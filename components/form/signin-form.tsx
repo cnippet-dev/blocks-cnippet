@@ -49,9 +49,23 @@ const SignInForm = ({ callbackUrl }: SignInFormProps) => {
         console.log("RES", res);
 
         if (res?.ok) {
-            router.push("/onboarding");
+            router.push("/");
         }
     }
+
+    const loginWithGoogle = async () => {
+        await signIn("google", {
+            callbackUrl,
+            redirect: true
+        });
+    };
+
+    const loginWithGit = async () => {
+        await signIn("github", {
+            callbackUrl,
+            redirect: true
+        });
+    };
 
     return (
         <Form {...form}>
@@ -107,6 +121,19 @@ const SignInForm = ({ callbackUrl }: SignInFormProps) => {
                     Sign Up
                 </Link>
             </p>
+
+            <button
+                onClick={loginWithGoogle}
+                className="group flex w-full items-center justify-center rounded-md border border-neutral-100 px-10 py-1.5 hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-900"
+            >
+                Log in with Google
+            </button>
+            <button
+                onClick={loginWithGit}
+                className="group flex w-full items-center justify-center rounded-md border border-neutral-100 px-10 py-1.5 hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-900"
+            >
+                Log in Git hubj
+            </button>
         </Form>
     );
 };

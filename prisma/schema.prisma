@@ -15,6 +15,7 @@ model User {
   password      String?
   emailVerified DateTime? @db.Date
   image         String?
+  provider      String?
   accounts      Account[]
   sessions      Session[]
 }

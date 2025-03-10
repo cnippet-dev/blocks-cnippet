@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { nextauthOptions } from "../nextauth-options";
 import { getServerSession } from "next-auth/next";
+import { Account, Profile } from "next-auth";
 
 export interface User {
     id: string;
@@ -75,7 +76,6 @@ export async function signUpWithCredentials({
     }
 }
 
-
 export async function signInWithCredentials({
     email,
     password,
@@ -112,3 +112,64 @@ export async function signInWithCredentials({
         return { error: "An error occurred during login" };
     }
 }
+
+interface ExtendedProfile extends Profile {
+    picture?: string;
+}
+
+interface SignInWithOauthParams {
+    account: Account;
+    profile: ExtendedProfile;
+}
+
+export async function signInWithOauth({
+    account,
+    profile,
+}: SignInWithOauthParams) {
+    const user = await prisma.user.findUnique({
+        where: { email: profile.email },
+    });
+
+    if (user) return true;
+
+    const newUser = await prisma.user.create({
+        data: {
+            name: profile.name,
+            email: profile.email,
+            image: profile.picture,
+            provider: account.provider,
+        },
+    });
+
+    return {
+        success: true,
+        data: {
+            name: newUser.name,
+            email: newUser.email,
+        },
+    };
+}
+
+interface GetUserByEmailParams {
+    email: string
+  }
+  
+  export async function getUserByEmail({
+    email
+  }: GetUserByEmailParams) {
+  
+    const user = await prisma.user.findUnique({
+        where: { email },
+    });
+  
+    if (!user) {
+      throw new Error ("User does not exist!")
+    }
+  
+    // console.log({user})
+    return {
+      ...user,
+      _id: user.id
+    }
+  }
+  
