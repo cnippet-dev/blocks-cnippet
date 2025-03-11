@@ -2,18 +2,18 @@ import React from "react";
 
 const Components = () => {
     return (
-        <section className="bg-gray-50 py-16">
-            <div className="container mx-auto px-4">
-                <div className="mb-2 text-sm text-blue-600">
+        <section className="bg-gray-50 py-32 mx-auto">
+            <div className="max-w-7xl mx-auto px-4">
+                <div className="mb-2 text-lg text-blue-600">
                     BUILT WITH MODERN TOOLS
                 </div>
-                <h2 className="mb-8 text-3xl font-bold">
+                <h2 className="mb-8 text-4xl font-semibold">
                     Blocks entirely built with React components
                     <br />
                     and Tailwind CSS
                 </h2>
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
-                    <div className="flex flex-col items-center text-center">
+                    <div className="flex flex-col items-start text-left">
                         <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
                             <svg
                                 width="24"

@@ -4,7 +4,7 @@ import React from "react";
 const Templates = () => {
     return (
         <section className="py-16">
-            <div className="container mx-auto px-4">
+            <div className="mx-auto max-w-7xl px-4">
                 <div className="mb-2 text-sm text-blue-600">
                     EXPLORE THE TEMPLATES
                 </div>
