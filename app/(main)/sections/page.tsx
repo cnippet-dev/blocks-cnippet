@@ -3,7 +3,6 @@ import { Metadata } from "next";
 
 import Sections from "@/components/routes/shared/layout/all-sections";
 
-
 const page = () => {
     const structuredData = {
         "@context": "https://schema.org",

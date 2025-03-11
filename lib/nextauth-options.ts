@@ -2,7 +2,11 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
-import { getUserByEmail, signInWithCredentials, signInWithOauth } from "./actions/auth.actions";
+import {
+    getUserByEmail,
+    signInWithCredentials,
+    signInWithOauth,
+} from "./actions/auth.actions";
 
 export const nextauthOptions: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET!,
@@ -56,24 +60,24 @@ export const nextauthOptions: NextAuthOptions = {
         async signIn({ account, profile }) {
             if (account?.type === "oauth" && profile) {
                 const result = await signInWithOauth({ account, profile });
-                return typeof result === 'object' ? result.success : result;
+                return typeof result === "object" ? result.success : result;
             }
             return true;
         },
 
         async jwt({ token, trigger, session }) {
             if (trigger === "update") {
-                token.name = session.name
-              } else {
+                token.name = session.name;
+            } else {
                 if (token.email) {
-                  const user = await getUserByEmail({email: token.email})
-                  // console.log({user})
-                  token.name = user.name
-                  token._id = user._id
-                  token.provider = user.provider
+                    const user = await getUserByEmail({ email: token.email });
+                    // console.log({user})
+                    token.name = user.name;
+                    token._id = user._id;
+                    token.provider = user.provider;
                 }
-              }
-              return token
+            }
+            return token;
         },
 
         async session({ token, session }) {

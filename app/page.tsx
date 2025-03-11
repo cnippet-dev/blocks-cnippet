@@ -6,16 +6,14 @@ import Feature from "@/components/routes/home/feature";
 import Sections from "@/components/routes/shared/layout/all-sections";
 
 export default async function Home() {
-
     return (
         <>
             <Navbar />
             <main>
                 <Hero />
-                <Feature/>
+                <Feature />
                 <Sections count={4} />
                 <Templates />
-
             </main>
             <Footer />
         </>

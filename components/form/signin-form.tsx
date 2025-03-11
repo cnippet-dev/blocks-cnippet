@@ -56,14 +56,14 @@ const SignInForm = ({ callbackUrl }: SignInFormProps) => {
     const loginWithGoogle = async () => {
         await signIn("google", {
             callbackUrl,
-            redirect: true
+            redirect: true,
         });
     };
 
     const loginWithGit = async () => {
         await signIn("github", {
             callbackUrl,
-            redirect: true
+            redirect: true,
         });
     };
 

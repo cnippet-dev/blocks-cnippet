@@ -2,8 +2,8 @@ import React from "react";
 
 const Components = () => {
     return (
-        <section className="bg-gray-50 py-32 mx-auto">
-            <div className="max-w-7xl mx-auto px-4">
+        <section className="mx-auto bg-gray-50 py-32">
+            <div className="mx-auto max-w-7xl px-4">
                 <div className="mb-2 text-lg text-blue-600">
                     BUILT WITH MODERN TOOLS
                 </div>

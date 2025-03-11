@@ -151,25 +151,21 @@ export async function signInWithOauth({
 }
 
 interface GetUserByEmailParams {
-    email: string
-  }
-  
-  export async function getUserByEmail({
-    email
-  }: GetUserByEmailParams) {
-  
+    email: string;
+}
+
+export async function getUserByEmail({ email }: GetUserByEmailParams) {
     const user = await prisma.user.findUnique({
         where: { email },
     });
-  
+
     if (!user) {
-      throw new Error ("User does not exist!")
+        throw new Error("User does not exist!");
     }
-  
+
     // console.log({user})
     return {
-      ...user,
-      _id: user.id
-    }
-  }
-  
+        ...user,
+        _id: user.id,
+    };
+}

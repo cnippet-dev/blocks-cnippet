@@ -13,7 +13,9 @@ const Navbar = () => {
                                 className="text-xl font-medium text-black"
                             >
                                 cnippet
-                                <span className="font-mono text-sm ml-3">blocks</span>
+                                <span className="ml-3 font-mono text-sm">
+                                    blocks
+                                </span>
                             </Link>
 
                             <div className="flex items-center gap-8 text-sm font-medium">

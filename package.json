@@ -7,6 +7,8 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
+        "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
+        "format:check": "prettier --check \"./components/**/*.{ts,tsx,mdx}\" --cache",
         "analyze": "cross-env ANALYZE=true next build",
         "collection": "content-collections build",
         "build:registry": "tsx --tsconfig ./tsconfig.scripts.json ./scripts/build-registry.mts"

@@ -43,7 +43,7 @@ const Feature = () => {
                     {features.map((feature, i) => (
                         <div
                             key={i}
-                            className="flex flex-col items-start text-left ring ring-gray-100 bg-white shadow-md p-6 rounded-xl"
+                            className="flex flex-col items-start rounded-xl bg-white p-6 text-left shadow-md ring ring-gray-100"
                         >
                             <div className="flex items-center gap-2">
                                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">

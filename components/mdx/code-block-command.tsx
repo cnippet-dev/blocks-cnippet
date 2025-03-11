@@ -62,7 +62,7 @@ export function CodeBlockCommand({
                                 <TabsTrigger
                                     key={key}
                                     value={key}
-                                    className="font-mono rounded-none border-b border-transparent bg-transparent p-0 pb-1.5 text-zinc-400 data-[state=active]:border-b-zinc-50 data-[state=active]:bg-transparent data-[state=active]:text-zinc-50"
+                                    className="rounded-none border-b border-transparent bg-transparent p-0 pb-1.5 font-mono text-zinc-400 data-[state=active]:border-b-zinc-50 data-[state=active]:bg-transparent data-[state=active]:text-zinc-50"
                                 >
                                     {key}
                                 </TabsTrigger>
@@ -75,7 +75,7 @@ export function CodeBlockCommand({
                         <TabsContent key={key} value={key} className="mt-0">
                             <pre className="px-4 py-5">
                                 <code
-                                    className="font-mono relative text-sm leading-none text-white"
+                                    className="relative font-mono text-sm leading-none text-white"
                                     data-language="bash"
                                 >
                                     {value}
@@ -88,7 +88,7 @@ export function CodeBlockCommand({
             <Button
                 size="icon"
                 variant="ghost"
-                className="absolute right-2.5 top-2 z-10 h-6 w-6 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50 [&_svg]:h-3 [&_svg]:w-3"
+                className="absolute top-2 right-2.5 z-10 h-6 w-6 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50 [&_svg]:h-3 [&_svg]:w-3"
                 onClick={copyCommand}
             >
                 <span className="sr-only">Copy</span>
