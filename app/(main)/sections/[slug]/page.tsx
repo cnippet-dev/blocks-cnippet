@@ -5,26 +5,9 @@ import { Mdx } from "@/mdx-components";
 
 import { allSections } from "@/.content-collections/generated";
 
-import Pro from "@/components/shared/pricing/pro";
 import { BASE_URL } from "@/config/docs";
 
 type Params = Promise<{ slug: string }>;
-
-interface SectionDoc {
-    title: string;
-    slug?: string;
-    description: string;
-    body: {
-        raw: string;
-        code: string;
-    };
-    thumbnail: {
-        src: string;
-        alt?: string;
-    };
-    link: string;
-    toc?: boolean;
-}
 
 async function getSectionDoc({ slug }: { slug: string }) {
     try {
@@ -52,7 +35,6 @@ export default async function Blogpage({ params }: { params: Params }) {
                     {doc?.body && <Mdx code={doc?.body.code} />}
                 </div>
             </div>
-            <Pro />
         </main>
     );
 }

@@ -6,7 +6,6 @@ import { Index } from "@/__registry__";
 
 import { MoveRight } from "lucide-react";
 import Image from "next/image";
-import { useConfig } from "@/lib/use-config";
 
 interface Section {
     name: string;
@@ -19,10 +18,8 @@ const Sections: React.FC<ComponentsProps> = (props) => {
         ...props,
     };
 
-    const [config] = useConfig();
-
-    // select all the components from the registry
     const components = Object.values(Index.default).filter(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (item: any): item is Section => item.type === "registry:sections",
     );
 
@@ -81,7 +78,7 @@ const Sections: React.FC<ComponentsProps> = (props) => {
                                     <div className="mt-5">
                                         <Link
                                             href={component.slug}
-                                            className="capitalize text-black/80 dark:text-dawn-100"
+                                            className="dark:text-dawn-100 text-black/80 capitalize"
                                         >
                                             {component.name}
                                             <span className="absolute inset-0"></span>
