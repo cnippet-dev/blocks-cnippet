@@ -1,28 +1,69 @@
-const BASE_PATH = "registry/default/";
+import { Registry } from "@/registry/schema";
+
+const BASE_PATH = "registry/default";
 
 const generateSections = (
-    sectionName: string,
-    totalSections: number,
-    authConfig: string[],
-    proConfig: string[],
-) => {
-    return Array.from({ length: totalSections }, (_, index) => {
-        const sectionIndex = index + 1;
-        return {
-            name: `${sectionName}-${sectionIndex}`,
-            slug: `/sections/${sectionName}`,
-            type: "registry:s",
-            auth: authConfig[index] === "T",
-            pro: proConfig[index] === "T",
-            dependencies: ["framer-motion"],
-            files: [
-                `${BASE_PATH}sections/${sectionName}/${sectionName}-${sectionIndex}.tsx`,
-            ],
-            thumbnail: `/images/components/featured-images/${sectionName}-${sectionIndex}.PNG`,
-        };
-    });
+    sectionsConfig: { name: string; no?: string }[],
+): Registry => {
+    return sectionsConfig.map((section, index) => ({
+        name: section.name,
+        slug: `/sections/${section.name}`,
+        type: "registry:sections",
+        // files: [`${BASE_PATH}/sections/${section.name}/${section.name}-1.tsx`],
+        files: [`${BASE_PATH}/sections/banner/banner-1.tsx`],
+        number: "4",
+        thumbnail: `https://res.cloudinary.com/dphulm0s9/image/upload/v1737696976/${section.name}.png`,
+    }));
 };
 
-export const sections = [
-    ...generateSections("banner", 1, ["T"], ["F"]),
-];
+export const sections: Registry = generateSections([
+    {
+        name: "banner",
+        no: "4",
+    },
+    {
+        name: "blog",
+        no: "2",
+    },
+    {
+        name: "career",
+        no: "5",
+    },
+    {
+        name: "contact",
+        no: "1",
+    },
+    {
+        name: "cta",
+    },
+    {
+        name: "faq",
+    },
+    {
+        name: "feature",
+    },
+    {
+        name: "footer",
+    },
+    {
+        name: "header",
+    },
+    {
+        name: "hero",
+    },
+    {
+        name: "metrics",
+    },
+    {
+        name: "newsletter",
+    },
+    {
+        name: "pricing",
+    },
+    {
+        name: "team",
+    },
+    {
+        name: "testimonial",
+    },
+]);

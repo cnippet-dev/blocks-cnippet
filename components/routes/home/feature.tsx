@@ -18,7 +18,7 @@ const features = [
         title: "Data Blocks",
         description:
             "A full set of data visualization blocks for creating beautiful, insightful dashboards",
-        icon: <Info />, 
+        icon: <Info />,
     },
     {
         title: "Light and dark mode",
@@ -29,7 +29,7 @@ const features = [
 ];
 const Feature = () => {
     return (
-        <section className="mx-auto bg-gray-50 py-32">
+        <section className="mx-auto bg-white py-32">
             <div className="mx-auto max-w-7xl px-4">
                 <div className="mb-2 text-lg text-blue-600">
                     BUILT WITH MODERN TOOLS
@@ -43,16 +43,18 @@ const Feature = () => {
                     {features.map((feature, i) => (
                         <div
                             key={i}
-                            className="flex flex-col items-start text-left"
+                            className="flex flex-col items-start text-left ring ring-gray-100 bg-white shadow-md p-6 rounded-xl"
                         >
-                            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
-                                {feature.icon}
+                            <div className="flex items-center gap-2">
+                                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
+                                    {feature.icon}
+                                </div>
+                                <h3 className="mb-2 text-lg font-medium">
+                                    {feature.title}
+                                </h3>
                             </div>
-                            <h3 className="mb-2 text-xl font-medium">
-                                {feature.title}
-                            </h3>
                             <p className="text-gray-600">
-                              {feature.description}
+                                {feature.description}
                             </p>
                         </div>
                     ))}

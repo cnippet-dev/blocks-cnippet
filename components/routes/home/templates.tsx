@@ -23,7 +23,7 @@ const Templates = () => {
                     <div className="overflow-hidden rounded-lg border border-gray-200">
                         <div className="relative h-64 bg-gray-100">
                             <Image
-                                src="/placeholder.svg?height=400&width=600"
+                                src="/images/t1.png"
                                 alt="Dashboard Template"
                                 width={600}
                                 height={400}
@@ -45,7 +45,7 @@ const Templates = () => {
                     <div className="overflow-hidden rounded-lg border border-gray-200">
                         <div className="relative h-64 bg-gray-100">
                             <Image
-                                src="/placeholder.svg?height=400&width=600"
+                                src="/images/c2.webp"
                                 alt="SaaS Marketing Website"
                                 width={600}
                                 height={400}
@@ -68,11 +68,11 @@ const Templates = () => {
                     <div className="overflow-hidden rounded-lg border border-gray-200">
                         <div className="relative h-48 bg-gray-100">
                             <Image
-                                src="/placeholder.svg?height=300&width=400"
+                                src="/images/c3.jpg"
                                 alt="Report Pages"
                                 width={400}
                                 height={300}
-                                className="h-full w-full object-cover"
+                                className="h-full w-full object-cover object-top"
                             />
                         </div>
                         <div className="p-4">
@@ -89,11 +89,11 @@ const Templates = () => {
                     <div className="overflow-hidden rounded-lg border border-gray-200">
                         <div className="relative h-48 bg-gray-100">
                             <Image
-                                src="/placeholder.svg?height=300&width=400"
+                                src="/images/c4.jpg"
                                 alt="SaaS Template"
                                 width={400}
                                 height={300}
-                                className="h-full w-full object-cover"
+                                className="h-full w-full object-cover object-top"
                             />
                         </div>
                         <div className="p-4">
@@ -111,7 +111,7 @@ const Templates = () => {
                     <div className="overflow-hidden rounded-lg border border-gray-200">
                         <div className="relative h-48 bg-gray-100">
                             <Image
-                                src="/placeholder.svg?height=300&width=400"
+                                src="/images/c1.jpg"
                                 alt="One-Page Website"
                                 width={400}
                                 height={300}

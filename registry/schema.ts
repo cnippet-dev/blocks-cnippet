@@ -19,6 +19,7 @@ export const registryItemTypeSchema = z.enum([
     "registry:example",
     "registry:block",
     "registry:section",
+    "registry:sections",
     "registry:components",
     "registry:hook",
     "registry:theme",

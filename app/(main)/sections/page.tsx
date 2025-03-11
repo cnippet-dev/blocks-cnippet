@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 
-import Sections from "@/components/shared/layout/all-sections";
+import Sections from "@/components/routes/shared/layout/all-sections";
 
 
 const page = () => {

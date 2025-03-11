@@ -23,7 +23,7 @@ const Sections: React.FC<ComponentsProps> = (props) => {
 
     // select all the components from the registry
     const components = Object.values(Index.default).filter(
-        (item: any): item is Section => item.type === "registry:section",
+        (item: any): item is Section => item.type === "registry:sections",
     );
 
     return (

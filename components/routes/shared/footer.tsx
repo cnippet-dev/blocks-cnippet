@@ -4,16 +4,19 @@ import React from "react";
 const Footer = () => {
     return (
         <footer className="border-t border-gray-200 bg-white py-12">
-            <div className="container mx-auto px-4">
+            <div className="mx-auto max-w-7xl px-4">
                 <div className="grid grid-cols-2 gap-8 md:grid-cols-6">
                     <div className="col-span-2">
                         <div className="mb-4 flex items-center gap-2">
-                            <div className="flex h-6 w-6 items-center justify-center rounded-sm bg-black">
-                                <span className="text-xs font-bold text-white">
-                                    D
+                            <Link
+                                href="/"
+                                className="text-xl font-medium text-black"
+                            >
+                                cnippet
+                                <span className="ml-3 font-mono text-sm">
+                                    blocks
                                 </span>
-                            </div>
-                            <span className="font-semibold">DevStack</span>
+                            </Link>
                         </div>
                         <p className="mb-4 text-sm text-gray-600">
                             The complete platform for building modern web
@@ -90,7 +93,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="mt-12 border-t border-gray-200 pt-8 text-center text-sm text-gray-600">
-                    © 2025 DevStack Labs, Inc. All rights reserved.
+                    © 2025 Cnippet Labs, Inc. All rights reserved.
                 </div>
             </div>
         </footer>
