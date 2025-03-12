@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import NavUser from "./nav-user";
 
 const Navbar = () => {
     return (
@@ -43,7 +44,10 @@ const Navbar = () => {
                                 >
                                     Templates
                                 </Link>
+                                <NavUser/>
                             </div>
+
+                           
                         </div>
                     </div>
                 </div>

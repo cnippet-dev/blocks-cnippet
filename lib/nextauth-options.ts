@@ -12,7 +12,7 @@ export const nextauthOptions: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET!,
     pages: {
         signIn: "/signin",
-        error: "/error",
+        // error: "/error",
     },
     providers: [
         GoogleProvider({
@@ -35,19 +35,18 @@ export const nextauthOptions: NextAuthOptions = {
             },
             async authorize(credentials) {
                 if (!credentials?.email || !credentials?.password) {
-                    return null;
+                    throw new Error("Email and password are required");
                 }
 
                 const result = await signInWithCredentials({
-                    email: credentials?.email,
-                    password: credentials?.password,
+                    email: credentials.email,
+                    password: credentials.password,
                 });
 
                 if (!result.success || !result.data?.id) {
-                    return null;
+                    throw new Error(result.error || "Invalid credentials");
                 }
 
-                // Return the user object in the format NextAuth expects
                 return {
                     id: result.data.id,
                     name: result.data.name || null,
@@ -60,11 +59,13 @@ export const nextauthOptions: NextAuthOptions = {
         async signIn({ account, profile }) {
             if (account?.type === "oauth" && profile) {
                 const result = await signInWithOauth({ account, profile });
-                return typeof result === "object" ? result.success : result;
+                if (!result.success) {
+                    // Redirect to sign-in page with error message
+                    return `/signin?error=${encodeURIComponent(result.error || "OAuth authentication failed")}`;
+                }
             }
             return true;
         },
-
         async jwt({ token, trigger, session }) {
             if (trigger === "update") {
                 token.name = session.name;

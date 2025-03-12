@@ -16,7 +16,8 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 const userSignInValidation = z.object({
     email: z.string().email(),
@@ -35,8 +36,11 @@ const SignInForm = ({ callbackUrl }: SignInFormProps) => {
             password: "",
         },
     });
-
+    const [error, setError] = useState("");
     const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const err = searchParams.get("error");
 
     async function onSubmit(values: z.infer<typeof userSignInValidation>) {
         // console.log(values)
@@ -46,26 +50,20 @@ const SignInForm = ({ callbackUrl }: SignInFormProps) => {
             callbackUrl,
         });
 
-        console.log("RES", res);
+        // const res = await signInWithCredentials(values);
 
-        if (res?.ok) {
-            router.push("/");
+        console.log("RES", res);
+        setError(err || "");
+        console.log(error);
+
+        if (res?.error) {
+            // Handle specific error messages if needed
+            setError("Invalid email or password");
+        } else {
+            router.push(callbackUrl);
         }
     }
-
-    const loginWithGoogle = async () => {
-        await signIn("google", {
-            callbackUrl,
-            redirect: true,
-        });
-    };
-
-    const loginWithGit = async () => {
-        await signIn("github", {
-            callbackUrl,
-            redirect: true,
-        });
-    };
+    console.log(error);
 
     return (
         <Form {...form}>
@@ -121,19 +119,20 @@ const SignInForm = ({ callbackUrl }: SignInFormProps) => {
                     Sign Up
                 </Link>
             </p>
+            <div className="text-xl text-red-500">{err}</div>
 
-            <button
-                onClick={loginWithGoogle}
-                className="group flex w-full items-center justify-center rounded-md border border-neutral-100 px-10 py-1.5 hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-900"
-            >
-                Log in with Google
-            </button>
-            <button
-                onClick={loginWithGit}
-                className="group flex w-full items-center justify-center rounded-md border border-neutral-100 px-10 py-1.5 hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-900"
-            >
-                Log in Git hubj
-            </button>
+            {/* <button
+                    onClick={loginWithGoogle}
+                    className="group flex w-full items-center justify-center rounded-md border border-neutral-100 px-10 py-1.5 hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-900"
+                >
+                    Log in with Google
+                </button>
+                <button
+                    onClick={loginWithGit}
+                    className="group flex w-full items-center justify-center rounded-md border border-neutral-100 px-10 py-1.5 hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-900"
+                >
+                    Log in Git hubj
+                </button> */}
         </Form>
     );
 };

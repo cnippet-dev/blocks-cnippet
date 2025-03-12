@@ -125,29 +125,37 @@ interface SignInWithOauthParams {
 export async function signInWithOauth({
     account,
     profile,
-}: SignInWithOauthParams) {
+}: SignInWithOauthParams): Promise<{
+    success: boolean;
+    data?: { name: string | null; email: string | null };
+    error?: string;
+}> {
     const user = await prisma.user.findUnique({
         where: { email: profile.email },
     });
 
-    if (user) return true;
+    if (user)
+        return { success: true, data: { name: user.name, email: user.email } };
 
-    const newUser = await prisma.user.create({
-        data: {
-            name: profile.name,
-            email: profile.email,
-            image: profile.picture,
-            provider: account.provider,
-        },
-    });
-
-    return {
-        success: true,
-        data: {
-            name: newUser.name,
-            email: newUser.email,
-        },
-    };
+    try {
+        const newUser = await prisma.user.create({
+            data: {
+                name: profile.name,
+                email: profile.email,
+                image: profile.picture,
+                provider: account.provider,
+            },
+        });
+        return {
+            success: true,
+            data: { name: newUser.name, email: newUser.email },
+        };
+    } catch (error) {
+        return {
+            success: false,
+            error: error as string,
+        };
+    }
 }
 
 interface GetUserByEmailParams {
