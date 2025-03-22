@@ -7,6 +7,7 @@ import { CopyButton } from "@/components/mdx/copy-button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CodeBlockCommand } from "./components/mdx/code-block-command";
 import { Button } from "@/components/ui/button";
+import { SectionPreview } from "./components/mdx/section-preview";
 
 interface MDXProps {
     code: string;
@@ -15,6 +16,7 @@ interface MDXProps {
 
 const components = {
     Button,
+    SectionPreview,
     h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
         <h2
             className={cn(
