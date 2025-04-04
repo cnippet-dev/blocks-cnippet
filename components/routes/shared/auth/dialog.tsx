@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { signIn} from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -111,7 +111,7 @@ const AuthDialog = () => {
                 </DialogHeader>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
@@ -173,7 +173,7 @@ const AuthDialog = () => {
 
                 <button
                     onClick={loginWithGoogle}
-                    className="flex w-full cursor-pointer items-center justify-center space-x-2 rounded-md border border-gray-300 py-2 transition-colors hover:bg-gray-50"
+                    className="flex w-full cursor-pointer items-center justify-center space-x-2 rounded-md border border-gray-300 py-1.5 transition-colors hover:bg-gray-50"
                 >
                     {loading && (
                         <LoadingIcon className="mr-3 -ml-1 h-5 w-5 animate-spin text-black" />
@@ -185,11 +185,13 @@ const AuthDialog = () => {
                         height={22}
                         className="mx-3"
                     />
-                    <span className="text-gray-700">Log in with Google</span>
+                    <span className="text-sm text-gray-700">
+                        Log in with Google
+                    </span>
                 </button>
                 <button
                     onClick={loginWithGit}
-                    className="flex w-full cursor-pointer items-center justify-center space-x-2 rounded-md border border-gray-300 py-2 transition-colors hover:bg-gray-50"
+                    className="flex w-full cursor-pointer items-center justify-center space-x-2 rounded-md border border-gray-300 py-1.5 transition-colors hover:bg-gray-50"
                 >
                     {loading1 && (
                         <LoadingIcon className="mr-3 -ml-1 h-5 w-5 animate-spin text-black" />
@@ -201,7 +203,9 @@ const AuthDialog = () => {
                         height={22}
                         className="mx-3"
                     />
-                    <span className="text-gray-700">Log in with Github</span>
+                    <span className="text-sm text-gray-700">
+                        Log in with Github
+                    </span>
                 </button>
 
                 <p className="text-center text-sm text-gray-600">

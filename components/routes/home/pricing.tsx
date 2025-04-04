@@ -9,6 +9,7 @@ import {
     Globe,
     Users,
 } from "lucide-react";
+
 const Pricing = () => {
     return (
         <section className="relative w-full dark:bg-black">
@@ -22,21 +23,6 @@ const Pricing = () => {
                     </div>
 
                     <div className="relative dark:border-neutral-800">
-                        {/* <div className="grid size-[5rem] w-full grid-cols-12 grid-rows-1 divide-x divide-y first:border-l last:border-r dark:divide-neutral-800 dark:border-neutral-800">
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
-                        </div> */}
-
                         <div className="grid size-[5rem] h-full w-full grid-cols-12 first:border-l">
                             <div className="col-span-1 border-b dark:border-neutral-800"></div>
                             <div className="col-span-10 border border-t-0 py-8 text-center dark:border-neutral-800">
@@ -50,21 +36,6 @@ const Pricing = () => {
                             </div>
                             <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
                         </div>
-
-                        {/* <div className="grid size-[5rem] w-full grid-cols-12 grid-rows-1 divide-x divide-y dark:divide-neutral-800">
-                            <div className="col-span-1 border-l"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1 border-r-0 bg-teal-700"></div>
-                            <div className="col-span-1 border-r border-b bg-amber-400 dark:border-neutral-800"></div>
-                        </div> */}
 
                         <div className="grid w-full grid-cols-12 divide-x border border-t-0 dark:divide-neutral-800 dark:border-neutral-800">
                             <div className="col-span-4 flex flex-col px-10 py-8">
@@ -104,14 +75,6 @@ const Pricing = () => {
                                         <Shield className="text-muted-foreground mt-0.5 h-5 w-5" />
                                         <span>Free updates</span>
                                     </div>
-                                    {/* <div className="flex items-start gap-3">
-                                        <Globe className="text-muted-foreground mt-0.5 h-5 w-5" />
-                                        <span>Web Application Firewall</span>
-                                    </div>
-                                    <div className="flex items-start gap-3">
-                                        
-                                        <span>Community Support</span>
-                                    </div> */}
                                 </div>
 
                                 <div className="mt-8">
@@ -262,39 +225,6 @@ const Pricing = () => {
                                 </div>
                             </div>
                         </div>
-
-                        {/* 
-                <div className="grid size-[16.5rem] w-full grid-cols-12 first:border-l dark:border-neutral-800">
-                    <div className="col-span-12 grid grid-cols-12 divide-x divide-y dark:divide-neutral-800">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                    <div className="col-span-8 row-span-3 flex flex-col items-center justify-center border-r border-b bg-white text-center dark:border-neutral-800 dark:bg-black">
-                        <p className="text-xl leading-relaxed">
-                            <span className="font-medium">
-                                Made by the creators of Next.js,
-                            </span>{" "}
-                            <span className="text-gray-500">
-                                Vercel is designed
-                            </span>
-                            <br />
-                            <span className="text-gray-500">
-                                to build, scale, and secure your
-                                Next.js apps.
-                            </span>
-                        </p>
-                    </div>
-                    <div className="col-span-2 row-span-3 grid grid-cols-2 grid-rows-3 divide-x divide-y dark:divide-neutral-800">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div> */}
                     </div>
                 </div>
             </div>

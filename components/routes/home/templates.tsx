@@ -217,12 +217,6 @@ const Templates = () => {
                                     </p>
                                 </motion.div>
                             </div>
-
-                            {/* <div className="p-0 md:col-span-4 md:p-5"></div> */}
-                            {/* <div className="flex flex-col items-center justify-center md:col-span-8"></div> */}
-                            {/* <div className="flex items-center justify-center border-r px-5 py-5 md:col-span-4 md:py-10"></div> */}
-                            {/* <div className="flex items-center justify-center border-r px-5 py-5 md:col-span-4 md:py-10"></div> */}
-                            {/* <div className="border-b px-5 py-5 md:col-span-4 md:py-10 dark:border-neutral-800"></div> */}
                         </div>
                         <div className="flex flex-col items-center justify-center">
                             <Link

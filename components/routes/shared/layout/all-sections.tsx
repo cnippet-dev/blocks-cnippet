@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { ComponentProps } from "@/types/global";
 import Link from "next/link";
 import { Index } from "@/__registry__";
 
@@ -11,12 +10,8 @@ interface Section {
     slug: string;
     thumbnail: string;
 }
-const Sections: React.FC<ComponentsProps> = (props) => {
-    const { header, description } = {
-        ...ComponentsDefaults,
-        ...props,
-    };
 
+const Sections = (props: any) => {
     const components = Object.values(Index.default).filter(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (item: any): item is Section => item.type === "registry:sections",
@@ -62,7 +57,7 @@ const Sections: React.FC<ComponentsProps> = (props) => {
                                             <div className="mt-4 flex flex-col items-start px-4">
                                                 <Link
                                                     href={component.slug}
-                                                    className="dark:text-neutral-400 text-black/80 capitalize font-medium"
+                                                    className="font-medium text-black/80 capitalize dark:text-neutral-400"
                                                 >
                                                     {component.name}
                                                     <span className="absolute inset-0"></span>
@@ -81,7 +76,7 @@ const Sections: React.FC<ComponentsProps> = (props) => {
                             </div>
                             <div className="flex flex-col items-center justify-center">
                                 <Link
-                                    href="/"
+                                    href="/sections"
                                     className="group relative w-full overflow-hidden bg-white p-5 dark:bg-black"
                                 >
                                     <div className="absolute inset-0 w-full -translate-x-[100%] bg-black transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
@@ -99,14 +94,3 @@ const Sections: React.FC<ComponentsProps> = (props) => {
 };
 
 export default Sections;
-
-type ComponentsProps = React.ComponentPropsWithoutRef<"section"> &
-    Partial<ComponentProps> & {
-        count: number;
-    };
-
-const ComponentsDefaults: ComponentProps = {
-    header: "All-in-one Sections",
-    description:
-        " Copy paste the most trending components and use them in your websites without having to worry about styling and animations.",
-};
