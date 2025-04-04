@@ -67,11 +67,14 @@ const Pricing = () => {
                         </div> */}
 
                         <div className="grid w-full grid-cols-12 divide-x border border-t-0 dark:divide-neutral-800 dark:border-neutral-800">
-                            <div className="col-span-4 px-10 py-16">
-                                <h2 className="mb-3 text-2xl font-bold">
-                                    Hobby
-                                </h2>
-                                <p className="text-muted-foreground mb-2">
+                            <div className="col-span-4 flex flex-col px-10 py-8">
+                                <div className="mb-5 flex items-center justify-between">
+                                    <h2 className="text-2xl font-bold">
+                                        Hobby
+                                    </h2>
+                                    <p>Free forever</p>
+                                </div>
+                                <p className="text-muted-foreground mb-2 text-sm">
                                     The perfect starting place for your web app
                                     or personal project.{" "}
                                     <span className="text-foreground font-semibold">
@@ -79,58 +82,63 @@ const Pricing = () => {
                                     </span>
                                     .
                                 </p>
+
                                 <div className="mt-8 flex-grow space-y-4 text-sm">
                                     <div className="flex items-start gap-3">
                                         <Download className="text-muted-foreground mt-0.5 h-5 w-5" />
-                                        <span>
-                                            Import your repo, deploy in seconds
-                                        </span>
+                                        <span>Access to basics components</span>
                                     </div>
                                     <div className="flex items-start gap-3">
                                         <GitBranch className="text-muted-foreground mt-0.5 h-5 w-5" />
-                                        <span>Automatic CI/CD</span>
+                                        <span>Lifetime access</span>
                                     </div>
                                     <div className="flex items-start gap-3">
                                         <Cloud className="text-muted-foreground mt-0.5 h-5 w-5" />
-                                        <span>Fluid compute</span>
+                                        <span>Unlimited projects</span>
                                     </div>
                                     <div className="flex items-start gap-3">
-                                        <LineChart className="text-muted-foreground mt-0.5 h-5 w-5" />
-                                        <span>
-                                            Traffic & performance insights
-                                        </span>
+                                        <Users className="text-muted-foreground mt-0.5 h-5 w-5" />
+                                        <span>Customer support</span>
                                     </div>
                                     <div className="flex items-start gap-3">
                                         <Shield className="text-muted-foreground mt-0.5 h-5 w-5" />
-                                        <span>DDoS Mitigation</span>
+                                        <span>Free updates</span>
                                     </div>
-                                    <div className="flex items-start gap-3">
+                                    {/* <div className="flex items-start gap-3">
                                         <Globe className="text-muted-foreground mt-0.5 h-5 w-5" />
                                         <span>Web Application Firewall</span>
                                     </div>
                                     <div className="flex items-start gap-3">
-                                        <Users className="text-muted-foreground mt-0.5 h-5 w-5" />
+                                        
                                         <span>Community Support</span>
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 <div className="mt-8">
                                     <Button
                                         variant="outline"
-                                        className="group w-full justify-between"
+                                        className="group w-full justify-between rounded-full"
                                     >
-                                        Start Deploying
+                                        Start Exploring
                                         <span className="transition-transform group-hover:translate-x-0.5">
                                             →
                                         </span>
                                     </Button>
                                 </div>
                             </div>
-                            <div className="col-span-4 px-10 py-16">
-                                <h2 className="mb-3 text-2xl font-bold">
-                                    Hobby
-                                </h2>
-                                <p className="text-muted-foreground mb-2">
+
+                            <div className="col-span-4 flex flex-col px-10 py-8">
+                                <div className="mb-5 flex items-center justify-between">
+                                    <h2 className="text-2xl font-bold">Pro</h2>
+                                    <p className="text-xl font-medium">
+                                        ₹500
+                                        <span className="text-muted-foreground text-xs">
+                                            /month
+                                        </span>
+                                    </p>
+                                </div>
+
+                                <p className="text-muted-foreground mb-2 text-sm">
                                     The perfect starting place for your web app
                                     or personal project.{" "}
                                     <span className="text-foreground font-semibold">
@@ -141,32 +149,32 @@ const Pricing = () => {
                                 <div className="mt-8 flex-grow space-y-4 text-sm">
                                     <div className="flex items-start gap-3">
                                         <Download className="text-muted-foreground mt-0.5 h-5 w-5" />
-                                        <span>
-                                            Import your repo, deploy in seconds
-                                        </span>
+                                        <span>Single user license</span>
                                     </div>
                                     <div className="flex items-start gap-3">
                                         <GitBranch className="text-muted-foreground mt-0.5 h-5 w-5" />
-                                        <span>Automatic CI/CD</span>
-                                    </div>
-                                    <div className="flex items-start gap-3">
-                                        <Cloud className="text-muted-foreground mt-0.5 h-5 w-5" />
-                                        <span>Fluid compute</span>
-                                    </div>
-                                    <div className="flex items-start gap-3">
-                                        <LineChart className="text-muted-foreground mt-0.5 h-5 w-5" />
                                         <span>
-                                            Traffic & performance insights
+                                            Access to all components & pages
                                         </span>
                                     </div>
                                     <div className="flex items-start gap-3">
-                                        <Shield className="text-muted-foreground mt-0.5 h-5 w-5" />
-                                        <span>DDoS Mitigation</span>
+                                        <Cloud className="text-muted-foreground mt-0.5 h-5 w-5" />
+                                        <span>Priority customer support</span>
                                     </div>
                                     <div className="flex items-start gap-3">
+                                        <LineChart className="text-muted-foreground mt-0.5 h-5 w-5" />
+                                        <span>Advanced project analytics</span>
+                                    </div>
+                                    <div className="flex items-start gap-3">
+                                        <Shield className="text-muted-foreground mt-0.5 h-5 w-5" />
+                                        <span>
+                                            Early access to new features
+                                        </span>
+                                    </div>
+                                    {/* <div className="flex items-start gap-3">
                                         <Globe className="text-muted-foreground mt-0.5 h-5 w-5" />
                                         <span>Web Application Firewall</span>
-                                    </div>
+                                    </div> */}
                                     <div className="flex items-start gap-3">
                                         <Users className="text-muted-foreground mt-0.5 h-5 w-5" />
                                         <span>Community Support</span>
@@ -176,20 +184,27 @@ const Pricing = () => {
                                 <div className="mt-8">
                                     <Button
                                         variant="outline"
-                                        className="group w-full justify-between"
+                                        className="group w-full justify-between rounded-full bg-blue-700 text-white hover:bg-blue-600 hover:text-white"
                                     >
-                                        Start Deploying
+                                        Upgrade now
                                         <span className="transition-transform group-hover:translate-x-0.5">
                                             →
                                         </span>
                                     </Button>
                                 </div>
                             </div>
-                            <div className="col-span-4 px-10 py-16">
-                                <h2 className="mb-3 text-2xl font-bold">
-                                    Hobby
-                                </h2>
-                                <p className="text-muted-foreground mb-2">
+
+                            <div className="col-span-4 flex flex-col px-10 py-8">
+                                <div className="mb-5 flex items-center justify-between">
+                                    <h2 className="text-2xl font-bold">Plus</h2>
+                                    <p className="text-xl font-medium">
+                                        ₹ 2000
+                                        <span className="text-muted-foreground text-xs">
+                                            /month
+                                        </span>
+                                    </p>
+                                </div>
+                                <p className="text-muted-foreground mb-2 text-sm">
                                     The perfect starting place for your web app
                                     or personal project.{" "}
                                     <span className="text-foreground font-semibold">
@@ -200,17 +215,17 @@ const Pricing = () => {
                                 <div className="mt-8 flex-grow space-y-4 text-sm">
                                     <div className="flex items-start gap-3">
                                         <Download className="text-muted-foreground mt-0.5 h-5 w-5" />
-                                        <span>
-                                            Import your repo, deploy in seconds
-                                        </span>
+                                        <span>5 user licenses</span>
                                     </div>
                                     <div className="flex items-start gap-3">
                                         <GitBranch className="text-muted-foreground mt-0.5 h-5 w-5" />
-                                        <span>Automatic CI/CD</span>
+                                        <span>
+                                            Bring your team to the platform
+                                        </span>
                                     </div>
                                     <div className="flex items-start gap-3">
                                         <Cloud className="text-muted-foreground mt-0.5 h-5 w-5" />
-                                        <span>Fluid compute</span>
+                                        <span>Access to everything</span>
                                     </div>
                                     <div className="flex items-start gap-3">
                                         <LineChart className="text-muted-foreground mt-0.5 h-5 w-5" />
@@ -220,11 +235,13 @@ const Pricing = () => {
                                     </div>
                                     <div className="flex items-start gap-3">
                                         <Shield className="text-muted-foreground mt-0.5 h-5 w-5" />
-                                        <span>DDoS Mitigation</span>
+                                        <span>
+                                            Early access to new features
+                                        </span>
                                     </div>
                                     <div className="flex items-start gap-3">
                                         <Globe className="text-muted-foreground mt-0.5 h-5 w-5" />
-                                        <span>Web Application Firewall</span>
+                                        <span>Priority tech support</span>
                                     </div>
                                     <div className="flex items-start gap-3">
                                         <Users className="text-muted-foreground mt-0.5 h-5 w-5" />
@@ -235,9 +252,9 @@ const Pricing = () => {
                                 <div className="mt-8">
                                     <Button
                                         variant="outline"
-                                        className="group w-full justify-between"
+                                        className="group w-full justify-between rounded-full bg-violet-600 text-white hover:bg-violet-700 hover:text-white"
                                     >
-                                        Start Deploying
+                                        Upgrade to Plus
                                         <span className="transition-transform group-hover:translate-x-0.5">
                                             →
                                         </span>

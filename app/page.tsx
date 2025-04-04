@@ -9,17 +9,18 @@ import Faq from "@/components/routes/home/faq";
 import Blocks from "@/components/routes/home/blocks";
 import Pricing from "@/components/routes/home/pricing";
 
+
 export default async function Home() {
     return (
         <>
             <Navbar />
             <main>
                 <Hero />
-                <Blocks />
+                <Sections count={6} />
+                {/* <Blocks /> */}
                 <Templates />
                 <Pricing />
                 {/* <Feature /> */}
-                {/* <Sections count={4} /> */}
                 <Faq />
                 <Cta />
             </main>

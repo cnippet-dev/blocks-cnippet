@@ -169,7 +169,7 @@ export default function Footer() {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     placeholder="you@domain.com"
-                                    className="h-7 rounded-md border-none dark:bg-black"
+                                    className="h-7 rounded-md border-none bg-white dark:bg-black"
                                 />
                                 <Button size="sm" className="h-7 text-sm">
                                     {status === "loading" ? (

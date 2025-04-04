@@ -45,7 +45,7 @@ const Templates = () => {
                                     className="h-full w-full object-cover"
                                 />
                                 <motion.div
-                                    className="pointer-events-none absolute bottom-0 left-0 h-24 w-full bg-white/50 backdrop-blur-sm"
+                                    className="pointer-events-none absolute bottom-0 left-0 h-24 w-full bg-white/20 backdrop-blur-sm dark:bg-black/20"
                                     animate={
                                         hoverStates[0] ? "visible" : "hidden"
                                     }
@@ -71,7 +71,7 @@ const Templates = () => {
                             </div>
 
                             <div
-                                className="relative overflow-hidden border-r p-5 md:col-span-5"
+                                className="relative overflow-hidden p-5 md:col-span-5"
                                 onMouseEnter={() => handleHover(1, true)}
                                 onMouseLeave={() => handleHover(1, false)}
                             >
@@ -181,7 +181,7 @@ const Templates = () => {
                             </div>
 
                             <div
-                                className="relative overflow-hidden border-r p-5 md:col-span-4"
+                                className="relative overflow-hidden border-b p-5 md:col-span-4"
                                 onMouseEnter={() => handleHover(4, true)}
                                 onMouseLeave={() => handleHover(4, false)}
                             >
@@ -224,7 +224,7 @@ const Templates = () => {
                             {/* <div className="flex items-center justify-center border-r px-5 py-5 md:col-span-4 md:py-10"></div> */}
                             {/* <div className="border-b px-5 py-5 md:col-span-4 md:py-10 dark:border-neutral-800"></div> */}
                         </div>
-                        <div className="flex flex-col items-center justify-center border-t">
+                        <div className="flex flex-col items-center justify-center">
                             <Link
                                 href="/"
                                 className="group relative w-full overflow-hidden bg-white p-5 dark:bg-black"

@@ -102,9 +102,9 @@ const Hero = () => {
                         <div className="col-span-1" />
                         <div className="col-span-1" />
                         <div className="col-span-1" />
+                        
                         <div className="col-span-1" />
-                        <div className="col-span-1" />
-                        <div className="col-span-1" />
+                        <div className="col-span-1 bg-rose-500" />
                     </div>
 
                     <div className="relative w-full">
@@ -166,7 +166,8 @@ const Hero = () => {
                     </div>
 
                     <div className="relative grid h-[6rem] w-full grid-cols-8 grid-rows-2 divide-x divide-y md:h-[11rem] md:grid-cols-12 dark:divide-neutral-800 dark:border-neutral-800">
-                        <div className="col-span-1 border-l" />
+                        
+                        <div className="col-span-1 border-l bg-violet-600" />
                         <div className="col-span-1" />
                         <div className="col-span-1" />
                         <div className="col-span-1" />
@@ -178,8 +179,8 @@ const Hero = () => {
                         <div className="col-span-1" />
                         <div className="col-span-1" />
                         <div className="col-span-1" />
-                        <div className="col-span-1 border-l" />
-                        <div className="col-span-1" />
+                        <div className="col-span-1 border-l bg-violet-600" />
+                        <div className="col-span-1 bg-violet-600" />
                         <div className="col-span-1" />
                         <div className="col-span-1" />
                         <div className="col-span-1" />
