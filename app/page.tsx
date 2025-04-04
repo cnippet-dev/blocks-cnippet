@@ -4,6 +4,10 @@ import Templates from "@/components/routes/home/templates";
 import Footer from "@/components/routes/shared/footer";
 import Feature from "@/components/routes/home/feature";
 import Sections from "@/components/routes/shared/layout/all-sections";
+import Cta from "@/components/routes/home/cta";
+import Faq from "@/components/routes/home/faq";
+import Blocks from "@/components/routes/home/blocks";
+import Pricing from "@/components/routes/home/pricing";
 
 export default async function Home() {
     return (
@@ -11,9 +15,13 @@ export default async function Home() {
             <Navbar />
             <main>
                 <Hero />
-                <Feature />
-                <Sections count={4} />
+                <Blocks />
                 <Templates />
+                <Pricing />
+                {/* <Feature /> */}
+                {/* <Sections count={4} /> */}
+                <Faq />
+                <Cta />
             </main>
             <Footer />
         </>

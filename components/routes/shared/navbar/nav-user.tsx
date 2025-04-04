@@ -36,7 +36,7 @@ const NavUser = () => {
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <div className="w-full">
-                                    <div className="mt-0 flex w-full cursor-pointer items-center justify-center gap-2 bg-white">
+                                    <div className="mt-0 flex w-full cursor-pointer items-center justify-center gap-2">
                                         <Avatar className="size-9 rounded-full">
                                             <AvatarImage
                                                 src={
@@ -64,7 +64,7 @@ const NavUser = () => {
                                         <div
                                             className={`grid flex-1 text-left text-sm leading-tight`}
                                         >
-                                            <span className="truncate font-semibold">
+                                            <span className="truncate font-semibold dark:text-white">
                                                 {session.user?.name}
                                             </span>
                                             {/* <span className="truncate text-xs">

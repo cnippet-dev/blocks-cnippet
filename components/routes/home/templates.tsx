@@ -1,132 +1,239 @@
+"use client";
+import { motion } from "motion/react";
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
+import React, { useState } from "react";
 
 const Templates = () => {
+    const [hoverStates, setHoverStates] = useState<boolean[]>(
+        Array(5).fill(false),
+    );
+
+    const handleHover = (index: number, isHovering: boolean) => {
+        setHoverStates((prev) => {
+            const newStates = [...prev];
+            newStates[index] = isHovering;
+            return newStates;
+        });
+    };
+
     return (
-        <section className="py-16">
-            <div className="mx-auto max-w-7xl px-4">
-                <div className="mb-2 text-sm text-blue-600">
-                    EXPLORE THE TEMPLATES
-                </div>
-                <h2 className="mb-4 text-3xl font-bold">
-                    Production-ready templates
-                    <br />
-                    to launch tomorrow
-                </h2>
-                <p className="mb-12 max-w-2xl text-gray-600">
-                    Carefully crafted templates built for experts with the
-                    latest technology stack based on React and Next.js. Get
-                    templates for anything to build and launch your idea.
-                </p>
+        <section className="dark:bg-black">
+            <div className="mx-auto w-full max-w-6xl px-4 md:px-10">
+                <div className="grid h-full w-full grid-cols-12 border border-t-0 py-0 dark:border-neutral-800">
+                    <div className="col-span-12 bg-white text-center dark:bg-black">
+                        <h2 className="mt-16 mb-2 text-2xl leading-tight font-semibold tracking-tight md:text-5xl">
+                            Production-ready templates to launch tomorrow
+                        </h2>
+                        <p className="mb-8 px-5 text-sm text-gray-500 md:mb-16 md:text-base">
+                            Carefully crafted templates built for experts with
+                            the latest technology stack based on React and
+                            Next.js. Get templates for anything to build and
+                            launch your idea.
+                        </p>
+                        <div className="grid grid-cols-1 divide-y border-t md:grid-cols-12 dark:divide-neutral-800 dark:border-neutral-800">
+                            <div
+                                className="relative overflow-hidden border-r p-5 md:col-span-7"
+                                onMouseEnter={() => handleHover(0, true)}
+                                onMouseLeave={() => handleHover(0, false)}
+                            >
+                                <Image
+                                    src="/images/t1.png"
+                                    alt="Dashboard Template"
+                                    width={600}
+                                    height={400}
+                                    className="h-full w-full object-cover"
+                                />
+                                <motion.div
+                                    className="pointer-events-none absolute bottom-0 left-0 h-24 w-full bg-white/50 backdrop-blur-sm"
+                                    animate={
+                                        hoverStates[0] ? "visible" : "hidden"
+                                    }
+                                    variants={{
+                                        hidden: { opacity: 0 },
+                                        visible: { opacity: 1 },
+                                    }}
+                                    transition={{
+                                        duration: 0.2,
+                                        ease: "easeOut",
+                                    }}
+                                >
+                                    <h3 className="mb-2 text-xl font-bold">
+                                        Dashboard Template
+                                    </h3>
+                                    <p className="text-sm text-gray-600">
+                                        Complete dashboard with analytics to
+                                        better understand your data. Data
+                                        visualization and reporting all in one
+                                        application experience.
+                                    </p>
+                                </motion.div>
+                            </div>
 
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-                    <div className="overflow-hidden rounded-lg border border-gray-200">
-                        <div className="relative h-64 bg-gray-100">
-                            <Image
-                                src="/images/t1.png"
-                                alt="Dashboard Template"
-                                width={600}
-                                height={400}
-                                className="h-full w-full object-cover"
-                            />
-                        </div>
-                        <div className="p-6">
-                            <h3 className="mb-2 text-xl font-bold">
-                                Dashboard Template
-                            </h3>
-                            <p className="text-sm text-gray-600">
-                                Complete dashboard with analytics to better
-                                understand your data. Data visualization and
-                                reporting all in one application experience.
-                            </p>
-                        </div>
-                    </div>
+                            <div
+                                className="relative overflow-hidden border-r p-5 md:col-span-5"
+                                onMouseEnter={() => handleHover(1, true)}
+                                onMouseLeave={() => handleHover(1, false)}
+                            >
+                                <Image
+                                    src="/images/c2.webp"
+                                    alt="Dashboard Template"
+                                    width={600}
+                                    height={400}
+                                    className="h-full w-full object-cover object-left"
+                                />
+                                <motion.div
+                                    className="pointer-events-none absolute bottom-0 left-0 h-24 w-full bg-white/50 backdrop-blur-sm"
+                                    animate={
+                                        hoverStates[1] ? "visible" : "hidden"
+                                    }
+                                    variants={{
+                                        hidden: { opacity: 0 },
+                                        visible: { opacity: 1 },
+                                    }}
+                                    transition={{
+                                        duration: 0.2,
+                                        ease: "easeOut",
+                                    }}
+                                >
+                                    <h3 className="mb-2 text-xl font-bold">
+                                        SaaS Marketing Website
+                                    </h3>
+                                    <p className="text-sm text-gray-600">
+                                        Complete marketing website with landing
+                                        pages designed to convert visitors into
+                                        users.
+                                    </p>
+                                </motion.div>
+                            </div>
 
-                    <div className="overflow-hidden rounded-lg border border-gray-200">
-                        <div className="relative h-64 bg-gray-100">
-                            <Image
-                                src="/images/c2.webp"
-                                alt="SaaS Marketing Website"
-                                width={600}
-                                height={400}
-                                className="h-full w-full object-cover"
-                            />
-                        </div>
-                        <div className="p-6">
-                            <h3 className="mb-2 text-xl font-bold">
-                                SaaS Marketing Website
-                            </h3>
-                            <p className="text-sm text-gray-600">
-                                Complete marketing website with landing pages
-                                designed to convert visitors into users.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                            <div
+                                className="relative overflow-hidden border-r p-5 md:col-span-4"
+                                onMouseEnter={() => handleHover(2, true)}
+                                onMouseLeave={() => handleHover(2, false)}
+                            >
+                                <Image
+                                    src="/images/c3.jpg"
+                                    alt="Dashboard Template"
+                                    width={600}
+                                    height={400}
+                                    className="h-full w-full object-cover object-left"
+                                />
+                                <motion.div
+                                    className="pointer-events-none absolute bottom-0 left-0 h-24 w-full bg-white/50 backdrop-blur-sm"
+                                    animate={
+                                        hoverStates[2] ? "visible" : "hidden"
+                                    }
+                                    variants={{
+                                        hidden: { opacity: 0 },
+                                        visible: { opacity: 1 },
+                                    }}
+                                    transition={{
+                                        duration: 0.2,
+                                        ease: "easeOut",
+                                    }}
+                                >
+                                    <h3 className="mb-2 text-lg font-bold">
+                                        Report Pages
+                                    </h3>
+                                    <p className="text-sm text-gray-600">
+                                        Clean report design to summarize data in
+                                        a beautiful way.
+                                    </p>
+                                </motion.div>
+                            </div>
 
-                <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-                    <div className="overflow-hidden rounded-lg border border-gray-200">
-                        <div className="relative h-48 bg-gray-100">
-                            <Image
-                                src="/images/c3.jpg"
-                                alt="Report Pages"
-                                width={400}
-                                height={300}
-                                className="h-full w-full object-cover object-top"
-                            />
-                        </div>
-                        <div className="p-4">
-                            <h3 className="mb-2 text-lg font-bold">
-                                Report Pages
-                            </h3>
-                            <p className="text-sm text-gray-600">
-                                Clean report design to summarize data in a
-                                beautiful way.
-                            </p>
-                        </div>
-                    </div>
+                            <div
+                                className="relative overflow-hidden border-r p-5 md:col-span-4"
+                                onMouseEnter={() => handleHover(3, true)}
+                                onMouseLeave={() => handleHover(3, false)}
+                            >
+                                <Image
+                                    src="/images/c1.jpg"
+                                    alt="Dashboard Template"
+                                    width={1920}
+                                    height={1080}
+                                    className="h-full w-full object-cover object-left"
+                                />
+                                <motion.div
+                                    className="pointer-events-none absolute bottom-0 left-0 h-24 w-full bg-white/50 backdrop-blur-sm"
+                                    animate={
+                                        hoverStates[3] ? "visible" : "hidden"
+                                    }
+                                    variants={{
+                                        hidden: { opacity: 0 },
+                                        visible: { opacity: 1 },
+                                    }}
+                                    transition={{
+                                        duration: 0.2,
+                                        ease: "easeOut",
+                                    }}
+                                >
+                                    <h3 className="mb-2 text-lg font-bold">
+                                        SaaS Template
+                                    </h3>
+                                    <p className="text-sm text-gray-600">
+                                        Build your SaaS product with ease using
+                                        this template. Everything you need to
+                                        build your SaaS application.
+                                    </p>
+                                </motion.div>
+                            </div>
 
-                    <div className="overflow-hidden rounded-lg border border-gray-200">
-                        <div className="relative h-48 bg-gray-100">
-                            <Image
-                                src="/images/c4.jpg"
-                                alt="SaaS Template"
-                                width={400}
-                                height={300}
-                                className="h-full w-full object-cover object-top"
-                            />
-                        </div>
-                        <div className="p-4">
-                            <h3 className="mb-2 text-lg font-bold">
-                                SaaS Template
-                            </h3>
-                            <p className="text-sm text-gray-600">
-                                Build your SaaS product with ease using this
-                                template. Everything you need to build your SaaS
-                                application.
-                            </p>
-                        </div>
-                    </div>
+                            <div
+                                className="relative overflow-hidden border-r p-5 md:col-span-4"
+                                onMouseEnter={() => handleHover(4, true)}
+                                onMouseLeave={() => handleHover(4, false)}
+                            >
+                                <Image
+                                    src="/images/c4.jpg"
+                                    alt="Dashboard Template"
+                                    width={600}
+                                    height={400}
+                                    className="h-full w-full object-cover object-left"
+                                />
+                                <motion.div
+                                    className="pointer-events-none absolute bottom-0 left-0 h-24 w-full bg-white/50 backdrop-blur-sm"
+                                    animate={
+                                        hoverStates[4] ? "visible" : "hidden"
+                                    }
+                                    variants={{
+                                        hidden: { opacity: 0 },
+                                        visible: { opacity: 1 },
+                                    }}
+                                    transition={{
+                                        duration: 0.2,
+                                        ease: "easeOut",
+                                    }}
+                                >
+                                    <h3 className="mb-2 text-lg font-bold">
+                                        One-Page Website
+                                    </h3>
+                                    <p className="text-sm text-gray-600">
+                                        Launch your idea with a beautiful
+                                        website template. Design in beautiful
+                                        Gradual transitions, simple but with
+                                        impact.
+                                    </p>
+                                </motion.div>
+                            </div>
 
-                    <div className="overflow-hidden rounded-lg border border-gray-200">
-                        <div className="relative h-48 bg-gray-100">
-                            <Image
-                                src="/images/c1.jpg"
-                                alt="One-Page Website"
-                                width={400}
-                                height={300}
-                                className="h-full w-full object-cover"
-                            />
+                            {/* <div className="p-0 md:col-span-4 md:p-5"></div> */}
+                            {/* <div className="flex flex-col items-center justify-center md:col-span-8"></div> */}
+                            {/* <div className="flex items-center justify-center border-r px-5 py-5 md:col-span-4 md:py-10"></div> */}
+                            {/* <div className="flex items-center justify-center border-r px-5 py-5 md:col-span-4 md:py-10"></div> */}
+                            {/* <div className="border-b px-5 py-5 md:col-span-4 md:py-10 dark:border-neutral-800"></div> */}
                         </div>
-                        <div className="p-4">
-                            <h3 className="mb-2 text-lg font-bold">
-                                One-Page Website
-                            </h3>
-                            <p className="text-sm text-gray-600">
-                                Launch your idea with a beautiful website
-                                template. Design in beautiful Gradual
-                                transitions, simple but with impact.
-                            </p>
+                        <div className="flex flex-col items-center justify-center border-t">
+                            <Link
+                                href="/"
+                                className="group relative w-full overflow-hidden bg-white p-5 dark:bg-black"
+                            >
+                                <div className="absolute inset-0 w-full -translate-x-[100%] bg-black transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
+                                <h3 className="relative z-10 text-2xl text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black">
+                                    Explore More
+                                </h3>
+                            </Link>
                         </div>
                     </div>
                 </div>
