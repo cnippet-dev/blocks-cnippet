@@ -3,6 +3,7 @@ import "./globals.css";
 import AuthProvider from "@/lib/providers/auth-provider";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import ThemeProvider from "@/providers/theme-provider";
+import { Toaster as Sonner } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
     title: "Cnippet Blocks",
@@ -26,6 +27,7 @@ export default function RootLayout({
                         disableTransitionOnChange
                     >
                         {children}
+                        <Sonner richColors expand={true} position="top-right" />
                     </ThemeProvider>
                 </AuthProvider>
             </body>

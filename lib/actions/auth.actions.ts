@@ -59,6 +59,7 @@ export async function signUpWithCredentials({
                 name,
                 email,
                 password: hashedPassword,
+                provider: "credentials",
             },
         });
 

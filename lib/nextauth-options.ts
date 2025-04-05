@@ -67,25 +67,32 @@ export const nextauthOptions: NextAuthOptions = {
             return true;
         },
         async jwt({ token, trigger, session }) {
-            if (trigger === "update") {
-                token.name = session.name;
-            } else {
-                if (token.email) {
-                    const user = await getUserByEmail({ email: token.email });
-                    // console.log({user})
+            if (trigger === "update" && session) {
+                // Handle updates from the session
+                return { ...token, ...session };
+            }
+
+            if (token.email) {
+                const user = await getUserByEmail({ email: token.email });
+                if (user) {
+                    token.id = user._id;
                     token.name = user.name;
-                    token._id = user._id;
+                    token.email = user.email;
                     token.provider = user.provider;
+                    token.image = user.image;
                 }
             }
+            
             return token;
         },
-
         async session({ token, session }) {
-            if (token.sub && session.user) {
-                session.user.id = token.sub;
+            if (session.user) {
+                session.user.id = token.id as string;
+                session.user.name = token.name as string;
+                session.user.email = token.email as string;
+                session.user.provider = token.provider as string;
+                session.user.image = token.image as string;
             }
-
             return session;
         },
     },

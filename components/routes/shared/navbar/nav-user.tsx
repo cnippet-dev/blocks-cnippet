@@ -20,6 +20,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import AuthDialog from "../auth/dialog";
+import Link from "next/link";
 
 const NavUser = () => {
     const { status, data: session } = useSession();
@@ -129,8 +130,13 @@ const NavUser = () => {
                                 <DropdownMenuSeparator />
                                 <DropdownMenuGroup>
                                     <DropdownMenuItem>
-                                        <BadgeCheck />
-                                        Account
+                                        <Link
+                                            href="/profile"
+                                            className="flex items-center gap-2 w-full"
+                                        >
+                                            <BadgeCheck />
+                                            Profile
+                                        </Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem>
                                         <CreditCard />
