@@ -1,19 +1,19 @@
 "use client";
 
 import * as React from "react";
-import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
 import {
     Controller,
-    ControllerProps,
-    FieldPath,
-    FieldValues,
     FormProvider,
     useFormContext,
+    type ControllerProps,
+    type FieldPath,
+    type FieldValues,
 } from "react-hook-form";
 
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
+import { HTMLMotionProps } from "motion/react";
 
 const Form = FormProvider;
 
@@ -86,25 +86,24 @@ const FormItem = React.forwardRef<
 });
 FormItem.displayName = "FormItem";
 
-const FormLabel = React.forwardRef<
-    React.ElementRef<typeof LabelPrimitive.Root>,
-    React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
->(({ className, ...props }, ref) => {
-    const { error, formItemId } = useFormField();
+const FormLabel = React.forwardRef<HTMLLabelElement, HTMLMotionProps<"label">>(
+    ({ className, ...props }, ref) => {
+        const { error, formItemId } = useFormField();
 
-    return (
-        <Label
-            ref={ref}
-            className={cn(error && "text-destructive", className)}
-            htmlFor={formItemId}
-            {...props}
-        />
-    );
-});
+        return (
+            <Label
+                ref={ref}
+                className={cn(error && "text-destructive", className)}
+                htmlFor={formItemId}
+                {...props}
+            />
+        );
+    },
+);
 FormLabel.displayName = "FormLabel";
 
 const FormControl = React.forwardRef<
-    React.ElementRef<typeof Slot>,
+    React.ComponentRef<typeof Slot>,
     React.ComponentPropsWithoutRef<typeof Slot>
 >(({ ...props }, ref) => {
     const { error, formItemId, formDescriptionId, formMessageId } =
@@ -148,7 +147,7 @@ const FormMessage = React.forwardRef<
     React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
     const { error, formMessageId } = useFormField();
-    const body = error ? String(error?.message) : children;
+    const body = error ? String(error?.message ?? "") : children;
 
     if (!body) {
         return null;
