@@ -126,6 +126,7 @@ export async function signInWithOauth({
                 email: profile.email || "",
                 image: profile.picture,
                 provider: account.provider,
+                emailVerified: new Date(),
             },
         });
 

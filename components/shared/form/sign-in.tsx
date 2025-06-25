@@ -34,13 +34,11 @@ type FormData = z.infer<typeof formSchema>;
 
 export default function SignInForm() {
     const router = useRouter();
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState<"signin" | "google" | "github" | null>(null);
     //eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [error, setError] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState(false);
-    const [oauthLoading, setOauthLoading] = useState<
-        "google" | "github" | null
-    >(null);
+    
     const { data: session, status } = useSession();
 
     const form = useForm<FormData>({
@@ -62,7 +60,7 @@ export default function SignInForm() {
     }, [status, session, router]);
 
     async function onSubmit(values: FormData) {
-        setIsLoading(true);
+        setIsLoading("signin");
         try {
             const result = await signIn("credentials", {
                 email: values.email,
@@ -82,19 +80,19 @@ export default function SignInForm() {
                 `An unexpected error occurred. Please try again. ${error}`,
             );
         } finally {
-            setIsLoading(false);
+            setIsLoading(null);
         }
     }
     const loginWithGoogle = async () => {
-        setOauthLoading("google");
+        setIsLoading("google");
         await signIn("google", { redirect: false });
-        setOauthLoading(null);
+        setIsLoading(null);
     };
 
     const loginWithGit = async () => {
-        setOauthLoading("github");
+        setIsLoading("github");
         await signIn("github", { redirect: false });
-        setOauthLoading(null);
+        setIsLoading(null);
     };
 
     return (
@@ -191,9 +189,9 @@ export default function SignInForm() {
                                     <Button
                                         type="submit"
                                         className="group relative flex h-12 w-full items-center justify-center overflow-hidden rounded-none bg-blue-700 text-white shadow-none hover:bg-blue-800"
-                                        disabled={isLoading}
+                                        disabled={isLoading === "signin"}
                                     >
-                                        {isLoading ? (
+                                        {isLoading === "signin" ? (
                                             <>
                                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                                 Signing in...
@@ -237,9 +235,9 @@ export default function SignInForm() {
                                 <Button
                                     onClick={loginWithGit}
                                     className="group relative flex h-12 items-center justify-center gap-2 overflow-hidden rounded-none border border-neutral-900 bg-white shadow-none dark:bg-black"
-                                    disabled={oauthLoading === "github"}
+                                    disabled={isLoading === "github"}
                                 >
-                                    {oauthLoading === "github" ? (
+                                    {isLoading === "github" ? (
                                         <Loader2 className="h-5 w-5 animate-spin" />
                                     ) : (
                                         <>
@@ -255,9 +253,9 @@ export default function SignInForm() {
                                 <Button
                                     onClick={loginWithGoogle}
                                     className="group relative flex h-12 items-center justify-center gap-2 overflow-hidden rounded-none border border-neutral-900 bg-white shadow-none dark:bg-black"
-                                    disabled={oauthLoading === "google"}
+                                    disabled={isLoading === "google"}
                                 >
-                                    {oauthLoading === "google" ? (
+                                    {isLoading === "google" ? (
                                         <Loader2 className="h-5 w-5 animate-spin" />
                                     ) : (
                                         <>

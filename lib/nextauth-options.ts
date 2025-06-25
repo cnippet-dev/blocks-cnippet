@@ -1,8 +1,11 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
 import {
     getUserByEmail,
     signInWithCredentials,
+    signInWithOauth,
 } from "./actions/auth.actions";
 
 // Extend the built-in session types
@@ -37,14 +40,14 @@ export const nextauthOptions: NextAuthOptions = {
         // error: "/sign_in",
     },
     providers: [
-        // GoogleProvider({
-        //     clientId: process.env.GOOGLE_CLIENT_ID!,
-        //     clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-        // }),
-        // GitHubProvider({
-        //     clientId: process.env.GITHUB_CLIENT_ID!,
-        //     clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-        // }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+        }),
+        GitHubProvider({
+            clientId: process.env.GITHUB_CLIENT_ID!,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+        }),
         CredentialsProvider({
             name: "Credentials",
             credentials: {
@@ -80,7 +83,7 @@ export const nextauthOptions: NextAuthOptions = {
     ],
 
     callbacks: {
-        async signIn({ user, account }) {
+        async signIn({ user, account, profile }) {
             // Handle credentials login
             if (account?.provider === "credentials") {
                 if (!user) {
@@ -91,13 +94,18 @@ export const nextauthOptions: NextAuthOptions = {
             }
 
             // Handle OAuth login
-            // if (account?.type === "oauth" && profile) {
-            //     const result = await signInWithOauth({ account, profile });
-            //     return !!result.success; // Always return boolean
-            // }
+            if (account?.type === "oauth" && profile) {
+                const result = await signInWithOauth({ account, profile });
+                // If user exists but has no username, mark as needs completion
+                if (result.success && result.data) {
+                    // Attach needsCompletion to user for jwt callback
+                    (user as any).needsCompletion = !result.data.username;
+                }
+                return !!result.success; // Always return boolean
+            }
             return true;
         },
-        async jwt({ token, trigger, session, account }) {
+        async jwt({ token, trigger, session, account, user }) {
             // Add provider information to token
             if (account?.provider) {
                 token.provider = account.provider;
@@ -109,17 +117,22 @@ export const nextauthOptions: NextAuthOptions = {
             }
 
             if (token.email) {
-                const user = await getUserByEmail(token.email);
-                if (user) {
-                    token.id = user._id;
-                    token.name = user.name;
-                    token.email = user.email;
-                    token.provider = token.provider || user.provider;
-                    token.image = user.image;
-                    token.username = user.username;
+                const userData = await getUserByEmail(token.email);
+                if (userData) {
+                    token.id = userData._id;
+                    token.name = userData.name;
+                    token.email = userData.email;
+                    token.provider = token.provider || userData.provider;
+                    token.image = userData.image;
+                    token.username = userData.username;
+                    // If user has no username, needs completion
+                    token.needsCompletion = !userData.username;
                 }
             }
-
+            // If needsCompletion was set during signIn, preserve it
+            if (user && (user as any).needsCompletion !== undefined) {
+                token.needsCompletion = (user as any).needsCompletion;
+            }
             return token;
         },
         async session({ token, session }) {
@@ -136,3 +149,4 @@ export const nextauthOptions: NextAuthOptions = {
         },
     },
 };
+
