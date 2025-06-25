@@ -1,297 +1,331 @@
-// lib/actions/auth.actions.ts
 "use server";
 
-import {
-    signUpSchemaStep1,
-    signUpSchemaStep2,
-    loginSchema,
-    aboutYouSchema,
-    forgotPasswordSchema,
-    resetPasswordSchema,
-} from "@/lib/validations/auth";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
-import { signIn, signOut } from "next-auth/react";
-import { redirect } from "next/navigation";
-import { sendVerificationEmail, sendPasswordResetEmail } from "@/lib/email";
-import {
-    generateOTP,
-    storeOTP,
-    verifyOTP,
-    deleteOTP,
-} from "@/lib/actions/otp.actions";
-import { z } from "zod";
+import { nextauthOptions } from "../nextauth-options";
+import { getServerSession } from "next-auth/next";
+import { Account, Profile } from "next-auth";
+import { Resend } from "resend";
+import { generateResetToken } from "@/lib/utils";
+import { ResetPasswordEmail } from "@/components/emails/reset-password";
+import { render } from "@react-email/components";
 
-const prisma = new PrismaClient();
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-// --- Email + Password Sign-Up Flow ---
+type User = {
+    id: string;
+    name: string | null;
+    email: string | null;
+    password?: string;
+    username?: string | null;
+    termsAccepted?: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+};
 
-export async function signUpStep1(values: z.infer<typeof signUpSchemaStep1>) {
-    const validatedFields = signUpSchemaStep1.safeParse(values);
-    if (!validatedFields.success) {
-        return { error: validatedFields.error.flatten().fieldErrors };
-    }
+type AuthResult = {
+    success?: boolean;
+    data?: Partial<User>;
+    error?: string;
+};
 
-    const { username, name, email, acceptTerms } = validatedFields.data;
-
-    const existingUserByEmail = await prisma.user.findUnique({
-        where: { email },
-    });
-    if (existingUserByEmail) {
-        return { error: { email: ["Email already registered."] } };
-    }
-
-    const existingUserByUsername = await prisma.user.findUnique({
-        where: { username },
-    });
-    if (existingUserByUsername) {
-        return { error: { username: ["Username already taken."] } };
-    }
-
-    // Store data temporarily or in a session to pass to step 2
-    // For simplicity, we'll store in a global state or a session in a real app,
-    // for now, let's just indicate success.
-    // In a real app, you might use a temporary token or session to link steps.
-    return { success: true, message: "Step 1 complete. Proceed to password." };
+export async function getUserSession() {
+    return await getServerSession(nextauthOptions);
 }
 
-export async function signUpStep2(
-    email: string,
-    values: z.infer<typeof signUpSchemaStep2>,
-) {
-    const validatedFields = signUpSchemaStep2.safeParse(values);
-    if (!validatedFields.success) {
-        return { error: validatedFields.error.flatten().fieldErrors };
-    }
-
-    const { password } = validatedFields.data;
-
-    // Retrieve temporary data for username, name, email from step 1
-    // (In a real app, you'd fetch from session or temp storage using `email` as key)
-    // For this example, let's assume we have it or pass it.
-    // const tempUser = await prisma.user.findUnique({ where: { email } }); // This is simplified, assumes user is temporarily stored
-    // if (!tempUser) {
-    //     return { error: { general: "Previous step data missing or expired." } };
-    // }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
+export async function signUpWithCredentials({
+    username,
+    name,
+    email,
+    password,
+    termsAccepted,
+}: {
+    username: string;
+    name: string;
+    email: string;
+    password: string;
+    termsAccepted: boolean;
+}): Promise<AuthResult> {
     try {
-        const newUser = await prisma.user.create({
+        const existingUser = await prisma.user.findUnique({ where: { email } });
+        if (existingUser) return { error: "User already exists" };
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = await prisma.user.create({
             data: {
+                username,
+                name,
                 email,
                 password: hashedPassword,
-                termsAccepted: false,
-                emailVerified: null,
+                emailVerified: new Date(),
+                termsAccepted,
+                provider: "credentials",
             },
         });
 
-        // Send email verification
-        const otp = await generateOTP();
-        await storeOTP(email, otp);
-        await sendVerificationEmail(email, otp);
-
-        return {
-            success: true,
-            message:
-                "Account created! Please check your email for verification.",
-        };
+        return { success: true, data: { id: user.id } };
     } catch (error) {
-        console.error("Error during sign up step 2:", error);
-        return {
-            error: { general: "Failed to create account. Please try again." },
-        };
+        console.error("Signup error:", error);
+        return { error: "Registration failed" };
     }
 }
 
-export async function verifyEmail(email: string, otpCode: string) {
+export async function signInWithCredentials({
+    email,
+    password,
+}: {
+    email: string;
+    password: string;
+}): Promise<AuthResult> {
     try {
-        const isValid = await verifyOTP(email, otpCode);
-        if (!isValid) {
-            return { error: "Invalid or expired verification code." };
-        }
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user) return { error: "Invalid credentials" };
+        if (!user.password)
+            return { error: "Account created with social provider" };
 
-        await prisma.user.update({
-            where: { email },
-            data: { emailVerified: new Date() },
-        });
-
-        await deleteOTP(email); // Delete the OTP after successful verification
+        const isValid = await bcrypt.compare(password, user.password);
+        if (!isValid) return { error: "Invalid credentials" };
 
         return {
             success: true,
-            message: "Email verified successfully! You can now sign in.",
+            data: { id: user.id, name: user.name, email: user.email },
         };
     } catch (error) {
-        console.error("Error verifying email:", error);
-        return { error: "Failed to verify email. Please try again." };
+        console.error("Signin error:", error);
+        return { error: "Login failed" };
     }
 }
 
-// --- Email + Password Sign-In Flow ---
-
-export async function signInEmailPassword(values: z.infer<typeof loginSchema>) {
-    const validatedFields = loginSchema.safeParse(values);
-    if (!validatedFields.success) {
-        return { error: validatedFields.error.flatten().fieldErrors };
-    }
-
-    const { email, password } = validatedFields.data;
-
+export async function signInWithOauth({
+    account,
+    profile,
+}: {
+    account: Account;
+    profile: Profile & { picture?: string };
+}) {
     try {
-        await signIn("credentials", {
-            email,
-            password,
-            redirect: false, // Prevent NextAuth.js from redirecting directly
+        const user = await prisma.user.findUnique({
+            where: { email: profile.email },
         });
 
-        return { success: true, message: "Signed in successfully." };
-    } catch (error: any) {
-        console.error("Sign-in error:", error);
-        if (error.message.includes("CredentialsSignin")) {
+        if (user) {
             return {
-                error: "Invalid credentials or email not verified. Please check your details or sign up.",
+                success: true,
+                data: {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    username: user.username,
+                },
             };
         }
-        return { error: "An unexpected error occurred during sign-in." };
-    }
-}
 
-// --- OAuth Sign-In/Sign-Up ---
-
-export async function signInOAuth(provider: "google" | "github") {
-    await signIn(provider);
-}
-
-// --- /about_you Route for Missing Info (OAuth and potentially Email/Password) ---
-export async function completeProfile(
-    userId: string,
-    values: z.infer<typeof aboutYouSchema>,
-) {
-    const validatedFields = aboutYouSchema.safeParse(values);
-    if (!validatedFields.success) {
-        return { error: validatedFields.error.flatten().fieldErrors };
-    }
-
-    const { username, acceptTerms } = validatedFields.data;
-
-    try {
-        // Check if username is already taken by another user
-        const existingUserWithUsername = await prisma.user.findUnique({
-            where: { username },
+        const newUser = await prisma.user.create({
+            data: {
+                name: profile.name || "",
+                email: profile.email || "",
+                image: profile.picture,
+                provider: account.provider,
+            },
         });
-        if (
-            existingUserWithUsername &&
-            existingUserWithUsername.id !== userId
-        ) {
-            return { error: { username: ["Username already taken."] } };
+
+        return {
+            success: true,
+            data: {
+                id: newUser.id,
+                name: newUser.name,
+                email: newUser.email,
+            },
+        };
+    } catch (error) {
+        return { success: false, error: `OAuth signin failed ${error}` };
+    }
+}
+
+export async function getUserByEmail(email: string) {
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) throw new Error("User not found");
+    return { ...user, _id: user.id };
+}
+
+export async function resetPassword({
+    token,
+    newPassword,
+}: {
+    token: string;
+    newPassword: string;
+}): Promise<AuthResult> {
+    try {
+        const resetToken = await prisma.resetToken.findFirst({
+            where: { token, expires: { gt: new Date() } },
+            include: { user: true },
+        });
+
+        if (!resetToken) return { error: "Invalid or expired token" };
+
+        const isSamePassword = await bcrypt.compare(
+            newPassword,
+            resetToken.user.password || "",
+        );
+        if (isSamePassword) {
+            return {
+                error: "New password cannot be the same as current password",
+            };
         }
 
-        const updatedUser = await prisma.user.update({
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        await prisma.$transaction([
+            prisma.user.update({
+                where: { id: resetToken.userId },
+                data: { password: hashedPassword },
+            }),
+            prisma.resetToken.delete({ where: { id: resetToken.id } }),
+        ]);
+
+        return {
+            success: true,
+            data: { id: resetToken.user.id, email: resetToken.user.email },
+        };
+    } catch (error) {
+        console.error("Password reset error:", error);
+        return { error: "Password reset failed" };
+    }
+}
+
+export async function sendResetEmail(email: string) {
+    try {
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user) return { error: "No user found" };
+
+        const resetToken = await generateResetToken(user.id);
+        const resetLink = `${process.env.NEXT_PUBLIC_URL}/reset_password?token=${resetToken}`;
+
+        try {
+            const emailHtml = await render(
+                ResetPasswordEmail({
+                    userEmail: user.email!,
+                    resetLink,
+                }),
+            );
+
+            await resend.emails.send({
+                from: "Cnippet <auth@ui.cnippet.site>",
+                to: email,
+                subject: "Password Reset Request",
+                html: emailHtml,
+            });
+            return { success: true, data: { email: user.email } };
+        } catch (error) {
+            console.error("Email sending error:", error);
+            return { error: "Failed to send email" };
+        }
+    } catch (error) {
+        console.error("Reset email error:", error);
+        return { error: "Reset email failed" };
+    }
+}
+
+export async function checkUsernameAvailability(
+    username: string,
+): Promise<{ available: boolean; error?: string }> {
+    try {
+        if (!username || username.length < 3) {
+            return {
+                available: false,
+                error: "Username must be at least 3 characters long",
+            };
+        }
+
+        // Check if username matches allowed pattern (alphanumeric and underscores only)
+        if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+            return {
+                available: false,
+                error: "Username can only contain letters, numbers, and underscores",
+            };
+        }
+
+        const existingUser = await prisma.user.findUnique({
+            where: { username },
+        });
+
+        return { available: !existingUser };
+    } catch (error) {
+        console.error("Username check error:", error);
+        return {
+            available: false,
+            error: "Failed to check username availability",
+        };
+    }
+}
+
+export async function completeSocialSignup({
+    userId,
+    username,
+    termsAccepted,
+}: {
+    userId: string;
+    username: string;
+    termsAccepted: boolean;
+}): Promise<AuthResult> {
+    try {
+        if (!termsAccepted) {
+            return { error: "You must accept the terms and conditions" };
+        }
+
+        const usernameCheck = await checkUsernameAvailability(username);
+        if (!usernameCheck.available) {
+            return {
+                error: usernameCheck.error || "Username is not available",
+            };
+        }
+
+        const user = await prisma.user.update({
             where: { id: userId },
             data: {
                 username,
-                termsAccepted: acceptTerms,
+                termsAccepted,
             },
         });
 
-        // Manually update the session after profile completion
-        // This will trigger the `jwt` and `session` callbacks in `auth.ts`
-        await signIn("credentials", {
-            redirect: false,
-            email: updatedUser.email, // Use the user's email for session update
-            password: "", // Password is not relevant for session update but required by credentials provider
-            callbackUrl: "/", // Redirect to home after update
-        });
-
-        return { success: true, message: "Profile updated successfully." };
-    } catch (error) {
-        console.error("Error completing profile:", error);
-        return {
-            error: { general: "Failed to update profile. Please try again." },
-        };
-    }
-}
-
-// --- Forgot Password & Reset Password ---
-
-export async function forgotPassword(
-    values: z.infer<typeof forgotPasswordSchema>,
-) {
-    const validatedFields = forgotPasswordSchema.safeParse(values);
-    if (!validatedFields.success) {
-        return { error: validatedFields.error.flatten().fieldErrors };
-    }
-
-    const { email } = validatedFields.data;
-
-    const user = await prisma.user.findUnique({ where: { email } });
-    if (!user) {
-        // For security, don't reveal if email exists or not
         return {
             success: true,
-            message:
-                "If an account with that email exists, a password reset link has been sent.",
+            data: { id: user.id, username: user.username },
         };
+    } catch (error) {
+        console.error("Complete social signup error:", error);
+        return { error: "Failed to complete signup" };
     }
-
-    const otp = await generateOTP();
-    await storeOTP(email, otp);
-    await sendPasswordResetEmail(email, otp);
-
-    return {
-        success: true,
-        message:
-            "If an account with that email exists, a password reset code has been sent.",
-    };
 }
 
-export async function resetPassword(
-    email: string,
-    otpCode: string,
-    values: z.infer<typeof resetPasswordSchema>,
-) {
-    const validatedFields = resetPasswordSchema.safeParse(values);
-    if (!validatedFields.success) {
-        return { error: validatedFields.error.flatten().fieldErrors };
-    }
-
-    const { password } = validatedFields.data;
-
+export async function checkUsername(username: string) {
     try {
-        const isValid = await verifyOTP(email, otpCode);
-        if (!isValid) {
-            return { error: { general: "Invalid or expired reset code." } };
-        }
-
-        const user = await prisma.user.findUnique({ where: { email } });
-        if (!user) {
-            return { error: { general: "User not found." } };
-        }
-
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        await prisma.user.update({
-            where: { email },
-            data: { password: hashedPassword },
+        const existingUser = await prisma.user.findFirst({
+            where: { username },
         });
-
-        await deleteOTP(email); // Delete the OTP after successful reset
-
         return {
-            success: true,
-            message:
-                "Your password has been reset successfully. You can now sign in.",
+            exists: !!existingUser,
         };
     } catch (error) {
-        console.error("Error resetting password:", error);
+        console.error("Error checking username:", error);
         return {
-            error: { general: "Failed to reset password. Please try again." },
+            exists: false,
+            error: "Error checking username",
         };
     }
 }
 
-// --- Sign Out ---
-export async function signOutUser() {
-    await signOut();
+export async function checkEmail(email: string) {
+    try {
+        const existingUser = await prisma.user.findFirst({ where: { email } });
+        return {
+            exists: !!existingUser,
+        };
+    } catch (error) {
+        console.error("Error checking email:", error);
+        return {
+            exists: false,
+            error: "Error checking email",
+        };
+    }
 }

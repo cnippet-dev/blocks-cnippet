@@ -1,24 +1,18 @@
-// types/auth.d.ts
-import { DefaultSession } from "next-auth";
+import "next-auth";
 
 declare module "next-auth" {
     interface Session {
         user: {
             id: string;
-            username?: string | null;
-            termsAccepted?: boolean;
-        } & DefaultSession["user"];
+            name?: string | null;
+            email?: string | null;
+            image?: string | null;
+            provider?: string | null;
+        };
+        needsCompletion?: boolean | undefined;
     }
 
     interface User {
-        username?: string | null;
-        termsAccepted?: boolean;
-    }
-}
-
-declare module "@auth/core/jwt" {
-    interface JWT {
-        username?: string | null;
-        termsAccepted?: boolean;
+        id: string;
     }
 }
