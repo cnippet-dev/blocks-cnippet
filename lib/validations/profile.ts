@@ -12,7 +12,6 @@ export const updateGeneralInfoSchema = z.object({
             "Username can only contain letters, numbers, and underscores",
         )
         .optional(),
-    // Add other general profile fields here if needed
 });
 
 export const changePasswordSchema = z
@@ -27,3 +26,18 @@ export const changePasswordSchema = z
         message: "New passwords do not match.",
         path: ["confirmNewPassword"],
     });
+
+export const updateUserSettingsSchema = z.object({
+    theme: z
+        .enum(["light", "dark", "system"], {
+            errorMap: () => ({ message: "Invalid theme selected." }),
+        })
+        .optional(),
+    emailNotifications: z.boolean().optional(),
+    inAppNotifications: z.boolean().optional(),
+    language: z
+        .string()
+        .min(2, "Language must be at least 2 characters.")
+        .optional(), // e.g., 'en', 'es', 'fr'
+    timezone: z.string().min(3, "Timezone is required.").optional(), // e.g., 'UTC', 'EST', 'IST'
+});

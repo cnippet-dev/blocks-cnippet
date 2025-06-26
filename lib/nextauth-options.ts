@@ -18,6 +18,11 @@ declare module "next-auth" {
             image?: string | null;
             provider?: string | null;
             username?: string | null;
+            preferredTheme?: string | null;
+            emailNotifications?: boolean | null;
+            inAppNotifications?: boolean | null;
+            preferredLanguage?: string | null;
+            preferredTimezone?: string | null;
         };
     }
 }
@@ -30,9 +35,14 @@ declare module "next-auth/jwt" {
         image?: string | null;
         provider?: string | null;
         username?: string | null;
+        preferredTheme?: string | null;
+        emailNotifications?: boolean | null;
+        inAppNotifications?: boolean | null;
+        preferredLanguage?: string | null;
+        preferredTimezone?: string | null;
     }
 }
-
+    
 export const nextauthOptions: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     pages: {
@@ -126,6 +136,12 @@ export const nextauthOptions: NextAuthOptions = {
                     token.provider = token.provider || userData.provider;
                     token.image = userData.image;
                     token.username = userData.username;
+                    // Add user settings fields to token
+                    token.preferredTheme = userData.preferredTheme;
+                    token.emailNotifications = userData.emailNotifications;
+                    token.inAppNotifications = userData.inAppNotifications;
+                    token.preferredLanguage = userData.preferredLanguage;
+                    token.preferredTimezone = userData.preferredTimezone;
                     // If user has no username, needs completion
                     token.needsCompletion = !userData.username;
                 }
@@ -146,6 +162,12 @@ export const nextauthOptions: NextAuthOptions = {
                 session.user.provider = token.provider as string;
                 session.user.image = token.image as string;
                 session.user.username = token.username as string | null;
+                // Add user settings fields to session.user
+                session.user.preferredTheme = token.preferredTheme as string | null;
+                session.user.emailNotifications = token.emailNotifications as boolean | null;
+                session.user.inAppNotifications = token.inAppNotifications as boolean | null;
+                session.user.preferredLanguage = token.preferredLanguage as string | null;
+                session.user.preferredTimezone = token.preferredTimezone as string | null;
                 session.needsCompletion = token.needsCompletion as
                     | boolean
                     | undefined;

@@ -123,6 +123,7 @@ export async function signInWithOauth({
         const newUser = await prisma.user.create({
             data: {
                 name: profile.name || "",
+                username: "",
                 email: profile.email || "",
                 image: profile.picture,
                 provider: account.provider,

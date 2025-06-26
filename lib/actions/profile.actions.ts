@@ -8,6 +8,7 @@ import { getUserSession } from "./auth.actions";
 import {
     updateGeneralInfoSchema,
     changePasswordSchema,
+    updateUserSettingsSchema,
 } from "@/lib/validations/profile";
 
 // Define a type for field-specific errors
@@ -165,3 +166,60 @@ export async function addPaymentMethod(userId: string, cardDetails: any): Promis
     return { success: true, message: "Payment method added." };
 }
 */
+
+/**
+ * Updates various user settings like theme, notifications, language, and timezone.
+ * @param values - Data for user settings.
+ */
+export async function updateUserSettings(
+    values: z.infer<typeof updateUserSettingsSchema>,
+): Promise<ActionResponse<typeof updateUserSettingsSchema>> {
+    const session = await getUserSession();
+    if (!session || !session.user || !session.user.id) {
+        return { error: { general: "Unauthorized. Please sign in." } };
+    }
+
+    const validatedFields = updateUserSettingsSchema.safeParse(values);
+    if (!validatedFields.success) {
+        return {
+            error: validatedFields.error.flatten().fieldErrors as FieldErrors<
+                typeof updateUserSettingsSchema
+            >,
+        };
+    }
+
+    const userId = session.user.id;
+
+    try {
+        const updatedUser = await prisma.user.update({
+            where: { id: userId },
+            data: {
+                preferredTheme: values.theme,
+                emailNotifications: values.emailNotifications,
+                inAppNotifications: values.inAppNotifications,
+                preferredLanguage: values.language,
+                preferredTimezone: values.timezone,
+            },
+            select: {
+                // Select updated fields to return for session refresh
+                id: true,
+                preferredTheme: true,
+                emailNotifications: true,
+                inAppNotifications: true,
+                preferredLanguage: true,
+                preferredTimezone: true,
+            },
+        });
+
+        return {
+            success: true,
+            message: "Settings updated successfully!",
+            user: updatedUser,
+        };
+    } catch (error) {
+        console.error("Error updating user settings:", error);
+        return {
+            error: { general: "Failed to update settings. Please try again." },
+        };
+    }
+}
