@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { checkUsernameAvailability, completeSocialSignup } from "@/lib/actions/auth.actions";
+import { completeSocialSignup } from "@/lib/actions/auth.actions";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -25,6 +25,7 @@ const usernameSchema = z.object({
 export default function CompleteSignupPage() {
     const router = useRouter();
     const { data: session, status } = useSession();
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isChecking, setIsChecking] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -45,22 +46,22 @@ export default function CompleteSignupPage() {
         }
     }, [status, session, router]);
 
-    const checkUsername = async (username: string) => {
-        if (username.length < 3) return;
+    // const checkUsername = async (username: string) => {
+    //     if (username.length < 3) return;
         
-        setIsChecking(true);
+    //     setIsChecking(true);
         
-        try {
-            const result = await checkUsernameAvailability(username);
-            if (!result.available) {
-                form.setError("username", { message: result.error || "Username is not available" });
-            }
-        } catch (error) {
-            toast.error("Failed to check username availability: " + error);
-        } finally {
-            setIsChecking(false);
-        }
-    };
+    //     try {
+    //         const result = await checkUsernameAvailability(username);
+    //         if (!result.available) {
+    //             form.setError("username", { message: result.error || "Username is not available" });
+    //         }
+    //     } catch (error) {
+    //         toast.error("Failed to check username availability: " + error);
+    //     } finally {
+    //         setIsChecking(false);
+    //     }
+    // };
 
     const onSubmit = async (values: z.infer<typeof usernameSchema>) => {
         if (!session?.user?.id) {

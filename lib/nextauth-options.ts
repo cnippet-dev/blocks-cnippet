@@ -99,6 +99,7 @@ export const nextauthOptions: NextAuthOptions = {
                 // If user exists but has no username, mark as needs completion
                 if (result.success && result.data) {
                     // Attach needsCompletion to user for jwt callback
+                    //eslint-disable-next-line @typescript-eslint/no-explicit-any
                     (user as any).needsCompletion = !result.data.username;
                 }
                 return !!result.success; // Always return boolean
@@ -130,7 +131,9 @@ export const nextauthOptions: NextAuthOptions = {
                 }
             }
             // If needsCompletion was set during signIn, preserve it
+            //eslint-disable-next-line @typescript-eslint/no-explicit-any
             if (user && (user as any).needsCompletion !== undefined) {
+                //eslint-disable-next-line @typescript-eslint/no-explicit-any
                 token.needsCompletion = (user as any).needsCompletion;
             }
             return token;
@@ -143,10 +146,11 @@ export const nextauthOptions: NextAuthOptions = {
                 session.user.provider = token.provider as string;
                 session.user.image = token.image as string;
                 session.user.username = token.username as string | null;
-                session.needsCompletion = token.needsCompletion as boolean | undefined;
+                session.needsCompletion = token.needsCompletion as
+                    | boolean
+                    | undefined;
             }
             return session;
         },
     },
 };
-

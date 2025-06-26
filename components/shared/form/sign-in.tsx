@@ -34,11 +34,13 @@ type FormData = z.infer<typeof formSchema>;
 
 export default function SignInForm() {
     const router = useRouter();
-    const [isLoading, setIsLoading] = useState<"signin" | "google" | "github" | null>(null);
+    const [isLoading, setIsLoading] = useState<
+        "signin" | "google" | "github" | null
+    >(null);
     //eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [error, setError] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState(false);
-    
+
     const { data: session, status } = useSession();
 
     const form = useForm<FormData>({
@@ -235,37 +237,28 @@ export default function SignInForm() {
                                 <Button
                                     onClick={loginWithGit}
                                     className="group relative flex h-12 items-center justify-center gap-2 overflow-hidden rounded-none border border-neutral-900 bg-white shadow-none dark:bg-black"
-                                    disabled={isLoading === "github"}
                                 >
-                                    {isLoading === "github" ? (
-                                        <Loader2 className="h-5 w-5 animate-spin" />
-                                    ) : (
-                                        <>
-                                            <div className="absolute inset-0 w-full -translate-x-[100%] bg-black transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
-                                            <RiGithubFill className="relative z-10 size-6 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
-                                            <span className="relative z-10 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black">
-                                                GitHub
-                                            </span>
-                                        </>
+                                    <div className="absolute inset-0 w-full -translate-x-[100%] bg-black transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
+                                    {isLoading === "github" && (
+                                        <Loader2 className="relative z-10 size-6 animate-spin text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
                                     )}
+                                    <RiGithubFill className="relative z-10 size-6 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
+                                    <span className="relative z-10 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black">
+                                        GitHub
+                                    </span>
                                 </Button>
-
                                 <Button
                                     onClick={loginWithGoogle}
                                     className="group relative flex h-12 items-center justify-center gap-2 overflow-hidden rounded-none border border-neutral-900 bg-white shadow-none dark:bg-black"
-                                    disabled={isLoading === "google"}
                                 >
-                                    {isLoading === "google" ? (
-                                        <Loader2 className="h-5 w-5 animate-spin" />
-                                    ) : (
-                                        <>
-                                            <div className="absolute inset-0 w-full -translate-x-[100%] bg-black transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
-                                            <RiGoogleFill className="relative z-10 size-5 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
-                                            <span className="relative z-10 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black">
-                                                Google
-                                            </span>
-                                        </>
+                                    <div className="absolute inset-0 w-full -translate-x-[100%] bg-black transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
+                                    {isLoading === "google" && (
+                                        <Loader2 className="relative z-10 size-6 animate-spin text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
                                     )}
+                                    <RiGoogleFill className="relative z-10 size-5 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
+                                    <span className="relative z-10 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black">
+                                        Google
+                                    </span>
                                 </Button>
                             </div>
 
