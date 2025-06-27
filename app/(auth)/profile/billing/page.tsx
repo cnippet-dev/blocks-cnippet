@@ -36,10 +36,10 @@ import {
     FileText,
     Download,
     Loader2,
-} from "lucide-react"; // Add Loader2 icon
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { useSession } from "next-auth/react"; // Import useSession
-import { getUserPayments } from "@/lib/actions/payment.actions"; // Import the new server action
+import { useSession } from "next-auth/react";
+import { getUserPayments } from "@/lib/actions/payment.actions";
 
 // Define types for your data
 interface PaymentMethod {
@@ -59,7 +59,7 @@ interface InvoiceData {
 }
 
 export default function BillingPage() {
-    const { data: session, status } = useSession(); // Get session data
+    const { data: session, status } = useSession();
     const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([
         {
             id: "1",
@@ -76,18 +76,20 @@ export default function BillingPage() {
             default: false,
         },
     ]);
-    const [invoices, setInvoices] = useState<InvoiceData[]>([]); // Initialize as empty array
-    const [isLoadingInvoices, setIsLoadingInvoices] = useState(true); // Loading state for invoices
+    const [invoices, setInvoices] = useState<InvoiceData[]>([]);
+    const [isLoadingInvoices, setIsLoadingInvoices] = useState(true);
+    const [hasLoadedInvoices, setHasLoadedInvoices] = useState(false); // New state to prevent re-fetching
 
     const [isAddPaymentModalOpen, setIsAddPaymentModalOpen] = useState(false);
     const [newCardNumber, setNewCardNumber] = useState("");
-    const [newCardExpiry, setNewCardExpiry] = useState(""); // Format MM/YY
+    const [newCardExpiry, setNewCardExpiry] = useState("");
     const [newCardCVC, setNewCardCVC] = useState("");
 
     // Fetch invoices from the database on component mount
     useEffect(() => {
         const fetchInvoices = async () => {
-            if (status === "loading") return; // Wait for session to load
+            // Only fetch if session is authenticated and we haven't loaded it yet
+            if (status === "loading" || hasLoadedInvoices) return;
             if (!session?.user?.id) {
                 setIsLoadingInvoices(false);
                 toast.info("Please sign in to view your billing history.");
@@ -102,7 +104,7 @@ export default function BillingPage() {
             } else if (result.payments) {
                 // Map fetched payment data to InvoiceData format
                 const fetchedInvoices: InvoiceData[] = result.payments.map(
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    //eslint-disable-next-line @typescript-eslint/no-explicit-any
                     (payment: any) => ({
                         id: payment.razorpayOrderId || payment.id, // Use Razorpay Order ID or internal ID
                         date: new Date(payment.createdAt).toLocaleDateString(),
@@ -114,10 +116,11 @@ export default function BillingPage() {
                 setInvoices(fetchedInvoices);
             }
             setIsLoadingInvoices(false);
+            setHasLoadedInvoices(true); // Mark as loaded after the first successful fetch
         };
 
         fetchInvoices();
-    }, [session, status]); // Re-run when session or status changes
+    }, [session, status, hasLoadedInvoices]); // Add hasLoadedInvoices to dependencies
 
     const handleAddPaymentMethod = () => {
         if (!newCardNumber || !newCardExpiry || !newCardCVC) {
