@@ -5,8 +5,15 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@font-face {
+    font-family: "Buch";
+    font-style: normal;
+    src: url(/fonts/buch.woff2);
+}
+
 @theme {
     --font-sans: "DM Sans", sans-serif;
+    --font-buch: "Buch";
 }
 
 :root {
