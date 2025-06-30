@@ -1,14 +1,14 @@
 import Link from "next/link";
-import React from "react";
+import React, { forwardRef } from "react";
 import {
   RiArrowRightLine,
   RiDiscordFill,
   RiGithubFill,
 } from "@remixicon/react";
 
-const Community = () => {
+const Community = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>((props, ref) => {
   return (
-    <section className="w-full relative border-t-0 border-b bg-white">
+    <section ref={ref} className="w-full relative border-t-0 border-b bg-white">
       <div className="border-b border-neutral-200 sticky top-0 bg-white z-10">
         <div className="flex gap-6 items-center justify-start max-w-[1536px] mx-auto px-30">
           <div className="size-4 rounded-full bg-blue-700"></div>
@@ -77,6 +77,6 @@ const Community = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Community;

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import Link from "next/link";
 
 import { RiArrowRightLine } from "@remixicon/react";
 import { TypingText } from "@/components/motion/typing-text";
 
-const Hero = () => {
+const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>((props, ref) => {
+    
     return (
         <>
             <section className="mx-auto w-full max-w-[1536px] border-t-0 border-b px-30">
@@ -29,7 +30,7 @@ const Hero = () => {
                                 </TypingText>
                             </div>
 
-                            <p className="mb-4 max-w-2xl text-sm font-mono leading-normal md:mt-2 md:text-lg">
+                            <p className="mb-4 max-w-2xl text-sm leading-normal md:mt-2 md:text-lg">
                                 <span className="text-gray-500">
                                     Welcome to Cnippet - your one-stop solution
                                     for modern web development.
@@ -97,10 +98,10 @@ const Hero = () => {
                     </div>
 
                     <div className="grid h-12 grid-cols-6 divide-x border-t">
-                        <div className="col-span-2 h-full w-full">
+                        <div ref={ref} className="col-span-2 h-full w-full">
                             <Link
                                 href="https://ui.cnippet.site"
-                                className="group relative flex h-full w-full items-center justify-center overflow-hidden bg-blue-700 dark:bg-black"
+                                className="group relative flex h-full cursor-none w-full items-center justify-center overflow-hidden bg-blue-700 dark:bg-black"
                             >
                                 <div className="absolute inset-0 w-full -translate-x-[100%] bg-blue-800 transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
                                 <span className="relative z-10 flex w-full items-center justify-between gap-2 px-4 text-lg text-white duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black">
@@ -122,6 +123,6 @@ const Hero = () => {
             </section>
         </>
     );
-};
+});
 
 export default Hero;

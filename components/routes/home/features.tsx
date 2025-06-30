@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import Link from "next/link";
 import { RiArrowRightLine } from "@remixicon/react";
 import { motion } from "motion/react";
@@ -35,7 +35,7 @@ const metrics = [
     },
 ];
 
-const Features = () => {
+const Features = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>((props, ref) => {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     
     return (
@@ -62,7 +62,7 @@ const Features = () => {
                         </p>
                     </div>
                     <div className="grid grid-cols-6 divide-x border-t">
-                        <div className="col-span-2 flex flex-col items-start justify-start gap-2 px-4 py-10">
+                        <div ref={ref} className="col-span-2 flex flex-col items-start justify-start gap-2 px-4 py-10">
                             <h3 className="text-2xl font-medium tracking-tight">
                                 ui.cnippet.site - Core Components
                             </h3>
@@ -213,6 +213,6 @@ const Features = () => {
             </section>
         </>
     );
-};
+});
 
 export default Features;
