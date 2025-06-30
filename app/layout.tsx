@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import AuthProvider from "@/providers/auth-provider";
+import ThemeProvider from "@/providers/theme-provider";
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -19,8 +20,19 @@ export default function RootLayout({
             <body className={`font-sans`}>
                 <ReactLenis root>
                     <AuthProvider>
-                        {children}
-                        <Sonner richColors expand={true} position="top-right" />
+                        <ThemeProvider
+                            attribute="class"
+                            defaultTheme="light"
+                            enableSystem
+                            disableTransitionOnChange
+                        >
+                            {children}
+                            <Sonner
+                                richColors
+                                expand={true}
+                                position="top-right"
+                            />
+                        </ThemeProvider>
                     </AuthProvider>
                 </ReactLenis>
             </body>

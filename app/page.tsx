@@ -11,29 +11,10 @@ const Nav1 = dynamic(() => import("@/components/shared/navbar/nav-1"));
 const Community = dynamic(() => import("@/components/routes/home/community"));
 const Sections = dynamic(() => import("@/components/shared/all-sections"));
 
-// export default function Home() {
-//     return (
-//         <>
-//             <Nav1 />
-//             <main className="font-sans">
-//                 <Hero />
-//                 <Features />
-//                 <Sections count={6} />
-//                 {/* <Feedback /> */}
-//                 <Community />
-//                 <Faq />
-//                 <Cta />
-//             </main>
-//             <Footer />
-//         </>
-//     );
-// }
-
 import { useRef, useState } from "react";
 import { Cursor } from "@/components/motion/cursor";
 import { AnimatePresence, motion } from "motion/react";
 import { PlusIcon } from "lucide-react";
-import { CldImage } from "next-cloudinary";
 
 export default function Cursor1() {
     const [isHovering, setIsHovering] = useState(false);
@@ -132,8 +113,8 @@ export default function Cursor1() {
             <Nav1 />
             <main className="font-buch">
                 <Hero ref={targetRef3} />
-                <Features ref={targetRef} />
                 <Sections count={6} />
+                <Features ref={targetRef} />
                 {/* <Feedback /> */}
                 <Community ref={targetRef2} />
                 <Faq />
