@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import Link from "next/link";
 import { RiArrowRightLine } from "@remixicon/react";
 import { motion } from "motion/react";
@@ -35,34 +35,44 @@ const metrics = [
     },
 ];
 
-const Features = () => {
+const Features = forwardRef<HTMLDivElement>((props, ref) => {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-    
+
     return (
         <>
-            <section className="mx-auto mt-20 w-full max-w-[1536px] border-t border-b px-30">
+            <section
+                {...props}
+                className="mx-auto w-full max-w-[1536px] border-t-0 border-b px-30"
+            >
                 <div className="border border-t-0 border-b-0">
                     <div className="max-w-2xl px-4 py-20">
-                        <TypingText
-                            className="text-2xl leading-tight font-medium tracking-tight md:text-5xl"
-                            speed={60}
-                            showCursor={false}
-                            once={false}
-                        >
-                            Complete Web Development Ecosystem
-                        </TypingText>
+                        <div className="h-[calc(2*theme(fontSize.6xl)*theme(lineHeight.normal))] md:h-[calc(2*theme(fontSize.5xl)*theme(lineHeight.tight))]">
+                            <TypingText
+                                className="text-2xl leading-tight font-medium tracking-tight md:text-5xl"
+                                speed={60}
+                                showCursor={false}
+                                once={true}
+                            >
+                                Everything You Need for a Complete Website
+                            </TypingText>
+                        </div>
 
                         {/* <h2 className="text-2xl leading-tight font-medium tracking-tight md:text-5xl">
                             Complete Web Development Ecosystem
                         </h2> */}
                         <p className="mt-2 text-gray-500">
-                            From individual components to complete websites, our
-                            ecosystem provides everything you need to build
-                            modern, scalable web applications.
+                            Cnippet block offers a growing library of ready-made
+                            sections (like hero, features, team), full pages
+                            (landing, about, contact), and complete website
+                            templates. Build your next project faster with
+                            SEO-friendly, customizable blocks.
                         </p>
                     </div>
                     <div className="grid grid-cols-6 divide-x border-t">
-                        <div className="col-span-2 flex flex-col items-start justify-start gap-2 px-4 py-10">
+                        <div
+                            ref={ref}
+                            className="col-span-2 flex flex-col items-start justify-start gap-2 px-4 py-10"
+                        >
                             <h3 className="text-2xl font-medium tracking-tight">
                                 ui.cnippet.site - Core Components
                             </h3>
@@ -77,14 +87,14 @@ const Features = () => {
 
                         <div className="col-span-2 flex flex-col items-start justify-start gap-2 px-4 py-10">
                             <h3 className="text-2xl font-medium tracking-tight">
-                                block.cnippet.site - Complete Templates
+                                block.cnippet.site - Sections & Templates
                             </h3>
                             <p className="text-gray-500">
-                                Choose from 100+ pre-built sections, pages, and
-                                complete website templates. Perfect for landing
-                                pages, about pages, contact forms, and full
-                                website solutions that you can customize and
-                                deploy instantly.
+                                Access 100+ pre-built sections, pages, and full
+                                website templates. Perfect for landing pages,
+                                about pages, contact forms, and more. All blocks
+                                are responsive, SEO-optimized, and easy to
+                                customize for any project.
                             </p>
                         </div>
 
@@ -139,10 +149,18 @@ const Features = () => {
             <section className="mx-auto mt-20 w-full max-w-[1536px] border-t border-b px-30">
                 <div className="border border-t-0 border-b-0">
                     <div className="max-w-3xl px-4 py-20">
-                        <h2 className="text-2xl leading-tight font-medium tracking-tight md:text-5xl">
-                            Trusted by Developers <br />{" "}
-                            <span className="text-blue-700">Worldwide</span>
-                        </h2>
+                        <div className="h-[calc(2*theme(fontSize.6xl)*theme(lineHeight.normal))] md:h-[calc(2*theme(fontSize.5xl)*theme(lineHeight.tight))]">
+                            <TypingText
+                                className="text-2xl leading-tight font-medium tracking-tight md:text-5xl"
+                                speed={60}
+                                showCursor={false}
+                                once={true}
+                            >
+                                Trusted by Developers <br />{" "}
+                                <span className="text-blue-700">Worldwide</span>
+                            </TypingText>
+                        </div>
+
                         <p className="mt-2 text-lg text-gray-500">
                             Join thousands of developers who trust Cnippet for
                             their web development needs. Our ecosystem has
@@ -192,7 +210,7 @@ const Features = () => {
                                         }
                                         transition={{ duration: 0.4 }}
                                     >
-                                        <h3 className="text-xl font-semibold text-white">
+                                        <h3 className="text-xl font-medium text-white">
                                             {metric.content}
                                         </h3>
                                         <p className="text-gray-400">
@@ -200,7 +218,7 @@ const Features = () => {
                                         </p>
                                     </motion.div>
                                 </div>
-                                <h3 className="mt-32 text-2xl font-medium tracking-tight group-hover:text-white md:text-7xl">
+                                <h3 className="mt-auto pt-40 text-2xl font-medium tracking-tight group-hover:text-white md:text-7xl">
                                     {metric.title}
                                 </h3>
                                 <p className="text-xl font-medium text-gray-500 group-hover:text-white">
@@ -213,6 +231,8 @@ const Features = () => {
             </section>
         </>
     );
-};
+});
+
+Features.displayName = "Features";
 
 export default Features;

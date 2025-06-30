@@ -84,13 +84,23 @@ export default function Footer() {
                                                 href="/"
                                                 className="flex items-center gap-2"
                                             >
-                                                <Image
-                                                    src="/images/logo-dark.png"
-                                                    alt=""
-                                                    className="size-9 rounded-full"
-                                                    width={1080}
-                                                    height={1080}
-                                                />
+                                                {theme === "dark" ? (
+                                                    <Image
+                                                        src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-dark.png"
+                                                        alt=""
+                                                        className="size-9 rounded-full"
+                                                        width={1080}
+                                                        height={1080}
+                                                    />
+                                                ) : (
+                                                    <Image
+                                                        src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-light.png"
+                                                        alt=""
+                                                        className="size-9 rounded-full"
+                                                        width={1080}
+                                                        height={1080}
+                                                    />
+                                                )}
                                                 <span className="inline-block">
                                                     Cnippet UI
                                                 </span>

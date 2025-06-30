@@ -12,45 +12,45 @@ import {
 const items = [
   {
     id: "1",
-    title: "What is the difference between ui.cnippet.site and block.cnippet.site?",
+    title: "What does block.cnippet.site offer?",
     icon: AtSignIcon,
     content:
-      "ui.cnippet.site provides individual UI components like buttons, dialogs, accordions, motion effects, and charts that you can use to build custom interfaces. block.cnippet.site offers complete sections, pages, and full website templates that you can use as starting points for entire websites. 🚀",
+      "block.cnippet.site provides a wide range of ready-made website sections (like hero, features, team), full pages (landing, about, contact), and complete website templates. All blocks are SEO-friendly and easy to customize.",
   },
   {
     id: "2",
-    title: "How quickly can I integrate components from ui.cnippet.site?",
+    title: "How do I use sections and templates from block.cnippet.site?",
     icon: CommandIcon,
     content:
-      "Extremely fast! Our UI components are copy-paste ready with built-in Tailwind styling. No complex setup or configuration needed - just copy, paste, and launch in seconds. Perfect for rapid prototyping and production builds. ⚡",
+      "Simply browse, copy, and integrate any section, page, or template into your project. All blocks are production-ready and optimized for fast deployment.",
   },
   {
     id: "3",
     icon: EclipseIcon,
-    title: "What kind of templates are available on block.cnippet.site?",
+    title: "Are the templates SEO-friendly?",
     content:
-      "We offer 100+ templates including landing pages, about pages, contact forms, pricing pages, blog layouts, e-commerce templates, and complete website solutions. All templates are responsive, customizable, and ready for immediate deployment. 💼",
+      "Yes! Every section, page, and template on block.cnippet.site is designed with SEO best practices in mind, ensuring your website ranks well and loads fast.",
   },
   {
     id: "4",
     icon: EclipseIcon,
-    title: "What topics are covered in next.cnippet.site?",
+    title: "Can I customize the blocks?",
     content:
-      "next.cnippet.site provides 200+ guides covering authentication systems, payment gateway integration, SEO optimization, performance tuning, deployment strategies, and advanced web development techniques. Perfect for developers at all skill levels. ♿️",
+      "Absolutely. All sections, pages, and templates are fully customizable. Adjust styles, content, and layout to fit your brand and project needs.",
   },
   {
     id: "5",
     icon: EclipseIcon,
-    title: "Do you support both TypeScript and JavaScript?",
+    title: "What types of websites can I build?",
     content:
-      "Yes! All our components and templates are designed for both TypeScript and JavaScript developers. Enjoy the same high-quality components regardless of your preference, with full type safety and documentation for TypeScript users. 🛠️",
+      "You can build landing pages, portfolios, SaaS sites, business websites, and more. Our templates cover a wide range of use cases and industries.",
   },
   {
     id: "6",
     icon: EclipseIcon,
-    title: "What kind of support do you offer?",
+    title: "Is there support for developers?",
     content:
-      "We provide comprehensive support through our Discord community for real-time assistance. For critical issues, we offer 24-hour response times. Plus, our extensive documentation and examples make implementation smooth across all our platforms. 💬",
+      "Yes! Join our community for support, tips, and updates. We also provide documentation and examples to help you get started quickly.",
   },
 ];
 

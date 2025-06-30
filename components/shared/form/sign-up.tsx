@@ -33,7 +33,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 type FormData = z.infer<typeof SignUpSchema>;
 
-export function SignUpForm() {
+export default function SignUpForm() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState<
         "signup" | "google" | "github" | null

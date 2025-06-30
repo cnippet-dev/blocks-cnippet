@@ -1,82 +1,95 @@
 import Link from "next/link";
-import React from "react";
+import React, { forwardRef } from "react";
 import {
-  RiArrowRightLine,
-  RiDiscordFill,
-  RiGithubFill,
+    RiArrowRightLine,
+    RiDiscordFill,
+    RiGithubFill,
 } from "@remixicon/react";
 
-const Community = () => {
-  return (
-    <section className="w-full relative border-t-0 border-b bg-white">
-      <div className="border-b border-neutral-200 sticky top-0 bg-white z-10">
-        <div className="flex gap-6 items-center justify-start max-w-[1536px] mx-auto px-30">
-          <div className="size-4 rounded-full bg-blue-700"></div>
-          <p className="text-lg tracking-wider py-2 uppercase font-semibold">
-            Our Ecosystem
-          </p>
-        </div>
-      </div>
-      <div className="max-w-[1536px] mx-auto px-30 border-neutral-200">
-        <div className="border border-t-0 border-b-0">
-          <div className="grid grid-cols-6 divide-x">
-            <div className="px-4 py-20 col-span-4">
-              <h2 className="text-2xl leading-tight md:text-5xl font-medium tracking-tight">
-                Explore Our Complete
-                <br />
-                <span className="text-blue-700">Development Ecosystem</span>
-              </h2>
-              <p className="mt-2 text-gray-500 text-lg max-w-xl">
-                From individual components to complete websites, our ecosystem provides
-                everything you need to build modern, scalable web applications.
-              </p>
+const Community = forwardRef<
+    HTMLDivElement,
+    React.HTMLAttributes<HTMLDivElement>
+>((props, ref) => {
+    return (
+        <section
+            ref={ref}
+            className="relative w-full border-t-0 border-b bg-white"
+        >
+            <div className="sticky top-0 z-10 border-b border-neutral-200 bg-white">
+                <div className="mx-auto flex max-w-[1536px] items-center justify-start gap-6 px-30">
+                    <div className="size-4 rounded-full bg-blue-700"></div>
+                    <p className="py-2 text-lg font-semibold tracking-wider uppercase">
+                        Our Ecosystem
+                    </p>
+                </div>
             </div>
-            <div className="col-span-2">
-              <div>
-                <Link
-                  href="https://ui.cnippet.site"
-                  className="group relative py-2 flex w-full h-full items-center justify-center overflow-hidden bg-blue-700 dark:bg-black"
-                >
-                  <div className="absolute inset-0 w-full -translate-x-[100%] bg-blue-800 transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
-                  <span className="relative z-10 text-lg text-white duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black flex items-center gap-2 justify-between w-full px-4">
-                    <RiGithubFill />
-                    UI Components
-                    <RiArrowRightLine
-                      className="ml-auto text-white"
-                      size={20}
-                    />
-                  </span>
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="grid grid-cols-6 h-12 border-t divide-x">
-            <div className="col-span-1"></div>
-            <div className="col-span-1"></div>
-            <div className="col-span-1"></div>
+            <div className="mx-auto max-w-[1536px] border-neutral-200 px-30">
+                <div className="border border-t-0 border-b-0">
+                    <div className="grid grid-cols-6 divide-x">
+                        <div className="col-span-4 px-4 py-20">
+                            <h2 className="text-2xl leading-tight font-medium tracking-tight md:text-5xl">
+                                Discover Sections, Pages, and Templates
+                                <br />
+                                <span className="text-blue-700">
+                                    for Every Website
+                                </span>
+                            </h2>
+                            <p className="mt-2 max-w-xl text-lg text-gray-500">
+                                block.cnippet.site is your go-to resource for
+                                ready-made website sections, full pages, and
+                                complete templates. Build landing pages, about
+                                pages, contact pages, and more with ease. All
+                                blocks are SEO-friendly and easy to customize.
+                            </p>
+                        </div>
+                        <div className="col-span-2">
+                            <div>
+                                <Link
+                                    href="https://ui.cnippet.site"
+                                    className="group relative flex h-full w-full items-center justify-center overflow-hidden bg-blue-700 py-2 dark:bg-black"
+                                >
+                                    <div className="absolute inset-0 w-full -translate-x-[100%] bg-blue-800 transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
+                                    <span className="relative z-10 flex w-full items-center justify-between gap-2 px-4 text-lg text-white duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black">
+                                        <RiGithubFill />
+                                        UI Components
+                                        <RiArrowRightLine
+                                            className="ml-auto text-white"
+                                            size={20}
+                                        />
+                                    </span>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="grid h-12 grid-cols-6 divide-x border-t">
+                        <div className="col-span-1"></div>
+                        <div className="col-span-1"></div>
+                        <div className="col-span-1"></div>
 
-            <div className="col-span-1"></div>
-            <div className="col-span-2 h-full w-full border-0">
-              <Link
-                href="https://block.cnippet.site"
-                className="group relative flex w-full h-full items-center justify-center overflow-hidden bg-blue-200 dark:bg-black"
-              >
-                <div className="absolute inset-0 w-full -translate-x-[100%] bg-blue-700 transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
-                <span className="relative z-10 text-lg text-blue-800 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black flex items-center gap-2 justify-between w-full px-4">
-                  <RiDiscordFill />
-                  Website Templates
-                  <RiArrowRightLine
-                    className="text-blue-800 ml-auto group-hover:text-white"
-                    size={20}
-                  />
-                </span>
-              </Link>
+                        <div className="col-span-1"></div>
+                        <div className="col-span-2 h-full w-full border-0">
+                            <Link
+                                href="https://block.cnippet.site"
+                                className="group relative flex h-full w-full items-center justify-center overflow-hidden bg-blue-200 dark:bg-black"
+                            >
+                                <div className="absolute inset-0 w-full -translate-x-[100%] bg-blue-700 transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
+                                <span className="relative z-10 flex w-full items-center justify-between gap-2 px-4 text-lg text-blue-800 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black">
+                                    <RiDiscordFill />
+                                    Website Templates
+                                    <RiArrowRightLine
+                                        className="ml-auto text-blue-800 group-hover:text-white"
+                                        size={20}
+                                    />
+                                </span>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+        </section>
+    );
+});
+
+Community.displayName = "Community";
 
 export default Community;
