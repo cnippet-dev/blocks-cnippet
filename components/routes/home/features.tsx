@@ -1,7 +1,8 @@
-import React, { forwardRef, useState } from "react";
-import Link from "next/link";
+import { forwardRef, useState } from "react";
 import { RiArrowRightLine } from "@remixicon/react";
 import { motion } from "motion/react";
+import Link from "next/link";
+
 import { TypingText } from "@/components/motion/typing-text";
 
 const metrics = [
@@ -42,9 +43,9 @@ const Features = forwardRef<HTMLDivElement>((props, ref) => {
         <>
             <section
                 {...props}
-                className="mx-auto w-full max-w-[1536px] border-t-0 border-b px-30"
+                className="mx-auto w-full max-w-[1536px] border-t-0 border-b px-30 dark:border-neutral-800 dark:bg-black"
             >
-                <div className="border border-t-0 border-b-0">
+                <div className="border border-t-0 border-b-0 dark:border-neutral-800">
                     <div className="max-w-2xl px-4 py-20">
                         <div className="h-[calc(2*theme(fontSize.6xl)*theme(lineHeight.normal))] md:h-[calc(2*theme(fontSize.5xl)*theme(lineHeight.tight))]">
                             <TypingText
@@ -57,9 +58,6 @@ const Features = forwardRef<HTMLDivElement>((props, ref) => {
                             </TypingText>
                         </div>
 
-                        {/* <h2 className="text-2xl leading-tight font-medium tracking-tight md:text-5xl">
-                            Complete Web Development Ecosystem
-                        </h2> */}
                         <p className="mt-2 text-gray-500">
                             Cnippet block offers a growing library of ready-made
                             sections (like hero, features, team), full pages
@@ -68,7 +66,7 @@ const Features = forwardRef<HTMLDivElement>((props, ref) => {
                             SEO-friendly, customizable blocks.
                         </p>
                     </div>
-                    <div className="grid grid-cols-6 divide-x border-t">
+                    <div className="grid grid-cols-6 divide-x border-t dark:divide-neutral-800 dark:border-neutral-800">
                         <div
                             ref={ref}
                             className="col-span-2 flex flex-col items-start justify-start gap-2 px-4 py-10"
@@ -112,7 +110,7 @@ const Features = forwardRef<HTMLDivElement>((props, ref) => {
                         </div>
                     </div>
 
-                    <div className="grid h-12 grid-cols-6 divide-x border-t">
+                    <div className="grid h-12 grid-cols-6 divide-x border-t dark:divide-neutral-800 dark:border-neutral-800">
                         <div className="col-span-1"></div>
                         <div className="col-span-1"></div>
                         <div className="col-span-1"></div>
@@ -134,7 +132,7 @@ const Features = forwardRef<HTMLDivElement>((props, ref) => {
                             </Link>
                         </div>
                     </div>
-                    <div className="grid h-52 grid-cols-6 divide-x border-t">
+                    <div className="grid h-52 grid-cols-6 divide-x border-t dark:divide-neutral-800 dark:border-neutral-800">
                         <div className="col-span-1"></div>
                         <div className="col-span-1"></div>
                         <div className="col-span-1"></div>
@@ -146,8 +144,8 @@ const Features = forwardRef<HTMLDivElement>((props, ref) => {
                 </div>
             </section>
 
-            <section className="mx-auto mt-20 w-full max-w-[1536px] border-t border-b px-30">
-                <div className="border border-t-0 border-b-0">
+            <section className="mx-auto mt-20 w-full max-w-[1536px] border-t border-b px-30 dark:border-neutral-800 dark:bg-black">
+                <div className="border border-t-0 border-b-0 dark:border-neutral-800">
                     <div className="max-w-3xl px-4 py-20">
                         <div className="h-[calc(2*theme(fontSize.6xl)*theme(lineHeight.normal))] md:h-[calc(2*theme(fontSize.5xl)*theme(lineHeight.tight))]">
                             <TypingText
@@ -169,7 +167,7 @@ const Features = forwardRef<HTMLDivElement>((props, ref) => {
                         </p>
                     </div>
 
-                    <div className="grid h-12 grid-cols-6 divide-x border-t">
+                    <div className="grid h-12 grid-cols-6 divide-x border-t dark:divide-neutral-800 dark:border-neutral-800">
                         <div className="col-span-1"></div>
                         <div className="col-span-1"></div>
                         <div className="col-span-1"></div>
@@ -192,11 +190,11 @@ const Features = forwardRef<HTMLDivElement>((props, ref) => {
                         </div>
                     </div>
 
-                    <div className="grid h-full grid-cols-4 divide-x border-t">
+                    <div className="grid h-full grid-cols-4 divide-x border-t dark:divide-neutral-800 dark:border-neutral-800">
                         {metrics.map((metric, index) => (
                             <div
                                 key={index}
-                                className="group col-span-1 flex cursor-pointer flex-col items-start justify-start gap-2 px-4 py-10 transition-all duration-300 hover:bg-gray-800"
+                                className="group col-span-1 flex cursor-pointer flex-col items-start justify-start gap-2 px-4 py-10 transition-all duration-300 hover:bg-gray-800 dark:hover:bg-gray-900"
                                 onMouseEnter={() => setHoveredIndex(index)}
                                 onMouseLeave={() => setHoveredIndex(null)}
                             >

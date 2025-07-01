@@ -27,43 +27,6 @@ export default function Footer() {
         setMounted(true);
     }, []);
 
-    // const handleSubmit = async (e: React.FormEvent) => {
-    //     e.preventDefault();
-    //     setStatus("loading");
-
-    //     try {
-    //         if (!email || typeof email !== "string") {
-    //             setStatus("error");
-    //             setMessage("Invalid email address");
-    //             return;
-    //         }
-
-    //         const response = await Newsletter({ email });
-
-    //         if (!response.success) {
-    //             setStatus("error");
-    //             setMessage(response.error || "Failed to subscribe");
-    //             return;
-    //         }
-    //         toast.success(
-    //             "Message sent successfully! We'll get back to you soon.",
-    //         );
-    //         setStatus("success");
-    //         setMessage("You've been subscribed to our newsletter!");
-    //         setEmail("");
-    //     } catch (error) {
-    //         setStatus("error");
-    //         setMessage(
-    //             error instanceof Error ? error.message : "Failed to subscribe",
-    //         );
-    //         toast.error(
-    //             error instanceof Error
-    //                 ? error.message
-    //                 : "Failed to send message",
-    //         );
-    //     }
-    // };
-
     return (
         <>
             <div
@@ -361,39 +324,4 @@ function MIcon() {
             />
         </svg>
     );
-}
-
-{
-    /* <div className="absolute inset-0 grid h-44 grid-cols-12 px-10">
-                            {Array.from({ length: 7 }).map((_, i) => (
-                                <div
-                                    key={i}
-                                    className={`${i === 0 || i === 6 ? "col-span-1" : "col-span-2"}`}
-                                >
-                                    {i === 0 && (
-                                        <div
-                                            className={`h-1/2 border-b-0 w-full rounded-tr-full border border-gray-200`}
-                                        />
-                                    )}
-                                    {i > 0 && i < 6 && (
-                                        <>
-                                            {i % 2 === 0 ? (
-                                                <div
-                                                    className={`h-full w-full rounded-t-full border border-gray-200`}
-                                                />
-                                            ) : (
-                                                <div
-                                                    className={`h-full w-full rounded-b-full border border-gray-200`}
-                                                />
-                                            )}
-                                        </>
-                                    )}
-                                    {i === 6 && (
-                                        <div
-                                            className={`h-1/2 w-full border-b-0 rounded-tl-full border border-gray-200`}
-                                        />
-                                    )}
-                                </div>
-                            ))}
-                        </div> */
 }

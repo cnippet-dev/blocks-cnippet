@@ -13,9 +13,9 @@ const Community = forwardRef<
     return (
         <section
             ref={ref}
-            className="relative w-full border-t-0 border-b bg-white"
+            className="relative w-full border-t-0 border-b dark:border-neutral-800 dark:bg-black"
         >
-            <div className="sticky top-0 z-10 border-b border-neutral-200 bg-white">
+            <div className="sticky top-0 z-10 border-b border-neutral-200 dark:border-neutral-800 dark:bg-black">
                 <div className="mx-auto flex max-w-[1536px] items-center justify-start gap-6 px-30">
                     <div className="size-4 rounded-full bg-blue-700"></div>
                     <p className="py-2 text-lg font-semibold tracking-wider uppercase">
@@ -23,9 +23,9 @@ const Community = forwardRef<
                     </p>
                 </div>
             </div>
-            <div className="mx-auto max-w-[1536px] border-neutral-200 px-30">
-                <div className="border border-t-0 border-b-0">
-                    <div className="grid grid-cols-6 divide-x">
+            <div className="mx-auto max-w-[1536px] border-neutral-200 px-30 dark:border-neutral-800">
+                <div className="border border-t-0 border-b-0 dark:border-neutral-800">
+                    <div className="grid grid-cols-6 divide-x dark:divide-neutral-800">
                         <div className="col-span-4 px-4 py-20">
                             <h2 className="text-2xl leading-tight font-medium tracking-tight md:text-5xl">
                                 Discover Sections, Pages, and Templates
@@ -61,7 +61,7 @@ const Community = forwardRef<
                             </div>
                         </div>
                     </div>
-                    <div className="grid h-12 grid-cols-6 divide-x border-t">
+                    <div className="grid h-12 grid-cols-6 divide-x border-t dark:divide-neutral-800 dark:border-neutral-800">
                         <div className="col-span-1"></div>
                         <div className="col-span-1"></div>
                         <div className="col-span-1"></div>

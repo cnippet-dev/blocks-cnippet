@@ -77,7 +77,7 @@ export default function Cursor1() {
                         width: isHovering || isHovering2 ? 80 : 16,
                         height: isHovering || isHovering2 ? 32 : 16,
                     }}
-                    className={`flex items-center justify-center rounded-[24px] ${isHovering3 ? "bg-white backdrop-blur-md dark:bg-gray-300/40" : "bg-blue-600 backdrop-blur-md dark:bg-gray-300/40"}`}
+                    className={`flex items-center justify-center rounded-[24px] ${isHovering3 ? "bg-white backdrop-blur-md dark:bg-gray-300/40" : "bg-blue-600 backdrop-blur-md dark:bg-gray-300/40"} transition-all  duration-500`}
                 >
                     <AnimatePresence>
                         {isHovering ? (

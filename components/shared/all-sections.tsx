@@ -22,8 +22,8 @@ const Sections = (props: any) => {
 
     return (
         <>
-            <section className="mx-auto mt-20 w-full max-w-[1536px] border-t border-b px-30">
-                <div className="border border-t-0 border-b-0">
+            <section className="mx-auto mt-20 w-full max-w-[1536px] border-t border-b px-30 dark:bg-black dark:border-neutral-800">
+                <div className="border border-t-0 border-b-0 dark:border-neutral-800">
                     <div className="max-w-3xl px-4 py-16">
                         <div className="h-[calc(2*theme(fontSize.6xl)*theme(lineHeight.normal))] md:h-[calc(2*theme(fontSize.5xl)*theme(lineHeight.tight))]">
                             <TypingText
@@ -51,7 +51,7 @@ const Sections = (props: any) => {
                                 .map((component, i) => (
                                     <div
                                         key={i}
-                                        className={`relative col-span-4 w-full ${i === 2 || i === 5 ? "border-r-0" : "border-r"} ${i === 5 ? "border-b" : ""}`}
+                                        className={`relative col-span-4 w-full ${i === 2 || i === 5 ? "border-r-0" : "border-r"} ${i === 5 ? "border-b" : ""} dark:border-neutral-800`}
                                     >
                                         <Image
                                             width="960"
@@ -79,7 +79,7 @@ const Sections = (props: any) => {
                         </div>
                     </div>
 
-                    <div className="grid h-12 grid-cols-6 divide-x border-t">
+                    <div className="grid h-12 grid-cols-6 divide-x border-t dark:border-neutral-800 dark:divide-neutral-800">
                         <div className="col-span-1"></div>
                         <div className="col-span-1"></div>
                         <div className="col-span-1"></div>
