@@ -80,7 +80,7 @@ const Nav1 = () => {
                             <CommandMenu />
                         </div>
 
-                        <div className="col-span-1 grid h-full cursor-pointer grid-cols-3 divide-x divide-neutral-500">
+                        <div className="col-span-1 hidden md:grid h-full cursor-pointer grid-cols-3 divide-x divide-neutral-500">
                             <Link
                                 target="_blank"
                                 rel="noreferrer"

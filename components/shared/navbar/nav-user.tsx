@@ -50,24 +50,24 @@ const NavUser = () => {
                                             <UserIcon className="mx-auto size-8" />
                                         )}
 
-                                        <div
+                                        {/* <div
                                             className={`grid flex-1 text-left text-sm leading-tight`}
                                         >
                                             <span className="truncate font-semibold dark:text-white">
                                                 {session.user?.name}
                                             </span>
-                                        </div>
-                                        <ChevronsUpDown
-                                            className={`ml-auto size-4`}
-                                        />
+                                        </div> */}
+                                        {/* <ChevronsUpDown
+                                            className={`ml-auto size-4 text-white`}
+                                        /> */}
                                     </div>
                                 </div>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent
-                                className="w-52 rounded-lg"
+                                className="w-52 rounded-none"
                                 side="bottom"
-                                align="end"
-                                sideOffset={4}
+                                align="center"
+                                sideOffset={15}
                             >
                                 <DropdownMenuLabel className="p-0 font-normal">
                                     <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">

@@ -70,8 +70,11 @@ export default function SignInForm() {
                 redirect: false,
             });
 
+            console.log(result);
+            
+
             if (result?.error) {
-                toast.error(result.error);
+                toast.error("Invalid Credentials");
                 return;
             }
 

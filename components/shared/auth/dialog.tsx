@@ -8,7 +8,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useTheme } from "next-themes";
-import { RiErrorWarningFill } from "@remixicon/react";
+import {
+    RiErrorWarningFill,
+    RiGithubFill,
+    RiGoogleFill,
+} from "@remixicon/react";
 
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 
@@ -94,7 +98,7 @@ const AuthDialog = () => {
             });
 
             if (result?.error) {
-                toast.error(result.error);
+                toast.error("Invalid Credentials");
                 return;
             }
 
@@ -110,140 +114,110 @@ const AuthDialog = () => {
     }
 
     return (
-        <DialogContent className="py-10 font-sans sm:max-w-md">
-            <div className="mb-2 flex flex-col items-center gap-2">
-                <div
-                    className="border-border flex size-11 shrink-0 items-center justify-center rounded-full border"
-                    aria-hidden="true"
-                >
-                    {theme === "dark" ? (
-                        <Image
-                            src="/images/logo-light.png"
-                            alt=""
-                            width={3840}
-                            height={2160}
-                            className="w-[2.75rem] rounded-full bg-black dark:bg-white"
-                        />
-                    ) : (
-                        <Image
-                            src="/images/logo-dark.png"
-                            alt=""
-                            width={3840}
-                            height={2160}
-                            className="w-[2.75rem] rounded-full bg-black dark:bg-white"
-                        />
-                    )}
-                </div>
-                <DialogHeader>
-                    <DialogTitle className="text-2xl leading-tight font-semibold tracking-tight text-gray-900 sm:text-center md:text-3xl dark:text-white">
+        <DialogContent className="w-full rounded-none bg-white p-0 md:max-w-md dark:bg-black">
+            <DialogTitle className="sr-only">Sign In form</DialogTitle>
+            <div className="w-full max-w-full isolate px-6 py-10 text-center">
+                <div className="mb-6 text-center">
+                    <Link className="flex items-center justify-center" href="/">
+                        {theme === "dark" ? (
+                            <Image
+                                src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-dark.png"
+                                alt=""
+                                className="size-14 rounded-full"
+                                width={1080}
+                                height={1080}
+                            />
+                        ) : (
+                            <Image
+                                src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-light.png"
+                                alt=""
+                                className="size-14 rounded-full"
+                                width={1080}
+                                height={1080}
+                            />
+                        )}
+                    </Link>
+                    <h1 className="font-buch mb-2 text-3xl font-medium tracking-tight md:text-3xl">
                         Log in to your account
-                    </DialogTitle>
-                    <DialogDescription className="text-sm leading-normal text-gray-600 sm:text-center md:text-base dark:text-gray-300">
+                    </h1>
+                    <p className="text-gray-500">
                         Welcome back! Please enter your details.
-                    </DialogDescription>
-                </DialogHeader>
-            </div>
-
-            <div className="space-y-4">
+                    </p>
+                </div>
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
-                        className="w-full"
+                        className="space-y-4 text-left"
                     >
-                        <div className="space-y-4">
-                            <FormField
-                                control={form.control}
-                                name="email"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="font-medium text-black dark:text-white">
-                                            Email
-                                        </FormLabel>
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="font-medium text-black dark:text-white">
+                                        Email
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="Enter your email"
+                                            className="mt-1 w-full rounded-none border-t-0 border-r-0 border-b border-l-0 border-neutral-300 bg-transparent px-0 py-2 font-light shadow-none placeholder:text-base placeholder:text-neutral-500 focus:border-purple-500 focus:outline-none focus-visible:ring-0 dark:border-neutral-700"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="password"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="font-medium text-black dark:text-white">
+                                        Password
+                                    </FormLabel>
+                                    <div className="relative">
                                         <FormControl>
                                             <Input
-                                                placeholder="Enter your email"
-                                                className="rounded-lg border-gray-300 transition-all focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            {/* <FormField
-                                control={form.control}
-                                name="password"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="font-medium text-black dark:text-white">
-                                            Password
-                                        </FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                type="password"
-                                                placeholder="Enter your password"
-                                                className="rounded-lg border-gray-300 transition-all focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            /> */}
-                            <FormField
-                                control={form.control}
-                                name="password"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="font-medium text-black dark:text-white">
-                                            Password
-                                        </FormLabel>
-                                        <div className="relative">
-                                            <FormControl>
-                                                <Input
-                                                    type={
-                                                        showPassword
-                                                            ? "text"
-                                                            : "password"
-                                                    }
-                                                    placeholder="Enter your password"
-                                                    className="rounded-lg border-gray-300 pr-10 transition-all focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700"
-                                                    {...field}
-                                                />
-                                            </FormControl>
-                                            <button
-                                                type="button"
-                                                className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 transition-colors hover:text-gray-700"
-                                                onClick={() =>
-                                                    setShowPassword(
-                                                        !showPassword,
-                                                    )
+                                                type={
+                                                    showPassword
+                                                        ? "text"
+                                                        : "password"
                                                 }
-                                            >
-                                                {showPassword ? (
-                                                    <EyeOff size={18} />
-                                                ) : (
-                                                    <Eye size={18} />
-                                                )}
-                                            </button>
-                                        </div>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                        <div className="mt-2 text-right">
+                                                placeholder="Enter your password"
+                                                className="mt-1 w-full rounded-none border-t-0 border-r-0 border-b border-l-0 border-neutral-300 bg-transparent px-0 py-2 font-light shadow-none placeholder:text-base placeholder:text-neutral-500 focus:border-purple-500 focus:outline-none focus-visible:ring-0 dark:border-neutral-700"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <button
+                                            type="button"
+                                            className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 transition-colors hover:text-gray-700"
+                                            onClick={() =>
+                                                setShowPassword(!showPassword)
+                                            }
+                                        >
+                                            {showPassword ? (
+                                                <EyeOff size={18} />
+                                            ) : (
+                                                <Eye size={18} />
+                                            )}
+                                        </button>
+                                    </div>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <div className="text-right">
                             <Link
                                 href="/forgot_password"
-                                className="text-sm text-indigo-600 hover:underline dark:text-indigo-500"
+                                className="text-sm text-blue-600 hover:underline"
                             >
                                 Forgot your password?
                             </Link>
                         </div>
-
                         <Button
                             type="submit"
-                            className="mt-3 flex w-full cursor-pointer items-center rounded-lg bg-indigo-600 py-2.5 text-white transition-all hover:bg-indigo-700"
+                            className="group relative flex h-12 w-full cursor-pointer items-center justify-center overflow-hidden rounded-none bg-blue-700 text-white shadow-none hover:bg-blue-800"
                             disabled={loading2}
                         >
                             {loading2 ? (
@@ -252,86 +226,76 @@ const AuthDialog = () => {
                                     Signing in...
                                 </>
                             ) : (
-                                "Sign In"
+                                "Sign in"
                             )}
                         </Button>
+                        {error && (
+                            <div className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-500">
+                                <div className="flex">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="mr-2 h-5 w-5 text-red-400"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                            clipRule="evenodd"
+                                        />
+                                    </svg>
+                                    {error}
+                                </div>
+                            </div>
+                        )}
                     </form>
                 </Form>
-
-                {error && (
-                    <div className="mt-4 rounded-lg bg-red-50 p-2 text-sm text-red-500">
-                        <div className="flex items-center justify-center">
-                            <RiErrorWarningFill className="mr-2 h-5 w-5 text-red-500" />
-                            {error}
-                        </div>
-                    </div>
-                )}
-
-                <div className="relative">
-                    <div className="absolute inset-0 flex items-center">
-                        <span className="w-full border-t border-gray-300 dark:border-neutral-700" />
-                    </div>
-                    <div className="relative flex justify-center text-xs uppercase">
-                        <span className="bg-background text-muted-foreground px-2">
-                            Or continue with
-                        </span>
-                    </div>
-                </div>
-
-                <div className="flex flex-col space-y-2">
-                    <Button
-                        variant="outline"
-                        type="button"
-                        className="flex items-center justify-center gap-2"
-                        onClick={loginWithGoogle}
-                        disabled={loading}
-                    >
-                        {/* {loading ? (
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        ) : (
-                            <Image
-                                src={GoogleLogo}
-                                alt="Google"
-                                className="size-5"
-                                width={16}
-                                height={16}
-                            />
-                        )} */}
-                        <span>Sign in with Google</span>
-                    </Button>
-                    <Button
-                        variant="outline"
-                        type="button"
-                        className="flex items-center justify-center gap-2"
-                        onClick={loginWithGit}
-                        disabled={loading1}
-                    >
-                        {/* {loading1 ? (
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        ) : (
-                            <Image
-                                src={Github}
-                                alt="GitHub"
-                                className="size-5"
-                                width={16}
-                                height={16}b
-                            />
-                        )} */}
-                        <span>Sign in with GitHub</span>
-                    </Button>
-                </div>
-
-                <div className="mt-6 text-center text-sm tracking-tight">
-                    <span className="text-gray-600">
-                        Don&apos;t have an account?{" "}
+                <div className="my-6 flex items-center">
+                    <div className="h-px flex-1 bg-neutral-300 dark:bg-neutral-700" />
+                    <span className="px-4 text-sm text-gray-500">
+                        OR CONTINUE WITH
                     </span>
+                    <div className="h-px flex-1 bg-neutral-300 dark:bg-neutral-700" />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                    <Button
+                        onClick={loginWithGit}
+                        className="group relative flex h-12 items-center justify-center gap-2 overflow-hidden rounded-none border border-neutral-900 bg-white shadow-none dark:bg-black"
+                    >
+                        <div className="absolute inset-0 w-full -translate-x-[100%] bg-black transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
+                        {loading1 ? (
+                            <Loader2 className="relative z-10 size-6 animate-spin text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
+                        ) : (
+                            <RiGithubFill className="relative z-10 size-6 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
+                        )}
+                        <span className="relative z-10 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black">
+                            GitHub
+                        </span>
+                    </Button>
+                    <Button
+                        onClick={loginWithGoogle}
+                        className="group relative flex h-12 items-center justify-center gap-2 overflow-hidden rounded-none border border-neutral-900 bg-white shadow-none dark:bg-black"
+                    >
+                        <div className="absolute inset-0 w-full -translate-x-[100%] bg-black transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
+                        {loading ? (
+                            <Loader2 className="relative z-10 size-6 animate-spin text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
+                        ) : (
+                            <RiGoogleFill className="relative z-10 size-5 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
+                        )}
+                        <span className="relative z-10 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black">
+                            Google
+                        </span>
+                    </Button>
+                </div>
+                <p className="mt-6 text-sm text-gray-500">
+                    Don&apos;t have an account?{" "}
                     <Link
                         href="/sign_up"
-                        className="font-medium text-indigo-600 transition-colors hover:text-indigo-500"
+                        className="underline hover:text-purple-500"
                     >
                         Sign up
                     </Link>
-                </div>
+                </p>
             </div>
         </DialogContent>
     );

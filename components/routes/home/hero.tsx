@@ -8,13 +8,13 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
     (props, ref) => {
         return (
             <>
-                <section className="mx-auto w-full max-w-[1536px] border-t-0 border-b px-30 dark:border-neutral-800 dark:bg-black">
+                <section className="mx-auto w-full max-w-full border-t-0 border-b px-4 md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-800 dark:bg-black">
                     <div className="border border-t-0 border-b-0 dark:border-neutral-800">
                         <div className="grid grid-cols-6 divide-x dark:divide-neutral-800">
-                            <div className="col-span-5 px-4 py-16">
-                                <div className="font-buch h-[calc(2*theme(fontSize.6xl)*theme(lineHeight.normal))] md:h-[calc(2*theme(fontSize.6xl)*theme(lineHeight.tight))]">
+                            <div className="col-span-6 px-4 py-16 md:col-span-5">
+                                <div className="font-buch h-[calc(2*theme(fontSize.3xl)*theme(lineHeight.normal))] md:h-[calc(2*theme(fontSize.6xl)*theme(lineHeight.tight))]">
                                     <TypingText
-                                        className="text-left text-3xl font-medium md:text-7xl"
+                                        className="text-left text-4xl font-medium md:text-5xl lg:text-7xl"
                                         speed={60}
                                         showCursor={false}
                                         once={true}
@@ -54,7 +54,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-6 divide-x border-t dark:divide-neutral-800 dark:border-neutral-800">
+                        <div className="grid grid-cols-4 md:grid-cols-6 divide-x border-t dark:divide-neutral-800 dark:border-neutral-800">
                             <div className="col-span-3 py-10">
                                 <p className="mb-4 max-w-2xl px-4 text-sm leading-normal md:mt-2 md:text-lg">
                                     <span className="text-gray-500">
@@ -73,11 +73,11 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                                 </p>
                             </div>
                             <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
+                            <div className="col-span-1 hidden md:block"></div>
+                            <div className="col-span-1 hidden md:block"></div>
                         </div>
 
-                        <div className="grid h-12 grid-cols-6 divide-x border-t dark:divide-neutral-800 dark:border-neutral-800">
+                        <div className="grid h-12 grid-cols-3 md:grid-cols-6 divide-x border-t dark:divide-neutral-800 dark:border-neutral-800">
                             <div ref={ref} className="col-span-2 h-full w-full">
                                 <Link
                                     href="https://ui.cnippet.site"
@@ -94,10 +94,10 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                                 </Link>
                             </div>
                             <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
-                            <div className="col-span-1"></div>
+                            <div className="col-span-1 hidden md:block"></div>
+                            <div className="col-span-1 hidden md:block"></div>
 
-                            <div className="col-span-1"></div>
+                            <div className="col-span-1 hidden md:block"></div>
                         </div>
                     </div>
                 </section>

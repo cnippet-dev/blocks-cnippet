@@ -22,7 +22,7 @@ const Sections = (props: any) => {
 
     return (
         <>
-            <section className="mx-auto mt-20 w-full max-w-[1536px] border-t border-b px-30 dark:bg-black dark:border-neutral-800">
+            <section className="mx-auto mt-20 w-full max-w-full border-t border-b px-4 md:px-10 xl:px-20 2xl:px-30 dark:bg-black dark:border-neutral-800">
                 <div className="border border-t-0 border-b-0 dark:border-neutral-800">
                     <div className="max-w-3xl px-4 py-16">
                         <div className="h-[calc(2*theme(fontSize.6xl)*theme(lineHeight.normal))] md:h-[calc(2*theme(fontSize.5xl)*theme(lineHeight.tight))]">
