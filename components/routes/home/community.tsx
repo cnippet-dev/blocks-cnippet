@@ -13,19 +13,19 @@ const Community = forwardRef<
     return (
         <section
             ref={ref}
-            className="relative w-full border-t-0 border-b bg-white"
+            className="relative w-full border-t-0 border-b dark:border-neutral-800 dark:bg-black"
         >
-            <div className="sticky top-0 z-10 border-b border-neutral-200 bg-white">
-                <div className="mx-auto flex max-w-[1536px] items-center justify-start gap-6 px-30">
+            <div className="sticky top-0 z-10 border-b border-neutral-200 dark:border-neutral-800 dark:bg-black">
+                <div className="mx-auto flex max-w-full items-center justify-start gap-6 px-4 md:px-10 xl:px-20 2xl:px-30">
                     <div className="size-4 rounded-full bg-blue-700"></div>
                     <p className="py-2 text-lg font-semibold tracking-wider uppercase">
                         Our Ecosystem
                     </p>
                 </div>
             </div>
-            <div className="mx-auto max-w-[1536px] border-neutral-200 px-30">
-                <div className="border border-t-0 border-b-0">
-                    <div className="grid grid-cols-6 divide-x">
+            <div className="mx-auto max-w-full border-neutral-200 px-4 md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-800">
+                <div className="border border-t-0 border-b-0 dark:border-neutral-800">
+                    <div className="grid grid-cols-4 md:grid-cols-6 md:divide-x dark:divide-neutral-800">
                         <div className="col-span-4 px-4 py-20">
                             <h2 className="text-2xl leading-tight font-medium tracking-tight md:text-5xl">
                                 Discover Sections, Pages, and Templates
@@ -42,10 +42,10 @@ const Community = forwardRef<
                                 blocks are SEO-friendly and easy to customize.
                             </p>
                         </div>
-                        <div className="col-span-2">
+                        <div className="col-span-2 hidden md:block">
                             <div>
                                 <Link
-                                    href="https://ui.cnippet.site"
+                                    href="#"
                                     className="group relative flex h-full w-full items-center justify-center overflow-hidden bg-blue-700 py-2 dark:bg-black"
                                 >
                                     <div className="absolute inset-0 w-full -translate-x-[100%] bg-blue-800 transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
@@ -61,15 +61,15 @@ const Community = forwardRef<
                             </div>
                         </div>
                     </div>
-                    <div className="grid h-12 grid-cols-6 divide-x border-t">
-                        <div className="col-span-1"></div>
-                        <div className="col-span-1"></div>
-                        <div className="col-span-1"></div>
+                    <div className="grid h-12 grid-cols-3 md:grid-cols-6 divide-x border-t dark:divide-neutral-800 dark:border-neutral-800">
+                        <div className="col-span-1 hidden md:block"></div>
+                        <div className="col-span-1 hidden md:block"></div>
+                        <div className="col-span-1 hidden md:block"></div>
 
                         <div className="col-span-1"></div>
                         <div className="col-span-2 h-full w-full border-0">
                             <Link
-                                href="https://block.cnippet.site"
+                                href="#"
                                 className="group relative flex h-full w-full items-center justify-center overflow-hidden bg-blue-200 dark:bg-black"
                             >
                                 <div className="absolute inset-0 w-full -translate-x-[100%] bg-blue-700 transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
