@@ -12,7 +12,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                     <div className="border border-t-0 border-b-0 dark:border-neutral-800">
                         <div className="grid grid-cols-6 divide-x dark:divide-neutral-800">
                             <div className="col-span-6 px-4 py-16 md:col-span-5">
-                                <div className="font-buch h-[calc(2*theme(fontSize.3xl)*theme(lineHeight.normal))] md:h-[calc(2*theme(fontSize.6xl)*theme(lineHeight.tight))]">
+                                <div className="font-buch mb-6 h-fit md:mb-0 md:h-[calc(2*theme(fontSize.6xl)*theme(lineHeight.tight))]">
                                     <TypingText
                                         className="text-left text-4xl font-medium md:text-5xl lg:text-7xl"
                                         speed={60}
@@ -54,7 +54,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-4 md:grid-cols-6 divide-x border-t dark:divide-neutral-800 dark:border-neutral-800">
+                        <div className="grid grid-cols-4 divide-x border-t md:grid-cols-6 dark:divide-neutral-800 dark:border-neutral-800">
                             <div className="col-span-3 py-10">
                                 <p className="mb-4 max-w-2xl px-4 text-sm leading-normal md:mt-2 md:text-lg">
                                     <span className="text-gray-500">
@@ -77,15 +77,18 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                             <div className="col-span-1 hidden md:block"></div>
                         </div>
 
-                        <div className="grid h-12 grid-cols-3 md:grid-cols-6 divide-x border-t dark:divide-neutral-800 dark:border-neutral-800">
-                            <div ref={ref} className="col-span-2 h-full w-full">
+                        <div className="grid h-12 grid-cols-1 divide-x border-t md:grid-cols-6 dark:divide-neutral-800 dark:border-neutral-800">
+                            <div
+                                ref={ref}
+                                className="col-span-1 h-full w-full md:col-span-2"
+                            >
                                 <Link
-                                    href="https://ui.cnippet.site"
-                                    className="group relative flex h-full w-full cursor-none items-center justify-center overflow-hidden bg-blue-700 dark:bg-blue-600"
+                                    href="#"
+                                    className="group relative flex h-full w-full items-center justify-center overflow-hidden bg-blue-700"
                                 >
-                                    <div className="absolute inset-0 w-full -translate-x-[100%] bg-blue-800 transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-blue-700" />
+                                    <div className="absolute inset-0 w-full -translate-x-[110%] bg-blue-800 transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-blue-600" />
                                     <span className="relative z-10 flex w-full items-center justify-between gap-2 px-4 text-lg text-white duration-300 group-hover:text-white dark:text-white">
-                                        Explore More
+                                        Explore
                                         <RiArrowRightLine
                                             className="text-white"
                                             size={20}
@@ -93,10 +96,9 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                                     </span>
                                 </Link>
                             </div>
-                            <div className="col-span-1"></div>
                             <div className="col-span-1 hidden md:block"></div>
                             <div className="col-span-1 hidden md:block"></div>
-
+                            <div className="col-span-1 hidden md:block"></div>
                             <div className="col-span-1 hidden md:block"></div>
                         </div>
                     </div>

@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
 import { useTheme } from "next-themes";
 import { RiMoonFill, RiSunLine } from "@remixicon/react";
-import NavUser from "./nav-user";
+
 import { CommandMenu } from "@/components/command-menu";
+import NavUser from "./nav-user";
 import { MobileNav } from "./mobile-nav";
 
 const Nav1 = () => {
@@ -21,7 +21,7 @@ const Nav1 = () => {
         <>
             <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 mx-auto w-full max-w-full border-t-0 border-b px-4 backdrop-blur md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-900 dark:bg-black/70">
                 <div className="w-full border border-t-0 border-r-0 border-b-0 dark:border-neutral-800">
-                    <div className="grid grid-cols-2 divide-x-0 md:grid-cols-6 md:divide-x dark:divide-neutral-800">
+                    <div className="grid grid-cols-2 divide-x-0 md:divide-x md:grid-cols-6 dark:divide-neutral-800">
                         <div className="col-span-1 px-4 py-3 md:col-span-1">
                             {mounted && (
                                 <Link
@@ -46,14 +46,14 @@ const Nav1 = () => {
                                         />
                                     )}
 
-                                    <span className="hidden font-mono text-xl lg:inline-block">
+                                    <span className="hidden font-mono text-xl xl:inline-block">
                                         Cnippet/blocks
                                     </span>
                                 </Link>
                             )}
                         </div>
 
-                        <div className="col-span-3 hidden items-center px-4 md:flex">
+                        <div className="col-span-4 hidden items-center px-4 md:flex xl:col-span-3">
                             <nav className="flex items-center gap-4 text-sm xl:gap-6">
                                 <Link
                                     href="#"
@@ -80,7 +80,7 @@ const Nav1 = () => {
                             <CommandMenu />
                         </div>
 
-                        <div className="col-span-1 hidden md:grid h-full cursor-pointer grid-cols-3 divide-x divide-neutral-500">
+                        <div className="col-span-1 hidden h-full cursor-pointer grid-cols-3 divide-x divide-neutral-500 xl:grid">
                             <Link
                                 target="_blank"
                                 rel="noreferrer"

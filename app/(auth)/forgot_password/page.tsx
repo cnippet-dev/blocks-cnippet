@@ -27,7 +27,7 @@ const forgotPasswordValidation = z.object({
 const ForgotPassword = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [success, setSuccess] = useState(false);
-    const { data: session, status } = useSession();
+    const { status } = useSession();
     const router = useRouter();
 
     const forgotPasswordForm = useForm<

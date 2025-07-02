@@ -8,20 +8,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useTheme } from "next-themes";
-import {
-    RiErrorWarningFill,
-    RiGithubFill,
-    RiGoogleFill,
-} from "@remixicon/react";
+import { RiGithubFill, RiGoogleFill } from "@remixicon/react";
 
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 
-import {
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog-cn";
+import { DialogContent, DialogTitle } from "@/components/ui/dialog-cn";
 import {
     Form,
     FormControl,
@@ -116,7 +107,7 @@ const AuthDialog = () => {
     return (
         <DialogContent className="w-full rounded-none bg-white p-0 md:max-w-md dark:bg-black">
             <DialogTitle className="sr-only">Sign In form</DialogTitle>
-            <div className="w-full max-w-full isolate px-6 py-10 text-center">
+            <div className="isolate w-full max-w-full px-6 py-10 text-center">
                 <div className="mb-6 text-center">
                     <Link className="flex items-center justify-center" href="/">
                         {theme === "dark" ? (

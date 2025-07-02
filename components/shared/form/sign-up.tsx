@@ -322,7 +322,7 @@ export default function SignUpForm() {
                             <FormLabel className="text-sm text-gray-500">
                                 I accept the{" "}
                                 <a
-                                    href="/terms"
+                                    href="#"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-blue-600 hover:underline"

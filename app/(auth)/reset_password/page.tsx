@@ -45,25 +45,29 @@ function ResetPassword() {
         resolver: zodResolver(schema),
         defaultValues: { password: "", confirmPassword: "" },
     });
-
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const router = useRouter();
     const searchParams = useSearchParams();
     const token = searchParams.get("token");
-
-    if (!token) {
-        router.push("/forgot_password");
-        return null;
-    }
     const { status } = useSession();
+
+    useEffect(() => {
+        if (!token) {
+            router.push("/forgot_password");
+        }
+    }, [token, router]);
 
     useEffect(() => {
         if (status === "authenticated") {
             router.push("/profile");
         }
     }, [status, router]);
+
+    if (!token) {
+        return null;
+    }
 
     async function onSubmit(values: z.infer<typeof schema>) {
         setLoading(true);
