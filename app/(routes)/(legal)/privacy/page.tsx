@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import Footer from "@/components/shared/footer";
-import Navbar from "@/components/shared/navbar/nav-1";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
