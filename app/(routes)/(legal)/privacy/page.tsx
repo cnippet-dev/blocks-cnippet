@@ -2,11 +2,16 @@ import Link from "next/link";
 
 import Footer from "@/components/shared/footer";
 import Navbar from "@/components/shared/navbar/nav-1";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Privacy Policy",
+    description: "Privacy policy for CNIPPET. Learn how we collect, use, and protect your personal information.",
+};
 
 const PrivacyPolicy = () => {
     return (
         <>
-            <Navbar />
             <main className="legal_page relative w-full dark:bg-black">
                 <div className="mx-auto w-full max-w-6xl px-10 pt-32">
                     <div className="relative">
@@ -17,36 +22,36 @@ const PrivacyPolicy = () => {
                             <div className=" " />
                         </div>
 
-                        <div className="relative border-t">
-                            <div className="grid size-[5rem] w-full grid-cols-12 grid-rows-1 divide-x divide-y first:border-l last:border-r">
+                        <div className="relative border-t dark:border-neutral-800">
+                            <div className="grid size-[5rem] w-full grid-cols-12 grid-rows-1 dark:divide-neutral-800 divide-x divide-y dark:border-neutral-800 first:border-l last:border-r">
                                 <div className="col-span-1"></div>
                                 <div className="col-span-10"></div>
-                                <div className="col-span-1 border-r border-b"></div>
+                                <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
                             </div>
 
                             <div className="grid size-[5rem] h-full w-full grid-cols-12 first:border-l">
-                                <div className="col-span-1 border-b border-l"></div>
-                                <div className="col-span-10 border border-t-0 py-8">
+                                <div className="col-span-1 border-b border-l dark:border-neutral-800"></div>
+                                <div className="col-span-10 border border-t-0 py-8 dark:border-neutral-800">
                                     <h1 className="text-center text-6xl leading-tight font-medium font-buch tracking-tight">
                                         Privacy Policy
                                     </h1>
                                 </div>
-                                <div className="col-span-1 border-r border-b"></div>
+                                <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
                             </div>
 
                             <div className="grid size-[5rem] w-full grid-cols-12 first:border-l">
-                                <div className="col-span-1 border-b border-l"></div>
-                                <div className="col-span-10 flex items-center justify-center border border-t-0">
-                                    <p className="text-center text-sm text-neutral-500">
+                                <div className="col-span-1 border-b border-l dark:border-neutral-800"></div>
+                                <div className="col-span-10 flex items-center justify-center border dark:border-neutral-800 border-t-0">
+                                    <p className="text-center text-sm text-neutral-500 dark:text-neutral-400">
                                         Last Updated June 5, 2025
                                     </p>
                                 </div>
-                                <div className="col-span-1 border-r border-b"></div>
+                                <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
                             </div>
 
-                            <div className="grid w-full grid-cols-12 border border-t-0">
+                            <div className="grid w-full grid-cols-12 border border-t-0 dark:border-neutral-800">
                                 <div className="col-span-8 px-10 pt-10 pb-16">
-                                    <p className="text-neutral-600">
+                                    <p className="text-neutral-600 dark:text-neutral-400">
                                         CNIPPET (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) respects
                                         your privacy and is committed to
                                         protecting your personal information.
@@ -64,11 +69,11 @@ const PrivacyPolicy = () => {
                                     <h2 id="information-collection" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Information Collection
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         We collect several types of information
                                         to provide and improve our services:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             <strong>
                                                 Personal Identification
@@ -111,11 +116,11 @@ const PrivacyPolicy = () => {
                                     <h2 id="use-of-information" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Use of Information
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         We use the collected information for the
                                         following purposes:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             To provide, operate, and maintain
                                             our services including component
@@ -154,12 +159,12 @@ const PrivacyPolicy = () => {
                                     <h2 id="data-sharing-and-disclosure" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Data Sharing and Disclosure
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         We do not sell your personal
                                         information. We may share information
                                         with:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             <strong>Service Providers:</strong>{" "}
                                             Payment processors (Razorpay),
@@ -183,7 +188,7 @@ const PrivacyPolicy = () => {
                                             acquisition, or sale of assets
                                         </li>
                                     </ul>
-                                    <p className="pt-3 text-neutral-500">
+                                    <p className="pt-3 text-neutral-500 dark:text-neutral-400">
                                         We implement strict data processing
                                         agreements with all third-party services
                                         to ensure GDPR compliance.
@@ -192,11 +197,11 @@ const PrivacyPolicy = () => {
                                     <h2 id="data-security" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Data Security
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         We implement industry-standard security
                                         measures including:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             Encryption of data in transit (TLS
                                             1.2+) and at rest (AES-256)
@@ -218,7 +223,7 @@ const PrivacyPolicy = () => {
                                             firewalls
                                         </li>
                                     </ul>
-                                    <p className="pt-3 text-neutral-500">
+                                    <p className="pt-3 text-neutral-500 dark:text-neutral-400">
                                         Despite these measures, no internet
                                         transmission is 100% secure. We cannot
                                         guarantee absolute security but commit
@@ -229,11 +234,11 @@ const PrivacyPolicy = () => {
                                     <h2 id="data-retention" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Data Retention
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         We retain personal information only as
                                         long as necessary:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             Account information: Retained while
                                             your account is active or as needed
@@ -256,11 +261,11 @@ const PrivacyPolicy = () => {
                                     <h2 id="your-rights" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Your Rights
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         Depending on your jurisdiction, you may
                                         have rights to:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             Access and receive a copy of your
                                             personal data
@@ -286,7 +291,7 @@ const PrivacyPolicy = () => {
                                             communications
                                         </li>
                                     </ul>
-                                    <p className="pt-3 text-neutral-500">
+                                    <p className="pt-3 text-neutral-500 dark:text-neutral-400">
                                         To exercise these rights, contact{" "}
                                         <Link href="mailto:privacy@cnippet.site">
                                             privacy@cnippet.site
@@ -300,13 +305,13 @@ const PrivacyPolicy = () => {
                                     <h2 id="international-data-transfers" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         International Data Transfers
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         As a global platform, your information
                                         may be transferred to and processed in
                                         countries outside your residence. We
                                         ensure adequate safeguards through:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             EU Standard Contractual Clauses for
                                             EEA data transfers
@@ -324,7 +329,7 @@ const PrivacyPolicy = () => {
                                     <h2 id="childrens-privacy" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Children&apos;s Privacy
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         Our services are not directed to
                                         individuals under 16. We do not
                                         knowingly collect personal information
@@ -337,7 +342,7 @@ const PrivacyPolicy = () => {
                                     <h2 id="policy-updates" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Policy Updates
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         We may update this policy periodically.
                                         We will notify you of significant
                                         changes via email or platform
@@ -349,7 +354,7 @@ const PrivacyPolicy = () => {
                                     <h2 id="contact-us" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Contact Us
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         For privacy-related inquiries, questions or to
                                         exercise your rights:
                                         <br />
@@ -363,59 +368,59 @@ const PrivacyPolicy = () => {
                                         Uttarakhand 248140
                                     </p>
                                 </div>
-                                <div className="col-span-4 border-l px-10 py-10">
+                                <div className="col-span-4 border-l dark:border-neutral-800 px-10 py-10">
                                     <div className="sticky top-20">
                                         <div className="flex font-medium font-buch">
                                             Privacy Policy
                                         </div>
                                         <ul className="space-y-2 pt-5 text-sm text-neutral-600">
                                             <li>
-                                                <Link href="#information-collection" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#information-collection" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Information Collection
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#use-of-information" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#use-of-information" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Use of Information
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#data-sharing-and-disclosure" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#data-sharing-and-disclosure" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Data Sharing and Disclosure
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#data-security" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#data-security" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Data Security
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#data-retention" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#data-retention" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Data Retention
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#your-rights" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#your-rights" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Your Rights
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#international-data-transfers" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#international-data-transfers" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     International Data Transfers
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#childrens-privacy" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#childrens-privacy" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Children&apos;s Privacy
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#policy-updates" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#policy-updates" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Policy Updates
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#contact-us" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#contact-us" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Contact Us
                                                 </Link>
                                             </li>

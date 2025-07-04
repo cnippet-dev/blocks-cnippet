@@ -1,6 +1,11 @@
 import Footer from "@/components/shared/footer";
 import Link from "next/link";
-import React from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Cancellation & Refund Policy",
+    description: "Cancellation & Refund Policy for CNIPPET. Learn how to cancel your subscription and get a refund.",
+};
 
 const CancellationPolicy = () => {
     return (
@@ -15,36 +20,36 @@ const CancellationPolicy = () => {
                             <div className=" " />
                         </div>
 
-                        <div className="relative border-t">
-                            <div className="grid size-[5rem] w-full grid-cols-12 grid-rows-1 divide-x divide-y first:border-l last:border-r">
+                        <div className="relative border-t dark:border-neutral-800">
+                            <div className="grid size-[5rem] w-full grid-cols-12 grid-rows-1 dark:divide-neutral-800 divide-x divide-y dark:border-neutral-800 first:border-l last:border-r">
                                 <div className="col-span-1"></div>
                                 <div className="col-span-10"></div>
-                                <div className="col-span-1 border-r border-b"></div>
+                                <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
                             </div>
 
                             <div className="grid size-[5rem] h-full w-full grid-cols-12 first:border-l">
-                                <div className="col-span-1 border-b border-l"></div>
-                                <div className="col-span-10 border border-t-0 py-8">
+                                <div className="col-span-1 border-b border-l dark:border-neutral-800"></div>
+                                <div className="col-span-10 border border-t-0 py-8 dark:border-neutral-800">
                                     <h1 className="text-center text-6xl leading-tight font-medium font-buch tracking-tight">
                                         Cancellation & Refund Policy
                                     </h1>
                                 </div>
-                                <div className="col-span-1 border-r border-b"></div>
+                                <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
                             </div>
 
                             <div className="grid size-[5rem] w-full grid-cols-12 first:border-l">
-                                <div className="col-span-1 border-b border-l"></div>
-                                <div className="col-span-10 flex items-center justify-center border border-t-0">
-                                    <p className="text-center text-sm text-neutral-500">
+                                <div className="col-span-1 border-b border-l dark:border-neutral-800"></div>
+                                <div className="col-span-10 flex items-center justify-center border dark:border-neutral-800 border-t-0">
+                                    <p className="text-center text-sm text-neutral-500 dark:text-neutral-400">
                                         Effective March 1, 2025
                                     </p>
                                 </div>
-                                <div className="col-span-1 border-r border-b"></div>
+                                <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
                             </div>
 
-                            <div className="grid w-full grid-cols-12 border border-t-0">
+                            <div className="grid w-full grid-cols-12 border border-t-0 dark:border-neutral-800">
                                 <div className="col-span-8 px-10 pt-10 pb-16">
-                                    <p className="text-neutral-600">
+                                    <p className="text-neutral-600 dark:text-neutral-400">
                                         This Cancellation & Refund Policy
                                         governs subscription cancellations and
                                         refund requests for purchases made
@@ -56,11 +61,11 @@ const CancellationPolicy = () => {
                                     <h2 id="subscription-cancellations" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Subscription Cancellations
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         You may cancel your premium subscription
                                         at any time:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             Access your account settings at{" "}
                                             <Link href="/profile">
@@ -71,10 +76,10 @@ const CancellationPolicy = () => {
                                         <li>Select &quot;Cancel Subscription&quot;</li>
                                         <li>Follow the confirmation prompts</li>
                                     </ul>
-                                    <p className="pt-3 text-neutral-500">
+                                    <p className="pt-3 text-neutral-500 dark:text-neutral-400">
                                         <strong>Important Notes:</strong>
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             Cancellations take effect at the end
                                             of your current billing period
@@ -96,11 +101,11 @@ const CancellationPolicy = () => {
                                     <h2 id="refund-eligibility" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Refund Eligibility
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         We offer refunds under these specific
                                         circumstances:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             <strong>Technical Issues:</strong>{" "}
                                             When platform errors prevent access
@@ -128,10 +133,10 @@ const CancellationPolicy = () => {
                                             capabilities
                                         </li>
                                     </ul>
-                                    <p className="pt-3 text-neutral-500">
+                                    <p className="pt-3 text-neutral-500 dark:text-neutral-400">
                                         <strong>Non-Refundable Items:</strong>
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             Subscription fees for periods that
                                             have already been used
@@ -153,10 +158,10 @@ const CancellationPolicy = () => {
                                     <h2 id="refund-request-process" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Refund Request Process
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         To request a refund:
                                     </p>
-                                    <ol className="mt-2 list-decimal pl-5 text-neutral-500">
+                                    <ol className="mt-2 list-decimal pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             Submit a request within 3 days of
                                             purchase to <Link href="mailto:support@cnippet.site">
@@ -177,10 +182,10 @@ const CancellationPolicy = () => {
                                             screenshots or error logs
                                         </li>
                                     </ol>
-                                    <p className="pt-3 text-neutral-500">
+                                    <p className="pt-3 text-neutral-500 dark:text-neutral-400">
                                         Our support team will:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             Acknowledge your request within 24
                                             business hours
@@ -202,11 +207,11 @@ const CancellationPolicy = () => {
                                     <h2 id="special-circumstances" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Special Circumstances
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         In exceptional cases, we may offer
                                         refunds at our discretion:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             <strong>Extended Downtime:</strong>{" "}
                                             Platform unavailability exceeding 48
@@ -233,18 +238,18 @@ const CancellationPolicy = () => {
                                     <h2 id="chargeback-policy" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Chargeback Policy
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         We are committed to resolving billing concerns in a fair and transparent manner. Filing a chargeback without first contacting us to attempt resolution may result in serious consequences under this policy.
                                     </p>
 
                                     <h3 className="pt-5 text-lg font-semibold">Dispute Resolution First</h3>
-                                    <p className="pt-2 text-neutral-500">
+                                    <p className="pt-2 text-neutral-500 dark:text-neutral-400">
                                         Before initiating a chargeback through your bank or payment provider, you are required to contact our support team at <Link href="mailto:support@cnippet.site">support@cnippet.site</Link>. Most issues are resolved within a few business days.
                                     </p>
 
-                                    <p className="pt-2 text-neutral-500">If you initiate a chargeback without first attempting to resolve the issue with us directly, the following actions may be taken:</p>
+                                    <p className="pt-2 text-neutral-500 dark:text-neutral-400">If you initiate a chargeback without first attempting to resolve the issue with us directly, the following actions may be taken:</p>
 
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>Immediate suspension of your CNIPPET account and associated services</li>
                                         <li>Permanent revocation of access to previously purchased templates, components, or subscriptions</li>
                                         <li>Dispute resolution fee of ₹4,000 added to your account to cover administrative and legal costs</li>
@@ -252,7 +257,7 @@ const CancellationPolicy = () => {
                                         <li>Legal action in accordance with the applicable laws of India, including recovery of funds and damages where applicable</li>
                                     </ul>
 
-                                    <p className="pt-3 text-neutral-500">
+                                    <p className="pt-3 text-neutral-500 dark:text-neutral-400">
                                         We encourage you to contact us at {" "}
                                         <Link href="mailto:support@cnippet.site">
                                             support@cnippet.site
@@ -264,11 +269,11 @@ const CancellationPolicy = () => {
                                     <h2 id="reactivation-of-cancelled-accounts" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Reactivation of Cancelled Accounts
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         You may reactivate a cancelled account
                                         within 6 months:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             Previous payment methods will be
                                             charged at current rates
@@ -289,7 +294,7 @@ const CancellationPolicy = () => {
                                     <h2 id="contact-information" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Contact Information
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         For cancellation or refund assistance:
                                         <br />
                                         Email:{" "}
@@ -302,44 +307,44 @@ const CancellationPolicy = () => {
                                         Uttarakhand 248140
                                     </p>
                                 </div>
-                                <div className="col-span-4 border-l px-10 pt-10">
+                                <div className="col-span-4 border-l dark:border-neutral-800 px-10 pt-10">
                                     <div className="sticky top-20">
                                         <div className="flex font-medium font-buch">
                                             Cancellation Policy
                                         </div>
                                         <ul className="space-y-2 pt-5 text-sm text-neutral-600">
                                             <li>
-                                                <Link href="#subscription-cancellations" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#subscription-cancellations" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Subscription Cancellations
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#refund-eligibility" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#refund-eligibility" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Refund Eligibility
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#refund-request-process" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#refund-request-process" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Refund Request Process
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#special-circumstances" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#special-circumstances" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Special Circumstances
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#chargeback-policy" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#chargeback-policy" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Chargeback Policy
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#reactivation-of-cancelled-accounts" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#reactivation-of-cancelled-accounts" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Reactivation of Cancelled Accounts
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#contact-information" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#contact-information" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Contact Information
                                                 </Link>
                                             </li>

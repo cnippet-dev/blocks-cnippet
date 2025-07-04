@@ -2,6 +2,13 @@ import Footer from "@/components/shared/footer";
 import Link from "next/link";
 import React from "react";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Terms of Service",
+    description: "Terms of Service for CNIPPET. Learn how to use our services and what you can expect from us.",
+};
+
 const TermsOfService = () => {
     return (
         <>
@@ -15,36 +22,36 @@ const TermsOfService = () => {
                             <div className=" " />
                         </div>
 
-                        <div className="relative border-t">
-                            <div className="grid size-[5rem] w-full grid-cols-12 grid-rows-1 divide-x divide-y first:border-l last:border-r">
+                        <div className="relative border-t dark:border-neutral-800">
+                            <div className="grid size-[5rem] w-full grid-cols-12 grid-rows-1 dark:divide-neutral-800 divide-x divide-y dark:border-neutral-800 first:border-l last:border-r">
                                 <div className="col-span-1"></div>
                                 <div className="col-span-10"></div>
-                                <div className="col-span-1 border-r border-b"></div>
+                                <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
                             </div>
 
                             <div className="grid size-[5rem] h-full w-full grid-cols-12 first:border-l">
-                                <div className="col-span-1 border-b border-l"></div>
-                                <div className="col-span-10 border border-t-0 py-8">
+                                <div className="col-span-1 border-b border-l dark:border-neutral-800"></div>
+                                <div className="col-span-10 border border-t-0 py-8 dark:border-neutral-800">
                                     <h1 className="text-center text-6xl leading-tight font-medium font-buch tracking-tight">
                                         Terms of Service
                                     </h1>
                                 </div>
-                                <div className="col-span-1 border-r border-b"></div>
+                                <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
                             </div>
 
                             <div className="grid size-[5rem] w-full grid-cols-12 first:border-l">
-                                <div className="col-span-1 border-b border-l"></div>
-                                <div className="col-span-10 flex items-center justify-center border border-t-0">
-                                    <p className="text-center text-sm text-neutral-500">
+                                <div className="col-span-1 border-b border-l dark:border-neutral-800"></div>
+                                <div className="col-span-10 flex items-center justify-center border dark:border-neutral-800 border-t-0">
+                                    <p className="text-center text-sm text-neutral-500 dark:text-neutral-400">
                                         Effective March 1, 2025
                                     </p>
                                 </div>
-                                <div className="col-span-1 border-r border-b"></div>
+                                <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
                             </div>
 
-                            <div className="grid w-full grid-cols-12 border border-t-0">
+                            <div className="grid w-full grid-cols-12 border border-t-0 dark:border-neutral-800">
                                 <div className="col-span-8 px-10 pt-10 pb-16">
-                                    <p className="text-neutral-600">
+                                    <p className="text-neutral-600 dark:text-neutral-400">
                                         These Terms of Service (&quot;Terms&quot;) govern
                                         your access to and use of CNIPPET&apos;s
                                         websites, services, components,
@@ -59,11 +66,11 @@ const TermsOfService = () => {
                                     <h2 id="account-registration-and-security" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Account Registration and Security
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         To access premium features, you must
                                         create an account. You agree to:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             Provide accurate and complete
                                             registration information
@@ -81,7 +88,7 @@ const TermsOfService = () => {
                                             unauthorized use of your account
                                         </li>
                                     </ul>
-                                    <p className="pt-3 text-neutral-500">
+                                    <p className="pt-3 text-neutral-500 dark:text-neutral-400">
                                         Individual accounts are for personal use
                                         only. Enterprise accounts may have
                                         multiple users under a single license as
@@ -91,11 +98,11 @@ const TermsOfService = () => {
                                     <h2 id="license-grant" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         License Grant
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         Subject to your compliance with these
                                         Terms, we grant you:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             A non-exclusive, worldwide,
                                             royalty-free license to use
@@ -113,11 +120,11 @@ const TermsOfService = () => {
                                             subscription period
                                         </li>
                                     </ul>
-                                    <p className="pt-3 text-neutral-500">
+                                    <p className="pt-3 text-neutral-500 dark:text-neutral-400">
                                         <strong>Restrictions:</strong> You may
                                         not:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             Redistribute standalone components
                                             or templates (modified or
@@ -141,10 +148,10 @@ const TermsOfService = () => {
                                     <h2 id="acceptable-use" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Acceptable Use
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         You agree not to use our services to:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>Violate any laws or regulations</li>
                                         <li>
                                             Infringe on intellectual property
@@ -172,16 +179,16 @@ const TermsOfService = () => {
                                     <h2 id="payments-and-subscriptions" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Payments and Subscriptions
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         <strong>Fees:</strong> Access to premium
                                         content requires payment of applicable
                                         fees. All fees are exclusive of taxes,
                                         which you&apos;re responsible for paying.
                                     </p>
-                                    <p className="pt-3 text-neutral-500">
+                                    <p className="pt-3 text-neutral-500 dark:text-neutral-400">
                                         <strong>Subscription Terms:</strong>
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             Subscriptions automatically renew at
                                             the end of each billing cycle
@@ -203,20 +210,20 @@ const TermsOfService = () => {
                                     <h2 id="intellectual-property" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Intellectual Property
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         <strong>Our Ownership:</strong> We
                                         retain all rights to CNIPPET platforms,
                                         branding, documentation, and original
                                         content. Components and templates are
                                         licensed, not sold.
                                     </p>
-                                    <p className="pt-3 text-neutral-500">
+                                    <p className="pt-3 text-neutral-500 dark:text-neutral-400">
                                         <strong>Your Ownership:</strong> You
                                         retain all rights to projects you build
                                         using our resources. Components become
                                         part of your derivative work.
                                     </p>
-                                    <p className="pt-3 text-neutral-500">
+                                    <p className="pt-3 text-neutral-500 dark:text-neutral-400">
                                         <strong>Feedback:</strong> Any
                                         suggestions or feedback you provide
                                         becomes our property without
@@ -226,11 +233,11 @@ const TermsOfService = () => {
                                     <h2 id="user-content" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         User Content
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         If you submit code samples, templates,
                                         or tutorials:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             You grant us a perpetual, worldwide
                                             license to use and modify your
@@ -249,16 +256,16 @@ const TermsOfService = () => {
                                     <h2 id="termination" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Termination
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         We may suspend or terminate your account
                                         for:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>Violations of these Terms</li>
                                         <li>Non-payment of fees</li>
                                         <li>Illegal or abusive activities</li>
                                     </ul>
-                                    <p className="pt-3 text-neutral-500">
+                                    <p className="pt-3 text-neutral-500 dark:text-neutral-400">
                                         Upon termination, your license to use
                                         materials is revoked. You must cease all
                                         use of our services and delete
@@ -268,12 +275,12 @@ const TermsOfService = () => {
                                     <h2 id="disclaimers" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Disclaimers
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         Our services are provided &quot;as is&quot;
                                         without warranties of any kind. We do
                                         not guarantee:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             That components are error-free or
                                             production-ready
@@ -295,11 +302,11 @@ const TermsOfService = () => {
                                     <h2 id="limitation-of-liability" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Limitation of Liability
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         To the maximum extent permitted by law,
                                         CNIPPET shall not be liable for:
                                     </p>
-                                    <ul className="mt-2 list-disc pl-5 text-neutral-500">
+                                    <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
                                         <li>
                                             Indirect, incidental, or
                                             consequential damages
@@ -313,7 +320,7 @@ const TermsOfService = () => {
                                             Third-party integrations or services
                                         </li>
                                     </ul>
-                                    <p className="pt-3 text-neutral-500">
+                                    <p className="pt-3 text-neutral-500 dark:text-neutral-400">
                                         Our total liability for any claim is
                                         limited to the amount you paid us in the
                                         12 months preceding the claim.
@@ -322,7 +329,7 @@ const TermsOfService = () => {
                                     <h2 id="modifications" className="pt-10 text-2xl font-semibold scroll-m-20">
                                         Modifications
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         We may update these Terms periodically.
                                         We&apos;ll notify you of material changes via
                                         email or platform notification.
@@ -333,7 +340,7 @@ const TermsOfService = () => {
                                     <h2 className="pt-10 text-2xl font-semibold">
                                         Contact Information
                                     </h2>
-                                    <p className="pt-5 text-neutral-500">
+                                    <p className="pt-5 text-neutral-500 dark:text-neutral-400">
                                         For terms of service related inquiries:
                                         <br />
                                         Email:{" "}
@@ -346,69 +353,69 @@ const TermsOfService = () => {
                                         Uttarakhand 248140
                                     </p>
                                 </div>
-                                <div className="col-span-4 border-l px-10 pt-10">
+                                <div className="col-span-4 border-l dark:border-neutral-800 px-10 pt-10">
                                     <div className="sticky top-20">
                                         <div className="flex font-medium font-buch">
                                             Terms of Service
                                         </div>
                                         <ul className="space-y-2 pt-5 text-sm text-neutral-600">
                                             <li>
-                                                <Link href="#account-registration-and-security" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#account-registration-and-security" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Account Registration and Security
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#license-grant" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#license-grant" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     License Grant
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#acceptable-use" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#acceptable-use" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Acceptable Use
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#payments-and-subscriptions" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#payments-and-subscriptions" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Payments and Subscriptions
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#intellectual-property" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#intellectual-property" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Intellectual Property
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#user-content" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#user-content" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     User Content
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#termination" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#termination" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Termination
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#disclaimers" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#disclaimers" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Disclaimers
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#limitation-of-liability" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#limitation-of-liability" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Limitation of Liability
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#governing-law-and-disputes" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#governing-law-and-disputes" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Governing Law and Disputes
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#modifications" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#modifications" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Modifications
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#contact-information" className="!text-neutral-600 hover:!text-neutral-800">
+                                                <Link href="#contact-information" className="!text-neutral-600 hover:!text-neutral-800 dark:!text-neutral-400 dark:hover:!text-neutral-200">
                                                     Contact Information
                                                 </Link>
                                             </li>
