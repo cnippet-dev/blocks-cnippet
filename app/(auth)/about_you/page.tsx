@@ -1,15 +1,15 @@
-import React from "react";
-
 import type { Metadata } from "next";
-import CompleteSignupPage from "./_components/main";
+import dynamic from "next/dynamic";
 
 export const metadata: Metadata = {
     title: "Complete Signup",
     description: "",
 };
 
-const ForgotPasswordPage = () => {
+const CompleteSignupPage = dynamic(() => import("./_components/main"));
+
+const AboutYouPage = () => {
     return <CompleteSignupPage />;
 };
 
-export default ForgotPasswordPage;
+export default AboutYouPage;

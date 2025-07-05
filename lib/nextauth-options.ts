@@ -42,7 +42,7 @@ declare module "next-auth/jwt" {
         preferredTimezone?: string | null;
     }
 }
-    
+
 export const nextauthOptions: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     pages: {
@@ -163,11 +163,21 @@ export const nextauthOptions: NextAuthOptions = {
                 session.user.image = token.image as string;
                 session.user.username = token.username as string | null;
                 // Add user settings fields to session.user
-                session.user.preferredTheme = token.preferredTheme as string | null;
-                session.user.emailNotifications = token.emailNotifications as boolean | null;
-                session.user.inAppNotifications = token.inAppNotifications as boolean | null;
-                session.user.preferredLanguage = token.preferredLanguage as string | null;
-                session.user.preferredTimezone = token.preferredTimezone as string | null;
+                session.user.preferredTheme = token.preferredTheme as
+                    | string
+                    | null;
+                session.user.emailNotifications = token.emailNotifications as
+                    | boolean
+                    | null;
+                session.user.inAppNotifications = token.inAppNotifications as
+                    | boolean
+                    | null;
+                session.user.preferredLanguage = token.preferredLanguage as
+                    | string
+                    | null;
+                session.user.preferredTimezone = token.preferredTimezone as
+                    | string
+                    | null;
                 session.needsCompletion = token.needsCompletion as
                     | boolean
                     | undefined;

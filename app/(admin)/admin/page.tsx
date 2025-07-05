@@ -6,13 +6,15 @@ import { Button } from "@/components/ui/button";
 
 export default async function AdminDashboardPage() {
     const contactsResult = await getContactMessages();
-    const contactCount = contactsResult.success ? contactsResult.data?.length || 0 : 0;
+    const contactCount = contactsResult.success
+        ? contactsResult.data?.length || 0
+        : 0;
 
     return (
         <div className="space-y-8">
             <div>
                 <h1 className="text-3xl font-bold">Dashboard</h1>
-                <p className="text-gray-600 mt-2">
+                <p className="mt-2 text-gray-600">
                     Welcome to the admin dashboard
                 </p>
             </div>
@@ -23,11 +25,11 @@ export default async function AdminDashboardPage() {
                         <CardTitle className="text-sm font-medium">
                             Contact Messages
                         </CardTitle>
-                        <MessageSquare className="h-4 w-4 text-muted-foreground" />
+                        <MessageSquare className="text-muted-foreground h-4 w-4" />
                     </CardHeader>
                     <CardContent>
                         <div className="text-2xl font-bold">{contactCount}</div>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-muted-foreground text-xs">
                             Total contact form submissions
                         </p>
                         <Link href="/admin/contacts" className="mt-4 block">
@@ -43,11 +45,11 @@ export default async function AdminDashboardPage() {
                         <CardTitle className="text-sm font-medium">
                             Users
                         </CardTitle>
-                        <Users className="h-4 w-4 text-muted-foreground" />
+                        <Users className="text-muted-foreground h-4 w-4" />
                     </CardHeader>
                     <CardContent>
                         <div className="text-2xl font-bold">0</div>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-muted-foreground text-xs">
                             Total registered users
                         </p>
                         <Link href="/admin/users" className="mt-4 block">
@@ -63,11 +65,11 @@ export default async function AdminDashboardPage() {
                         <CardTitle className="text-sm font-medium">
                             Analytics
                         </CardTitle>
-                        <TrendingUp className="h-4 w-4 text-muted-foreground" />
+                        <TrendingUp className="text-muted-foreground h-4 w-4" />
                     </CardHeader>
                     <CardContent>
                         <div className="text-2xl font-bold">Coming Soon</div>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-muted-foreground text-xs">
                             Site analytics and insights
                         </p>
                     </CardContent>
@@ -80,7 +82,7 @@ export default async function AdminDashboardPage() {
                         <CardTitle>Recent Activity</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-muted-foreground text-sm">
                             No recent activity to display
                         </p>
                     </CardContent>
@@ -92,13 +94,19 @@ export default async function AdminDashboardPage() {
                     </CardHeader>
                     <CardContent className="space-y-2">
                         <Link href="/admin/contacts">
-                            <Button variant="outline" className="w-full justify-start">
+                            <Button
+                                variant="outline"
+                                className="w-full justify-start"
+                            >
                                 <MessageSquare className="mr-2 h-4 w-4" />
                                 View Contact Messages
                             </Button>
                         </Link>
                         <Link href="/admin/settings">
-                            <Button variant="outline" className="w-full justify-start">
+                            <Button
+                                variant="outline"
+                                className="w-full justify-start"
+                            >
                                 <Users className="mr-2 h-4 w-4" />
                                 Manage Settings
                             </Button>
@@ -108,4 +116,4 @@ export default async function AdminDashboardPage() {
             </div>
         </div>
     );
-} 
+}

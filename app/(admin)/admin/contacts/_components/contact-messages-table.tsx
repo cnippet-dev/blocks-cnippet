@@ -30,7 +30,9 @@ interface ContactMessagesTableProps {
 }
 
 export function ContactMessagesTable({ messages }: ContactMessagesTableProps) {
-    const [expandedMessages, setExpandedMessages] = useState<Set<string>>(new Set());
+    const [expandedMessages, setExpandedMessages] = useState<Set<string>>(
+        new Set(),
+    );
     const [deletingIds, setDeletingIds] = useState<Set<string>>(new Set());
 
     const toggleMessageExpansion = (messageId: string) => {
@@ -45,11 +47,11 @@ export function ContactMessagesTable({ messages }: ContactMessagesTableProps) {
 
     const handleDeleteMessage = async (messageId: string) => {
         if (confirm("Are you sure you want to delete this message?")) {
-            setDeletingIds(prev => new Set(prev).add(messageId));
-            
+            setDeletingIds((prev) => new Set(prev).add(messageId));
+
             try {
                 const result = await deleteContactMessage(messageId);
-                
+
                 if (result.success) {
                     toast.success("Message deleted successfully");
                     // Refresh the page to update the list
@@ -61,7 +63,7 @@ export function ContactMessagesTable({ messages }: ContactMessagesTableProps) {
                 console.error("Delete error:", error);
                 toast.error("Failed to delete message");
             } finally {
-                setDeletingIds(prev => {
+                setDeletingIds((prev) => {
                     const newSet = new Set(prev);
                     newSet.delete(messageId);
                     return newSet;
@@ -84,7 +86,9 @@ export function ContactMessagesTable({ messages }: ContactMessagesTableProps) {
         return (
             <Card>
                 <CardContent className="py-8">
-                    <p className="text-center text-gray-500">No contact messages found</p>
+                    <p className="text-center text-gray-500">
+                        No contact messages found
+                    </p>
                 </CardContent>
             </Card>
         );
@@ -113,7 +117,7 @@ export function ContactMessagesTable({ messages }: ContactMessagesTableProps) {
                                     {message.name}
                                 </TableCell>
                                 <TableCell>
-                                    <a 
+                                    <a
                                         href={`mailto:${message.email}`}
                                         className="text-blue-600 hover:underline"
                                     >
@@ -121,7 +125,10 @@ export function ContactMessagesTable({ messages }: ContactMessagesTableProps) {
                                     </a>
                                 </TableCell>
                                 <TableCell>
-                                    <div className="max-w-xs truncate" title={message.subject}>
+                                    <div
+                                        className="max-w-xs truncate"
+                                        title={message.subject}
+                                    >
                                         {message.subject}
                                     </div>
                                 </TableCell>
@@ -135,9 +142,15 @@ export function ContactMessagesTable({ messages }: ContactMessagesTableProps) {
                                         <Button
                                             variant="outline"
                                             size="sm"
-                                            onClick={() => toggleMessageExpansion(message.id)}
+                                            onClick={() =>
+                                                toggleMessageExpansion(
+                                                    message.id,
+                                                )
+                                            }
                                         >
-                                            {expandedMessages.has(message.id) ? (
+                                            {expandedMessages.has(
+                                                message.id,
+                                            ) ? (
                                                 <EyeOff className="h-4 w-4" />
                                             ) : (
                                                 <Eye className="h-4 w-4" />
@@ -146,8 +159,12 @@ export function ContactMessagesTable({ messages }: ContactMessagesTableProps) {
                                         <Button
                                             variant="destructive"
                                             size="sm"
-                                            onClick={() => handleDeleteMessage(message.id)}
-                                            disabled={deletingIds.has(message.id)}
+                                            onClick={() =>
+                                                handleDeleteMessage(message.id)
+                                            }
+                                            disabled={deletingIds.has(
+                                                message.id,
+                                            )}
                                         >
                                             <Trash2 className="h-4 w-4" />
                                         </Button>
@@ -160,7 +177,7 @@ export function ContactMessagesTable({ messages }: ContactMessagesTableProps) {
 
                 {/* Expanded message details */}
                 {Array.from(expandedMessages).map((messageId) => {
-                    const message = messages.find(m => m.id === messageId);
+                    const message = messages.find((m) => m.id === messageId);
                     if (!message) return null;
 
                     return (
@@ -176,19 +193,27 @@ export function ContactMessagesTable({ messages }: ContactMessagesTableProps) {
                             <CardContent>
                                 <div className="space-y-4">
                                     <div>
-                                        <label className="font-medium">Subject:</label>
-                                        <p className="text-gray-700">{message.subject}</p>
+                                        <label className="font-medium">
+                                            Subject:
+                                        </label>
+                                        <p className="text-gray-700">
+                                            {message.subject}
+                                        </p>
                                     </div>
                                     <div>
-                                        <label className="font-medium">Message:</label>
-                                        <p className="text-gray-700 whitespace-pre-wrap">
+                                        <label className="font-medium">
+                                            Message:
+                                        </label>
+                                        <p className="whitespace-pre-wrap text-gray-700">
                                             {message.message}
                                         </p>
                                     </div>
                                     <div>
-                                        <label className="font-medium">Contact:</label>
+                                        <label className="font-medium">
+                                            Contact:
+                                        </label>
                                         <p className="text-gray-700">
-                                            <a 
+                                            <a
                                                 href={`mailto:${message.email}`}
                                                 className="text-blue-600 hover:underline"
                                             >
@@ -204,4 +229,4 @@ export function ContactMessagesTable({ messages }: ContactMessagesTableProps) {
             </CardContent>
         </Card>
     );
-} 
+}
