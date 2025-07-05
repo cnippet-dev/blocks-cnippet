@@ -4,11 +4,18 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { useTheme } from "next-themes";
-import { Sun, Moon, Loader2 } from "lucide-react";
+import { Sun, Moon, Loader2, ChevronDownIcon } from "lucide-react";
 import { RiGithubLine } from "@remixicon/react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 export default function Footer() {
     const { theme, setTheme } = useTheme();
@@ -75,15 +82,38 @@ export default function Footer() {
                     </div>
 
                     <div className="lg:col-span-1">
-                        <h3 className="mb-4 font-medium">More...</h3>
+                        <h3 className="mb-4 font-medium">Company</h3>
                         <ul className="space-y-3">
-                            <FooterLink href="#">Core Components</FooterLink>
-                            <FooterLink href="#">Motion Components</FooterLink>
-                            <FooterLink href="#">Chart Components</FooterLink>
-                            <FooterLink href="#">Sections</FooterLink>
-                            <FooterLink href="#">Pages</FooterLink>
-                            <FooterLink href="#">Templates</FooterLink>
-                            <FooterLink href="#">Contact Us</FooterLink>
+                            <FooterLink href="/about_us">About</FooterLink>
+                            <FooterLink href="#">Blog</FooterLink>
+                            <FooterLink href="/changelog">Changelog</FooterLink>
+                            <FooterLink href="/contact_us">Contact Us</FooterLink>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button variant="outline" className="text-left px-0 py-0 shadow-none  border-none rounded-none text-sm text-gray-600 h-fit hover:bg-white hover:text-black dark:text-gray-500 dark:hover:text-white">Legal
+                                        <ChevronDownIcon />
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent className="w-56" align="start">
+                                    <DropdownMenuGroup>
+                                        <DropdownMenuItem>
+                                            <Link href="/privacy">
+                                                Privacy Policy
+                                            </Link>
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem>
+                                            <Link href="/terms">
+                                                Terms of Service
+                                            </Link>
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem>
+                                            <Link href="/cancellation">
+                                                Cancellation Policy
+                                            </Link>
+                                        </DropdownMenuItem>
+                                    </DropdownMenuGroup>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
                         </ul>
                     </div>
 

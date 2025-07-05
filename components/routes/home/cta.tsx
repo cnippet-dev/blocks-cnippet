@@ -3,7 +3,7 @@ import { RiArrowRightLine } from "@remixicon/react";
 const Cta = () => {
     return (
         <>
-            <section className="mx-auto w-full max-w-[1536px] border-t-0 border-b bg-blue-700 pl-4 text-white md:pl-30 dark:bg-blue-700">
+            <section className="mx-auto w-full max-w-[1536px] border-t-0 border-b bg-blue-700 pl-4 text-white md:pl-30 dark:bg-blue-700 dark:border-neutral-800">
                 <div className="grid grid-cols-6 divide-x dark:divide-neutral-800">
                     <div className="col-span-5 py-28">
                         <h2 className="text-2xl leading-tight font-medium tracking-tight md:text-5xl">

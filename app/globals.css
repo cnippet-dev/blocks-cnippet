@@ -130,3 +130,11 @@
         display: none;
     }
 }
+
+.legal_page  a {
+    @apply text-blue-600 dark:text-blue-500;
+}
+
+.legal_page strong {
+    @apply text-neutral-800 dark:text-neutral-200;
+}
