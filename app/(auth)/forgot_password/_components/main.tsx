@@ -24,14 +24,14 @@ const forgotPasswordValidation = z.object({
     email: z.string().email(),
 });
 
-export function ForgotPassword() {
+const ForgotPassword = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const { status } = useSession();
     const router = useRouter();
 
     const forgotPasswordForm = useForm<
-        z.infer<typeof forgotPasswordValidation>
+        z.infer<typeof forgotPasswordValidation> 
     >({
         resolver: zodResolver(forgotPasswordValidation),
         defaultValues: {
@@ -151,4 +151,6 @@ export function ForgotPassword() {
             </div>
         </section>
     );
-}
+};
+
+export default ForgotPassword;

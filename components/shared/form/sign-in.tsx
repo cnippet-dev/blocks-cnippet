@@ -71,7 +71,6 @@ export default function SignInForm() {
             });
 
             console.log(result);
-            
 
             if (result?.error) {
                 toast.error("Invalid Credentials");
@@ -88,6 +87,7 @@ export default function SignInForm() {
             setIsLoading(null);
         }
     }
+
     const loginWithGoogle = async () => {
         setIsLoading("google");
         await signIn("google", { redirect: false });

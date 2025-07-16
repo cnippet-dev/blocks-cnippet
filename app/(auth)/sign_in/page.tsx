@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-
-import SignInForm from "@/components/shared/form/sign-in";
+import dynamic from "next/dynamic";
 
 export const metadata: Metadata = {
     title: "Sign In",
     description: "",
 };
+
+const SignInForm = dynamic(() => import("@/components/shared/form/sign-in"));
 
 const page = () => {
     return <SignInForm />;
