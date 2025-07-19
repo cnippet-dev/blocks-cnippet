@@ -2,13 +2,13 @@
 import dynamic from "next/dynamic";
 
 const Hero = dynamic(() => import("@/components/routes/home/hero"));
-const Features = dynamic(() => import("@/components/routes/home/features"));
+// const Features = dynamic(() => import("@/components/routes/home/features"));        
 const Faq = dynamic(() => import("@/components/routes/home/faq"));
 const Footer = dynamic(() => import("@/components/shared/footer"));
 // const Feedback = dynamic(() => import("@/components/routes/home/feedback"));
 const Cta = dynamic(() => import("@/components/routes/home/cta"));
 const Nav1 = dynamic(() => import("@/components/shared/navbar/nav-1"));
-const Community = dynamic(() => import("@/components/routes/home/community"));
+// const Community = dynamic(() => import("@/components/routes/home/community"));
 const Sections = dynamic(() => import("@/components/shared/all-sections"));
 
 import { useRef, useState } from "react";
@@ -111,12 +111,12 @@ export default function Cursor1() {
             </Cursor>
 
             <Nav1 />
-            <main className="font-buch">
+            <main className="">
                 <Hero ref={targetRef3} />
                 <Sections count={6} />
-                <Features ref={targetRef} />
+                {/* <Features ref={targetRef} /> */}
                 {/* <Feedback /> */}
-                <Community ref={targetRef2} />
+                {/* <Community ref={targetRef2} /> */}
                 <Faq />
                 <Cta />
             </main>

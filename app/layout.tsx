@@ -74,12 +74,12 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={`font-sans`}>
+            <body>
                 <ReactLenis root>
                     <AuthProvider>
                         <ThemeProvider
                             attribute="class"
-                            defaultTheme="light"
+                            defaultTheme="system"
                             enableSystem
                             disableTransitionOnChange
                         >

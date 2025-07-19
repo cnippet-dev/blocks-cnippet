@@ -3,7 +3,7 @@
 import React from "react";
 import { signOut, useSession } from "next-auth/react";
 import { Sparkles, BadgeCheck, CreditCard, Bell, LogOut } from "lucide-react";
-import { RiUser3Fill } from "@remixicon/react";
+import { RiUserFill } from "@remixicon/react";
 import Link from "next/link";
 
 import {
@@ -119,10 +119,10 @@ const NavUser = () => {
                         <Dialog>
                             <DialogTrigger asChild>
                                 <Button
-                                    size="sm"
+                                    size="lg"
                                     className="[&amp;_svg]:size-4.5 cursor-pointer rounded-full bg-black px-2 hover:bg-black"
                                 >
-                                    <RiUser3Fill />
+                                    <RiUserFill className="text-white" />
                                 </Button>
                             </DialogTrigger>
                             <AuthDialog />

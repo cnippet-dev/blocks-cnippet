@@ -23,7 +23,6 @@ import { Loader2 } from "lucide-react";
 export default function GeneralInformationPage() {
     const { data: session, status, update } = useSession();
     const [isPending, setIsPending] = useState(false);
-
     const form = useForm<z.infer<typeof updateGeneralInfoSchema>>({
         resolver: zodResolver(updateGeneralInfoSchema),
         defaultValues: {
@@ -32,7 +31,6 @@ export default function GeneralInformationPage() {
         },
     });
 
-    // Populate form with session data on load
     useEffect(() => {
         if (status === "authenticated" && session?.user) {
             form.reset({
@@ -52,10 +50,16 @@ export default function GeneralInformationPage() {
                 toast.error(result.error.general);
             } else {
                 if (result.error.name && result.error.name[0]) {
-                    form.setError("name", { type: "manual", message: result.error.name[0] });
+                    form.setError("name", {
+                        type: "manual",
+                        message: result.error.name[0],
+                    });
                 }
                 if (result.error.username && result.error.username[0]) {
-                    form.setError("username", { type: "manual", message: result.error.username[0] });
+                    form.setError("username", {
+                        type: "manual",
+                        message: result.error.username[0],
+                    });
                 }
                 toast.error("Please correct the errors in the form.");
             }
@@ -63,26 +67,45 @@ export default function GeneralInformationPage() {
             toast.success(result?.message || "Profile updated!");
             // Update the client-side session if the data changed
             if (result?.user) {
-                await update({ user: { name: result.user.name, username: result.user.username } });
+                await update({
+                    user: {
+                        name: result.user.name,
+                        username: result.user.username,
+                    },
+                });
+                await update();
+                form.reset({
+                    name: result.user.name,
+                    username: result.user.username,
+                });
             }
         }
     }
 
     if (status === "loading") {
-        return <div className="flex justify-center items-center h-full">Loading profile...</div>;
+        return (
+            <div className="flex h-full items-center justify-center">
+                <div className="loader"></div>
+                Loading profile...bbb
+            </div>
+        );
     }
 
     if (!session?.user) {
-        return <div className="flex justify-center items-center h-full text-red-500">Please sign in to view your profile.</div>;
+        return (
+            <div className="flex h-full items-center justify-center text-red-500">
+                Please sign in to view your profile.
+            </div>
+        );
     }
 
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-4">General Information</h1>
-            <p className="text-gray-600 mb-6">Manage your basic account details.</p>
-
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-6"
+                >
                     <FormField
                         control={form.control}
                         name="name"
@@ -90,7 +113,10 @@ export default function GeneralInformationPage() {
                             <FormItem>
                                 <FormLabel>Full Name</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Your Full Name" {...field} />
+                                    <Input
+                                        placeholder="Your Full Name"
+                                        {...field}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -103,7 +129,10 @@ export default function GeneralInformationPage() {
                             <FormItem>
                                 <FormLabel>Username</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Your Username" {...field} />
+                                    <Input
+                                        placeholder="Your Username"
+                                        {...field}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -112,10 +141,16 @@ export default function GeneralInformationPage() {
                     <FormItem>
                         <FormLabel>Email</FormLabel>
                         <FormControl>
-                            <Input value={session.user.email || ""} disabled className="bg-gray-100 dark:bg-gray-800 cursor-not-allowed" />
+                            <Input
+                                value={session.user.email || ""}
+                                disabled
+                                className="cursor-not-allowed bg-gray-100 dark:bg-gray-800"
+                            />
                         </FormControl>
                         <FormMessage />
-                        <p className="text-sm text-gray-500 mt-1">Email cannot be changed here.</p>
+                        <p className="mt-1 text-sm text-gray-500">
+                            Email cannot be changed here.
+                        </p>
                     </FormItem>
                     <Button type="submit" disabled={isPending}>
                         {isPending ? (
