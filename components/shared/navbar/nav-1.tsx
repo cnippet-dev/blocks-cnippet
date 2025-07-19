@@ -21,36 +21,27 @@ const Nav1 = () => {
         <>
             <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 mx-auto w-full max-w-full border-t-0 border-b px-4 backdrop-blur md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-900 dark:bg-black/70">
                 <div className="w-full border border-t-0 border-r-0 border-b-0 dark:border-neutral-800">
-                    <div className="grid grid-cols-2 divide-x-0 md:divide-x md:grid-cols-6 dark:divide-neutral-800">
-                        <div className="col-span-1 px-4 py-3 md:col-span-1">
-                            {mounted && (
-                                <Link
-                                    className="mr-4 flex items-center gap-0 lg:mr-6"
-                                    href="/"
-                                >
-                                    {theme === "dark" ? (
-                                        <Image
-                                            src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-dark.png"
-                                            alt=""
-                                            className="size-9 rounded-full"
-                                            width={1080}
-                                            height={1080}
-                                        />
-                                    ) : (
-                                        <Image
-                                            src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-light.png"
-                                            alt=""
-                                            className="size-9 rounded-full"
-                                            width={1080}
-                                            height={1080}
-                                        />
-                                    )}
-
-                                    <span className="hidden font-mono text-xl xl:inline-block">
-                                        Cnippet/blocks
-                                    </span>
-                                </Link>
-                            )}
+                    <div className="grid grid-cols-2 divide-x-0 md:grid-cols-6 md:divide-x dark:divide-neutral-800">
+                        <div className="col-span-1  md:col-span-1">
+                            <Link
+                                suppressHydrationWarning
+                                className="grid grid-cols-4"
+                                href="/"
+                            >
+                                <span className="col-span-1 size-full bg-white py-2 flex items-center justify-center w-full">
+                                    <Image
+                                        src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-light.png"
+                                        alt=""
+                                        className="size-9"
+                                        width={1080}
+                                        height={1080}
+                                        suppressHydrationWarning
+                                    />
+                                </span>
+                                <span className="hidden col-span-3 font-mono text-base xl:flex items-center justify-start pl-2">
+                                    cnippet/blocks
+                                </span>
+                            </Link>
                         </div>
 
                         <div className="col-span-4 hidden items-center px-4 md:flex xl:col-span-3">
@@ -80,16 +71,16 @@ const Nav1 = () => {
                             <CommandMenu />
                         </div>
 
-                        <div className="col-span-1 hidden h-full cursor-pointer grid-cols-3 divide-x divide-neutral-500 xl:grid">
+                        <div className="col-span-1 hidden h-full cursor-pointer grid-cols-3 divide-x xl:grid dark:divide-neutral-800">
                             <Link
                                 target="_blank"
                                 rel="noreferrer"
-                                className="hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring [&amp;_svg]:pointer-events-none [&amp;_svg]:size-5 [&amp;_svg]:shrink-0 inline-flex w-full items-center justify-center gap-2 rounded-none bg-gray-400 px-0 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+                                className="hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring [&amp;_svg]:pointer-events-none [&amp;_svg]:size-5 [&amp;_svg]:shrink-0 bg-muted/50 inline-flex w-full items-center justify-center gap-2 rounded-none px-0 text-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
                                 href="https://github.com/cnippet-site/all-elements/"
                             >
                                 <svg
                                     viewBox="0 0 438.549 438.549"
-                                    className="size-5 text-white"
+                                    className="size-5 text-black dark:text-white"
                                 >
                                     <path
                                         fill="currentColor"
@@ -98,45 +89,26 @@ const Nav1 = () => {
                                 </svg>
                                 <span className="sr-only">GitHub</span>
                             </Link>
-                            {mounted && (
-                                <div className="group/toggle focus-visible:ring-ring [&amp;_svg]:pointer-events-none [&amp;_svg]:size-5 [&amp;_svg]:shrink-0 inline-flex w-full items-center justify-center gap-2 rounded-none bg-gray-400 px-0 text-sm font-medium whitespace-nowrap transition-colors hover:bg-none focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50">
-                                    {/* <Button
-                                    variant="ghost"
-                                    onClick={() => toggleTheme()}
-                                    className="hover:bg-dusk-500 flex items-center justify-center gap-2 rounded-lg p-2 text-black dark:text-white hover:dark:bg-neutral-700"
-                                >
-                                    {theme === "dark" ? (
-                                        <RiSunLine className="size-5" />
-                                    ) : (
-                                        <RiMoonFill className="size-5" />
-                                    )}
-                                </Button> */}
-                                    {theme === "dark" ? (
-                                        <button
-                                            onClick={() => setTheme("light")}
-                                            className={`cursor-pointer rounded-full p-1.5`}
-                                            aria-label="Light mode"
-                                        >
-                                            <RiSunLine className="size-5 text-white" />
-                                        </button>
-                                    ) : (
-                                        <button
-                                            onClick={() => setTheme("dark")}
-                                            className={`cursor-pointer rounded-full p-1.5`}
-                                            aria-label="Dark mode"
-                                        >
-                                            <RiMoonFill className="size-5 text-white" />
-                                        </button>
-                                    )}
-
-                                    {/* {mounted && (
-                                    <div className="flex gap-1 rounded-full border p-1 dark:border-neutral-800"></div>
-                                )} */}
-                                    <span className="sr-only">
-                                        Toggle theme
-                                    </span>
-                                </div>
-                            )}
+                            <div className="group/toggle focus-visible:ring-ring [&amp;_svg]:pointer-events-none [&amp;_svg]:size-5 [&amp;_svg]:shrink-0 bg-muted/50 inline-flex w-full items-center justify-center gap-2 rounded-none px-0 text-sm font-medium whitespace-nowrap transition-colors hover:bg-none focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50">
+                                {theme === "dark" ? (
+                                    <button
+                                        onClick={() => setTheme("light")}
+                                        className={`cursor-pointer rounded-full p-1.5`}
+                                        aria-label="Light mode"
+                                    >
+                                        <RiSunLine className="size-5 text-black dark:text-white" />
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={() => setTheme("dark")}
+                                        className={`cursor-pointer rounded-full p-1.5`}
+                                        aria-label="Dark mode"
+                                    >
+                                        <RiMoonFill className="size-5 text-black dark:text-white" />
+                                    </button>
+                                )}
+                                <span className="sr-only">Toggle theme</span>
+                            </div>
                             <div className="col-span-1 flex w-full items-center justify-center bg-black">
                                 <NavUser />
                             </div>

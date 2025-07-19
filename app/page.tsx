@@ -111,12 +111,12 @@ export default function Cursor1() {
             </Cursor>
 
             <Nav1 />
-            <main className="font-buch">
+            <main className="">
                 <Hero ref={targetRef3} />
                 <Sections count={6} />
-                <Features ref={targetRef} />
+                {/* <Features ref={targetRef} /> */}
                 {/* <Feedback /> */}
-                <Community ref={targetRef2} />
+                {/* <Community ref={targetRef2} /> */}
                 <Faq />
                 <Cta />
             </main>
