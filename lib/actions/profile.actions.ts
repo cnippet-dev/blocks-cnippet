@@ -223,3 +223,26 @@ export async function updateUserSettings(
         };
     }
 }
+
+/**
+ * Fetches the current user's profile data.
+ */
+export async function getCurrentUserProfile() {
+    const session = await getUserSession();
+    if (!session || !session.user || !session.user.id) {
+        return null;
+    }
+    const user = await prisma.user.findUnique({
+        where: { id: session.user.id },
+        select: {
+            id: true,
+            name: true,
+            username: true,
+            email: true,
+            // location: true,
+            // bio: true,
+            image: true,
+        },
+    });
+    return user;
+}

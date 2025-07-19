@@ -5,8 +5,7 @@ import prisma from "@/lib/prisma";
 import Razorpay from "razorpay";
 import crypto from "crypto";
 import { Resend } from "resend"; // Assuming Resend is used for emails
-import { getServerSession } from "next-auth";
-import { nextauthOptions } from "../nextauth-options";
+import { getUserSession } from "./auth.actions";
 
 // --- Interfaces from previous working code ---
 interface PaymentData {
@@ -283,7 +282,7 @@ export async function getUserPayments(): Promise<{
     payments?: any[];
     error?: string;
 }> {
-    const session = await getServerSession(nextauthOptions);
+    const session = await getUserSession();
     if (!session?.user?.id) {
         return { error: "Unauthorized. Please sign in to view payments." };
     }

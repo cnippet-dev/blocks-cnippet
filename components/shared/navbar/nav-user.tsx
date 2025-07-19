@@ -3,7 +3,7 @@
 import React from "react";
 import { signOut, useSession } from "next-auth/react";
 import { Sparkles, BadgeCheck, CreditCard, Bell, LogOut } from "lucide-react";
-import { RiUser3Fill, RiUserFill } from "@remixicon/react";
+import { RiUserFill } from "@remixicon/react";
 import Link from "next/link";
 
 import {

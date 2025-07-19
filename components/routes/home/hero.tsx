@@ -2,8 +2,6 @@ import { forwardRef } from "react";
 import Link from "next/link";
 import { RiArrowRightLine } from "@remixicon/react";
 
-import { TypingText } from "@/components/motion/typing-text";
-
 const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
     (props, ref) => {
         return (
@@ -25,16 +23,15 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                                     </h1>
                                 </div>
 
-                                <p className="max-w-2xl text-sm leading-normal md:mt-2 md:text-lg text-gray-400">
-                                        Cnippet Blocks equips you with
-                                        everything needed to kickstart your next
-                                        project: discover a wide range of
-                                        sections (like hero, features, team, and
-                                        more), ready-made pages (including
-                                        landing, about, and contact), and
-                                        complete website templates that cover
-                                        every page. Build smarter and faster
-                                        with block.cnippet.site.
+                                <p className="max-w-2xl text-sm leading-normal text-gray-400 md:mt-2 md:text-lg">
+                                    Cnippet Blocks equips you with everything
+                                    needed to kickstart your next project:
+                                    discover a wide range of sections (like
+                                    hero, features, team, and more), ready-made
+                                    pages (including landing, about, and
+                                    contact), and complete website templates
+                                    that cover every page. Build smarter and
+                                    faster with block.cnippet.site.
                                 </p>
                             </div>
                             <div className="col-span-1">

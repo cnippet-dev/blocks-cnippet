@@ -11,6 +11,7 @@ import { MobileNav } from "./mobile-nav";
 
 const Nav1 = () => {
     const { theme, setTheme } = useTheme();
+    //eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -22,13 +23,13 @@ const Nav1 = () => {
             <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 mx-auto w-full max-w-full border-t-0 border-b px-4 backdrop-blur md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-900 dark:bg-black/70">
                 <div className="w-full border border-t-0 border-r-0 border-b-0 dark:border-neutral-800">
                     <div className="grid grid-cols-2 divide-x-0 md:grid-cols-6 md:divide-x dark:divide-neutral-800">
-                        <div className="col-span-1  md:col-span-1">
+                        <div className="col-span-1 md:col-span-1">
                             <Link
                                 suppressHydrationWarning
                                 className="grid grid-cols-4"
                                 href="/"
                             >
-                                <span className="col-span-1 size-full bg-white py-2 flex items-center justify-center w-full">
+                                <span className="col-span-1 flex size-full w-full items-center justify-center bg-white py-2">
                                     <Image
                                         src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-light.png"
                                         alt=""
@@ -38,7 +39,7 @@ const Nav1 = () => {
                                         suppressHydrationWarning
                                     />
                                 </span>
-                                <span className="hidden col-span-3 font-mono text-base xl:flex items-center justify-start pl-2">
+                                <span className="col-span-3 hidden items-center justify-start pl-2 font-mono text-base xl:flex">
                                     cnippet/blocks
                                 </span>
                             </Link>
