@@ -12,6 +12,7 @@ interface PaymentData {
     amount: number;
     plan: string; // The name of the plan (e.g., "PRO")
     userId: string;
+    duration: string; // Add duration (e.g., 'monthly', 'annual')
 }
 
 interface PaymentResult {
@@ -44,7 +45,7 @@ export async function createPayment(
     paymentData: PaymentData,
 ): Promise<PaymentResult> {
     try {
-        const { amount, plan, userId } = paymentData;
+        const { amount, plan, userId, duration } = paymentData;
 
         // Validate user exists (important for security and data integrity)
         // const user = await prisma.user.findUnique({
@@ -73,6 +74,7 @@ export async function createPayment(
                 planName: plan.toString(), // Explicitly cast to string
                 userId: userId.toString(), // Explicitly cast to string
                 originalAmount: amount.toString(), // Store original amount as string in notes
+                duration: duration.toString(), // Store duration in notes
             },
         };
 
@@ -139,6 +141,7 @@ export async function verifyPayment(
     razorpay_signature: string,
     userId: string,
     planId: string, // This 'plan' parameter will be used to create the subscription if not retrieved from notes
+    duration: string, // Add duration parameter
 ): Promise<VerificationResult> {
     try {
         if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
@@ -209,7 +212,14 @@ export async function verifyPayment(
         // Create subscription
         const startDate = new Date();
         const endDate = new Date();
-        endDate.setFullYear(endDate.getFullYear() + 1); // Example: 1 year subscription (as in your old code)
+        if (duration === "monthly") {
+            endDate.setMonth(endDate.getMonth() + 1);
+        } else if (duration === "annual" || duration === "yearly") {
+            endDate.setFullYear(endDate.getFullYear() + 1);
+        } else {
+            // Default to 1 year if duration is not recognized
+            endDate.setFullYear(endDate.getFullYear() + 1);
+        }
 
         // Check for existing active subscription and expire it if necessary
         const existingActiveSubscription = await prisma.subscription.findFirst({

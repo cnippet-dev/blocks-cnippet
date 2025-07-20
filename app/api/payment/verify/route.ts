@@ -5,12 +5,26 @@ export async function POST(req: Request) {
     try {
         const body = await req.json();
         console.log("body", body);
-        const { razorpay_order_id, razorpay_payment_id, razorpay_signature, userId, planId } = body;
+        const {
+            razorpay_order_id,
+            razorpay_payment_id,
+            razorpay_signature,
+            userId,
+            planId,
+            duration,
+        } = body;
 
-        if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature || !userId || !planId) {
+        if (
+            !razorpay_order_id ||
+            !razorpay_payment_id ||
+            !razorpay_signature ||
+            !userId ||
+            !planId ||
+            !duration
+        ) {
             return NextResponse.json(
                 { error: "Missing required fields" },
-                { status: 400 }
+                { status: 400 },
             );
         }
 
@@ -19,14 +33,12 @@ export async function POST(req: Request) {
             razorpay_payment_id,
             razorpay_signature,
             userId,
-            planId
+            planId,
+            duration,
         );
 
         if (result.error) {
-            return NextResponse.json(
-                { error: result.error },
-                { status: 400 }
-            );
+            return NextResponse.json({ error: result.error }, { status: 400 });
         }
 
         return NextResponse.json({ success: true });
@@ -34,7 +46,7 @@ export async function POST(req: Request) {
         console.error("[PAYMENT_VERIFY] Error:", error);
         return NextResponse.json(
             { error: "Internal server error" },
-            { status: 500 }
+            { status: 500 },
         );
     }
-} 
+}
