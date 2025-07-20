@@ -27,7 +27,6 @@ const sharedSchema = z.object({
     toc: z.boolean().optional().default(true),
 });
 
-
 const sharedRehypePlugins = [
     rehypeSlug,
     rehypeComponent,
@@ -104,8 +103,8 @@ const createCollection = (name: string, directory: string) => {
 };
 
 // Create collections using the helper function
-const section = createCollection("sections", "content/section");
+const sections = createCollection("sections", "content/section");
 
 export default defineConfig({
-    collections: [section],
+    collections: [sections],
 });

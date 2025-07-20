@@ -17,10 +17,15 @@ export const registryItemTypeSchema = z.enum([
     "registry:style",
     "registry:lib",
     "registry:example",
-    "registry:section",
-    "registry:sections",
+    "registry:block",
+    "registry:component",
+    "registry:components",
+    "registry:motion",
+    "registry:motions",
+    "registry:charts",
     "registry:hook",
     "registry:theme",
+    "registry:section",
 ]);
 
 export const registryItemFileSchema = z.union([

@@ -5,7 +5,7 @@ import { Index } from "@/__registry__";
 
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
-import fetchPro from "@/lib/get-pro";
+// import fetchPro from "@/lib/get-pro";
 import { scrollToSection } from "@/lib/utils";
 import { Eye, Code, SquareArrowOutUpRight, Loader } from "lucide-react";
 
@@ -18,6 +18,8 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog-cn";
 import Image from "next/image";
+import { useConfig } from "@/lib/use-config";
+
 // import GoogleLogo from "@/public/images/svg/google-logo.svg";
 // import Github from "@/public/images/svg/github.svg";
 // import { Button } from "@/components/ui/button";
@@ -40,8 +42,8 @@ export function SectionPreview({
         "preview",
     );
 
-    const { status, data: session } = useSession();
-    const email = session?.user?.email;
+    const { status } = useSession();
+    // const email = session?.user?.email;
     const [loading, setLoading] = React.useState(false);
     const [loading1, setLoading1] = React.useState(false);
 
@@ -54,19 +56,21 @@ export function SectionPreview({
         await signIn("github");
     };
 
-    const { pro } = fetchPro(email);
+    // const { pro } = fetchPro(email);
     // console.log("in component:" + pro);
 
     const Codes = React.Children.toArray(children) as React.ReactElement[];
     const Src = Codes[0]; // Use first child instead of index-based selection
+    const [config] = useConfig();
 
     // const n = name.split("-");
 
     const a = "false"; // Default auth value
-    const p = "false"; // Default pro value
+    // const p = "false"; // Default pro value
 
     const Preview = React.useMemo(() => {
-        const Component = Index[name as keyof typeof Index]?.component;
+        //eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const Component = (Index[config.style] as any)[name]?.component;
 
         if (!Component) {
             console.error(
@@ -127,34 +131,30 @@ export function SectionPreview({
                                 </button>
                                 {status === "authenticated" || a === "false" ? (
                                     <>
-                                        {pro === true || p === "false" ? (
-                                            <button
-                                                onClick={() =>
-                                                    setActiveTab("code")
-                                                }
-                                                className={`flex items-center px-5 py-[0.45rem] text-sm tracking-wide ${activeTab === "code" ? "border-b-2 border-black text-black dark:border-white dark:text-white" : "border-dawn-100 text-dawn-300"} border-b`}
-                                            >
-                                                <Code className="size-5" />
-                                                <span className="sr-only lg:not-sr-only lg:ml-2">
-                                                    Code
-                                                </span>
-                                            </button>
-                                        ) : (
-                                            <button
-                                                onClick={() =>
-                                                    scrollToSection(
-                                                        "checkout-pro",
-                                                    )
-                                                }
-                                                className={`flex items-center rounded-md py-[0.45rem] pr-2 pl-2 text-sm tracking-wide lg:pr-3 ${activeTab === "code" ? "shadow" : ""} transition-all duration-500 ease-in-out`}
-                                            >
-                                                <Code className="dark:text-dawn-300 size-5 text-neutral-700" />
+                                        {/* {pro === true || p === "false" ? ( */}
+                                        <button
+                                            onClick={() => setActiveTab("code")}
+                                            className={`flex items-center px-5 py-[0.45rem] text-sm tracking-wide ${activeTab === "code" ? "border-b-2 border-black text-black dark:border-white dark:text-white" : "border-dawn-100 text-dawn-300"} border-b`}
+                                        >
+                                            <Code className="size-5" />
+                                            <span className="sr-only lg:not-sr-only lg:ml-2">
+                                                Code
+                                            </span>
+                                        </button>
+                                        {/* ) : ( */}
+                                        <button
+                                            onClick={() =>
+                                                scrollToSection("checkout-pro")
+                                            }
+                                            className={`flex items-center rounded-md py-[0.45rem] pr-2 pl-2 text-sm tracking-wide lg:pr-3 ${activeTab === "code" ? "shadow" : ""} transition-all duration-500 ease-in-out`}
+                                        >
+                                            <Code className="dark:text-dawn-300 size-5 text-neutral-700" />
 
-                                                <span className="dark:text-dawn-300 sr-only text-neutral-700 lg:not-sr-only lg:ml-2">
-                                                    Get pro to view code
-                                                </span>
-                                            </button>
-                                        )}
+                                            <span className="dark:text-dawn-300 sr-only text-neutral-700 lg:not-sr-only lg:ml-2">
+                                                Get pro to view code
+                                            </span>
+                                        </button>
+                                        {/* )} */}
                                     </>
                                 ) : (
                                     // <Link

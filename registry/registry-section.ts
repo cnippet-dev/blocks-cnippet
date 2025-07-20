@@ -18,7 +18,7 @@ const generateSections = (
 
 export const section: Registry = generateSections([
     {
-        name: "banner",
+        name: "login",
         no: "4",
     },
 ]);

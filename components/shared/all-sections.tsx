@@ -15,9 +15,9 @@ interface Section {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Sections = (props: any) => {
-    const components = Object.values(Index).filter(
+    const components = Object.values(Index["default"]).filter(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (item: any): item is Section => item.type === "registry:sections",
+        (item: any): item is Section => item.type === "registry:section",
     );
 
     return (
