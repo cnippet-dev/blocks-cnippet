@@ -6,6 +6,7 @@ import { visit } from "unist-util-visit";
 import { UnistNode, UnistTree } from "@/types/unist";
 
 import { Index } from "../__registry__";
+import { styles } from "../registry/registry-styles";
 
 export function rehypeComponent() {
     return async (tree: UnistTree) => {
@@ -24,85 +25,74 @@ export function rehypeComponent() {
                 }
 
                 try {
-                    let src: string;
+                    for (const style of styles) {
+                        let src: string;
 
-                    if (srcPath) {
-                        src = srcPath as string;
-                    } else {
-                        // Find the component in the Index
-                        const component = Object.values(Index).find(
-                            //eslint-disable-next-line @typescript-eslint/no-explicit-any
-                            (comp: any) =>
-                                comp.files.some(
-                                    (file: string) =>
-                                        file.includes(`/${name}.tsx`) ||
-                                        file.includes(`/${name}.ts`),
-                                ),
-                        );
-
-                        if (!component) {
-                            return null;
+                        if (srcPath) {
+                            src = srcPath as string;
+                        } else {
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            const component = (Index[style.name] as any)[name];
+                            src = fileName
+                                ? component.files.find((file: string) => {
+                                      return (
+                                          file.endsWith(`${fileName}.tsx`) ||
+                                          file.endsWith(`${fileName}.ts`)
+                                      );
+                                  }) || component.files[0]
+                                : component.files[0];
                         }
 
-                        src = fileName
-                            ? component.files.find((file: string) => {
-                                  return (
-                                      file.endsWith(`${fileName}.tsx`) ||
-                                      file.endsWith(`${fileName}.ts`)
-                                  );
-                              }) || component.files[0]
-                            : component.files[0];
-                    }
+                        // Read the source file.
+                        const filePath = path.join(process.cwd(), src);
+                        let source = fs.readFileSync(filePath, "utf8");
 
-                    // Read the source file.
-                    const filePath = path.join(process.cwd(), src);
-                    let source = fs.readFileSync(filePath, "utf8");
-
-                    // Replace imports.
-                    // TODO: Use @swc/core and a visitor to replace this.
-                    // For now a simple regex should do.
-                    source = source.replaceAll(
-                        `@/registry/default/`,
-                        "@/components/",
-                    );
-                    // source = source.replaceAll("export default", "export");
-                    source = source.replaceAll(
-                        "https://res.cloudinary.com/dphulm0s9/",
-                        "/",
-                    );
-                    // Add code as children so that rehype can take over at build time.
-                    node.children?.push(
-                        u("element", {
-                            tagName: "pre",
-                            properties: {
-                                __src__: src,
-                            },
-                            attributes: [
-                                {
-                                    name: "styleName",
-                                    type: "mdxJsxAttribute",
-                                    value: "default",
+                        // Replace imports.
+                        // TODO: Use @swc/core and a visitor to replace this.
+                        // For now a simple regex should do.
+                        source = source.replaceAll(
+                            `@/registry/${style.name}/`,
+                            "@/components/",
+                        );
+                        // source = source.replaceAll("export default", "export");
+                        source = source.replaceAll(
+                            "https://res.cloudinary.com/dphulm0s9/",
+                            "/",
+                        );
+                        // Add code as children so that rehype can take over at build time.
+                        node.children?.push(
+                            u("element", {
+                                tagName: "pre",
+                                properties: {
+                                    __src__: src,
                                 },
-                            ],
-                            children: [
-                                u("element", {
-                                    tagName: "code",
-                                    properties: {
-                                        className: ["language-tsx"],
+                                attributes: [
+                                    {
+                                        name: "styleName",
+                                        type: "mdxJsxAttribute",
+                                        value: style.name,
                                     },
-                                    data: {
-                                        meta: `event="copy_source_code"`,
-                                    },
-                                    children: [
-                                        {
-                                            type: "text",
-                                            value: source,
+                                ],
+                                children: [
+                                    u("element", {
+                                        tagName: "code",
+                                        properties: {
+                                            className: ["language-tsx"],
                                         },
-                                    ],
-                                }),
-                            ],
-                        }),
-                    );
+                                        data: {
+                                            meta: `event="copy_source_code"`,
+                                        },
+                                        children: [
+                                            {
+                                                type: "text",
+                                                value: source,
+                                            },
+                                        ],
+                                    }),
+                                ],
+                            }),
+                        );
+                    }
                 } catch (error) {
                     console.error(error);
                 }
@@ -121,64 +111,54 @@ export function rehypeComponent() {
                 }
 
                 try {
-                    // Find the component in the Index
-                    //eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    const component = Object.values(Index).find((comp: any) =>
-                        comp.files.some(
-                            (file: string) =>
-                                file.includes(`/${name}.tsx`) ||
-                                file.includes(`/${name}.ts`),
-                        ),
-                    );
+                    for (const style of styles) {
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        const component = (Index[style.name] as any)[name];
+                        const src = component.files[0];
 
-                    if (!component) {
-                        return null;
-                    }
+                        // Read the source file.
+                        const filePath = path.join(process.cwd(), src);
+                        let source = fs.readFileSync(filePath, "utf8");
 
-                    const src = component.files[0];
-
-                    // Read the source file.
-                    const filePath = path.join(process.cwd(), src);
-                    let source = fs.readFileSync(filePath, "utf8");
-
-                    // Replace imports.
-                    // TODO: Use @swc/core and a visitor to replace this.
-                    // For now a simple regex should do.
-                    source = source.replaceAll(
-                        `@/registry/default/`,
-                        "@/components/",
-                    );
-                    // source = source.replaceAll("export default", "export");
-                    source = source.replaceAll(
-                        "https://res.cloudinary.com/dphulm0s9/",
-                        "/",
-                    );
-                    // Add code as children so that rehype can take over at build time.
-                    node.children?.push(
-                        u("element", {
-                            tagName: "pre",
-                            properties: {
-                                __src__: src,
-                            },
-                            children: [
-                                u("element", {
-                                    tagName: "code",
-                                    properties: {
-                                        className: ["language-tsx"],
-                                    },
-                                    data: {
-                                        meta: `event="copy_usage_code"`,
-                                    },
-                                    children: [
-                                        {
-                                            type: "text",
-                                            value: source,
+                        // Replace imports.
+                        // TODO: Use @swc/core and a visitor to replace this.
+                        // For now a simple regex should do.
+                        source = source.replaceAll(
+                            `@/registry/${style.name}/`,
+                            "@/components/",
+                        );
+                        // source = source.replaceAll("export default", "export");
+                        source = source.replaceAll(
+                            "https://res.cloudinary.com/dphulm0s9/",
+                            "/",
+                        );
+                        // Add code as children so that rehype can take over at build time.
+                        node.children?.push(
+                            u("element", {
+                                tagName: "pre",
+                                properties: {
+                                    __src__: src,
+                                },
+                                children: [
+                                    u("element", {
+                                        tagName: "code",
+                                        properties: {
+                                            className: ["language-tsx"],
                                         },
-                                    ],
-                                }),
-                            ],
-                        }),
-                    );
+                                        data: {
+                                            meta: `event="copy_usage_code"`,
+                                        },
+                                        children: [
+                                            {
+                                                type: "text",
+                                                value: source,
+                                            },
+                                        ],
+                                    }),
+                                ],
+                            }),
+                        );
+                    }
                 } catch (error) {
                     console.error(error);
                 }

@@ -15,9 +15,9 @@ interface Section {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Sections = (props: any) => {
-    const components = Object.values(Index).filter(
+    const components = Object.values(Index["default"]).filter(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (item: any): item is Section => item.type === "registry:sections",
+        (item: any): item is Section => item.type === "registry:section",
     );
 
     return (
@@ -56,10 +56,10 @@ const Sections = (props: any) => {
                                         <Image
                                             width="960"
                                             height="600"
-                                            src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1737836551/${component.name.split("-")[0]}.png`}
+                                            src={component.thumbnail}
                                             sizes="100vw"
                                             alt="Description of my image"
-                                            className="w-full border-b"
+                                            className="w-full border-b bg-black"
                                         />
 
                                         <div className="flex flex-col items-start p-4">

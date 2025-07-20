@@ -9,16 +9,13 @@ import { getServerSession } from "next-auth";
 import { nextauthOptions } from "@/lib/nextauth-options";
 import { getUserSession } from "./auth.actions";
 
-// Define a type for action responses
 type ActionResponse<T extends z.ZodTypeAny> =
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     | { success: true; message: string; data?: any }
     | { error: { general: string } | { [K in keyof z.infer<T>]?: string[] } };
 
-/**
- * Fetches the active subscription for the current user.
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function getActiveSubscription(): Promise<ActionResponse<any>> {
     const session = await getUserSession();
     if (!session?.user?.id) {

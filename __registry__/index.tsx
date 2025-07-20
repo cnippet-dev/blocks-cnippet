@@ -4,25 +4,46 @@
 import * as React from "react"
 
 export const Index = {
-
-  "banner": {
-    name: "banner",
-    type: "registry:section",
-    slug: "/sections/banner",
-    thumbnail: "https://res.cloudinary.com/dphulm0s9/image/upload/v1737696976/banner.png",
-    number: "4",
-    registryDependencies: undefined,
-    files: ["registry/default/sections/hero/hero1.tsx"],
-    component: React.lazy(() => import("@/registry/default/sections/hero/hero1.tsx")),
-  },
-  "hero-1": {
-    name: "hero-1",
-    type: "registry:sections",
-    slug: "/sections/hero",
-    thumbnail: "/images/components/featured-images/hero1.PNG",
-    number: "",
-    registryDependencies: undefined,
-    files: ["registry/default/sections/hero/hero1.tsx"],
-    component: React.lazy(() => import("@/registry/default/sections/hero/hero1.tsx")),
-  },
+  "default": {
+      "pricing": {
+        name: "pricing",
+        type: "registry:section",
+        slug: "/sections/pricing",
+        thumbnail: "https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/pricing.png",
+        number: "4",
+        registryDependencies: undefined,
+        files: ["registry/default/sections/hero/hero1.tsx"],
+        component: React.lazy(() => import("@/registry/default/sections/hero/hero1.tsx")),
+      },
+      "pricing-1": {
+        name: "pricing-1",
+        type: "registry:sections",
+        slug: "/sections/pricing",
+        thumbnail: "/images/components/featured-images/pricing1.PNG",
+        number: "",
+        registryDependencies: undefined,
+        files: ["registry/default/sections/pricing/pricing1.tsx"],
+        component: React.lazy(() => import("@/registry/default/sections/pricing/pricing1.tsx")),
+      },
+      "pricing-2": {
+        name: "pricing-2",
+        type: "registry:sections",
+        slug: "/sections/pricing",
+        thumbnail: "/images/components/featured-images/pricing2.PNG",
+        number: "",
+        registryDependencies: undefined,
+        files: ["registry/default/sections/pricing/pricing2.tsx"],
+        component: React.lazy(() => import("@/registry/default/sections/pricing/pricing2.tsx")),
+      },
+      "pricing-3": {
+        name: "pricing-3",
+        type: "registry:sections",
+        slug: "/sections/pricing",
+        thumbnail: "/images/components/featured-images/pricing3.PNG",
+        number: "",
+        registryDependencies: undefined,
+        files: ["registry/default/sections/pricing/pricing3.tsx"],
+        component: React.lazy(() => import("@/registry/default/sections/pricing/pricing3.tsx")),
+      },
+    },
 }

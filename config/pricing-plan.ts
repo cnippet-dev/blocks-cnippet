@@ -41,3 +41,57 @@ export const PRICING_PLANS: PricingPlan[] = [
         popular: false,
     },
 ];
+
+export const plans = [
+    {
+        name: "Free",
+        popular: false,
+        monthlyPrice: 0,
+        annualPrice: 0,
+        discount: "",
+        description:
+            "Basic features for up to 10 employees with everything you need.",
+        features: {
+            basicBlocks: true,
+            advanceBlocks: false,
+            pages: [true, "~3 Free"],
+            templates: false,
+            usage: "1 Personal Project",
+            support: false,
+        },
+    },
+    {
+        name: "Pro",
+        popular: true,
+        monthlyPrice: 1,
+        annualPrice: 6000,
+        discount: "17% off",
+        description:
+            "Advanced features and reporting, better workflows and automation.",
+        features: {
+            basicBlocks: true,
+            advanceBlocks: true,
+            pages: [true, "All Pages"],
+            templates: false,
+            usage: "Unlimited Projects",
+            support: true,
+        },
+    },
+    {
+        name: "Lifetime",
+        popular: false,
+        monthlyPrice: 18000,
+        annualPrice: 18000,
+        lifetime: true,
+        description:
+            "Personalized service and enterprise security for large teams.",
+        features: {
+            basicBlocks: true,
+            advanceBlocks: true,
+            pages: [true, "All Pages"],
+            templates: true,
+            usage: "Unlimited Projects",
+            support: true,
+        },
+    },
+];

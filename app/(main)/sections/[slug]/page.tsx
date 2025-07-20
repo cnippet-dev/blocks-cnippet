@@ -1,9 +1,12 @@
 import React from "react";
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
 
 import { Mdx } from "@/mdx-components";
 
 import { allSections } from "@/.content-collections/generated";
+const Navbar = dynamic(() => import("@/components/shared/navbar/nav-1"));
+const Footer = dynamic(() => import("@/components/shared/footer"));
 
 import { BASE_URL } from "@/config/docs";
 
@@ -29,13 +32,17 @@ export default async function Blogpage({ params }: { params: Params }) {
     }
 
     return (
-        <main className="mt-5 md:mt-0">
-            <div className="font-ins font-medium">
-                <div className="section mx-auto w-full px-5 pt-10 md:max-w-[95%] md:px-0">
-                    {doc?.body && <Mdx code={doc?.body.code} />}
+        <>
+            <Navbar />
+            <main className="">
+                <div className="mx-auto w-full max-w-full border-t-0 border-b px-4 md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-800 dark:bg-black">
+                    <div className="border border-t-0 border-b-0 dark:border-neutral-800 p-10">
+                        {doc?.body && <Mdx code={doc?.body.code} />}
+                    </div>
                 </div>
-            </div>
-        </main>
+            </main>
+            <Footer />
+        </>
     );
 }
 

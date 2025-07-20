@@ -2,9 +2,15 @@ import path from "path";
 
 import fs from "fs/promises";
 import { tmpdir } from "os";
+import { styles } from "../registry/registry-styles";
 import { registry } from "../registry/index";
 
 const REGISTRY_PATH = path.join(process.cwd(), "public/r");
+
+async function createTempSourceFile(filename: string) {
+    const dir = await fs.mkdtemp(path.join(tmpdir(), "shadcn-"));
+    return path.join(dir, filename);
+}
 
 async function buildRegistry(registry: any) {
     let index = `// @ts-nocheck
@@ -15,23 +21,40 @@ import * as React from "react"
 export const Index = {
 `;
 
-    // Build registry index without styles
-    for (const item of registry) {
-        const resolveFiles = item.files?.map(
-            (file: any) => `${typeof file === "string" ? file : file.path}`,
-        );
-        if (!resolveFiles) {
-            continue;
-        }
+    for (const style of styles) {
+        index += `  "${style.name}": {`;
 
-        const type = item.type.split(":")[1];
-        let sourceFilename = "";
-        let chunks: any[] = [];
+        // Build style index.
+        for (const item of registry) {
+            const resolveFiles = item.files?.map(
+                (file: any) => `${typeof file === "string" ? file : file.path}`,
+            );
+            if (!resolveFiles) {
+                continue;
+            }
 
-        // For blocks, we'll skip the complex TypeScript parsing
-        // and just handle the basic component registration
-        if (item.type === "registry:block") {
-            sourceFilename = `__registry__/${type}/${item.name}.tsx`;
+            const type = item.type.split(":")[1];
+            let sourceFilename = "";
+            let chunks: any[] = [];
+
+            // For blocks, we'll skip the complex TypeScript parsing
+            // and just handle the basic component registration
+            if (item.type === "registry:block") {
+                sourceFilename = `__registry__/${style.name}/${type}/${item.name}.tsx`;
+
+                if (item.files) {
+                    const files = item.files.map((file: any) =>
+                        typeof file === "string"
+                            ? { type: "registry:page", path: file }
+                            : file,
+                    );
+                    if (files?.length) {
+                        sourceFilename = `__registry__/${style.name}/${files[0].path}`;
+                    }
+                }
+            }
+
+            let componentPath = `@/${type}/${item.name}`;
 
             if (item.files) {
                 const files = item.files.map((file: any) =>
@@ -40,35 +63,25 @@ export const Index = {
                         : file,
                 );
                 if (files?.length) {
-                    sourceFilename = `__registry__/${files[0].path}`;
+                    componentPath = `@/${files[0].path}`;
                 }
             }
-        }
 
-        let componentPath = `@/${type}/${item.name}`;
-
-        if (item.files) {
-            const files = item.files.map((file: any) =>
-                typeof file === "string"
-                    ? { type: "registry:page", path: file }
-                    : file,
-            );
-            if (files?.length) {
-                componentPath = `@/${files[0].path}`;
-            }
+            index += `
+      "${item.name}": {
+        name: "${item.name}",
+        type: "${item.type}",
+        slug: "${item.slug || ""}",
+        thumbnail: "${item.thumbnail || ""}",
+        number: "${item.number || ""}",
+        registryDependencies: ${JSON.stringify(item.registryDependencies || undefined)},
+        files: [${resolveFiles.map((file: any) => `"${file}"`)}],
+        component: React.lazy(() => import("${componentPath}")),
+      },`;
         }
 
         index += `
-  "${item.name}": {
-    name: "${item.name}",
-    type: "${item.type}",
-    slug: "${item.slug || ""}",
-    thumbnail: "${item.thumbnail || ""}",
-    number: "${item.number || ""}",
-    registryDependencies: ${JSON.stringify(item.registryDependencies || undefined)},
-    files: [${resolveFiles.map((file: any) => `"${file}"`)}],
-    component: React.lazy(() => import("${componentPath}")),
-  },`;
+    },`;
     }
 
     index += `
