@@ -15,17 +15,10 @@ const withMDX = nextMDX({
     },
 });
 
-/** @type {import('next').NextConfig} */
+/**
+ * @type {import('next').NextConfig}
+ */
 const nextConfig = {
-    experimental: {
-        optimizePackageImports: [
-            "@content-collections/next",
-            "@content-collections/cli",
-            "@content-collections/core",
-            "@content-collections/mdx",
-        ],
-    },
-    reactStrictMode: true,
     images: {
         remotePatterns: [
             {

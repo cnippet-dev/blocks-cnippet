@@ -5,11 +5,11 @@ import * as React from "react"
 
 export const Index = {
   "default": {
-      "login": {
-        name: "login",
+      "pricing": {
+        name: "pricing",
         type: "registry:section",
-        slug: "/sections/login",
-        thumbnail: "https://res.cloudinary.com/dphulm0s9/image/upload/v1737696976/login.png",
+        slug: "/sections/pricing",
+        thumbnail: "https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/pricing.png",
         number: "4",
         registryDependencies: undefined,
         files: ["registry/default/sections/hero/hero1.tsx"],

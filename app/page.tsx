@@ -1,14 +1,12 @@
 "use client";
 import dynamic from "next/dynamic";
+import { ReactLenis } from "lenis/react";
 
+const Nav1 = dynamic(() => import("@/components/shared/navbar/nav-1"));
 const Hero = dynamic(() => import("@/components/routes/home/hero"));
-// const Features = dynamic(() => import("@/components/routes/home/features"));        
 const Faq = dynamic(() => import("@/components/routes/home/faq"));
 const Footer = dynamic(() => import("@/components/shared/footer"));
-// const Feedback = dynamic(() => import("@/components/routes/home/feedback"));
 const Cta = dynamic(() => import("@/components/routes/home/cta"));
-const Nav1 = dynamic(() => import("@/components/shared/navbar/nav-1"));
-// const Community = dynamic(() => import("@/components/routes/home/community"));
 const Sections = dynamic(() => import("@/components/shared/all-sections"));
 
 import { useRef, useState } from "react";
@@ -55,72 +53,72 @@ export default function Cursor1() {
     };
 
     return (
-        <div className="">
-            <Cursor
-                attachToParent
-                variants={{
-                    initial: { scale: 0.3, opacity: 0 },
-                    animate: { scale: 1, opacity: 1 },
-                    exit: { scale: 0.3, opacity: 0 },
-                }}
-                // springConfig={{
-                //     bounce: 0.001,
-                // }}
-                transition={{
-                    ease: "easeInOut",
-                    duration: 0.15,
-                }}
-                onPositionChange={handlePositionChange}
-            >
-                <motion.div
-                    animate={{
-                        width: isHovering || isHovering2 ? 80 : 16,
-                        height: isHovering || isHovering2 ? 32 : 16,
+        <ReactLenis root>
+            <div className="">
+                <Cursor
+                    attachToParent
+                    variants={{
+                        initial: { scale: 0.3, opacity: 0 },
+                        animate: { scale: 1, opacity: 1 },
+                        exit: { scale: 0.3, opacity: 0 },
                     }}
-                    className={`flex items-center justify-center rounded-[24px] ${isHovering3 ? "bg-white backdrop-blur-md dark:bg-gray-300/40" : "bg-blue-600 backdrop-blur-md dark:bg-gray-300/40"} transition-all  duration-500`}
+                    // springConfig={{
+                    //     bounce: 0.001,
+                    // }}
+                    transition={{
+                        ease: "easeInOut",
+                        duration: 0.15,
+                    }}
+                    onPositionChange={handlePositionChange}
                 >
-                    <AnimatePresence>
-                        {isHovering ? (
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.6 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.6 }}
-                                className="inline-flex w-full items-center justify-center"
-                            >
-                                <div className="inline-flex items-center text-sm text-white dark:text-black">
-                                    More <PlusIcon className="ml-1 h-4 w-4" />
-                                </div>
-                            </motion.div>
-                        ) : null}
-                    </AnimatePresence>
-                    <AnimatePresence>
-                        {isHovering2 ? (
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.6 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.6 }}
-                            >
-                                <div className="inline-flex items-center text-sm text-white dark:text-black">
-                                    Moreeeeee{" "}
-                                    <PlusIcon className="ml-1 h-4 w-4" />
-                                </div>
-                            </motion.div>
-                        ) : null}
-                    </AnimatePresence>
-                </motion.div>
-            </Cursor>
+                    <motion.div
+                        animate={{
+                            width: isHovering || isHovering2 ? 80 : 16,
+                            height: isHovering || isHovering2 ? 32 : 16,
+                        }}
+                        className={`flex items-center justify-center rounded-[24px] ${isHovering3 ? "bg-white backdrop-blur-md dark:bg-gray-300/40" : "bg-blue-600 backdrop-blur-md dark:bg-gray-300/40"} transition-all duration-500`}
+                    >
+                        <AnimatePresence>
+                            {isHovering ? (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.6 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.6 }}
+                                    className="inline-flex w-full items-center justify-center"
+                                >
+                                    <div className="inline-flex items-center text-sm text-white dark:text-black">
+                                        More{" "}
+                                        <PlusIcon className="ml-1 h-4 w-4" />
+                                    </div>
+                                </motion.div>
+                            ) : null}
+                        </AnimatePresence>
+                        <AnimatePresence>
+                            {isHovering2 ? (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.6 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.6 }}
+                                >
+                                    <div className="inline-flex items-center text-sm text-white dark:text-black">
+                                        Moreeeeee{" "}
+                                        <PlusIcon className="ml-1 h-4 w-4" />
+                                    </div>
+                                </motion.div>
+                            ) : null}
+                        </AnimatePresence>
+                    </motion.div>
+                </Cursor>
 
-            <Nav1 />
-            <main className="">
-                <Hero ref={targetRef3} />
-                <Sections count={6} />
-                {/* <Features ref={targetRef} /> */}
-                {/* <Feedback /> */}
-                {/* <Community ref={targetRef2} /> */}
-                <Faq />
-                <Cta />
-            </main>
-            <Footer />
-        </div>
+                <Nav1 />
+                <main className="">
+                    <Hero ref={targetRef3} />
+                    <Sections count={6} />
+                    <Faq />
+                    <Cta />
+                </main>
+                <Footer />
+            </div>
+        </ReactLenis>
     );
 }

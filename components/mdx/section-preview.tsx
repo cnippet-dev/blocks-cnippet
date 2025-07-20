@@ -263,7 +263,7 @@ export function SectionPreview({
                             </div>
                         </div>
                         <Link
-                            href={`/preview/${name.split("-")[0]}/${name}`}
+                            href={`/preview/${name}`}
                             target="_blank"
                         >
                             <SquareArrowOutUpRight className="size-4 text-black dark:text-neutral-300" />

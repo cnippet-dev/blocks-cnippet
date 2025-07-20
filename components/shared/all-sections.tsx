@@ -56,10 +56,10 @@ const Sections = (props: any) => {
                                         <Image
                                             width="960"
                                             height="600"
-                                            src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1737836551/${component.name.split("-")[0]}.png`}
+                                            src={component.thumbnail}
                                             sizes="100vw"
                                             alt="Description of my image"
-                                            className="w-full border-b"
+                                            className="w-full border-b bg-black"
                                         />
 
                                         <div className="flex flex-col items-start p-4">

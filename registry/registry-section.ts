@@ -12,13 +12,15 @@ const generateSections = (
         // files: [`${BASE_PATH}/sections/${section.name}/${section.name}-1.tsx`],
         files: [`${BASE_PATH}/sections/hero/hero1.tsx`],
         number: "4",
-        thumbnail: `https://res.cloudinary.com/dphulm0s9/image/upload/v1737696976/${section.name}.png`,
+        thumbnail: `https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/${section.name}.png`,
     }));
 };
 
 export const section: Registry = generateSections([
     {
-        name: "login",
+        name: "pricing",
         no: "4",
     },
 ]);
+
+

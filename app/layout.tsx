@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ReactLenis } from "lenis/react";
 
 import AuthProvider from "@/providers/auth-provider";
 import ThemeProvider from "@/providers/theme-provider";
@@ -75,7 +74,6 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body>
-                <ReactLenis root>
                     <AuthProvider>
                         <ThemeProvider
                             attribute="class"
@@ -91,7 +89,6 @@ export default function RootLayout({
                             />
                         </ThemeProvider>
                     </AuthProvider>
-                </ReactLenis>
             </body>
         </html>
     );
