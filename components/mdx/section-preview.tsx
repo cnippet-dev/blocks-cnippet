@@ -6,8 +6,7 @@ import { Index } from "@/__registry__";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 // import fetchPro from "@/lib/get-pro";
-import { scrollToSection } from "@/lib/utils";
-import { Eye, Code, SquareArrowOutUpRight, Loader } from "lucide-react";
+import { cn, scrollToSection } from "@/lib/utils";
 
 import {
     Dialog,
@@ -19,28 +18,39 @@ import {
 } from "@/components/ui/dialog-cn";
 import Image from "next/image";
 import { useConfig } from "@/lib/use-config";
+import {
+    Code,
+    Eye,
+    Fullscreen,
+    Loader,
+    Monitor,
+    RotateCw,
+    Smartphone,
+    Tablet,
+} from "lucide-react";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { ImperativePanelHandle } from "react-resizable-panels";
 
-// import GoogleLogo from "@/public/images/svg/google-logo.svg";
-// import Github from "@/public/images/svg/github.svg";
-// import { Button } from "@/components/ui/button";
-// import { LoadingIcon } from "@/components/icons";
+import {
+    ResizableHandle,
+    ResizablePanel,
+    ResizablePanelGroup,
+} from "@/components/ui/resizable";
+import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
 
 interface SectionPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
     name: string;
     description: string;
 }
 
-export function SectionPreview({
-    name,
-    // description,
-    children,
-    className,
-    // ...props
-}: SectionPreviewProps) {
-    // const [key, setKey] = React.useState(0);
+export function SectionPreview({ name, children }: SectionPreviewProps) {
     const [activeTab, setActiveTab] = React.useState<"preview" | "code">(
         "preview",
     );
+    const resizablePanelRef = React.useRef<ImperativePanelHandle>(null);
+    const [iframeKey, setIframeKey] = React.useState(0);
+    const [view, setView] = React.useState("view");
 
     const { status } = useSession();
     // const email = session?.user?.email;
@@ -56,17 +66,11 @@ export function SectionPreview({
         await signIn("github");
     };
 
-    // const { pro } = fetchPro(email);
-    // console.log("in component:" + pro);
-
     const Codes = React.Children.toArray(children) as React.ReactElement[];
-    const Src = Codes[0]; // Use first child instead of index-based selection
+    const Src = Codes[0];
     const [config] = useConfig();
 
-    // const n = name.split("-");
-
-    const a = "false"; // Default auth value
-    // const p = "false"; // Default pro value
+    const a = "false";
 
     const Preview = React.useMemo(() => {
         //eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -91,32 +95,18 @@ export function SectionPreview({
     }, [name]);
 
     return (
-        <>
+        <BlockViewerContext.Provider
+            value={{
+                item: {
+                    name,
+                },
+                iframeKey,
+                setIframeKey,
+                resizablePanelRef,
+            }}
+        >
             <div className={`relative mx-auto mt-32 first:mt-0`}>
                 <div className="relative flex flex-col items-start justify-between md:flex-row md:items-center">
-                    {/* <div>
-                        <h2 className="flex items-end gap-2 truncate py-1 font-ins text-4xl font-normal capitalize tracking-tight text-blue-600 md:text-5xl">
-                            <span className="text-black dark:text-white">
-                                {n[0]}
-                            </span>
-                            {"-"}
-                            <span className="text-2xl text-blue-600 md:text-3xl">
-                                0{n[1]}
-                            </span>
-                            <span className="text-3xl text-[#cfd2d6]">.</span>
-                            <Link
-                                href={`/u/preview?component=${name}`}
-                                target="_blank"
-                            >
-                                <SquareArrowOutUpRight className="mb-2 size-4 text-black" />
-                            </Link>
-                        </h2>
-
-                        <p className="foin mt-5 max-w-xl text-base text-neutral-700 dark:text-neutral-400">
-                            {description}
-                        </p>
-                    </div> */}
-
                     <div className="ml-auto flex items-center gap-10 md:-mt-20">
                         <div className="font-normal">
                             <div className="mx-auto flex w-fit items-center justify-center">
@@ -129,6 +119,91 @@ export function SectionPreview({
                                         Preview
                                     </span>
                                 </button>
+                                <div className="ml-auto flex items-center gap-2">
+                                    <div className="h-8 items-center gap-1.5 rounded-md border p-1 shadow-none">
+                                        <ToggleGroup
+                                            type="single"
+                                            defaultValue="100"
+                                            onValueChange={(value) => {
+                                                setView("preview");
+                                                if (
+                                                    resizablePanelRef?.current
+                                                ) {
+                                                    resizablePanelRef.current.resize(
+                                                        parseInt(value),
+                                                    );
+                                                }
+                                            }}
+                                            className="gap-1 *:data-[slot=toggle-group-item]:!size-6 *:data-[slot=toggle-group-item]:!rounded-sm"
+                                        >
+                                            <ToggleGroupItem
+                                                value="100"
+                                                title="Desktop"
+                                            >
+                                                <Monitor />
+                                            </ToggleGroupItem>
+                                            <ToggleGroupItem
+                                                value="60"
+                                                title="Tablet"
+                                            >
+                                                <Tablet />
+                                            </ToggleGroupItem>
+                                            <ToggleGroupItem
+                                                value="30"
+                                                title="Mobile"
+                                            >
+                                                <Smartphone />
+                                            </ToggleGroupItem>
+                                            <Separator
+                                                orientation="vertical"
+                                                className="!h-4"
+                                            />
+                                            <Button
+                                                size="icon"
+                                                variant="ghost"
+                                                className="size-6 rounded-sm p-0"
+                                                asChild
+                                                title="Open in New Tab"
+                                            >
+                                                <Link
+                                                    href={`/preview/${name}`}
+                                                    target="_blank"
+                                                >
+                                                    <span className="sr-only">
+                                                        Open in New Tab
+                                                    </span>
+                                                    <Fullscreen />
+                                                </Link>
+                                            </Button>
+                                            <Separator
+                                                orientation="vertical"
+                                                className="!h-4"
+                                            />
+                                            <Button
+                                                size="icon"
+                                                variant="ghost"
+                                                className="size-6 rounded-sm p-0"
+                                                title="Refresh Preview"
+                                                onClick={() => {
+                                                    if (setIframeKey) {
+                                                        setIframeKey(
+                                                            (k) => k + 1,
+                                                        );
+                                                    }
+                                                }}
+                                            >
+                                                <RotateCw />
+                                                <span className="sr-only">
+                                                    Refresh Preview
+                                                </span>
+                                            </Button>
+                                        </ToggleGroup>
+                                    </div>
+                                    <Separator
+                                        orientation="vertical"
+                                        className="mx-1 !h-4"
+                                    />
+                                </div>
                                 {status === "authenticated" || a === "false" ? (
                                     <>
                                         {/* {pro === true || p === "false" ? ( */}
@@ -262,12 +337,6 @@ export function SectionPreview({
                                 )}
                             </div>
                         </div>
-                        <Link
-                            href={`/preview/${name}`}
-                            target="_blank"
-                        >
-                            <SquareArrowOutUpRight className="size-4 text-black dark:text-neutral-300" />
-                        </Link>
                     </div>
                 </div>
 
@@ -280,11 +349,7 @@ export function SectionPreview({
                 >
                     <div className="overflow- col-span-2 row-start-2 mx-auto mt-8 min-w-0">
                         {activeTab === "preview" ? (
-                            <div
-                                className={`font-ins dark:border-dawn-600 overflow-y-auto rounded-xl border ${className} bg-white`}
-                            >
-                                {Preview}
-                            </div>
+                            <BlockViewerView />
                         ) : (
                             <div className="overflow-y-auto rounded-xl text-sm break-words">
                                 <div className="w-full rounded-md [&_pre]:my-0 [&_pre]:max-h-[600px] [&_pre]:overflow-auto">
@@ -295,6 +360,63 @@ export function SectionPreview({
                     </div>
                 </React.Suspense>
             </div>
-        </>
+        </BlockViewerContext.Provider>
+    );
+}
+
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
+const BlockViewerContext = React.createContext<any | null>(null);
+
+function useBlockViewer() {
+    const context = React.useContext(BlockViewerContext);
+    if (!context) {
+        throw new Error(
+            "useBlockViewer must be used within a BlockViewerProvider.",
+        );
+    }
+    return context;
+}
+
+function BlockViewerIframe({ className }: { className?: string }) {
+    const { item, iframeKey } = useBlockViewer();
+
+    return (
+        <iframe
+            key={iframeKey}
+            src={`/preview/${item.name}`}
+            height={item.meta?.iframeHeight ?? 930}
+            loading="lazy"
+            className={cn(
+                "bg-background no-scrollbar relative z-20 w-full",
+                className,
+            )}
+        />
+    );
+}
+
+function BlockViewerView() {
+    const { resizablePanelRef } = useBlockViewer();
+
+    return (
+        <div className="hidden group-data-[view=code]/block-view-wrapper:hidden md:h-[var(--height)] lg:flex">
+            <div className="relative grid w-full gap-4">
+                <div className="absolute inset-0 right-4 [background-image:radial-gradient(#d4d4d4_1px,transparent_1px)] [background-size:20px_20px] dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]"></div>
+                <ResizablePanelGroup
+                    direction="horizontal"
+                    className="after:bg-surface/50 relative z-10 after:absolute after:inset-0 after:right-3 after:z-0 after:rounded-xl"
+                >
+                    <ResizablePanel
+                        ref={resizablePanelRef}
+                        className="bg-background relative aspect-[4/2.5] overflow-hidden rounded-lg border md:aspect-auto md:rounded-xl"
+                        defaultSize={100}
+                        minSize={30}
+                    >
+                        <BlockViewerIframe />
+                    </ResizablePanel>
+                    <ResizableHandle className="after:bg-border relative hidden w-3 bg-transparent p-0 after:absolute after:top-1/2 after:right-0 after:h-8 after:w-[6px] after:translate-x-[-1px] after:-translate-y-1/2 after:rounded-full after:transition-all after:hover:h-10 md:block" />
+                    <ResizablePanel defaultSize={0} minSize={0} />
+                </ResizablePanelGroup>
+            </div>
+        </div>
     );
 }

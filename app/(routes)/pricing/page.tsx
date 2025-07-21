@@ -4,20 +4,15 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
+import dynamic from "next/dynamic";
+import Link from "next/link";
 import { toast } from "sonner";
+import { Check, Info, Plus } from "lucide-react";
 
 import { plans } from "@/config/pricing-plan";
-import { createPayment } from "@/lib/actions/payment.actions";
-import { Check, Info, Plus } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+import { CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
     Tooltip,
@@ -25,6 +20,12 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+
+import { createPayment } from "@/lib/actions/payment.actions";
+
+const Navbar = dynamic(() => import("@/components/shared/navbar/nav-1"));
+const Footer = dynamic(() => import("@/components/shared/footer"));
+const Faq = dynamic(() => import("@/components/routes/home/faq"));
 
 export default function PricingPage() {
     const { data: session, status } = useSession();
@@ -206,263 +207,254 @@ export default function PricingPage() {
                 strategy="lazyOnload"
             />
 
+            <Navbar />
             <TooltipProvider>
-                <div className="mx-auto w-full max-w-7xl px-4 py-16">
-                    {/* Header */}
-                    <div className="mb-16 text-center">
-                        <div className="mb-4 font-medium text-purple-600">
-                            Pricing
-                        </div>
-                        <h1 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl">
-                            Compare our plans and find yours
-                        </h1>
-                        <p className="mb-8 text-lg text-gray-600">
-                            Simple, transparent pricing that grows with you. Try
-                            any plan free for 30 days.
-                        </p>
+                <div className="dark:bg-background mx-auto w-full max-w-full border-t-0 border-b px-4 md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-800">
+                    <div className="border border-t-0 border-b-0 dark:border-neutral-800">
+                        <div className="grid grid-cols-6 divide-x dark:divide-neutral-800 dark:border-neutral-800">
+                            <div />
+                            <div className="col-span-4 py-8 text-center">
+                                <div className="mb-4 font-medium text-purple-600">
+                                    Pricing
+                                </div>
+                                <h1 className="text-4xl leading-tight font-medium tracking-tight md:text-5xl">
+                                    Compare our plans and find yours
+                                </h1>
+                                <p className="mb-8 text-lg text-gray-600 dark:text-gray-400">
+                                    Simple, transparent pricing that grows with
+                                    you. Try any plan free for 30 days.
+                                </p>
 
-                        {/* Billing Toggle */}
-                        <Tabs
-                            value={billingCycle}
-                            onValueChange={setBillingCycle}
-                            className="mx-auto w-fit"
-                        >
-                            <TabsList className="grid w-full grid-cols-2">
-                                <TabsTrigger value="monthly">
-                                    Monthly billing
-                                </TabsTrigger>
-                                <TabsTrigger value="annual">
-                                    Annual billing
-                                </TabsTrigger>
-                            </TabsList>
-                        </Tabs>
-                    </div>
-
-                    {/* Pricing Cards */}
-                    <div className="grid w-full grid-cols-4 border-b pb-3">
-                        <div />
-                        {plans.map((plan) => (
-                            <div
-                                key={plan.name}
-                                className="flex items-center justify-center gap-2"
-                            >
-                                <CardTitle className="text-xl font-semibold">
-                                    {plan.name}
-                                </CardTitle>
-                                {plan.popular && (
-                                    <Badge className="bg-purple-600 hover:bg-purple-700">
-                                        Popular
-                                    </Badge>
-                                )}
+                                <Tabs
+                                    value={billingCycle}
+                                    onValueChange={setBillingCycle}
+                                    className="mx-auto w-fit"
+                                >
+                                    <TabsList className="grid w-full grid-cols-2">
+                                        <TabsTrigger value="monthly">
+                                            Monthly billing
+                                        </TabsTrigger>
+                                        <TabsTrigger value="annual">
+                                            Annual billing
+                                        </TabsTrigger>
+                                    </TabsList>
+                                </Tabs>
                             </div>
-                        ))}
-                    </div>
+                            <div />
+                        </div>
 
-                    <div className="mb-16 grid gap-8 md:grid-cols-4">
-                        <div />
-
-                        {plans.map((plan) => (
-                            <Card
-                                key={plan.name}
-                                className="relative border-none shadow-none"
-                            >
-                                <CardHeader className="pb-8 text-left">
-                                    <CardTitle className="sr-only text-xl font-semibold">
+                        <div className="grid grid-cols-4 divide-x border-t dark:divide-neutral-800 dark:border-neutral-800">
+                            <div />
+                            {plans.map((plan) => (
+                                <div
+                                    key={plan.name}
+                                    className="flex items-center justify-center gap-2 py-2"
+                                >
+                                    <CardTitle className="text-xl font-semibold">
                                         {plan.name}
                                     </CardTitle>
-                                    <div className="mt-2">
-                                        <span className="text-4xl font-bold">
-                                            ₹{getPrice(plan)}
-                                        </span>
-                                        {plan.lifetime ? (
-                                            <span className="ml-1 text-gray-600">
-                                                Onetime
+                                    {plan.popular && (
+                                        <Badge className="bg-purple-600 hover:bg-purple-700">
+                                            Popular
+                                        </Badge>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="grid grid-cols-4 divide-x border-t border-b dark:divide-neutral-800 dark:border-neutral-800">
+                            <div />
+
+                            {plans.map((plan) => (
+                                <div
+                                    key={plan.name}
+                                    className="relative rounded-none px-6 py-10 shadow-none"
+                                >
+                                    <div className="pb-8 text-left">
+                                        <h2 className="sr-only text-xl font-semibold">
+                                            {plan.name}
+                                        </h2>
+                                        <div className="mt-2">
+                                            <span className="text-4xl font-bold">
+                                                ₹{getPrice(plan)}
                                             </span>
-                                        ) : (
-                                            <span className="ml-1 text-gray-600">
-                                                per{" "}
-                                                {billingCycle == "monthly"
-                                                    ? "month"
-                                                    : "year"}
-                                            </span>
-                                        )}
+                                            {plan.lifetime ? (
+                                                <span className="ml-1 text-gray-600">
+                                                    Onetime
+                                                </span>
+                                            ) : (
+                                                <span className="ml-1 text-gray-600 dark:text-gray-400">
+                                                    per{" "}
+                                                    {billingCycle == "monthly"
+                                                        ? "month"
+                                                        : "year"}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div className="absolute top-3 right-5">
+                                            {plan.discount &&
+                                            billingCycle != "monthly" ? (
+                                                <div>
+                                                    <p className="rounded-full border border-purple-500 px-2 text-xs tracking-tight">
+                                                        {plan.discount}
+                                                    </p>
+                                                </div>
+                                            ) : (
+                                                ""
+                                            )}
+                                        </div>
+                                        <p className="mt-auto text-gray-600 dark:text-gray-400">
+                                            {plan.description}
+                                        </p>
                                     </div>
-                                    <div className="absolute top-3 right-5">
-                                        {plan.discount &&
-                                        billingCycle != "monthly" ? (
-                                            <div>
-                                                <p className="rounded-full border border-purple-500 px-2 text-xs tracking-tight">
-                                                    {plan.discount}
-                                                </p>
-                                            </div>
+                                    <div className="space-y-4">
+                                        {getPrice(plan) > 0 ? (
+                                            <Button
+                                                className="w-full cursor-pointer bg-purple-600 hover:bg-purple-700"
+                                                onClick={() =>
+                                                    handleSubscribe(plan)
+                                                }
+                                            >
+                                                Get started
+                                            </Button>
+                                        ) : (
+                                            <Button className="w-full cursor-pointer bg-purple-600 hover:bg-purple-700">
+                                                <Link href="/sections">
+                                                    Explore components
+                                                </Link>
+                                            </Button>
+                                        )}
+                                        {getPrice(plan) ? (
+                                            <Button
+                                                variant="outline"
+                                                className="w-full cursor-pointer bg-transparent"
+                                                onClick={() =>
+                                                    handleChatToSales(plan.name)
+                                                }
+                                            >
+                                                Chat to sales
+                                            </Button>
                                         ) : (
                                             ""
                                         )}
                                     </div>
-                                    <CardDescription className="mt-auto text-gray-600">
-                                        {plan.description}
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent className="space-y-4">
-                                    <Button
-                                        className="w-full cursor-pointer bg-purple-600 hover:bg-purple-700"
-                                        onClick={() => handleSubscribe(plan)}
-                                    >
-                                        Get started
-                                    </Button>
-                                    <Button
-                                        variant="outline"
-                                        className="w-full cursor-pointer bg-transparent"
-                                        onClick={() =>
-                                            handleChatToSales(plan.name)
-                                        }
-                                    >
-                                        Chat to sales
-                                    </Button>
-                                </CardContent>
-                            </Card>
-                        ))}
-                    </div>
-
-                    <div>
-                        <div className="mb-6 px-4 font-medium text-purple-600">
-                            Overview
+                                </div>
+                            ))}
                         </div>
-                        <div className="overflow-x-auto">
-                            <table className="w-full">
-                                <thead>
-                                    <tr className="sr-only grid grid-cols-4 rounded-md bg-gray-100">
-                                        <th className="text-left"></th>
-                                        {plans.map((plan) => (
-                                            <th
-                                                key={plan.name}
-                                                className="px-4 py-4 text-center font-medium"
-                                            >
-                                                {plan.name}
-                                            </th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {featureRows.map((feature, i) => (
-                                        <tr
-                                            key={feature.key}
-                                            className={`grid grid-cols-4 ${i % 2 === 0 ? "rounded-md bg-gray-100" : ""}`}
-                                        >
-                                            <td className="py-4 pr-8">
-                                                <div className="flex items-center gap-2">
-                                                    <span className="px-4 font-medium">
-                                                        {feature.name}
-                                                    </span>
-                                                    <Tooltip>
-                                                        <TooltipTrigger>
-                                                            <Info className="h-4 w-4 text-gray-400" />
-                                                        </TooltipTrigger>
-                                                        <TooltipContent>
-                                                            <p>
-                                                                {
-                                                                    feature.tooltip
-                                                                }
-                                                            </p>
-                                                        </TooltipContent>
-                                                    </Tooltip>
-                                                </div>
-                                            </td>
+
+                        <div>
+                            <div className="grid grid-cols-4 divide-x dark:divide-neutral-800">
+                                <div className="px-4 py-3 font-medium text-purple-600">
+                                    Overview
+                                </div>
+                                <div></div>
+                            </div>
+                            <div className="overflow-x-auto">
+                                <table className="w-full">
+                                    <thead>
+                                        <tr className="sr-only grid grid-cols-4 bg-gray-100">
+                                            <th className="text-left"></th>
                                             {plans.map((plan) => (
-                                                <td
-                                                    key={`${plan.name}-${feature.key}`}
-                                                    className="px-4 py-4 text-center"
+                                                <th
+                                                    key={plan.name}
+                                                    className="px-4 py-4 text-center font-medium"
                                                 >
-                                                    {(() => {
-                                                        const value =
-                                                            plan.features[
-                                                                feature.key as keyof typeof plan.features
-                                                            ];
-                                                        if (
-                                                            typeof value ===
-                                                            "boolean"
-                                                        ) {
-                                                            return value ? (
-                                                                <Check className="mx-auto h-5 w-5 text-green-600" />
-                                                            ) : (
-                                                                <Plus className="mx-auto h-5 w-5 rotate-45 text-red-500" />
-                                                            );
-                                                        } else if (
-                                                            Array.isArray(
-                                                                value,
-                                                            ) &&
-                                                            value.length ===
-                                                                2 &&
-                                                            typeof value[0] ===
-                                                                "boolean" &&
-                                                            typeof value[1] ===
-                                                                "string"
-                                                        ) {
-                                                            return value[0] ? (
-                                                                <span className="flex items-center justify-center gap-1 text-sm font-medium">
-                                                                    <Check className="h-5 w-5 text-green-600" />
-                                                                    {value[1]}
-                                                                </span>
-                                                            ) : (
-                                                                <span className="flex items-center justify-center gap-1 text-sm font-medium">
-                                                                    <Plus className="h-5 w-5 rotate-45 text-red-400" />
-                                                                    {value[1]}
-                                                                </span>
-                                                            );
-                                                        } else {
-                                                            return (
-                                                                <span className="text-sm font-medium">
-                                                                    {value}
-                                                                </span>
-                                                            );
-                                                        }
-                                                    })()}
-                                                </td>
+                                                    {plan.name}
+                                                </th>
                                             ))}
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {featureRows.map((feature, i) => (
+                                            <tr
+                                                key={feature.key}
+                                                className={`grid grid-cols-4 divide-x dark:divide-neutral-800 ${i % 2 === 0 ? "bg-gray-100 dark:bg-neutral-900" : ""}`}
+                                            >
+                                                <td className="py-4 pr-8">
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="px-4 font-medium">
+                                                            {feature.name}
+                                                        </span>
+                                                        <Tooltip>
+                                                            <TooltipTrigger>
+                                                                <Info className="h-4 w-4 text-gray-400" />
+                                                            </TooltipTrigger>
+                                                            <TooltipContent>
+                                                                <p>
+                                                                    {
+                                                                        feature.tooltip
+                                                                    }
+                                                                </p>
+                                                            </TooltipContent>
+                                                        </Tooltip>
+                                                    </div>
+                                                </td>
+                                                {plans.map((plan) => (
+                                                    <td
+                                                        key={`${plan.name}-${feature.key}`}
+                                                        className="px-4 py-4 text-center"
+                                                    >
+                                                        {(() => {
+                                                            const value =
+                                                                plan.features[
+                                                                    feature.key as keyof typeof plan.features
+                                                                ];
+                                                            if (
+                                                                typeof value ===
+                                                                "boolean"
+                                                            ) {
+                                                                return value ? (
+                                                                    <Check className="mx-auto h-5 w-5 text-green-600" />
+                                                                ) : (
+                                                                    <Plus className="mx-auto h-5 w-5 rotate-45 text-red-500" />
+                                                                );
+                                                            } else if (
+                                                                Array.isArray(
+                                                                    value,
+                                                                ) &&
+                                                                value.length ===
+                                                                    2 &&
+                                                                typeof value[0] ===
+                                                                    "boolean" &&
+                                                                typeof value[1] ===
+                                                                    "string"
+                                                            ) {
+                                                                return value[0] ? (
+                                                                    <span className="flex items-center justify-center gap-1 text-sm font-medium">
+                                                                        <Check className="h-5 w-5 text-green-600" />
+                                                                        {
+                                                                            value[1]
+                                                                        }
+                                                                    </span>
+                                                                ) : (
+                                                                    <span className="flex items-center justify-center gap-1 text-sm font-medium">
+                                                                        <Plus className="h-5 w-5 rotate-45 text-red-400" />
+                                                                        {
+                                                                            value[1]
+                                                                        }
+                                                                    </span>
+                                                                );
+                                                            } else {
+                                                                return (
+                                                                    <span className="text-sm font-medium">
+                                                                        {value}
+                                                                    </span>
+                                                                );
+                                                            }
+                                                        })()}
+                                                    </td>
+                                                ))}
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </TooltipProvider>
-
-            {/* <div className="container mx-auto px-4 py-12 md:py-16">
-                <div className="mb-10 text-center">
-                    <div className="mb-2 text-sm font-medium text-purple-600">
-                        Pricing
-                    </div>
-                    <h1 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
-                        Simple, Transparent Pricing
-                    </h1>
-                    <p className="text-xl text-gray-600 dark:text-gray-400">
-                        Choose the plan that&apos;s right for you.
-                    </p>
-
-                    <div className="mb-12 flex justify-center">
-                        <PricingToggle
-                            isAnnual={isAnnual}
-                            setIsAnnual={setIsAnnual}
-                        />
-                    </div>
-                </div>
-                <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-3">
-                    {PRICING_PLANS.filter(
-                        (plan) =>
-                            plan.duration ===
-                            (isAnnual ? "Annually" : "Monthly"),
-                    ).map((plan) => (
-                        <PricingCard
-                            key={plan.id}
-                            plan={plan}
-                            onSubscribe={() => handleSubscribe(plan)}
-                            loadingPaymentId={loadingPaymentId}
-                        />
-                    ))}
-                </div>
-                <PricingTable />
-            </div> */}
+            <Faq />
+            <Footer />
         </>
     );
 }
