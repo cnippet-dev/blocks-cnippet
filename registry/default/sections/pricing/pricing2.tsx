@@ -1,273 +1,218 @@
 "use client";
 
-import { useState } from "react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
     Card,
     CardContent,
-    CardDescription,
+    CardFooter,
     CardHeader,
-    CardTitle,
 } from "@/components/ui/card";
-import { Switch } from "@/components/ui/switch";
-import {
-    Check,
-    Monitor,
-    Clock,
-    Target,
-    Download,
-    HardDrive,
-    Zap,
-} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { useState } from "react";
 
-export default function Component() {
-    const [isYearly, setIsYearly] = useState(false);
+const pricingData = {
+    monthly: {
+        basic: { price: 10, period: "per month" },
+        business: { price: 20, period: "per month" },
+    },
+    annual: {
+        basic: { price: 8, period: "per month" },
+        business: { price: 16, period: "per month" },
+    },
+};
 
-    const standardPrice = isYearly ? 499.99 : 49.99;
-    const plusPrice = isYearly ? 1640.0 : 164.0;
+const plans = [
+    {
+        id: "basic",
+        name: "Basic plan",
+        description: "Our most popular plan for small teams.",
+        features: [
+            { left: "Access to basic features", right: "Attend events" },
+            { left: "Basic reporting + analytics", right: "Automatic updates" },
+            { left: "Up to 10 individual users", right: "Backup your account" },
+            { left: "20 GB individual data", right: "Audit log and notes" },
+            { left: "Basic chat support", right: "Feature requests" },
+        ],
+    },
+    {
+        id: "business",
+        name: "Business plan",
+        description: "Advanced features and reporting.",
+        popular: true,
+        features: [
+            { left: "200+ integrations", right: "Advanced custom fields" },
+            { left: "Advanced reporting", right: "Audit log and data history" },
+            { left: "Up to 20 individual users", right: "Backup your account" },
+            { left: "40 GB individual data", right: "Personalized service" },
+            { left: "Priority chat support", right: "+ many more..." },
+        ],
+    },
+];
 
-    const handleGetStarted = (plan: string, price: number) => {
-        console.log(`Getting started with ${plan} plan at $${price}`);
-        // Add your subscription logic here
+export default function PricingSection() {
+    const [billingPeriod, setBillingPeriod] = useState<"monthly" | "annual">(
+        "monthly",
+    );
+    const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+
+    const handleGetStarted = (planId: string) => {
+        setSelectedPlan(planId);
+        console.log(`Selected ${planId} plan with ${billingPeriod} billing`);
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 px-4 py-12">
-            <div className="mx-auto max-w-6xl">
-                <div className="mx-auto mb-8 flex w-fit items-center justify-center gap-2 rounded-full border px-2 text-sm text-gray-600">
-                    <Zap className="h-4 w-4" />
-                    <span>Beam Our Pricing</span>
-                </div>
+        <div className="mx-auto w-full max-w-6xl px-4 py-16">
+            {/* Header */}
+            <div className="mb-12 text-center">
+                <p className="mb-4 font-medium text-purple-600">Pricing</p>
+                <h1 className="mb-6 text-4xl font-bold text-gray-900 md:text-5xl">
+                    Plans that fit your scale
+                </h1>
+                <p className="mx-auto mb-12 max-w-2xl text-lg text-gray-600">
+                    Simple, transparent pricing that grows with you. Try any
+                    plan free for 30 days.
+                </p>
 
-                <div className="mb-12 text-center">
-                    <h1 className="mb-8 text-4xl font-bold text-gray-900 md:text-5xl">
-                        Beam Pricing Plans
-                    </h1>
-
-                    <div className="flex items-center justify-center gap-4">
-                        <span
-                            className={`text-lg ${!isYearly ? "font-medium text-gray-900" : "text-gray-500"}`}
+                {/* Billing Toggle */}
+                <div className="mb-12 inline-flex items-center rounded-2xl bg-gray-100 p-1">
+                    <button
+                        onClick={() => setBillingPeriod("monthly")}
+                        className={`rounded-xl px-6 py-1 font-medium transition-colors ${
+                            billingPeriod === "monthly"
+                                ? "bg-white text-gray-900 shadow-sm"
+                                : "text-gray-600 hover:text-gray-900"
+                        }`}
+                    >
+                        Monthly billing
+                    </button>
+                    <button
+                        onClick={() => setBillingPeriod("annual")}
+                        className={`flex items-center gap-2 rounded-xl px-6 py-1 font-medium transition-colors ${
+                            billingPeriod === "annual"
+                                ? "bg-white text-gray-900 shadow-sm"
+                                : "text-gray-600 hover:text-gray-900"
+                        }`}
+                    >
+                        Annual billing
+                        <Badge
+                            variant="secondary"
+                            className="bg-green-100 text-green-700 hover:bg-green-100"
                         >
-                            Monthly
-                        </span>
-                        <Switch
-                            checked={isYearly}
-                            onCheckedChange={setIsYearly}
-                            className="data-[state=checked]:bg-blue-600"
-                        />
-                        <span
-                            className={`text-lg ${isYearly ? "font-medium text-gray-900" : "text-gray-500"}`}
-                        >
-                            Yearly
-                        </span>
-                    </div>
-                </div>
-
-                <div className="mx-auto grid max-w-3xl gap-8 md:grid-cols-2">
-                    <Card className="relative border-none bg-gray-50 bg-none shadow-none">
-                        <CardHeader className="rounded-2xl border pb-4">
-                            <div className="mb-2 flex items-center gap-3">
-                                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-900">
-                                    <Monitor className="h-6 w-6 text-white" />
-                                </div>
-                                <div>
-                                    <CardTitle className="text-xl font-semibold">
-                                        Standard
-                                    </CardTitle>
-                                    <CardDescription className="text-gray-600">
-                                        Lorem ipsum dolor sit amet.
-                                    </CardDescription>
-                                </div>
-                            </div>
-                        </CardHeader>
-
-                        <CardContent className="mt-8 space-y-6 rounded-2xl border bg-white pt-6">
-                            <div className="space-y-2">
-                                <div className="flex items-baseline gap-2">
-                                    <span className="text-4xl font-bold text-gray-900">
-                                        ${standardPrice}
-                                    </span>
-                                    <span className="text-gray-600">
-                                        / {isYearly ? "Year" : "Month"}
-                                    </span>
-                                </div>
-                                <p className="text-sm text-gray-600">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit etiam venenatis orci.
-                                </p>
-                            </div>
-
-                            <Button
-                                variant="outline"
-                                className="w-full border-gray-300 bg-transparent py-3 text-gray-900 shadow-none hover:bg-gray-50"
-                                onClick={() =>
-                                    handleGetStarted("Standard", standardPrice)
-                                }
-                            >
-                                Get Started With Basic
-                            </Button>
-
-                            <div className="space-y-4">
-                                <div className="text-sm font-medium tracking-wide text-gray-500 uppercase">
-                                    Weekly Sends
-                                </div>
-
-                                <div className="space-y-3">
-                                    <div className="flex items-center gap-3">
-                                        <Target className="h-5 w-5 text-gray-400" />
-                                        <span className="text-gray-700">
-                                            <span className="font-medium">
-                                                30 day
-                                            </span>{" "}
-                                            build retention
-                                        </span>
-                                    </div>
-
-                                    <div className="flex items-center gap-3">
-                                        <Download className="h-5 w-5 text-gray-400" />
-                                        <span className="text-gray-700">
-                                            <span className="font-medium">
-                                                5,000
-                                            </span>{" "}
-                                            downloads/month
-                                        </span>
-                                    </div>
-
-                                    <div className="flex items-center gap-3">
-                                        <HardDrive className="h-5 w-5 text-gray-400" />
-                                        <span className="text-gray-700">
-                                            Native module rebuilding
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <hr />
-
-                                <div className="space-y-3">
-                                    <div className="flex items-center gap-3">
-                                        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-600">
-                                            <Check className="h-3 w-3 text-white" />
-                                        </div>
-                                        <span className="text-gray-700">
-                                            Increased Efficiency
-                                        </span>
-                                    </div>
-
-                                    <div className="flex items-center gap-3">
-                                        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-600">
-                                            <Check className="h-3 w-3 text-white" />
-                                        </div>
-                                        <span className="text-gray-700">
-                                            Great Communication
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-
-                    <Card className="relative border-none bg-gray-50 bg-none shadow-none">
-                        <CardHeader className="rounded-2xl border pb-4">
-                            <div className="mb-2 flex items-center gap-3">
-                                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-900">
-                                    <Clock className="h-6 w-6 text-white" />
-                                </div>
-                                <div>
-                                    <CardTitle className="text-xl font-semibold">
-                                        Plus
-                                    </CardTitle>
-                                    <CardDescription className="text-gray-600">
-                                        Lorem ipsum dolor sit amet.
-                                    </CardDescription>
-                                </div>
-                            </div>
-                        </CardHeader>
-
-                        <CardContent className="mt-8 space-y-6 rounded-2xl border bg-white pt-6">
-                            <div className="space-y-2">
-                                <div className="flex items-baseline gap-2">
-                                    <span className="text-4xl font-bold text-gray-900">
-                                        ${plusPrice}
-                                    </span>
-                                    <span className="text-gray-600">
-                                        / {isYearly ? "Year" : "Month"}
-                                    </span>
-                                </div>
-                                <p className="text-sm text-gray-600">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit etiam venenatis orci.
-                                </p>
-                            </div>
-
-                            <Button
-                                className="w-full bg-blue-600 py-3 text-white hover:bg-blue-700"
-                                onClick={() =>
-                                    handleGetStarted("Plus", plusPrice)
-                                }
-                            >
-                                Get Started → ${Math.round(plusPrice)}
-                            </Button>
-
-                            <div className="space-y-4">
-                                <div className="text-sm font-medium tracking-wide text-gray-500 uppercase">
-                                    Weekly Sends
-                                </div>
-
-                                <div className="space-y-3">
-                                    <div className="flex items-center gap-3">
-                                        <Target className="h-5 w-5 text-gray-400" />
-                                        <span className="text-gray-700">
-                                            <span className="font-medium">
-                                                60 day
-                                            </span>{" "}
-                                            build retention
-                                        </span>
-                                    </div>
-
-                                    <div className="flex items-center gap-3">
-                                        <Download className="h-5 w-5 text-gray-400" />
-                                        <span className="text-gray-700">
-                                            <span className="font-medium">
-                                                15,000
-                                            </span>{" "}
-                                            downloads/month
-                                        </span>
-                                    </div>
-
-                                    <div className="flex items-center gap-3">
-                                        <HardDrive className="h-5 w-5 text-gray-400" />
-                                        <span className="text-gray-700">
-                                            Native module rebuilding
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <hr />
-
-                                <div className="space-y-3">
-                                    <div className="flex items-center gap-3">
-                                        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-600">
-                                            <Check className="h-3 w-3 text-white" />
-                                        </div>
-                                        <span className="text-gray-700">
-                                            Increased Efficiency
-                                        </span>
-                                    </div>
-
-                                    <div className="flex items-center gap-3">
-                                        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-600">
-                                            <Check className="h-3 w-3 text-white" />
-                                        </div>
-                                        <span className="text-gray-700">
-                                            Great Communication
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
+                            Save 20%
+                        </Badge>
+                    </button>
                 </div>
             </div>
+
+            {/* Pricing Cards */}
+            <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2">
+                {plans.map((plan) => {
+                    const pricing =
+                        pricingData[billingPeriod][
+                            plan.id as keyof typeof pricingData.monthly
+                        ];
+
+                    return (
+                        <Card
+                            key={plan.id}
+                            className="relative border border-gray-200 shadow-sm transition-shadow hover:shadow-md"
+                        >
+                            {/* {plan.popular && (
+                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform">
+                                    <Badge className="bg-purple-600 text-white">
+                                        Popular
+                                    </Badge>
+                                </div>
+                            )} */}
+
+                            <CardHeader className="flex flex-row items-end justify-between pb-6">
+                                <div>
+                                    <h3 className="mb-1 text-xl font-semibold text-gray-900">
+                                        {plan.name}
+                                    </h3>
+                                    <p className="text-sm text-gray-600">
+                                        {plan.description}
+                                    </p>
+                                </div>
+
+                                <div className="mb-2 flex items-baseline gap-1">
+                                    <div className="flex">
+                                        <span className="text-3xl">₹</span>
+                                        <span className="text-4xl font-semibold text-gray-900 md:text-5xl">
+                                            {pricing.price}
+                                        </span>
+                                    </div>
+
+                                    <span className="mt-auto text-gray-600">
+                                        {pricing.period}
+                                    </span>
+                                </div>
+                            </CardHeader>
+
+                            <CardContent className="pb-6">
+                                <div className="mb-6">
+                                    <h4 className="mb-2 text-sm font-semibold tracking-wide text-gray-900 uppercase">
+                                        FEATURES
+                                    </h4>
+                                    <p className="mb-4 text-sm text-gray-600">
+                                        Everything in our{" "}
+                                        <span className="font-medium">
+                                            {plan.id === "basic"
+                                                ? "free plan"
+                                                : "basic plan"}
+                                        </span>{" "}
+                                        plus....
+                                    </p>
+                                </div>
+
+                                <div className="grid grid-cols-1 gap-3">
+                                    {plan.features.map((feature, index) => (
+                                        <div
+                                            key={index}
+                                            className="grid grid-cols-1 gap-3 md:grid-cols-2"
+                                        >
+                                            <div className="flex items-start gap-3">
+                                                <Check className="mt-0.5 size-5 flex-shrink-0 rounded-full bg-green-100 p-0.5 text-green-600" />
+                                                <span className="text-sm text-gray-700">
+                                                    {feature.left}
+                                                </span>
+                                            </div>
+                                            <div className="flex items-start gap-3">
+                                                <Check className="mt-0.5 size-5 flex-shrink-0 rounded-full bg-green-100 p-0.5 text-green-600" />
+                                                <span className="text-sm text-gray-700">
+                                                    {feature.right}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </CardContent>
+
+                            <CardFooter>
+                                <Button
+                                    className="w-full cursor-pointer rounded-lg bg-purple-600 py-3 font-medium text-white transition-colors hover:bg-purple-700"
+                                    onClick={() => handleGetStarted(plan.id)}
+                                >
+                                    Get started
+                                </Button>
+                            </CardFooter>
+                        </Card>
+                    );
+                })}
+            </div>
+
+            {/* Selection Feedback */}
+            {selectedPlan && (
+                <div className="mt-8 text-center">
+                    <p className="font-medium text-purple-600">
+                        You selected the{" "}
+                        {plans.find((p) => p.id === selectedPlan)?.name} with{" "}
+                        {billingPeriod} billing!
+                        {billingPeriod === "annual" && " (20% savings applied)"}
+                    </p>
+                </div>
+            )}
         </div>
     );
 }
