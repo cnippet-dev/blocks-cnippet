@@ -24,5 +24,10 @@ const generateSections = (
 };
 
 export const sections = [
-    ...generateSections("pricing", 3, ["F", "F", "T"], ["F", "F", "T"]),
+    ...generateSections(
+        "pricing",
+        7,
+        ["F", "F", "F", "F", "F", "F", "F"],
+        ["F", "F", "F", "F", "F", "F", "F"],
+    ),
 ];

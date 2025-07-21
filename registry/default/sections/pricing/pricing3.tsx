@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { Check, Info, Plus } from "lucide-react";
+
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -9,346 +12,358 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-    ThumbsUp,
-    Target,
-    Download,
-    HardDrive,
-    Shield,
-    Zap,
-    Check,
-    Badge,
-} from "lucide-react";
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 
-export default function Component() {
-    const [isYearly, setIsYearly] = useState(true);
+export default function PricingPage() {
+    const [billingCycle, setBillingCycle] = useState("monthly");
 
-    const pricingTiers = [
-        { sends: "2,500", price: "Included", isIncluded: true },
+    const plans = [
         {
-            sends: "5,000",
-            price: isYearly ? "$320/yr" : "$32/mo",
-            isIncluded: false,
+            name: "Basic",
+            popular: true,
+            monthlyPrice: 1000,
+            annualPrice: 10000,
+            description:
+                "Basic features for up to 10 employees with everything you need.",
+            features: {
+                basicFeatures: true,
+                users: "10",
+                individualData: "20 GB",
+                support: true,
+                automatedWorkflows: false,
+                integrations: false,
+                analytics: false,
+                exportData: false,
+                customReports: false,
+                apiAccess: false,
+            },
         },
         {
-            sends: "7,500",
-            price: isYearly ? "$490/yr" : "$49/mo",
-            isIncluded: false,
+            name: "Business",
+            popular: false,
+            monthlyPrice: 2000,
+            annualPrice: 16000,
+            description:
+                "Advanced features and reporting, better workflows and automation.",
+            features: {
+                basicFeatures: true,
+                users: "20",
+                individualData: "40 GB",
+                support: true,
+                automatedWorkflows: true,
+                integrations: true,
+                analytics: true,
+                exportData: true,
+                customReports: true,
+                apiAccess: true,
+            },
         },
         {
-            sends: "10,000",
-            price: isYearly ? "$990/yr" : "$99/mo",
-            isIncluded: false,
-        },
-        {
-            sends: "12,500",
-            price: isYearly ? "$1,250/yr" : "$125/mo",
-            isIncluded: false,
+            name: "Enterprise",
+            popular: false,
+            monthlyPrice: 40,
+            annualPrice: 32,
+            description:
+                "Personalized service and enterprise security for large teams.",
+            features: {
+                basicFeatures: true,
+                users: "Unlimited",
+                individualData: "Unlimited",
+                support: true,
+                automatedWorkflows: true,
+                integrations: true,
+                analytics: true,
+                exportData: true,
+                customReports: true,
+                apiAccess: true,
+            },
         },
     ];
 
+    const featureRows = [
+        {
+            title: "Overview",
+            features: [
+                {
+                    name: "Basic features",
+                    key: "basicFeatures",
+                    tooltip: "Core functionality and basic tools",
+                },
+                {
+                    name: "Users",
+                    key: "users",
+                    tooltip: "Number of team members that can use the platform",
+                },
+                {
+                    name: "Individual data",
+                    key: "individualData",
+                    tooltip: "Storage space allocated per user",
+                },
+                {
+                    name: "Support",
+                    key: "support",
+                    tooltip: "Customer support availability",
+                },
+                {
+                    name: "Automated workflows",
+                    key: "automatedWorkflows",
+                    tooltip: "Automation tools and workflow builders",
+                },
+                {
+                    name: "200+ integrations",
+                    key: "integrations",
+                    tooltip: "Connect with popular third-party tools",
+                },
+            ],
+        },
+        {
+            title: "Reporting and analytics",
+            features: [
+                {
+                    name: "Analytics",
+                    key: "analytics",
+                    tooltip: "Analytics and insights for your data",
+                },
+                {
+                    name: "Export data",
+                    key: "exportData",
+                    tooltip: "Analytics and insights for your data",
+                },
+                {
+                    name: "Custom reports",
+                    key: "customReports",
+                    tooltip: "Analytics and insights for your data",
+                },
+                {
+                    name: "API Access",
+                    key: "apiAccess",
+                    tooltip: "Analytics and insights for your data",
+                },
+            ],
+        },
+    ];
+
+    const getPrice = (plan: (typeof plans)[0]) => {
+        return billingCycle === "monthly"
+            ? plan.monthlyPrice
+            : plan.annualPrice;
+    };
+
     return (
-        <div className="min-h-screen bg-white px-4 py-16">
-            <div className="mx-auto max-w-7xl">
-                <div className="mb-16 text-center">
-                    <p className="mb-4 text-sm font-medium tracking-wide text-gray-800 uppercase">
-                        PRICING PLAN
-                    </p>
-                    <h1 className="text-4xl leading-tight font-medium text-gray-900 md:text-5xl">
-                        Simply choose the pricing plan
-                        <br />
-                        that{" "}
-                        <span className="text-orange-500">fits you best.</span>
-                    </h1>
-                </div>
-
-                <div className="mx-auto mb-12 grid max-w-6xl gap-8 lg:grid-cols-3">
-                    <Card className="relative h-fit border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md">
-                        <CardHeader className="pb-6">
-                            <CardTitle className="text-2xl font-bold text-gray-900">
-                                Jambo
-                            </CardTitle>
-                            <CardDescription className="text-gray-600">
-                                Best for personal and basic needs.
-                            </CardDescription>
-                        </CardHeader>
-
-                        <CardContent className="space-y-6">
-                            {/* Price */}
-                            <div className="space-y-1">
-                                <div className="flex items-center gap-2">
-                                    <span className="text-4xl font-bold text-gray-900">
-                                        $8
-                                    </span>
-                                    <span className="text-gray-800">
-                                        one-time payment
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div className="space-y-4">
-                                <div className="flex items-start gap-3">
-                                    <div className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
-                                        <Check className="h-3 w-3 text-green-600" />
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-gray-900">
-                                            Feedback
-                                        </p>
-                                        <p className="text-sm text-gray-600">
-                                            Collect, organize, and prioritize
-                                            user feedback.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-3">
-                                    <div className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
-                                        <Check className="h-3 w-3 text-green-600" />
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-gray-900">
-                                            Insights
-                                        </p>
-                                        <p className="text-sm text-gray-600">
-                                            Collect, organize, and prioritize
-                                            user feedback.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-3">
-                                    <div className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
-                                        <Check className="h-3 w-3 text-green-600" />
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-gray-900">
-                                            Free 2-years of updates
-                                        </p>
-                                        <p className="text-sm text-gray-600">
-                                            Collect, organize, and prioritize
-                                            user feedback.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="border-t pt-4">
-                                <h4 className="mb-2 font-medium text-gray-900">
-                                    More description here
-                                </h4>
-                                <p className="text-sm text-gray-600">
-                                    Lorem ipsum aliquam erat volutpat - cras
-                                    dapibus.
-                                </p>
-                            </div>
-
-                            <Button
-                                variant="outline"
-                                className="w-full border-gray-300 bg-transparent py-3 text-gray-700 hover:bg-gray-50"
-                            >
-                                Try now
-                            </Button>
-                        </CardContent>
-                    </Card>
-
-                    {/* Jambo+ Plan (Most Popular) */}
-                    <Card className="relative border-2 border-orange-500 bg-white shadow-lg transition-shadow hover:shadow-xl">
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform rounded-full bg-orange-600 px-2 text-sm text-white">
-                            MOST POPULAR
+        <>
+            <TooltipProvider>
+                <div className="mx-auto w-full max-w-7xl px-4 py-16">
+                    <div className="mb-16 text-center">
+                        <div className="mb-4 font-medium text-purple-600">
+                            Pricing
                         </div>
+                        <h1 className="mb-4 text-4xl font-semibold text-gray-900 md:text-5xl">
+                            Compare our plans and find yours
+                        </h1>
+                        <p className="mb-8 text-lg text-gray-600">
+                            Simple, transparent pricing that grows with you. Try
+                            any plan free for 30 days.
+                        </p>
 
-                        <CardHeader className="pt-8 pb-6">
-                            <CardTitle className="text-2xl font-bold text-gray-900">
-                                Jambo<span className="text-orange-500">+</span>
-                            </CardTitle>
-                            <CardDescription className="text-gray-600">
-                                Best for personal and basic needs.
-                            </CardDescription>
-                        </CardHeader>
+                        <Tabs
+                            value={billingCycle}
+                            onValueChange={setBillingCycle}
+                            className="mx-auto w-fit"
+                        >
+                            <TabsList className="grid w-full grid-cols-2">
+                                <TabsTrigger value="monthly">
+                                    Monthly billing
+                                </TabsTrigger>
+                                <TabsTrigger value="annual">
+                                    Annual billing
+                                </TabsTrigger>
+                            </TabsList>
+                        </Tabs>
+                    </div>
 
-                        <CardContent className="space-y-6">
-                            {/* Price */}
-                            <div className="-mx-6 rounded-lg bg-orange-50 p-4">
-                                <div className="flex gap-2 px-6">
-                                    <span className="text-4xl font-bold text-orange-500">
-                                        $12
-                                    </span>
-                                    <div className="text-sm text-gray-800">
-                                        <div>per user/mo,</div>
-                                        <div>billed annually</div>
+                    <div className="grid w-full grid-cols-4 gap-8 border-b pb-3">
+                        <div />
+                        {plans.map((plan) => (
+                            <div
+                                key={plan.name}
+                                className="flex items-center justify-start gap-2 px-6"
+                            >
+                                <CardTitle className="text-xl font-semibold">
+                                    {plan.name}
+                                </CardTitle>
+                                {plan.popular && (
+                                    <Badge className="bg-purple-600 hover:bg-purple-700">
+                                        Popular
+                                    </Badge>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="mb-16 grid gap-8 md:grid-cols-4">
+                        <div />
+
+                        {plans.map((plan) => (
+                            <Card
+                                key={plan.name}
+                                className="relative border-none shadow-none"
+                            >
+                                <CardHeader className="pb-8 text-left">
+                                    <CardTitle className="sr-only text-xl font-semibold">
+                                        {plan.name}
+                                    </CardTitle>
+                                    <div className="mt-2">
+                                        <span className="text-4xl font-bold">
+                                            ₹{getPrice(plan)}
+                                        </span>
+
+                                        <span className="ml-1 text-gray-600">
+                                            per{" "}
+                                            {billingCycle == "monthly"
+                                                ? "month"
+                                                : "year"}
+                                        </span>
                                     </div>
+
+                                    <CardDescription className="mt-auto text-gray-600">
+                                        {plan.description}
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent className="space-y-4">
+                                    <Button className="w-full cursor-pointer bg-purple-600 hover:bg-purple-700">
+                                        Get started
+                                    </Button>
+                                    <Button
+                                        variant="outline"
+                                        className="w-full cursor-pointer bg-transparent"
+                                    >
+                                        Chat to sales
+                                    </Button>
+                                </CardContent>
+                            </Card>
+                        ))}
+                    </div>
+
+                    <div>
+                        {featureRows.map((row) => (
+                            <div key={row.title} className="mb-16">
+                                <div className="mb-6 px-4 font-medium text-purple-600">
+                                    {row.title}
+                                </div>
+                                <div className="overflow-x-auto">
+                                    <table className="w-full">
+                                        <thead>
+                                            <tr className="sr-only grid grid-cols-4 rounded-md bg-gray-50">
+                                                <th></th>
+                                                {plans.map((plan) => (
+                                                    <th
+                                                        key={plan.name}
+                                                        className="px-4 py-4 text-left font-medium"
+                                                    >
+                                                        {plan.name}
+                                                    </th>
+                                                ))}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {row.features.map((feature, i) => (
+                                                <tr
+                                                    key={feature.key}
+                                                    className={`grid grid-cols-4 ${i % 2 === 0 ? "rounded-md bg-gray-100/80" : ""}`}
+                                                >
+                                                    <td className="py-4 pr-8">
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="px-4 font-medium">
+                                                                {feature.name}
+                                                            </span>
+                                                            <Tooltip>
+                                                                <TooltipTrigger>
+                                                                    <Info className="h-4 w-4 text-gray-400" />
+                                                                </TooltipTrigger>
+                                                                <TooltipContent>
+                                                                    <p>
+                                                                        {
+                                                                            feature.tooltip
+                                                                        }
+                                                                    </p>
+                                                                </TooltipContent>
+                                                            </Tooltip>
+                                                        </div>
+                                                    </td>
+                                                    {plans.map((plan) => (
+                                                        <td
+                                                            key={`${plan.name}-${feature.key}`}
+                                                            className="px-4 py-4 text-center"
+                                                        >
+                                                            {(() => {
+                                                                const value =
+                                                                    plan
+                                                                        .features[
+                                                                        feature.key as keyof typeof plan.features
+                                                                    ];
+                                                                if (
+                                                                    typeof value ===
+                                                                    "boolean"
+                                                                ) {
+                                                                    return value ? (
+                                                                        <Check className="mx-auto h-5 w-5 text-green-600" />
+                                                                    ) : (
+                                                                        <Plus className="mx-auto h-5 w-5 rotate-45 text-red-500" />
+                                                                    );
+                                                                } else if (
+                                                                    Array.isArray(
+                                                                        value,
+                                                                    ) &&
+                                                                    value.length ===
+                                                                        2 &&
+                                                                    typeof value[0] ===
+                                                                        "boolean" &&
+                                                                    typeof value[1] ===
+                                                                        "string"
+                                                                ) {
+                                                                    return value[0] ? (
+                                                                        <span className="flex items-center justify-center gap-1 text-sm font-medium">
+                                                                            <Check className="h-5 w-5 text-green-600" />
+                                                                            {
+                                                                                value[1]
+                                                                            }
+                                                                        </span>
+                                                                    ) : (
+                                                                        <span className="flex items-center justify-center gap-1 text-sm font-medium">
+                                                                            <Plus className="h-5 w-5 rotate-45 text-red-400" />
+                                                                            {
+                                                                                value[1]
+                                                                            }
+                                                                        </span>
+                                                                    );
+                                                                } else {
+                                                                    return (
+                                                                        <span className="text-sm font-medium">
+                                                                            {
+                                                                                value
+                                                                            }
+                                                                        </span>
+                                                                    );
+                                                                }
+                                                            })()}
+                                                        </td>
+                                                    ))}
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-
-                            {/* Features */}
-                            <div className="space-y-4">
-                                <div className="flex items-start gap-3">
-                                    <div className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
-                                        <Check className="h-3 w-3 text-green-600" />
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-gray-900">
-                                            Feedback{" "}
-                                            <span className="text-orange-500">
-                                                + Voting System
-                                            </span>
-                                        </p>
-                                        <p className="text-sm text-gray-600">
-                                            Collect, organize, and prioritize
-                                            user feedback.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-3">
-                                    <div className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
-                                        <Check className="h-3 w-3 text-green-600" />
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-gray-900">
-                                            Advanced Insights
-                                        </p>
-                                        <p className="text-sm text-gray-600">
-                                            Collect, organize, and prioritize
-                                            user feedback.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-3">
-                                    <div className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
-                                        <Check className="h-3 w-3 text-green-600" />
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-gray-900">
-                                            Public Leaderboard
-                                        </p>
-                                        <p className="text-sm text-gray-600">
-                                            Collect, organize, and prioritize
-                                            user feedback.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-3">
-                                    <div className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
-                                        <Check className="h-3 w-3 text-green-600" />
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-gray-900">
-                                            Public Roadmap
-                                        </p>
-                                        <p className="text-sm text-gray-600">
-                                            Collect, organize, and prioritize
-                                            user feedback.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-3">
-                                    <div className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
-                                        <Check className="h-3 w-3 text-green-600" />
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-gray-900">
-                                            Hyper-regular Updates
-                                        </p>
-                                        <p className="text-sm text-gray-600">
-                                            Collect, organize, and prioritize
-                                            user feedback.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Description */}
-                            <div className="border-t pt-4">
-                                <h4 className="mb-2 font-medium text-gray-900">
-                                    More description here
-                                </h4>
-                                <p className="text-sm text-gray-600">
-                                    Lorem ipsum aliquam erat volutpat – cras
-                                    dapibus.
-                                </p>
-                            </div>
-
-                            {/* CTA Button */}
-                            <Button className="w-full bg-gray-900 py-3 text-white hover:bg-gray-800">
-                                Try now
-                            </Button>
-                        </CardContent>
-                    </Card>
-
-                    {/* Custom Plan */}
-                    <Card className="relative h-fit border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md">
-                        <CardHeader className="pb-6">
-                            <CardTitle className="text-2xl font-bold text-gray-900">
-                                Custom
-                            </CardTitle>
-                            <CardDescription className="text-gray-600">
-                                Best for personal and basic needs.
-                            </CardDescription>
-                        </CardHeader>
-
-                        <CardContent className="space-y-6">
-                            {/* Contact Us */}
-                            <div className="py-3 text-center">
-                                <Button
-                                    variant="outline"
-                                    className="h-auto w-full p-0 py-1 text-lg font-medium text-gray-900 hover:text-gray-700"
-                                >
-                                    Contact us
-                                </Button>
-                            </div>
-
-                            {/* Features */}
-                            <div className="space-y-4">
-                                <div className="flex items-start gap-3">
-                                    <div className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
-                                        <Check className="h-3 w-3 text-green-600" />
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-gray-900">
-                                            Everything in Jambo+
-                                        </p>
-                                        <p className="text-sm text-gray-600">
-                                            Collect, organize, and prioritize
-                                            user feedback.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-3">
-                                    <div className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
-                                        <Check className="h-3 w-3 text-green-600" />
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-gray-900">
-                                            Single Sign-On (SSO)
-                                        </p>
-                                        <p className="text-sm text-gray-600">
-                                            Collect, organize, and prioritize
-                                            user feedback.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Description */}
-                            <div className="border-t pt-4">
-                                <h4 className="mb-2 font-medium text-gray-900">
-                                    More description here
-                                </h4>
-                                <p className="text-sm text-gray-600">
-                                    Lorem ipsum aliquam erat volutpat – cras
-                                    dapibus.
-                                </p>
-                            </div>
-                        </CardContent>
-                    </Card>
+                        ))}
+                    </div>
                 </div>
-            </div>
-        </div>
+            </TooltipProvider>
+        </>
     );
 }
