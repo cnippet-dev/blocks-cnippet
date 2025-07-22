@@ -63,15 +63,15 @@ export default function BeamPricingSection() {
     return (
         <div className="mx-auto w-full max-w-5xl px-4 py-16">
             {/* Header */}
-            <div className="mb-16 flex items-start justify-between">
+            <div className="mb-8 flex flex-col items-start justify-between gap-4 text-center md:mb-16 md:flex-row md:gap-0 md:text-left">
                 <div>
-                    <div className="mb-4 flex items-center gap-2">
+                    <div className="mb-3 flex items-center justify-center gap-2 md:justify-start">
                         <Zap className="h-5 w-5 text-gray-600" />
                         <span className="font-medium text-gray-600">
                             Beam Our Pricing
                         </span>
                     </div>
-                    <h1 className="mb-4 text-4xl font-medium text-gray-900 md:text-5xl">
+                    <h1 className="mb-3 text-4xl font-medium text-gray-900 md:text-5xl">
                         Beam Pricing Plans
                     </h1>
                     <p className="max-w-2xl text-lg text-gray-600">
@@ -80,7 +80,7 @@ export default function BeamPricingSection() {
                 </div>
 
                 {/* Billing Toggle */}
-                <div className="mt-auto flex items-center gap-3">
+                <div className="mx-auto mt-auto flex items-center justify-center gap-3 md:mx-0 md:justify-end">
                     <span
                         className={`font-medium ${!isYearly ? "text-gray-900" : "text-gray-500"}`}
                     >
@@ -103,9 +103,9 @@ export default function BeamPricingSection() {
             <div className="mb-16">
                 {/* Add-Ons Section */}
                 <div>
-                    <Card className="grid h-full grid-cols-7 border-gray-200 bg-gray-100 p-[3px] shadow-none">
+                    <Card className="grid h-full grid-cols-1 border-gray-200 bg-gray-100 p-[3px] shadow-none md:grid-cols-7">
                         <CardContent className="col-span-5 flex flex-col justify-between space-y-6 p-6">
-                            <div className="mb-4 flex items-start gap-3">
+                            <div className="mb-0 flex items-start gap-3 md:mb-4">
                                 <div className="rounded-lg bg-blue-100 p-4">
                                     <ThumbsUp className="size-6 text-blue-600" />
                                 </div>
@@ -120,7 +120,7 @@ export default function BeamPricingSection() {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid gap-4 md:grid-cols-2">
                                 {features.map((feature, index) => {
                                     const IconComponent = feature.icon;
                                     return (
@@ -139,7 +139,7 @@ export default function BeamPricingSection() {
                                 })}
                             </div>
 
-                            <div className="flex gap-4 pt-6">
+                            <div className="flex gap-4 pt-3 md:pt-6">
                                 <Button
                                     className="bg-gray-900 px-6 py-2 text-white hover:bg-gray-800"
                                     onClick={() =>
@@ -158,7 +158,7 @@ export default function BeamPricingSection() {
                             </div>
                         </CardContent>
 
-                        <div className="col-span-2 border-none border-gray-200 p-1 shadow-none">
+                        <div className="col-span-1 border-none border-gray-200 p-1 shadow-none md:col-span-2">
                             <CardHeader className="rounded-t-lg bg-gray-900 px-4 py-2 text-white">
                                 <div className="flex items-center justify-between text-sm">
                                     <h3 className="font-medium">
@@ -170,7 +170,7 @@ export default function BeamPricingSection() {
                                 </div>
                             </CardHeader>
 
-                            <CardContent className="p-0">
+                            <CardContent className="rounded-xl bg-white p-0">
                                 {currentPricing.map((tier, index) => (
                                     <div
                                         key={index}

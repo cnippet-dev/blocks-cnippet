@@ -71,10 +71,10 @@ export const Index = {
       "${item.name}": {
         name: "${item.name}",
         type: "${item.type}",
-        slug: "${item.slug || ""}",
+        ${item.type === "registry:sections" ? `auth: ${item.auth || false},
+        pro: ${item.pro || false},` : `slug: "${item.slug || ""}",
         thumbnail: "${item.thumbnail || ""}",
-        number: "${item.number || ""}",
-        registryDependencies: ${JSON.stringify(item.registryDependencies || undefined)},
+        number: "${item.number || ""}",`}
         files: [${resolveFiles.map((file: any) => `"${file}"`)}],
         component: React.lazy(() => import("${componentPath}")),
       },`;
@@ -90,7 +90,7 @@ export const Index = {
 
     // Build registry/index.json
     const items = registry
-        .filter((item: any) => ["registry:ui"].includes(item.type))
+        .filter((item: any) => ["registry:section"].includes(item.type))
         .map((item: any) => {
             return {
                 ...item,

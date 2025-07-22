@@ -10,7 +10,6 @@ const generateSections = (
         const sectionIndex = index + 1;
         return {
             name: `${sectionName}-${sectionIndex}`,
-            slug: `/sections/${sectionName}`,
             type: "registry:sections",
             auth: authConfig[index] === "T",
             pro: proConfig[index] === "T",
@@ -18,7 +17,6 @@ const generateSections = (
             files: [
                 `${BASE_PATH}sections/${sectionName}/${sectionName}${sectionIndex}.tsx`,
             ],
-            thumbnail: `/images/components/featured-images/${sectionName}${sectionIndex}.PNG`,
         };
     });
 };
