@@ -5,7 +5,6 @@ type Params = Promise<{ slug: string }>;
 
 const PreviewPage = async ({ params }: { params: Params }) => {
     const slug = await params;
-    console.log(slug);
 
     const Preview =
         Index["default"][slug.slug as keyof (typeof Index)["default"]]

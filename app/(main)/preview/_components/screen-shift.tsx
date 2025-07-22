@@ -2,12 +2,9 @@
 
 import * as React from "react";
 
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 import {
-    Eye,
-    Fullscreen,
     Monitor,
     RotateCw,
     Smartphone,
@@ -34,7 +31,6 @@ export function ScreenShift({
 
     const resizablePanelRef = React.useRef<ImperativePanelHandle>(null);
     const [iframeKey, setIframeKey] = React.useState(0);
-    const [view, setView] = React.useState("view");
 
     const contextValue = React.useMemo(
         () => ({
@@ -59,7 +55,6 @@ export function ScreenShift({
                                             type="single"
                                             defaultValue="100"
                                             onValueChange={(value) => {
-                                                setView("preview");
                                                 if (
                                                     resizablePanelRef?.current
                                                 ) {

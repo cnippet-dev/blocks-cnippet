@@ -37,6 +37,7 @@ import {
 } from "@/components/ui/resizable";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
+import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 
 interface SectionPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
     name: string;
@@ -44,10 +45,7 @@ interface SectionPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
     session: "authenticated" | "unauthenticated";
 }
 
-export function SectionPreview({
-    name,
-    children,
-}: SectionPreviewProps) {
+export function SectionPreview({ name, children }: SectionPreviewProps) {
     const [activeTab, setActiveTab] = React.useState<"preview" | "code">(
         "preview",
     );
@@ -80,51 +78,43 @@ export function SectionPreview({
     return (
         <div className={`relative mx-auto mt-32 first:mt-0`}>
             <div className="relative flex flex-col items-start justify-between md:flex-row md:items-center">
-                <div className="ml-auto flex items-center gap-10 md:-mt-20">
-                    <div className="font-normal">
-                        <div className="mx-auto flex w-fit items-center justify-center">
-                            <button
-                                onClick={() => setActiveTab("preview")}
-                                className={`flex items-center px-5 py-[0.45rem] text-sm tracking-wide ${activeTab === "preview" ? "border-b-2 border-black text-black dark:border-white dark:text-white" : "border-dawn-100 text-dawn-300"} border-b`}
-                            >
-                                <Eye className="size-5" />
-                                <span className="sr-only lg:not-sr-only lg:ml-2">
+                <div className="ml-auto flex items-center gap-10 md:-mt-13">
+                    <div className="flex items-center gap-2">
+                        <Tabs
+                            value={activeTab}
+                            onValueChange={(value) =>
+                                setActiveTab(value as "preview" | "code")
+                            }
+                        >
+                            <TabsList className="grid h-8 grid-cols-2 items-center rounded-md p-0.5 *:data-[slot=tabs-trigger]:h-6 *:data-[slot=tabs-trigger]:rounded-sm *:data-[slot=tabs-trigger]:px-2 *:data-[slot=tabs-trigger]:text-xs">
+                                <TabsTrigger value="preview">
                                     Preview
-                                </span>
-                            </button>
-
-                            <Button
-                                size="icon"
-                                variant="ghost"
-                                className="size-6 rounded-sm p-0"
-                                asChild
-                                title="Open in New Tab"
-                            >
-                                <Link href={`/preview/${name}`} target="_blank">
-                                    <span className="sr-only">
-                                        Open in New Tab
-                                    </span>
-                                    <Fullscreen />
-                                </Link>
-                            </Button>
-                            <button
-                                onClick={() => setActiveTab("code")}
-                                className={`flex items-center px-5 py-[0.45rem] text-sm tracking-wide ${activeTab === "code" ? "border-b-2 border-black text-black dark:border-white dark:text-white" : "border-dawn-100 text-dawn-300"} border-b`}
-                            >
-                                <Code className="size-5" />
-                                <span className="sr-only lg:not-sr-only lg:ml-2">
-                                    Code
-                                </span>
-                            </button>
-                        </div>
+                                </TabsTrigger>
+                                <TabsTrigger value="code">Code</TabsTrigger>
+                            </TabsList>
+                        </Tabs>
+                        <Separator orientation="vertical" className="!h-6" />
+                        <Button
+                            size="icon"
+                            variant="ghost"
+                            className="size-6 rounded-sm p-0"
+                            asChild
+                            title="Open in New Tab"
+                        >
+                            <Link href={`/preview/${name}`} target="_blank">
+                                <span className="sr-only">Open in New Tab</span>
+                                <Fullscreen />
+                            </Link>
+                        </Button>
                     </div>
                 </div>
             </div>
 
             <React.Suspense
                 fallback={
-                    <div className="text-muted-foreground flex items-center text-sm">
-                        Loading...
+                    <div className="flex min-h-[40vh] items-center justify-center gap-2">
+                        <div className="loader"></div>
+                        Loading component...
                     </div>
                 }
             >
