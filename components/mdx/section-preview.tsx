@@ -3,41 +3,15 @@
 import * as React from "react";
 import { Index } from "@/__registry__";
 
-import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { cn, scrollToSection } from "@/lib/utils";
-
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog-cn";
-import Image from "next/image";
-import { useConfig } from "@/lib/use-config";
-import {
-    Code,
-    Eye,
     Fullscreen,
-    Loader,
-    Monitor,
-    RotateCw,
-    Smartphone,
-    Tablet,
 } from "lucide-react";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { ImperativePanelHandle } from "react-resizable-panels";
 
-import {
-    ResizableHandle,
-    ResizablePanel,
-    ResizablePanelGroup,
-} from "@/components/ui/resizable";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
+import { useConfig } from "@/lib/use-config";
 
 interface SectionPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
     name: string;
@@ -49,7 +23,7 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
     const [activeTab, setActiveTab] = React.useState<"preview" | "code">(
         "preview",
     );
-    const [config] = useConfig();
+    const [config] = useConfig();   
     const Codes = React.Children.toArray(children) as React.ReactElement[];
     const Src = Codes[0];
 
@@ -73,7 +47,7 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
         }
 
         return <Component />;
-    }, [name]);
+    }, [name, config.style]);
 
     return (
         <div className={`relative mx-auto mt-32 first:mt-0`}>
