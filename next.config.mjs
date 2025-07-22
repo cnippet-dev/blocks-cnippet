@@ -1,6 +1,7 @@
 import nextMDX from "@next/mdx";
 import rehypePrettyCode from "rehype-pretty-code";
 import { withContentCollections } from "@content-collections/next";
+import withBundleAnalyzer from "@next/bundle-analyzer";
 
 /** @type {import('rehype-pretty-code').Options} */
 const options = {
@@ -37,4 +38,10 @@ const nextConfig = {
     },
 };
 
-export default withContentCollections(withMDX(nextConfig));
+const withBundleAnalyzerConfig = withBundleAnalyzer({
+    enabled: process.env.ANALYZE === "true",
+});
+
+export default withContentCollections(
+    withMDX(withBundleAnalyzerConfig(nextConfig)),
+);

@@ -11,13 +11,15 @@ interface Section {
     name: string;
     slug: string;
     thumbnail: string;
+    number: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Sections = (props: any) => {
     const components = Object.values(Index["default"]).filter(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (item: any): item is Section => item.type === "registry:section",
+        (item: any): item is Section =>
+            item.type === "registry:section" && "thumbnail" in item,
     );
 
     return (
@@ -48,34 +50,37 @@ const Sections = (props: any) => {
                         <div className="grid grid-cols-1 divide-y border-t md:grid-cols-12 dark:divide-neutral-800 dark:border-neutral-800">
                             {components
                                 ?.slice(0, props.count)
-                                .map((component, i) => (
-                                    <div
-                                        key={i}
-                                        className={`relative col-span-4 w-full ${i === 2 || i === 5 ? "border-r-0" : "border-r"} ${i === 5 ? "border-b" : ""} dark:border-neutral-800`}
-                                    >
-                                        <Image
-                                            width="960"
-                                            height="600"
-                                            src={component.thumbnail}
-                                            sizes="100vw"
-                                            alt="Description of my image"
-                                            className="w-full border-b bg-black"
-                                        />
+                                .map((component, i) => {
+                                    const section = component as Section;
+                                    return (
+                                        <div
+                                            key={i}
+                                            className={`relative col-span-4 w-full ${i === 2 || i === 5 ? "border-r-0" : "border-r"} ${i === 5 ? "border-b" : ""} dark:border-neutral-800`}
+                                        >
+                                            <Image
+                                                width="960"
+                                                height="600"
+                                                src={section.thumbnail}
+                                                sizes="100vw"
+                                                alt="Description of my image"
+                                                className="w-full border-b bg-black"
+                                            />
 
-                                        <div className="flex flex-col items-start p-4">
-                                            <Link
-                                                href={component.slug}
-                                                className="font-medium text-black/80 capitalize dark:text-neutral-400"
-                                            >
-                                                {component.name}
-                                                <span className="absolute inset-0"></span>
-                                            </Link>
-                                            <p className="text-sm text-gray-400">
-                                                3 components
-                                            </p>
+                                            <div className="flex flex-col items-start p-4">
+                                                <Link
+                                                    href={section.slug}
+                                                    className="font-medium text-black/80 capitalize dark:text-neutral-400"
+                                                >
+                                                    {component.name}
+                                                    <span className="absolute inset-0"></span>
+                                                </Link>
+                                                <p className="text-sm text-gray-400">
+                                                    {section.number} components
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    );
+                                })}
                         </div>
                     </div>
 
