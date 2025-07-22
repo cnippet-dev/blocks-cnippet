@@ -1,5 +1,6 @@
 import React from "react";
 import { Index } from "@/__registry__";
+import { ScreenShift } from "../_components/screen-shift";
 
 type Params = Promise<{ slug: string }>;
 
@@ -21,23 +22,9 @@ const PreviewPage = async ({ params }: { params: Params }) => {
 
     return (
         <>
-            <section>
-                <React.Suspense
-                    fallback={
-                        <div className="text-muted-foreground flex items-center text-sm">
-                            Loading...
-                        </div>
-                    }
-                >
-                    <div className="overflow-col-span-2 row-start-2 mx-auto min-w-0">
-                        <div
-                            className={`font-ins overflow-y-auto bg-white font-medium break-words`}
-                        >
-                            <Preview />
-                        </div>
-                    </div>
-                </React.Suspense>
-            </section>
+            <div className="px-10 py-10">
+                <ScreenShift name={slug.slug} />
+            </div>
         </>
     );
 };
