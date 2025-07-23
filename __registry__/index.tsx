@@ -33,8 +33,8 @@ export const Index = {
       "pricing-3": {
         name: "pricing-3",
         type: "registry:sections",
-        auth: false,
-        pro: false,
+        auth: true,
+        pro: true,
         files: ["registry/default/sections/pricing/pricing3.tsx"],
         component: React.lazy(() => import("@/registry/default/sections/pricing/pricing3.tsx")),
       },
@@ -49,7 +49,7 @@ export const Index = {
       "pricing-5": {
         name: "pricing-5",
         type: "registry:sections",
-        auth: false,
+        auth: true,
         pro: false,
         files: ["registry/default/sections/pricing/pricing5.tsx"],
         component: React.lazy(() => import("@/registry/default/sections/pricing/pricing5.tsx")),
@@ -65,7 +65,7 @@ export const Index = {
       "pricing-7": {
         name: "pricing-7",
         type: "registry:sections",
-        auth: false,
+        auth: true,
         pro: false,
         files: ["registry/default/sections/pricing/pricing7.tsx"],
         component: React.lazy(() => import("@/registry/default/sections/pricing/pricing7.tsx")),

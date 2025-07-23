@@ -5,6 +5,7 @@ import AuthProvider from "@/providers/auth-provider";
 import ThemeProvider from "@/providers/theme-provider";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { BASE_URL } from "@/config/docs";
+import { ProStatusProvider } from "@/providers/pro-status-provider";
 
 export const metadata: Metadata = {
     metadataBase: new URL(BASE_URL),
@@ -74,21 +75,17 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body>
-                    <AuthProvider>
-                        <ThemeProvider
-                            attribute="class"
-                            defaultTheme="system"
-                            enableSystem
-                            disableTransitionOnChange
-                        >
-                            {children}
-                            <Sonner
-                                richColors
-                                expand={true}
-                                position="top-right"
-                            />
-                        </ThemeProvider>
-                    </AuthProvider>
+                <AuthProvider>
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="system"
+                        enableSystem
+                        disableTransitionOnChange
+                    >
+                        <ProStatusProvider>{children}</ProStatusProvider>
+                        <Sonner richColors expand={true} position="top-right" />
+                    </ThemeProvider>
+                </AuthProvider>
             </body>
         </html>
     );

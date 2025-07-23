@@ -25,7 +25,7 @@ export const sections = [
     ...generateSections(
         "pricing",
         7,
-        ["F", "F", "F", "F", "F", "F", "F"],
-        ["F", "F", "F", "F", "F", "F", "F"],
+        ["F", "F", "T", "F", "T", "F", "T"],
+        ["F", "F", "T", "F", "F", "F", "F"],
     ),
 ];
