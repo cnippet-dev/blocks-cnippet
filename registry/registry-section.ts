@@ -21,6 +21,10 @@ export const section: Registry = generateSections([
         name: "pricing",
         no: "4",
     },
+    {
+        name: "hero",
+        no: "2",
+    },
 ]);
 
 
