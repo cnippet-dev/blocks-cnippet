@@ -14,6 +14,15 @@ export const Index = {
         files: ["registry/default/sections/hero/hero1.tsx"],
         component: React.lazy(() => import("@/registry/default/sections/hero/hero1.tsx")),
       },
+      "hero": {
+        name: "hero",
+        type: "registry:section",
+        slug: "/sections/hero",
+        thumbnail: "https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/hero.png",
+        number: "4",
+        files: ["registry/default/sections/hero/hero1.tsx"],
+        component: React.lazy(() => import("@/registry/default/sections/hero/hero1.tsx")),
+      },
       "pricing-1": {
         name: "pricing-1",
         type: "registry:sections",
@@ -33,8 +42,8 @@ export const Index = {
       "pricing-3": {
         name: "pricing-3",
         type: "registry:sections",
-        auth: false,
-        pro: false,
+        auth: true,
+        pro: true,
         files: ["registry/default/sections/pricing/pricing3.tsx"],
         component: React.lazy(() => import("@/registry/default/sections/pricing/pricing3.tsx")),
       },
@@ -49,7 +58,7 @@ export const Index = {
       "pricing-5": {
         name: "pricing-5",
         type: "registry:sections",
-        auth: false,
+        auth: true,
         pro: false,
         files: ["registry/default/sections/pricing/pricing5.tsx"],
         component: React.lazy(() => import("@/registry/default/sections/pricing/pricing5.tsx")),
@@ -65,10 +74,26 @@ export const Index = {
       "pricing-7": {
         name: "pricing-7",
         type: "registry:sections",
-        auth: false,
+        auth: true,
         pro: false,
         files: ["registry/default/sections/pricing/pricing7.tsx"],
         component: React.lazy(() => import("@/registry/default/sections/pricing/pricing7.tsx")),
+      },
+      "hero-1": {
+        name: "hero-1",
+        type: "registry:sections",
+        auth: true,
+        pro: true,
+        files: ["registry/default/sections/hero/hero1.tsx"],
+        component: React.lazy(() => import("@/registry/default/sections/hero/hero1.tsx")),
+      },
+      "hero-2": {
+        name: "hero-2",
+        type: "registry:sections",
+        auth: true,
+        pro: true,
+        files: ["registry/default/sections/hero/hero2.tsx"],
+        component: React.lazy(() => import("@/registry/default/sections/hero/hero2.tsx")),
       },
     },
 }
