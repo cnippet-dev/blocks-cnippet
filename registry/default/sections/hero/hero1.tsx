@@ -22,14 +22,14 @@ export default function HeroSection() {
             <div className="mx-auto max-w-7xl">
                 <div className="flex flex-col items-center justify-center gap-10 text-center">
                     <div className="space-y-5">
-                        <h1 className="font-lite mx-auto max-w-2xl text-4xl font-normal text-gray-900 md:text-5xl lg:text-[5rem]">
+                        <h1 className="font-lite mx-auto max-w-3xl text-4xl font-normal text-gray-900 md:text-5xl lg:text-[5rem]">
                             Your mindset shapes{" "}
                             <span className="font-normal text-emerald-700 italic">
                                 everything.
                             </span>
                         </h1>
 
-                        <p className="font-kumb mx-auto max-w-2xl text-xl leading-relaxed text-gray-600">
+                        <p className="font-kumb mx-auto max-w-2xl text-xl font-light leading-relaxed text-gray-600">
                             A calm and steady mind is the foundation of every
                             meaningful change — start within, and watch life
                             shift around you.

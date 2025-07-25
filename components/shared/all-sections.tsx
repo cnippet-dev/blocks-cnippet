@@ -15,11 +15,11 @@ interface Section {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Sections = (props: any) => {
-    const components = Object.values(Index["default"]).filter(
+const Sections = (props: { count?: number; sections?: any[] }) => {
+    const components = props.sections ?? Object.values(Index["default"]).filter(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (item: any): item is Section =>
-            item.type === "registry:section" && "thumbnail" in item,
+            item.type === "registry:sections" && "thumbnail" in item,
     );
 
     return (

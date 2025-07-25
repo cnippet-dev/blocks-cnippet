@@ -1,83 +1,122 @@
-import React from "react";
-import { Metadata } from "next";
-
+"use client";
+import React, { FormEvent, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Sections from "@/components/shared/all-sections";
+import { Index } from "@/__registry__";
+import Image from "next/image";
+import SectionsPage from "./_components/categories";
+import Navbar from "@/components/shared/navbar/nav-1";
+
+const getCategories = () => {
+    // Only include items of type registry:sections
+    return Object.values(Index["default"])
+        .filter((item: any) => item.type === "registry:section")
+        .map((item: any) => item.name);
+};
 
 const page = () => {
-    const structuredData = {
-        "@context": "https://schema.org",
-        "@type": "Webpage",
-        name: "Components - cnippet/ui",
-        url: "https://ui.cnippet.site/sections",
-        description:
-            "An extensive collection of copy-and-paste components for quickly building app UIs. Free, open-source, and ready to drop into your projects..",
-        image: `${baseUrl}/images/og/site.png`,
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const category = searchParams.get("category") || "";
+    const license = searchParams.get("license") || "";
 
-        publisher: {
-            "@type": "Organization",
-            name: "Cnippet",
-            url: "https://ui.cnippet.site",
-        },
+    const categories = getCategories();
+    const [screenshotUrl, setScreenshotUrl] = useState<string | null>(null);
+
+    // Filter sections by category and license if selected
+    const filteredSections = Object.values(Index["default"]).filter(
+        (item: any) =>
+            item.type === "registry:sections" &&
+            (category ? item.name.includes(category) : true) &&
+            (license
+                ? license === "pro"
+                    ? item.pro === true
+                    : item.pro === false
+                : true),
+    );
+
+    const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value;
+        const params = new URLSearchParams(searchParams.toString());
+        if (value) {
+            params.set("category", value);
+        } else {
+            params.delete("category");
+        }
+        router.push(`/sections?${params.toString()}`);
+    };
+
+    const handleLicenseChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value;
+        const params = new URLSearchParams(searchParams.toString());
+        if (value) {
+            params.set("license", value);
+        } else {
+            params.delete("license");
+        }
+        router.push(`/sections?${params.toString()}`);
     };
 
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify(structuredData),
-                }}
-            />
+        <Navbar/>
+            <SectionsPage />
+            <div className="container mx-auto px-4 py-8">
+                <div className="mb-6 flex items-center gap-4">
+                    <label htmlFor="category" className="text-lg font-medium">
+                        Filter by Section:
+                    </label>
+                    <select
+                        id="category"
+                        value={category}
+                        onChange={handleCategoryChange}
+                        className="rounded border px-3 py-2"
+                    >
+                        <option value="">All</option>
+                        {categories.map((cat) => (
+                            <option key={cat} value={cat}>
+                                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                            </option>
+                        ))}
+                    </select>
+                    <label
+                        htmlFor="license"
+                        className="ml-4 text-lg font-medium"
+                    >
+                        License:
+                    </label>
+                    <select
+                        id="license"
+                        value={license}
+                        onChange={handleLicenseChange}
+                        className="rounded border px-3 py-2"
+                    >
+                        <option value="">All</option>
+                        <option value="free">Free</option>
+                        <option value="pro">Pro</option>
+                    </select>
+                </div>
 
-            <Sections count={15} />
+                <div className="mx-auto grid max-w-7xl grid-cols-2 gap-10">
+                    {filteredSections.map((section) => (
+                        <div key={section.name}>
+                            <Image
+                                src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/${section.name}.png`}
+                                alt={section.name}
+                                width={4210}
+                                height={1080}
+                                className="aspect-video h-full w-full rounded-2xl border object-cover object-top"
+                            />
+                            <h2>
+                                {section.name}{" "}
+                                {(section as any).pro ? "(Pro)" : "(Free)"}
+                            </h2>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </>
     );
 };
 
 export default page;
-
-const baseUrl = process.env.NEXT_PUBLIC_URL
-    ? process.env.NEXT_PUBLIC_URL
-    : "http://localhost:3000";
-
-export const metadata: Metadata = {
-    metadataBase: new URL(baseUrl),
-
-    title: "Sections",
-    description:
-        "An extensive collection of copy-and-paste components for quickly building app UIs. Free, open-source, and ready to drop into your projects..",
-    robots: "index, follow",
-
-    applicationName: "Cnippet Ui",
-
-    alternates: {
-        canonical: `${baseUrl}/sections`,
-        languages: {
-            en: [
-                {
-                    url: `${baseUrl}/sections`,
-                },
-            ],
-        },
-        types: {
-            url: `${baseUrl}/sections`,
-        },
-    },
-
-    openGraph: {
-        title: "Sections - cnippet/ui",
-        description:
-            "An extensive collection of copy-and-paste components for quickly building app UIs. Free, open-source, and ready to drop into your projects..",
-        url: "https://ui.cnippet.site/sections",
-        images: ["/images/og/site.png"],
-        siteName: "Cnippet Ui",
-    },
-
-    twitter: {
-        card: "summary_large_image",
-        title: "Sections - cnippet/ui",
-        description:
-            "An extensive collection of copy-and-paste components for quickly building app UIs. Free, open-source, and ready to drop into your projects..",
-        images: ["/images/og/site.png"],
-    },
-};

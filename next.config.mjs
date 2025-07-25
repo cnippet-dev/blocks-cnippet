@@ -3,16 +3,11 @@ import rehypePrettyCode from "rehype-pretty-code";
 import { withContentCollections } from "@content-collections/next";
 import withBundleAnalyzer from "@next/bundle-analyzer";
 
-/** @type {import('rehype-pretty-code').Options} */
-const options = {
-    theme: "night-owl",
-};
-
 const withMDX = nextMDX({
     extension: /\.mdx?$/,
     options: {
         remarkPlugins: [],
-        rehypePlugins: [[rehypePrettyCode, options]],
+        rehypePlugins: [[rehypePrettyCode]],
     },
 });
 
