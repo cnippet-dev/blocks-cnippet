@@ -1,12 +1,16 @@
 "use client";
 
 import * as React from "react";
-import { Search, Grid3X3, LayoutGrid, ExternalLink } from "lucide-react";
+import {
+    LayoutGrid,
+    Grid3X3,
+    ExternalLink,
+    X,
+    ChevronDown,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -15,7 +19,6 @@ import {
     SidebarGroup,
     SidebarGroupContent,
     SidebarGroupLabel,
-    SidebarHeader,
     SidebarInset,
     SidebarProvider,
     SidebarTrigger,
@@ -25,173 +28,143 @@ import {
     CollapsibleContent,
     CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { ChevronDown } from "lucide-react";
+import { Index } from "@/__registry__";
+import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 
-// Sample data
-const platforms = [
-    { id: "webflow", name: "Webflow", icon: "🌊" },
-    { id: "framer", name: "Framer", icon: "🎨" },
-    { id: "figma", name: "Figma", icon: "🎯" },
-];
-
-const collections = [
-    { id: "sana", name: "Sana", icon: "🌸" },
-    { id: "antik", name: "Antik", icon: "⚫" },
-    { id: "beam", name: "Beam", icon: "🔵" },
-    { id: "echo", name: "Echo", icon: "📢" },
-    { id: "donezo", name: "Donezo", icon: "✅" },
-    { id: "helio", name: "Helio", icon: "☀️" },
-    { id: "wonder", name: "Wonder", icon: "⭐" },
-    { id: "cyrus", name: "Cyrus", icon: "🔷" },
-    { id: "jambo", name: "Jambo", icon: "🎪" },
-    { id: "zen", name: "Zen", icon: "🧘" },
-];
-
-const categories = [
-    "Header",
-    "Navigation",
-    "Content",
-    "Feature",
-    "Testimonial",
-    "Pricing",
-    "Footer",
-    "CTA",
-    "Team",
-];
-
-const components = [
-    {
-        id: 1,
-        title: "Sana Header 07",
-        category: "Header",
-        collection: "sana",
-        platform: "webflow",
-        isPro: true,
-        image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%7BFDD5392F-A968-4EF0-96F5-B8F0F9CE5A45%7D-wHki63TrOI9g4pvCZVoUtpVJVBNlOm.png",
-        addedDate: "Jul 10, 2025",
-    },
-    {
-        id: 2,
-        title: "Sana Header 06",
-        category: "Header",
-        collection: "sana",
-        platform: "framer",
-        isPro: true,
-        image: "/placeholder.svg?height=300&width=400",
-        addedDate: "Jul 9, 2025",
-    },
-    {
-        id: 3,
-        title: "Beam Navigation 01",
-        category: "Navigation",
-        collection: "beam",
-        platform: "figma",
-        isPro: false,
-        image: "/placeholder.svg?height=300&width=400",
-        addedDate: "Jul 8, 2025",
-    },
-    {
-        id: 4,
-        title: "Echo Feature 03",
-        category: "Feature",
-        collection: "echo",
-        platform: "webflow",
-        isPro: true,
-        image: "/placeholder.svg?height=300&width=400",
-        addedDate: "Jul 7, 2025",
-    },
-    {
-        id: 5,
-        title: "Wonder CTA 02",
-        category: "CTA",
-        collection: "wonder",
-        platform: "framer",
-        isPro: false,
-        image: "/placeholder.svg?height=300&width=400",
-        addedDate: "Jul 6, 2025",
-    },
-    {
-        id: 6,
-        title: "Zen Footer 01",
-        category: "Footer",
-        collection: "zen",
-        platform: "figma",
-        isPro: true,
-        image: "/placeholder.svg?height=300&width=400",
-        addedDate: "Jul 5, 2025",
-    },
-];
-
-const tabs = [
-    { id: "components", name: "Components", icon: "🧩", active: true },
-    { id: "wireframes", name: "Wireframes", icon: "📐", active: false },
-    { id: "elements", name: "Elements", icon: "🔷", active: false },
-    { id: "illustrations", name: "Illustrations", icon: "🎨", active: false },
-    { id: "icons", name: "Icons", icon: "⭐", active: false },
-];
+const getCategories = () => {
+    return Array.from(
+        new Set(
+            Object.values(Index["default"])
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                .filter((item: any) => item.type === "registry:sections")
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                .map((item: any) => {
+                    const match = item.name.match(/^(.*?)-/);
+                    return match ? match[1] : item.name;
+                }),
+        ),
+    );
+};
 
 export default function SectionsPage() {
-    const [searchQuery, setSearchQuery] = React.useState("");
-    const [selectedPlatforms, setSelectedPlatforms] = React.useState<string[]>(
-        [],
-    );
-    const [selectedCollections, setSelectedCollections] = React.useState<
-        string[]
-    >([]);
-    const [selectedCategories, setSelectedCategories] = React.useState<
-        string[]
-    >([]);
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const urlCategories = searchParams.get("categories") || "";
+    const selectedCategories = urlCategories
+        .split("|")
+        .map((c) => c.trim())
+        .filter(Boolean);
+    const urlLicense = searchParams.get("license") || "";
+    const categories = getCategories();
     const [viewMode, setViewMode] = React.useState<"grid" | "list">("grid");
 
-    const filteredComponents = components.filter((component) => {
-        const matchesSearch = component.title
-            .toLowerCase()
-            .includes(searchQuery.toLowerCase());
-        const matchesPlatform =
-            selectedPlatforms.length === 0 ||
-            selectedPlatforms.includes(component.platform);
-        const matchesCollection =
-            selectedCollections.length === 0 ||
-            selectedCollections.includes(component.collection);
-        const matchesCategory =
-            selectedCategories.length === 0 ||
-            selectedCategories.includes(component.category);
+    const filteredSections = Object.values(Index["default"]).filter(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (item: any) => {
+            if (item.type !== "registry:sections") return false;
+            if (selectedCategories.length > 0) {
+                const match = item.name.match(/^(.*?)-/);
+                const category = match ? match[1] : item.name;
+                if (!selectedCategories.includes(category)) return false;
+            }
+            if (urlLicense === "pro" && !item.pro) return false;
+            if (urlLicense === "free" && item.pro) return false;
+            return true;
+        },
+    );
 
-        return (
-            matchesSearch &&
-            matchesPlatform &&
-            matchesCollection &&
-            matchesCategory
-        );
-    });
-
-    const handlePlatformChange = (platformId: string, checked: boolean) => {
-        setSelectedPlatforms((prev) =>
-            checked
-                ? [...prev, platformId]
-                : prev.filter((id) => id !== platformId),
-        );
+    const updateCategoryInUrl = (categoriesArr: string[], license?: string) => {
+        const params = new URLSearchParams(searchParams.toString());
+        if (categoriesArr.length > 0) {
+            params.set("categories", categoriesArr.join("|"));
+        } else {
+            params.delete("categories");
+        }
+        if (license) {
+            params.set("license", license);
+        } else {
+            params.delete("license");
+        }
+        router.push(`/sections?${params.toString()}`);
     };
 
-    const handleCollectionChange = (collectionId: string, checked: boolean) => {
-        setSelectedCollections((prev) =>
-            checked
-                ? [...prev, collectionId]
-                : prev.filter((id) => id !== collectionId),
-        );
-    };
-
-    const handleCategoryChange = (category: string, checked: boolean) => {
-        setSelectedCategories((prev) =>
-            checked ? [...prev, category] : prev.filter((c) => c !== category),
-        );
-    };
+    const capitalize = (str: string) =>
+        str.charAt(0).toUpperCase() + str.slice(1);
 
     return (
         <SidebarProvider>
-            <div className="flex min-h-screen w-full font-sans">
-                <Sidebar className="border-r pt-10">
-                    <SidebarContent>
+            <div className="flex min-h-screen w-full">
+                <Sidebar className="border-r pt-20">
+                    <SidebarContent className="px-3">
+                        <SidebarGroup>
+                            <SidebarGroupLabel className="text-sm font-normal">
+                                Applied Filters
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="ml-auto"
+                                    onClick={() => updateCategoryInUrl([], "")}
+                                >
+                                    Clear all
+                                </Button>
+                            </SidebarGroupLabel>
+                            <SidebarGroupContent>
+                                <div className="mt-2 flex flex-wrap gap-2">
+                                    {selectedCategories.length === 0 &&
+                                        !urlLicense && (
+                                            <span className="text-muted-foreground text-xs">
+                                                No filters applied
+                                            </span>
+                                        )}
+                                    {selectedCategories.map((category) => (
+                                        <Button
+                                            key={category}
+                                            className="flex h-fit cursor-pointer items-center gap-1 rounded-lg bg-purple-200 px-3 py-1 text-purple-700 hover:bg-purple-200"
+                                        >
+                                            <span>{capitalize(category)}</span>
+                                            <div
+                                                className="ml-1 bg-none text-xs text-purple-700 hover:text-purple-900"
+                                                onClick={() => {
+                                                    const updated =
+                                                        selectedCategories.filter(
+                                                            (c) =>
+                                                                c !== category,
+                                                        );
+                                                    updateCategoryInUrl(
+                                                        updated,
+                                                        urlLicense,
+                                                    );
+                                                }}
+                                            >
+                                                <X className="size-2" />
+                                            </div>
+                                        </Button>
+                                    ))}
+                                    {urlLicense && (
+                                        <Button
+                                            className="flex h-fit cursor-pointer items-center gap-1 rounded-lg bg-blue-200 px-3 py-1 text-blue-700 hover:bg-blue-200"
+                                            onClick={() => {
+                                                updateCategoryInUrl(
+                                                    selectedCategories,
+                                                    "",
+                                                );
+                                            }}
+                                        >
+                                            <span>
+                                                {urlLicense === "pro"
+                                                    ? "Pro"
+                                                    : "Free"}
+                                            </span>
+                                            <div className="ml-1 bg-none text-xs text-blue-700 hover:text-blue-900">
+                                                <X className="size-2" />
+                                            </div>
+                                        </Button>
+                                    )}
+                                </div>
+                            </SidebarGroupContent>
+                        </SidebarGroup>
+
                         <Collapsible defaultOpen>
                             <SidebarGroup>
                                 <CollapsibleTrigger asChild>
@@ -203,24 +176,90 @@ export default function SectionsPage() {
                                 <CollapsibleContent>
                                     <SidebarGroupContent>
                                         <div className="mt-5 flex flex-wrap gap-2">
-                                            {categories.map((category) => (
-                                                <div
-                                                    key={category}
-                                                    className="flex items-center space-x-2 rounded-md border px-2 py-1"
-                                                >
-                                                    <Label
-                                                        htmlFor={category}
-                                                        className="cursor-pointer text-[15px] font-normal"
+                                            {categories
+                                                .filter(
+                                                    (category) =>
+                                                        !selectedCategories.includes(
+                                                            category,
+                                                        ),
+                                                )
+                                                .map((category) => (
+                                                    <Button
+                                                        key={category}
+                                                        variant="outline"
+                                                        onClick={() => {
+                                                            const updated = [
+                                                                ...selectedCategories,
+                                                                category,
+                                                            ];
+                                                            updateCategoryInUrl(
+                                                                updated,
+                                                                urlLicense,
+                                                            );
+                                                        }}
+                                                        className="flex h-fit items-center space-x-2 rounded-md border px-2 py-1"
                                                     >
-                                                        {category}
-                                                    </Label>
-                                                </div>
-                                            ))}
+                                                        <Label
+                                                            htmlFor={category}
+                                                            className="cursor-pointer text-[15px] font-normal"
+                                                        >
+                                                            {capitalize(
+                                                                category,
+                                                            )}
+                                                        </Label>
+                                                    </Button>
+                                                ))}
                                         </div>
                                     </SidebarGroupContent>
                                 </CollapsibleContent>
                             </SidebarGroup>
                         </Collapsible>
+
+                        <SidebarGroup>
+                            <SidebarGroupLabel className="mt-6 text-sm font-normal">
+                                License
+                            </SidebarGroupLabel>
+                            <SidebarGroupContent>
+                                <div className="mt-2 flex gap-2">
+                                    <Button
+                                        variant={
+                                            urlLicense === "pro"
+                                                ? "secondary"
+                                                : "outline"
+                                        }
+                                        className="rounded-md px-3 py-1 text-sm"
+                                        onClick={() =>
+                                            updateCategoryInUrl(
+                                                selectedCategories,
+                                                urlLicense === "pro"
+                                                    ? ""
+                                                    : "pro",
+                                            )
+                                        }
+                                    >
+                                        Pro
+                                    </Button>
+                                    <Button
+                                        variant={
+                                            urlLicense === "free"
+                                                ? "secondary"
+                                                : "outline"
+                                        }
+                                        className="rounded-md px-3 py-1 text-sm"
+                                        onClick={() =>
+                                            updateCategoryInUrl(
+                                                selectedCategories,
+                                                urlLicense === "free"
+                                                    ? ""
+                                                    : "free",
+                                            )
+                                        }
+                                    >
+                                        Free
+                                    </Button>
+                                </div>
+                            </SidebarGroupContent>
+                        </SidebarGroup>
                     </SidebarContent>
                 </Sidebar>
 
@@ -235,8 +274,8 @@ export default function SectionsPage() {
                                     <Button
                                         variant={
                                             viewMode === "grid"
-                                                ? "secondary"
-                                                : "ghost"
+                                                ? "outline"
+                                                : "outline"
                                         }
                                         size="sm"
                                         onClick={() => setViewMode("grid")}
@@ -269,15 +308,15 @@ export default function SectionsPage() {
 
                     <main className="p-6">
                         <div className="mb-6">
-                            <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-purple-500 to-blue-600 p-8 text-white">
+                            <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-purple-700 to-blue-800 p-8 text-white">
                                 <div className="relative z-10">
-                                    <div className="mb-4 inline-block rounded-full bg-white/20 px-3 py-1 text-sm">
+                                    <div className="mb-2 inline-block rounded-full bg-white/20 px-3 py-1 text-xs">
                                         Build Better, Faster
                                     </div>
-                                    <h1 className="mb-4 text-4xl font-bold">
+                                    <h1 className="mb-2 text-2xl font-medium">
                                         Build a better website, faster than ever
                                     </h1>
-                                    <p className="mb-6 max-w-2xl text-lg">
+                                    <p className="mb-3 max-w-2xl text-sm">
                                         Browse thousands of components and paste
                                         them directly into your project. Built
                                         for every category to help you build
@@ -304,110 +343,76 @@ export default function SectionsPage() {
                         <div
                             className={`grid gap-6 ${
                                 viewMode === "grid"
-                                    ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                                    ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-2"
                                     : "grid-cols-1"
                             }`}
                         >
-                            {filteredComponents.map((component) => (
-                                <Card
-                                    key={component.id}
-                                    className="group cursor-pointer border-0 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                                >
-                                    <CardContent className="p-0">
-                                        <div className="relative overflow-hidden rounded-t-lg bg-gradient-to-br from-amber-50 to-orange-100">
-                                            <img
-                                                src={
-                                                    component.image ||
-                                                    "/placeholder.svg"
-                                                }
-                                                alt={component.title}
-                                                className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                            />
-                                            <div className="absolute top-3 right-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                                <Button
-                                                    size="sm"
-                                                    variant="secondary"
-                                                    className="h-8 w-8 rounded-full p-0"
-                                                >
-                                                    <ExternalLink className="h-4 w-4" />
-                                                </Button>
-                                            </div>
-                                        </div>
-
-                                        <div className="p-4">
-                                            <div className="mb-2 flex items-center justify-between">
-                                                <h3 className="group-hover:text-primary text-lg font-semibold transition-colors">
-                                                    {component.title}
-                                                </h3>
-                                                {component.isPro && (
-                                                    <Badge
+                            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                            {filteredSections.map((section: any) => {
+                                const match = section.name.match(/^(.*?)-/);
+                                const category = match
+                                    ? match[1]
+                                    : section.name;
+                                return (
+                                    <Card
+                                        key={section.name}
+                                        className="group cursor-pointer border-0 shadow-none"
+                                    >
+                                        <CardContent className="p-0">
+                                            <div className="relative overflow-hidden">
+                                                <Image
+                                                    src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/${section.name}.png`}
+                                                    alt={section.name}
+                                                    width={4210}
+                                                    height={1080}
+                                                    className="aspect-video h-full w-full rounded-2xl border object-cover object-top"
+                                                />
+                                                <div className="absolute top-3 right-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                                                    <Button
+                                                        size="sm"
                                                         variant="secondary"
-                                                        className="bg-purple-100 text-purple-700"
+                                                        className="h-8 w-8 rounded-full p-0"
                                                     >
-                                                        Pro
-                                                    </Badge>
-                                                )}
+                                                        <ExternalLink className="h-4 w-4" />
+                                                    </Button>
+                                                </div>
                                             </div>
 
-                                            <p className="text-muted-foreground mb-3 text-sm">
-                                                Added {component.addedDate} in{" "}
-                                                {component.category}
-                                            </p>
-
-                                            <div className="flex items-center gap-2">
-                                                <span className="bg-muted rounded px-2 py-1 text-xs">
-                                                    {
-                                                        collections.find(
-                                                            (c) =>
-                                                                c.id ===
-                                                                component.collection,
-                                                        )?.icon
-                                                    }
-                                                    {
-                                                        collections.find(
-                                                            (c) =>
-                                                                c.id ===
-                                                                component.collection,
-                                                        )?.name
-                                                    }
-                                                </span>
-                                                <span className="bg-muted rounded px-2 py-1 text-xs">
-                                                    {
-                                                        platforms.find(
-                                                            (p) =>
-                                                                p.id ===
-                                                                component.platform,
-                                                        )?.icon
-                                                    }
-                                                    {
-                                                        platforms.find(
-                                                            (p) =>
-                                                                p.id ===
-                                                                component.platform,
-                                                        )?.name
-                                                    }
-                                                </span>
+                                            <div className="p-4">
+                                                <div className="mb-2 flex items-center justify-between">
+                                                    <h3 className="group-hover:text-primary text-lg font-semibold">
+                                                        {capitalize(
+                                                            section.name,
+                                                        )}
+                                                    </h3>
+                                                    {section.pro && (
+                                                        <Badge
+                                                            variant="secondary"
+                                                            className="bg-purple-100 text-purple-700"
+                                                        >
+                                                            Pro
+                                                        </Badge>
+                                                    )}
+                                                </div>
+                                                <p className="text-muted-foreground mb-3 text-sm">
+                                                    {category}
+                                                </p>
                                             </div>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            ))}
+                                        </CardContent>
+                                    </Card>
+                                );
+                            })}
                         </div>
 
-                        {filteredComponents.length === 0 && (
+                        {filteredSections.length === 0 && (
                             <div className="py-12 text-center">
                                 <p className="text-muted-foreground">
-                                    No components found matching your filters.
+                                    No sections found matching your filters.
                                 </p>
                                 <Button
                                     variant="outline"
                                     className="mt-4 bg-transparent"
-                                    onClick={() => {
-                                        setSelectedPlatforms([]);
-                                        setSelectedCollections([]);
-                                        setSelectedCategories([]);
-                                        setSearchQuery("");
-                                    }}
+                                    onClick={() => updateCategoryInUrl([], "")}
                                 >
                                     Clear all filters
                                 </Button>
