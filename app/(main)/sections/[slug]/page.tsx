@@ -36,7 +36,7 @@ export default async function Blogpage({ params }: { params: Params }) {
             <Navbar />
             <main className="">
                 <div className="mx-auto w-full max-w-full border-t-0 border-b px-4 md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-800 dark:bg-black">
-                    <div className="border border-t-0 border-b-0 dark:border-neutral-800 p-10">
+                    <div className="border border-t-0 border-b-0 dark:border-neutral-800">
                         {doc?.body && <Mdx code={doc?.body.code} />}
                     </div>
                 </div>

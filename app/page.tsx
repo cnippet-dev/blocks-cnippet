@@ -123,7 +123,6 @@ export default function Cursor1() {
     );
 }
 
-
 // import Component from '@/registry/default/sections/login/login1'
 // import React from 'react'
 
