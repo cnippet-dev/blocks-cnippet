@@ -24,5 +24,18 @@
     ],
     "number": "4",
     "thumbnail": "https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/hero.png"
+  },
+  {
+    "name": "login",
+    "slug": "/sections/login",
+    "type": "registry:section",
+    "files": [
+      {
+        "path": "registry/default/sections/hero/hero1.tsx",
+        "type": "registry:section"
+      }
+    ],
+    "number": "4",
+    "thumbnail": "https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/login.png"
   }
 ]

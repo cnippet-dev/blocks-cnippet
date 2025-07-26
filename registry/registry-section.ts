@@ -11,7 +11,7 @@ const generateSections = (
         type: "registry:section",
         // files: [`${BASE_PATH}/sections/${section.name}/${section.name}-1.tsx`],
         files: [`${BASE_PATH}/sections/hero/hero1.tsx`],
-        number: "4",
+        number: section.no,
         thumbnail: `https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/${section.name}.png`,
     }));
 };
@@ -23,6 +23,10 @@ export const section: Registry = generateSections([
     },
     {
         name: "hero",
+        no: "2",
+    },
+    {
+        name: "login",
         no: "2",
     },
 ]);
