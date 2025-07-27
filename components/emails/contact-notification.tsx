@@ -29,12 +29,12 @@ export function ContactNotificationEmail({
             <Body style={main}>
                 <Container style={container}>
                     <Heading style={h1}>New Contact Form Submission</Heading>
-                    
+
                     <Section style={section}>
                         <Text style={label}>Name:</Text>
                         <Text style={value}>{name}</Text>
                     </Section>
-                    
+
                     <Section style={section}>
                         <Text style={label}>Email:</Text>
                         <Text style={value}>
@@ -43,20 +43,21 @@ export function ContactNotificationEmail({
                             </a>
                         </Text>
                     </Section>
-                    
+
                     <Section style={section}>
                         <Text style={label}>Subject:</Text>
                         <Text style={value}>{subject}</Text>
                     </Section>
-                    
+
                     <Section style={section}>
                         <Text style={label}>Message:</Text>
                         <Text style={messageText}>{message}</Text>
                     </Section>
-                    
+
                     <Section style={footer}>
                         <Text style={footerText}>
-                            This message was sent from your website contact form.
+                            This message was sent from your website contact
+                            form.
                         </Text>
                     </Section>
                 </Container>
@@ -129,4 +130,4 @@ const footerText = {
     fontSize: "14px",
     margin: "0",
     textAlign: "center" as const,
-}; 
+};

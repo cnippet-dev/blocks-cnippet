@@ -21,9 +21,7 @@ const PreviewPage = async ({ params }: { params: Params }) => {
 
     return (
         <>
-            <div className="px-10 py-10">
-                <ScreenShift name={slug.slug} />
-            </div>
+            <ScreenShift name={slug.slug} />
         </>
     );
 };

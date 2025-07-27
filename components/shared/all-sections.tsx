@@ -15,8 +15,8 @@ interface Section {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Sections = (props: any) => {
-    const components = Object.values(Index["default"]).filter(
+const Sections = (props: { count?: number; sections?: any[] }) => {
+    const components = props.sections ?? Object.values(Index["default"]).filter(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (item: any): item is Section =>
             item.type === "registry:section" && "thumbnail" in item,
@@ -47,7 +47,7 @@ const Sections = (props: any) => {
                         </p>
                     </div>
                     <div>
-                        <div className="grid grid-cols-1 divide-y border-t md:grid-cols-12 dark:divide-neutral-800 dark:border-neutral-800">
+                        <div className="grid grid-cols-1 border-t md:grid-cols-12 dark:divide-neutral-800 dark:border-neutral-800">
                             {components
                                 ?.slice(0, props.count)
                                 .map((component, i) => {
@@ -91,7 +91,7 @@ const Sections = (props: any) => {
                         <div className="col-span-1 hidden md:block"></div>
                         <div className="col-span-1 h-full w-full md:col-span-2">
                             <Link
-                                href="https://ui.cnippet.site"
+                                href="/sections"
                                 className="group relative flex h-full w-full items-center justify-center overflow-hidden bg-blue-700"
                             >
                                 <div className="absolute inset-0 w-full -translate-x-[110%] bg-blue-800 transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-blue-600" />

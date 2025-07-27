@@ -69,7 +69,7 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
                 <TabsTrigger value="pro" onClick={() => setActiveTab("pro")}>
                     Code
                 </TabsTrigger>
-            )
+            );
         }
         // This covers the case where auth is required but the user is not logged in.
         return (
@@ -156,7 +156,7 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
                         <Button
                             size="icon"
                             variant="ghost"
-                            className="size-6 rounded-sm p-0"
+                            className="size-6 rounded-sm p-0 pr-4"
                             asChild
                             title="Open in New Tab"
                         >
@@ -177,7 +177,7 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
                     </div>
                 }
             >
-                <div className="overflow- col-span-2 row-start-2 mx-auto mt-8 min-w-0">
+                <div className="overflow- col-span-2 row-start-2 mx-auto mt-8 min-w-0 border border-r-0 border-l-0">
                     {renderContent()}
                 </div>
             </React.Suspense>

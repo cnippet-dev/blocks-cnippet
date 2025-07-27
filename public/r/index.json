@@ -22,7 +22,33 @@
         "type": "registry:section"
       }
     ],
-    "number": "4",
+    "number": "2",
     "thumbnail": "https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/hero.png"
+  },
+  {
+    "name": "login",
+    "slug": "/sections/login",
+    "type": "registry:section",
+    "files": [
+      {
+        "path": "registry/default/sections/hero/hero1.tsx",
+        "type": "registry:section"
+      }
+    ],
+    "number": "2",
+    "thumbnail": "https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/login.png"
+  },
+  {
+    "name": "footer",
+    "slug": "/sections/footer",
+    "type": "registry:section",
+    "files": [
+      {
+        "path": "registry/default/sections/hero/hero1.tsx",
+        "type": "registry:section"
+      }
+    ],
+    "number": "3",
+    "thumbnail": "https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/footer.png"
   }
 ]

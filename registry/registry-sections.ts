@@ -29,4 +29,6 @@ export const sections = [
         ["F", "F", "T", "F", "F", "F", "F"],
     ),
     ...generateSections("hero", 2, ["T", "T"], ["T", "T"]),
+    ...generateSections("login", 4, ["F", "F", "F", "F"], ["F", "F", "F", "F"]),
+    ...generateSections("footer", 3, ["F", "F", "F"], ["F", "F", "F"]),
 ];
