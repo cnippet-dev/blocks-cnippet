@@ -31,6 +31,7 @@ import {
 import { Index } from "@/__registry__";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 const getCategories = () => {
     return Array.from(
@@ -373,7 +374,12 @@ export default function SectionsPage() {
                                                         variant="secondary"
                                                         className="h-8 w-8 rounded-full p-0"
                                                     >
-                                                        <ExternalLink className="h-4 w-4" />
+                                                        <Link
+                                                            href={`/sections/${section.name.split("-")[0]}`}
+                                                            target="_blank"
+                                                        >
+                                                            <ExternalLink className="h-4 w-4" />
+                                                        </Link>
                                                     </Button>
                                                 </div>
                                             </div>

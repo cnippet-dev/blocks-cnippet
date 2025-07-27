@@ -29,9 +29,7 @@ const PreviewPage = async ({ params }: { params: Params }) => {
                     }
                 >
                     <div className="overflow-col-span-2 row-start-2 mx-auto min-w-0">
-                        <div
-                            className={`font-ins overflow-y-auto bg-white font-medium break-words`}
-                        >
+                        <div className={`overflow-y-auto bg-white`}>
                             <Preview />
                         </div>
                     </div>

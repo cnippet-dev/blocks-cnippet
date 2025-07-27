@@ -29,7 +29,6 @@ export default function Component() {
             <div className="relative z-10 flex min-h-screen items-center justify-end p-4">
                 <Card className="h-[80vh] w-full max-w-lg border-0 bg-white shadow-2xl backdrop-blur-sm">
                     <CardContent className="space-y-6 px-10 py-20">
-                        {/* Header */}
                         <div className="space-y-2 text-left">
                             <h1 className="mt-2 text-3xl font-normal md:text-5xl">
                                 Create an account
@@ -45,9 +44,7 @@ export default function Component() {
                             </p>
                         </div>
 
-                        {/* Form */}
                         <form className="space-y-4">
-                            {/* Email Field */}
                             <div className="grid gap-3">
                                 <Label htmlFor="email">Email Address</Label>
                                 <Input
@@ -58,7 +55,6 @@ export default function Component() {
                                     className="rounded-none border-t-0 border-r-0 border-b border-l-0 px-0 py-5 shadow-none focus-visible:ring-0"
                                 />
                             </div>
-                            {/* Name Fields */}
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                     <Label htmlFor="firstName">
@@ -135,21 +131,20 @@ export default function Component() {
                                     Create Account
                                 </Button>
                             </div>
-
-                            {/* Terms */}
-                            <p className="text-xs leading-relaxed text-gray-500">
-                                By clicking Create account, I agree that I have
-                                read and accepted the{" "}
-                                <button className="text-orange-500 underline-offset-4 hover:text-orange-600 hover:underline">
-                                    Terms of Use
-                                </button>{" "}
-                                and{" "}
-                                <button className="text-orange-500 underline-offset-4 hover:text-orange-600 hover:underline">
-                                    Privacy Policy
-                                </button>
-                                .
-                            </p>
                         </form>
+
+                        <p className="mt-40 text-xs leading-relaxed text-gray-500">
+                            By clicking Create account, I agree that I have read
+                            and accepted the{" "}
+                            <button className="text-orange-500 underline-offset-4 hover:text-orange-600 hover:underline">
+                                Terms of Use
+                            </button>{" "}
+                            and{" "}
+                            <button className="text-orange-500 underline-offset-4 hover:text-orange-600 hover:underline">
+                                Privacy Policy
+                            </button>
+                            .
+                        </p>
                     </CardContent>
                 </Card>
             </div>
