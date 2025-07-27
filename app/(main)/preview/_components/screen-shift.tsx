@@ -37,7 +37,7 @@ export function ScreenShift({ name }: SectionPreviewProps) {
     return (
         <BlockViewerContext.Provider value={contextValue}>
             <div className={`relative`}>
-                <div className="fixed bottom-20 left-1/2 max-w-full -translate-x-1/2 z-50">
+                <div className="fixed bottom-10 left-1/2 z-50 max-w-full -translate-x-1/2">
                     <div className="w-fit items-center gap-1.5 rounded-full border bg-white p-1 shadow-md">
                         <ToggleGroup
                             type="single"
@@ -133,15 +133,15 @@ function BlockViewerView() {
 
     return (
         <div className="hidden group-data-[view=code]/block-view-wrapper:hidden md:h-[var(--height)] lg:flex">
-            <div className="relative grid w-full gap-4 mx-auto">
+            <div className="relative mx-auto grid w-full gap-4">
                 <div className="absolute inset-0 right-4 [background-image:radial-gradient(#d4d4d4_1px,transparent_1px)] [background-size:20px_20px] dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]"></div>
                 <ResizablePanelGroup
                     direction="horizontal"
-                    className="after:bg-surface/50 mx-auto relative z-10 after:absolute after:inset-0 after:right-3 after:z-0 after:rounded-xl"
+                    className="after:bg-surface/50 relative z-10 mx-auto after:absolute after:inset-0 after:right-3 after:z-0 after:rounded-xl"
                 >
                     <ResizablePanel
                         ref={resizablePanelRef}
-                        className="bg-background mx-auto relative border overflow-hidden md:aspect-auto"
+                        className="bg-background relative mx-auto overflow-hidden border md:aspect-auto"
                         defaultSize={100}
                         minSize={30}
                     >

@@ -1,148 +1,140 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
+import { RiEyeFill, RiEyeOffFill } from "@remixicon/react";
 
 export default function Component() {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
-        <div className="relative min-h-screen overflow-hidden">
-            {/* Background Image */}
+        <div className="relative h-screen overflow-hidden">
             <div
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                className="absolute inset-0 bg-cover"
                 style={{
-                    backgroundImage: `url('/placeholder.svg?height=1080&width=1920')`,
+                    backgroundImage: `url('https://res.cloudinary.com/dphulm0s9/image/upload/v1741613286/h5.jpg')`,
+                    height: "100vh",
                 }}
             >
-                {/* Overlay */}
                 <div className="absolute inset-0 bg-black/20"></div>
             </div>
 
             {/* Content */}
-            <div className="relative z-10 flex min-h-screen items-center justify-center p-4">
-                <Card className="w-full max-w-md border-0 bg-white/95 shadow-2xl backdrop-blur-sm">
-                    <CardContent className="space-y-6 p-8">
+            <div className="relative z-10 flex min-h-screen items-center justify-end p-4">
+                <Card className="h-[80vh] w-full max-w-lg border-0 bg-white shadow-2xl backdrop-blur-sm">
+                    <CardContent className="space-y-6 px-10 py-20">
                         {/* Header */}
-                        <div className="space-y-2 text-center">
-                            <h1 className="text-2xl font-bold text-gray-900">
+                        <div className="space-y-2 text-left">
+                            <h1 className="mt-2 text-3xl font-normal md:text-5xl">
                                 Create an account
                             </h1>
                             <p className="text-gray-600">
                                 Already have an account?{" "}
-                                <button className="font-medium text-orange-500 underline-offset-4 hover:text-orange-600 hover:underline">
+                                <Link
+                                    href=""
+                                    className="font-medium text-violet-500 underline-offset-2 hover:text-violet-600 hover:underline"
+                                >
                                     Sign in
-                                </button>
+                                </Link>
                             </p>
                         </div>
 
                         {/* Form */}
                         <form className="space-y-4">
                             {/* Email Field */}
-                            <div className="space-y-2">
-                                <Label
-                                    htmlFor="email"
-                                    className="text-sm font-medium text-gray-700"
-                                >
-                                    Email address
-                                </Label>
+                            <div className="grid gap-3">
+                                <Label htmlFor="email">Email Address</Label>
                                 <Input
                                     id="email"
                                     type="email"
-                                    placeholder="Curious@george.co"
-                                    className="h-12 border-gray-200 bg-white focus:border-orange-500 focus:ring-orange-500"
+                                    placeholder="m@example.com"
+                                    required
+                                    className="rounded-none border-t-0 border-r-0 border-b border-l-0 px-0 py-5 shadow-none focus-visible:ring-0"
                                 />
                             </div>
-
                             {/* Name Fields */}
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label
-                                        htmlFor="firstName"
-                                        className="text-sm font-medium text-gray-700"
-                                    >
+                                    <Label htmlFor="firstName">
                                         First name
                                     </Label>
                                     <Input
                                         id="firstName"
                                         placeholder="Curious"
-                                        className="h-12 border-gray-200 bg-white focus:border-orange-500 focus:ring-orange-500"
+                                        className="rounded-none border-t-0 border-r-0 border-b border-l-0 px-0 py-5 shadow-none focus-visible:ring-0"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label
-                                        htmlFor="lastName"
-                                        className="text-sm font-medium text-gray-700"
-                                    >
-                                        Last name
-                                    </Label>
+                                    <Label htmlFor="lastName">Last name</Label>
                                     <Input
                                         id="lastName"
                                         placeholder="George"
-                                        className="h-12 border-gray-200 bg-white focus:border-orange-500 focus:ring-orange-500"
+                                        className="rounded-none border-t-0 border-r-0 border-b border-l-0 px-0 py-5 shadow-none focus-visible:ring-0"
                                     />
                                 </div>
                             </div>
 
-                            {/* Password Field */}
-                            <div className="space-y-2">
-                                <Label
-                                    htmlFor="password"
-                                    className="text-sm font-medium text-gray-700"
-                                >
-                                    Password
-                                </Label>
-                                <div className="relative">
+                            <div className="grid gap-3">
+                                <div className="flex items-center">
+                                    <Label htmlFor="password">
+                                        Password
+                                        <span className="text-purple-500">
+                                            *
+                                        </span>
+                                    </Label>
+                                </div>
+                                <div className="flex overflow-hidden border-b">
                                     <Input
                                         id="password"
                                         type={
                                             showPassword ? "text" : "password"
                                         }
-                                        placeholder="••••••••••"
-                                        className="h-12 border-gray-200 bg-white pr-12 focus:border-orange-500 focus:ring-orange-500"
+                                        placeholder="* * * * * * * *"
+                                        required
+                                        className="border-none px-0 py-5 shadow-none focus-visible:border-none focus-visible:ring-0"
                                     />
-                                    <Button
-                                        type="button"
-                                        variant="ghost"
-                                        size="sm"
-                                        className="absolute top-0 right-0 h-12 px-3 py-2 hover:bg-transparent"
+                                    <button
+                                        className="pr-3"
                                         onClick={() =>
                                             setShowPassword(!showPassword)
                                         }
                                     >
                                         {showPassword ? (
-                                            <EyeOff className="h-4 w-4 text-gray-400" />
+                                            <RiEyeOffFill className="size-5 text-neutral-500" />
                                         ) : (
-                                            <Eye className="h-4 w-4 text-gray-400" />
+                                            <RiEyeFill className="size-5 text-neutral-500" />
                                         )}
-                                    </Button>
+                                    </button>
                                 </div>
                             </div>
 
-                            {/* Newsletter Checkbox */}
-                            <div className="flex items-center space-x-2 py-2">
-                                <Checkbox
-                                    id="newsletter"
-                                    className="border-gray-300"
-                                />
-                                <Label
-                                    htmlFor="newsletter"
-                                    className="text-sm text-gray-600"
-                                >
-                                    send me a newsletter
-                                </Label>
-                            </div>
+                            <div className="mt-10 flex">
+                                <div className="flex w-full items-center space-x-2 py-2">
+                                    <Checkbox
+                                        id="newsletter"
+                                        className="border-gray-300"
+                                    />
+                                    <Label
+                                        htmlFor="newsletter"
+                                        className="text-sm text-gray-600"
+                                    >
+                                        send me a newsletter
+                                    </Label>
+                                </div>
 
-                            {/* Create Account Button */}
-                            <Button className="h-12 w-full rounded-lg border-0 bg-amber-200 font-medium text-gray-900 shadow-sm hover:bg-amber-300">
-                                Create account
-                            </Button>
+                                <Button
+                                    type="submit"
+                                    className="shadow-8 w-full rounded-full bg-violet-600 py-5 hover:bg-violet-700"
+                                >
+                                    Create Account
+                                </Button>
+                            </div>
 
                             {/* Terms */}
                             <p className="text-xs leading-relaxed text-gray-500">

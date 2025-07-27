@@ -7,52 +7,61 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import Image from "next/image";
+import {
+    RiEyeFill,
+    RiEyeOffFill,
+    RiFacebookCircleFill,
+    RiInstagramFill,
+    RiLinkedinBoxFill,
+} from "@remixicon/react";
+import Link from "next/link";
 
 export default function Component() {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="font-kumb min-h-screen overflow-hidden">
             <div className="container mx-auto px-4 py-8 lg:py-16">
                 <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-2 lg:gap-16">
-                    {/* Left Column - Security & App Showcase */}
-                    <div className="space-y-8 text-center lg:text-left">
-                        {/* Logo */}
-                        <div className="flex justify-center lg:justify-start">
-                            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm">
-                                <svg
-                                    className="h-8 w-8 text-orange-500"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                                </svg>
-                            </div>
+                    <div className="flex flex-col items-center justify-center gap-4 text-center">
+                        <div className="h-14 rounded-2xl border bg-white shadow-sm">
+                            <Image
+                                src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-light.png"
+                                alt=""
+                                className="size-13"
+                                width={1080}
+                                height={1080}
+                                suppressHydrationWarning
+                            />
                         </div>
 
-                        {/* Header */}
-                        <div className="space-y-4">
-                            <h1 className="text-3xl font-bold text-gray-900 lg:text-4xl xl:text-5xl">
-                                World Class Security
+                        <div className="space-y-2">
+                            <h1 className="text-3xl font-medium text-gray-900 lg:text-4xl">
+                                World Class Components
                             </h1>
-                            <p className="mx-auto max-w-md text-lg text-gray-600 lg:mx-0">
+                            <p className="mx-auto max-w-md text-lg font-normal text-gray-500 lg:mx-0">
                                 Lorem ipsum dolor sit amet, consectetur
                                 adipiscing.
                             </p>
                         </div>
 
-                        {/* App Store Button */}
-                        <div className="flex justify-center lg:justify-start">
-                            <Button className="rounded-full bg-gray-900 px-8 py-3 font-medium text-white hover:bg-gray-800">
-                                Vario App Store
-                            </Button>
-                        </div>
+                        <Button className="shadow-8 rounded-full bg-violet-600 px-8 py-3 text-white hover:bg-violet-700">
+                            Cnippet App Store
+                        </Button>
 
-                        {/* Phone and Card Mockup */}
                         <div className="relative mt-12 flex justify-center lg:justify-start">
                             <div className="relative">
-                                {/* iPhone Mockup */}
-                                <div className="h-[520px] w-64 rounded-[3rem] bg-black p-2 shadow-2xl">
+                                <div className="h-[520px] w-72 rounded-[3rem] bg-black p-2 shadow-2xl">
+                                    <div className="absolute top-24 z-50">
+                                        <Image
+                                            src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/hero-2.png`}
+                                            alt=""
+                                            width={4210}
+                                            height={1080}
+                                            className="aspect-[16/10] h-full w-full scale-150 rounded-2xl border bg-white object-cover object-top p-1 shadow-2xl"
+                                        />
+                                    </div>
                                     <div className="relative h-full w-full overflow-hidden rounded-[2.5rem] bg-white">
                                         {/* Status Bar */}
                                         <div className="flex items-center justify-between px-6 pt-4 pb-2">
@@ -94,65 +103,25 @@ export default function Component() {
                                         </div>
 
                                         {/* App Content */}
-                                        <div className="px-6 py-8">
-                                            <div className="mb-8 flex items-center space-x-3">
-                                                <svg
-                                                    className="h-8 w-8 text-orange-500"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                                                </svg>
-                                                <span className="text-xl font-bold">
-                                                    Vario
-                                                </span>
+                                        <div className="relative mt-10 px-6">
+                                            <div className="relative mt-10 hidden h-full py-4 lg:block">
+                                                <div className="flex translate-y-40 flex-col items-end gap-6">
+                                                    <Image
+                                                        src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/pricing-2.png`}
+                                                        alt=""
+                                                        width={4210}
+                                                        height={1080}
+                                                        className="aspect-[16/10] h-full w-full rounded-2xl border bg-white object-cover object-top p-1"
+                                                    />
+                                                    <Image
+                                                        src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/pricing-2.png`}
+                                                        alt=""
+                                                        width={4210}
+                                                        height={1080}
+                                                        className="aspect-[16/10] h-full w-full rounded-2xl border bg-white object-cover object-top p-1"
+                                                    />
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Credit Card */}
-                                <div className="absolute -right-8 -bottom-8 h-48 w-80 rotate-6 transform rounded-2xl bg-gradient-to-br from-gray-900 to-black p-6 text-white shadow-2xl">
-                                    {/* Card Elements */}
-                                    <div className="mb-8 flex items-start justify-between">
-                                        <div className="h-8 w-12 rounded bg-gradient-to-r from-yellow-400 to-yellow-600"></div>
-                                        <div className="flex items-center space-x-2">
-                                            <div className="h-8 w-8 rounded-full bg-red-500 opacity-80"></div>
-                                            <div className="-ml-4 h-8 w-8 rounded-full bg-yellow-500 opacity-80"></div>
-                                        </div>
-                                    </div>
-
-                                    {/* Contactless Symbol */}
-                                    <div className="absolute top-6 left-20">
-                                        <svg
-                                            className="h-6 w-6 text-white opacity-60"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"
-                                            />
-                                        </svg>
-                                    </div>
-
-                                    {/* Card Info */}
-                                    <div className="absolute bottom-6 left-6">
-                                        <div className="mb-1 text-xs opacity-80">
-                                            Cardholder Name
-                                        </div>
-                                        <div className="text-lg font-bold">
-                                            Arthur Taylor
-                                        </div>
-                                    </div>
-
-                                    {/* Card Logo */}
-                                    <div className="absolute right-6 bottom-6">
-                                        <div className="bg-opacity-20 flex h-8 w-8 items-center justify-center rounded-full bg-white">
-                                            <div className="h-4 w-4 rounded-full bg-white"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -164,29 +133,46 @@ export default function Component() {
                     <div className="mx-auto max-w-md space-y-8 lg:mx-0">
                         {/* Header */}
                         <div className="space-y-2 text-center lg:text-left">
-                            <h2 className="text-2xl font-bold text-gray-900 lg:text-3xl">
-                                Login to Vario
+                            <h2 className="mt-2 text-3xl font-medium">
+                                Login to Cnippet!
                             </h2>
-                            <p className="text-gray-600">
+                            <p className="font-normal text-gray-600">
                                 Lorem ipsum dolor sit amet consectetur.
                             </p>
                         </div>
 
                         {/* Social Icons */}
-                        <div className="flex justify-center space-x-6 lg:justify-start">
-                            <Button variant="ghost" size="sm" className="p-2">
-                                <Facebook className="h-5 w-5 text-gray-600" />
+                        <div className="flex justify-center space-x-3 lg:justify-start [&>button]:cursor-pointer">
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                className="w-full border p-2 [&>svg]:size-6"
+                            >
+                                <RiFacebookCircleFill />
                             </Button>
-                            <Button variant="ghost" size="sm" className="p-2">
-                                <Instagram className="h-5 w-5 text-gray-600" />
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                className="w-full border p-2 [&>svg]:size-6"
+                            >
+                                <RiInstagramFill />
                             </Button>
-                            <Button variant="ghost" size="sm" className="p-2">
-                                <Linkedin className="h-5 w-5 text-gray-600" />
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                className="w-full border p-2 [&>svg]:size-6"
+                            >
+                                <RiLinkedinBoxFill />
                             </Button>
                         </div>
 
-                        {/* Divider */}
-                        <div className="text-center text-gray-500">or</div>
+                        <div className="flex items-center justify-center">
+                            <div className="w-full border border-dashed border-neutral-300"></div>
+                            <div className="bg-white px-2 text-gray-500">
+                                or
+                            </div>
+                            <div className="w-full border border-dashed border-neutral-300"></div>
+                        </div>
 
                         {/* Form */}
                         <form className="space-y-6">
@@ -195,29 +181,33 @@ export default function Component() {
                                 <div className="space-y-2">
                                     <Label
                                         htmlFor="firstName"
-                                        className="text-sm font-medium text-gray-900"
+                                        className="text-sm font-medium"
                                     >
                                         First Name{" "}
-                                        <span className="text-red-500">*</span>
+                                        <span className="text-violet-500">
+                                            *
+                                        </span>
                                     </Label>
                                     <Input
                                         id="firstName"
                                         placeholder="John"
-                                        className="h-12 border-gray-200 bg-white focus:border-orange-500 focus:ring-orange-500"
+                                        className="py-5"
                                     />
                                 </div>
                                 <div className="space-y-2">
                                     <Label
                                         htmlFor="lastName"
-                                        className="text-sm font-medium text-gray-900"
+                                        className="text-sm font-medium"
                                     >
                                         Last Name{" "}
-                                        <span className="text-red-500">*</span>
+                                        <span className="text-violet-500">
+                                            *
+                                        </span>
                                     </Label>
                                     <Input
                                         id="lastName"
                                         placeholder="Smith"
-                                        className="h-12 border-gray-200 bg-white focus:border-orange-500 focus:ring-orange-500"
+                                        className="py-5"
                                     />
                                 </div>
                             </div>
@@ -226,71 +216,77 @@ export default function Component() {
                             <div className="space-y-2">
                                 <Label
                                     htmlFor="email"
-                                    className="text-sm font-medium text-gray-900"
+                                    className="text-sm font-medium"
                                 >
                                     Email Address{" "}
-                                    <span className="text-red-500">*</span>
+                                    <span className="text-violet-500">*</span>
                                 </Label>
                                 <Input
                                     id="email"
                                     type="email"
                                     placeholder="john@example.com"
-                                    className="h-12 border-gray-200 bg-white focus:border-orange-500 focus:ring-orange-500"
+                                    className="py-5"
                                 />
                             </div>
 
-                            {/* Password Field */}
-                            <div className="space-y-2">
-                                <Label
-                                    htmlFor="password"
-                                    className="text-sm font-medium text-gray-900"
-                                >
-                                    Password{" "}
-                                    <span className="text-red-500">*</span>
-                                </Label>
-                                <div className="relative">
+                            <div className="grid gap-3">
+                                <div className="flex items-center">
+                                    <Label htmlFor="password">
+                                        Password
+                                        <span className="text-purple-500">
+                                            *
+                                        </span>
+                                    </Label>
+                                </div>
+                                <div className="flex overflow-hidden rounded-lg border">
                                     <Input
                                         id="password"
                                         type={
                                             showPassword ? "text" : "password"
                                         }
-                                        placeholder="••••••••"
-                                        className="h-12 border-gray-200 bg-white pr-12 focus:border-orange-500 focus:ring-orange-500"
+                                        placeholder="* * * * * * * *"
+                                        required
+                                        className="border-none py-5 shadow-none focus-visible:border-none focus-visible:ring-0"
                                     />
-                                    <Button
-                                        type="button"
-                                        variant="ghost"
-                                        size="sm"
-                                        className="absolute top-0 right-0 h-12 px-3 py-2 hover:bg-transparent"
+                                    <button
+                                        className="pr-3"
                                         onClick={() =>
                                             setShowPassword(!showPassword)
                                         }
                                     >
                                         {showPassword ? (
-                                            <EyeOff className="h-4 w-4 text-gray-400" />
+                                            <RiEyeOffFill className="size-5 text-neutral-500" />
                                         ) : (
-                                            <Eye className="h-4 w-4 text-gray-400" />
+                                            <RiEyeFill className="size-5 text-neutral-500" />
                                         )}
-                                    </Button>
+                                    </button>
                                 </div>
                             </div>
 
-                            {/* Terms Checkbox */}
-                            <div className="flex items-center space-x-2">
-                                <Checkbox
-                                    id="terms"
-                                    className="border-gray-300"
-                                />
-                                <Label
-                                    htmlFor="terms"
-                                    className="text-sm text-gray-600"
-                                >
-                                    I agree to the Terms and Privacy Policy
+                            <div className="flex items-center space-x-2 font-normal">
+                                <Checkbox id="terms" />
+                                <Label htmlFor="terms" className="text-sm">
+                                    I agree to the{" "}
+                                    <Link
+                                        href="#"
+                                        className="text-violet-600 hover:text-violet-700"
+                                    >
+                                        Terms
+                                    </Link>{" "}
+                                    and{" "}
+                                    <Link
+                                        href="#"
+                                        className="text-violet-600 hover:text-violet-700"
+                                    >
+                                        Privacy Policy
+                                    </Link>
+                                    .
                                 </Label>
                             </div>
-
-                            {/* Register Button */}
-                            <Button className="h-12 w-full rounded-full bg-gray-900 font-medium text-white hover:bg-gray-800">
+                            <Button
+                                type="submit"
+                                className="shadow-8 w-full rounded-full bg-violet-600 hover:bg-violet-700"
+                            >
                                 Register
                             </Button>
                         </form>

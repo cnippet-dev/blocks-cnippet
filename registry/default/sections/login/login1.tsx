@@ -297,13 +297,10 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { GalleryVerticalEnd } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import { RiEye2Fill, RiEyeFill, RiEyeOffFill } from "@remixicon/react";
+import { RiEyeFill, RiEyeOffFill } from "@remixicon/react";
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Separator } from "@/components/ui/separator";
 
 export default function LoginForm({
     className,
