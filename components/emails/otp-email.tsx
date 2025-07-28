@@ -33,7 +33,6 @@ export const OTPEmail = ({
                 <Preview>Your Cnippet OTP Code</Preview>
                 <Body className="font-['Google Sans',Roboto,Arial,sans-serif] mx-auto my-auto bg-[#f8f9fa] px-2 py-6">
                     <Container className="mx-auto max-w-[520px] rounded-2xl bg-white p-6">
-                        {/* Header Section */}
                         <Section className="mb-4 text-center">
                             <Img
                                 src={`${baseUrl}/images/logo-light.png`}
@@ -44,7 +43,6 @@ export const OTPEmail = ({
                             />
                         </Section>
 
-                        {/* Main Content */}
                         <Section className="mx-auto mb-4 text-center">
                             <Row>
                                 <Column>
@@ -69,7 +67,6 @@ export const OTPEmail = ({
                         </Section>
 
                         <hr className="my-6 border-t border-[#e8eaed]" />
-                        {/* Footer */}
                         <Section className="mt-2 text-center">
                             <Text className="my-1 text-[12px] text-[#5f6368]">
                                 © {new Date().getFullYear()} Cnippet LLC · All rights reserved

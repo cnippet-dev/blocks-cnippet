@@ -1,12 +1,11 @@
-// lib/validations/subscription.ts
 import { z } from "zod";
 
 export const subscriptionPlanSchema = z.object({
     id: z.string(),
     name: z.string(),
-    price: z.number(), // Price in original currency (e.g., INR)
+    price: z.number(),
     features: z.array(z.string()),
-    duration: z.string(), // e.g., "Monthly", "Annually", "Lifetime"
+    duration: z.string(),
     popular: z.boolean().optional(),
 });
 

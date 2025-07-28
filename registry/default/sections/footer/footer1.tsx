@@ -1,11 +1,12 @@
+import Link from "next/link";
+import Image from "next/image";
+import { RiArtboard2Fill } from "@remixicon/react";
+import { CheckCircle } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { CheckCircle } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
-import { RiArtboard2Fill } from "@remixicon/react";
 
 export default function Component() {
     const footerLinks = [
@@ -84,6 +85,7 @@ export default function Component() {
             ],
         },
     ];
+
     return (
         <footer className="w-full bg-stone-100 px-10 pt-20">
             <div className="mx-auto max-w-7xl">
@@ -119,7 +121,6 @@ export default function Component() {
 
                 <div className="container mx-auto py-12">
                     <div className="grid justify-between gap-8 lg:grid-cols-12">
-                        {/* Profile Card */}
                         <div className="col-span-3">
                             <Card className="border-stone-200 bg-white shadow-sm">
                                 <CardContent className="relative p-0">
@@ -149,7 +150,6 @@ export default function Component() {
                         </div>
 
                         <div className="col-span-1" />
-                        {/* Navigation Links */}
                         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:col-span-8">
                             {footerLinks.map((link) => (
                                 <div key={link.title}>

@@ -1,14 +1,12 @@
 "use client";
-
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo } from "react";
+
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 export default function Component() {
-    // Dynamic nav items, ref from footer1.tsx
     const footerLinks = useMemo(
         () => [
             {
@@ -120,7 +118,7 @@ export default function Component() {
                             ©2025, Cnippet.co
                         </div>
                     </div>
-                    <div className="flex gap-6 [&>a]:text-sm [&>a]:text-stone-700 [&>a]:hover:text-stone-950 [&>a]:underline">
+                    <div className="flex gap-6 [&>a]:text-sm [&>a]:text-stone-700 [&>a]:underline [&>a]:hover:text-stone-950">
                         <Link href="#">Terms</Link>
                         <Link href="#">Code of Ethics</Link>
                         <Link href="#">Privacy Policy</Link>

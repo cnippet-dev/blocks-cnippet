@@ -1,4 +1,3 @@
-// app/profile/billing/page.tsx
 "use client";
 
 import {
@@ -41,7 +40,6 @@ import { Badge } from "@/components/ui/badge";
 import { useSession } from "next-auth/react";
 import { getUserPayments } from "@/lib/actions/payment.actions";
 
-// Define types for your data
 interface PaymentMethod {
     id: string;
     type: string;
@@ -53,7 +51,7 @@ interface PaymentMethod {
 interface InvoiceData {
     id: string;
     date: string;
-    amount: string; // Store as string for display if currency symbol is included
+    amount: string;
     status: string;
     downloadLink: string;
 }
@@ -78,17 +76,15 @@ export default function BillingPage() {
     ]);
     const [invoices, setInvoices] = useState<InvoiceData[]>([]);
     const [isLoadingInvoices, setIsLoadingInvoices] = useState(true);
-    const [hasLoadedInvoices, setHasLoadedInvoices] = useState(false); // New state to prevent re-fetching
+    const [hasLoadedInvoices, setHasLoadedInvoices] = useState(false);
 
     const [isAddPaymentModalOpen, setIsAddPaymentModalOpen] = useState(false);
     const [newCardNumber, setNewCardNumber] = useState("");
     const [newCardExpiry, setNewCardExpiry] = useState("");
     const [newCardCVC, setNewCardCVC] = useState("");
 
-    // Fetch invoices from the database on component mount
     useEffect(() => {
         const fetchInvoices = async () => {
-            // Only fetch if session is authenticated and we haven't loaded it yet
             if (status === "loading" || hasLoadedInvoices) return;
             if (!session?.user?.id) {
                 setIsLoadingInvoices(false);
@@ -102,43 +98,39 @@ export default function BillingPage() {
                 toast.error(result.error);
                 setInvoices([]);
             } else if (result.payments) {
-                // Map fetched payment data to InvoiceData format
                 const fetchedInvoices: InvoiceData[] = result.payments.map(
                     //eslint-disable-next-line @typescript-eslint/no-explicit-any
                     (payment: any) => ({
-                        id: payment.razorpayOrderId || payment.id, // Use Razorpay Order ID or internal ID
+                        id: payment.razorpayOrderId || payment.id,
                         date: new Date(payment.createdAt).toLocaleDateString(),
-                        amount: `₹${(payment.amount || 0).toFixed(2)}`, // Format amount
+                        amount: `₹${(payment.amount || 0).toFixed(2)}`,
                         status: payment.status,
-                        downloadLink: `#`, // Placeholder for actual invoice download link
+                        downloadLink: `#`,
                     }),
                 );
                 setInvoices(fetchedInvoices);
             }
             setIsLoadingInvoices(false);
-            setHasLoadedInvoices(true); // Mark as loaded after the first successful fetch
+            setHasLoadedInvoices(true);
         };
 
         fetchInvoices();
-    }, [session, status, hasLoadedInvoices]); // Add hasLoadedInvoices to dependencies
+    }, [session, status, hasLoadedInvoices]);
 
     const handleAddPaymentMethod = () => {
         if (!newCardNumber || !newCardExpiry || !newCardCVC) {
             toast.error("Please fill all card details.");
             return;
         }
-        // Basic validation for expiry format (MM/YY)
         const expiryRegex = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;
         if (!expiryRegex.test(newCardExpiry)) {
             toast.error("Invalid expiry date format. Use MM/YY.");
             return;
         }
 
-        // In a real app, this would securely send card details to a payment gateway (e.g., Stripe, PayPal)
-        // and store a token. NEVER store raw card details in your database.
         toast.info("Adding payment method... (Placeholder)");
         const newMethod = {
-            id: String(Date.now()), // Use a more unique ID in production, e.g., UUID
+            id: String(Date.now()),
             type: newCardNumber.startsWith("4")
                 ? "Visa"
                 : newCardNumber.startsWith("5")
@@ -146,10 +138,9 @@ export default function BillingPage() {
                   : "Card", // Simple guess
             last4: newCardNumber.slice(-4),
             expiry: newCardExpiry,
-            default: paymentMethods.length === 0, // First added card becomes default
+            default: paymentMethods.length === 0,
         };
 
-        // If adding a new default, ensure old default is set to false
         setPaymentMethods((prevMethods) => {
             const updatedMethods = prevMethods.map((method) => ({
                 ...method,
@@ -166,12 +157,10 @@ export default function BillingPage() {
     };
 
     const handleRemovePaymentMethod = (id: string) => {
-        // In a real app, this would call a server action to remove the payment method
         setPaymentMethods((prevMethods) => {
             const updatedMethods = prevMethods.filter(
                 (method) => method.id !== id,
             );
-            // If the removed card was default, set the first remaining card as default
             if (
                 paymentMethods.find((m) => m.id === id)?.default &&
                 updatedMethods.length > 0
@@ -195,7 +184,6 @@ export default function BillingPage() {
 
     const handleDownloadInvoice = (invoiceId: string) => {
         toast.info(`Downloading invoice ${invoiceId}... (Placeholder)`);
-        // In a real app, this would trigger a server action to generate and provide a download link for the invoice
     };
 
     if (status === "loading") {
@@ -222,7 +210,6 @@ export default function BillingPage() {
                 Manage your payment methods and view billing history.
             </p>
 
-            {/* Payment Methods Section */}
             <Card className="mb-8 shadow-none">
                 <CardHeader>
                     <CardTitle className="flex items-center">
@@ -245,7 +232,6 @@ export default function BillingPage() {
                                     className="flex items-center justify-between rounded-md border p-3"
                                 >
                                     <div className="flex items-center">
-                                        {/* Placeholder for card icon based on type */}
                                         {method.type === "Visa" && "💳"}
                                         {method.type === "Mastercard" && "🏦"}
                                         {method.type === "Card" && "💰"}
@@ -373,7 +359,6 @@ export default function BillingPage() {
                 </CardContent>
             </Card>
 
-            {/* Billing History Section */}
             <Card className="shadow-none">
                 <CardHeader>
                     <CardTitle className="flex items-center">

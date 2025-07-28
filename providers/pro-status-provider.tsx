@@ -1,5 +1,3 @@
-// components/providers/pro-status-provider.tsx
-
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
@@ -10,7 +8,6 @@ interface ProStatusContextType {
     isLoading: boolean;
 }
 
-// Create a context with a default value.
 const ProStatusContext = createContext<ProStatusContextType | undefined>(
     undefined,
 );
@@ -28,7 +25,7 @@ export const ProStatusProvider = ({
 
     useEffect(() => {
         if (sessionStatus === "loading") {
-            return; // Wait for the session to be loaded
+            return;
         }
 
         if (sessionStatus === "unauthenticated") {
@@ -36,7 +33,6 @@ export const ProStatusProvider = ({
             return;
         }
 
-        // If authenticated, fetch the pro status once.
         const fetchStatus = async () => {
             try {
                 const response = await fetch("/api/pro");
@@ -58,7 +54,6 @@ export const ProStatusProvider = ({
     );
 };
 
-// Custom hook to use the ProStatusContext
 export const useProStatusContext = () => {
     const context = useContext(ProStatusContext);
     if (context === undefined) {

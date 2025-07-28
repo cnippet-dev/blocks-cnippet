@@ -8,7 +8,6 @@ export function rehypeNpmCommand() {
                 return;
             }
 
-            // npm install.
             if (node.properties?.["__rawString__"]?.startsWith("npm install")) {
                 const npmCommand = node.properties?.["__rawString__"];
                 node.properties["__npmCommand__"] = npmCommand;
@@ -26,7 +25,6 @@ export function rehypeNpmCommand() {
                 );
             }
 
-            // npx create.
             if (node.properties?.["__rawString__"]?.startsWith("npx create-")) {
                 const npmCommand = node.properties?.["__rawString__"];
                 node.properties["__npmCommand__"] = npmCommand;
@@ -44,7 +42,6 @@ export function rehypeNpmCommand() {
                 );
             }
 
-            // npx.
             if (
                 node.properties?.["__rawString__"]?.startsWith("npx") &&
                 !node.properties?.["__rawString__"]?.startsWith("npx create-")

@@ -1,14 +1,13 @@
 "use client";
-
+import { useState } from "react";
 import { Zap, Clock, Download, Folder, Shield } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import {
     Card,
     CardContent,
-    CardFooter,
     CardHeader,
 } from "@/components/ui/card";
-import { useState } from "react";
 
 const pricingPlans = [
     {
@@ -73,7 +72,6 @@ export default function BeamPricingSection() {
 
     return (
         <div className="mx-auto w-full max-w-7xl px-4 py-16">
-            {/* Header */}
             <div className="mb-16 text-center">
                 <div className="mb-6 flex items-center justify-center gap-2">
                     <Zap className="h-5 w-5 text-gray-600" />
@@ -89,7 +87,6 @@ export default function BeamPricingSection() {
                 </p>
             </div>
 
-            {/* Pricing Cards */}
             <div className="mx-auto mb-16 grid max-w-6xl gap-8 px-4 md:grid-cols-3">
                 {pricingPlans.map((plan) => (
                     <Card

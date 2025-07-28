@@ -1,16 +1,9 @@
 import path from "path";
-
 import fs from "fs/promises";
-import { tmpdir } from "os";
 import { styles } from "../registry/registry-styles";
 import { registry } from "../registry/index";
 
 const REGISTRY_PATH = path.join(process.cwd(), "public/r");
-
-async function createTempSourceFile(filename: string) {
-    const dir = await fs.mkdtemp(path.join(tmpdir(), "shadcn-"));
-    return path.join(dir, filename);
-}
 
 async function buildRegistry(registry: any) {
     let index = `// @ts-nocheck
@@ -24,7 +17,6 @@ export const Index = {
     for (const style of styles) {
         index += `  "${style.name}": {`;
 
-        // Build style index.
         for (const item of registry) {
             const resolveFiles = item.files?.map(
                 (file: any) => `${typeof file === "string" ? file : file.path}`,
@@ -37,8 +29,6 @@ export const Index = {
             let sourceFilename = "";
             let chunks: any[] = [];
 
-            // For blocks, we'll skip the complex TypeScript parsing
-            // and just handle the basic component registration
             if (item.type === "registry:block") {
                 sourceFilename = `__registry__/${style.name}/${type}/${item.name}.tsx`;
 
@@ -71,10 +61,14 @@ export const Index = {
       "${item.name}": {
         name: "${item.name}",
         type: "${item.type}",
-        ${item.type === "registry:sections" ? `auth: ${item.auth || false},
-        pro: ${item.pro || false},` : `slug: "${item.slug || ""}",
+        ${
+            item.type === "registry:sections"
+                ? `auth: ${item.auth || false},
+        pro: ${item.pro || false},`
+                : `slug: "${item.slug || ""}",
         thumbnail: "${item.thumbnail || ""}",
-        number: "${item.number || ""}",`}
+        number: "${item.number || ""}",`
+        }
         files: [${resolveFiles.map((file: any) => `"${file}"`)}],
         component: React.lazy(() => import("${componentPath}")),
       },`;
@@ -88,7 +82,6 @@ export const Index = {
 }
 `;
 
-    // Build registry/index.json
     const items = registry
         .filter((item: any) => ["registry:section"].includes(item.type))
         .map((item: any) => {
@@ -110,17 +103,14 @@ export const Index = {
     const registryJson = JSON.stringify(items, null, 2);
 
     try {
-        // Ensure the REGISTRY_PATH directory exists
         await fs.mkdir(REGISTRY_PATH, { recursive: true });
 
-        // Write the registry JSON file
         await fs.writeFile(
             path.join(REGISTRY_PATH, "index.json"),
             registryJson,
             "utf8",
         );
 
-        // Write the registry index file
         await fs.writeFile(
             path.join(process.cwd(), "__registry__/index.tsx"),
             index,
@@ -134,7 +124,6 @@ export const Index = {
     }
 }
 
-// Run the build
 buildRegistry(registry).catch((error) => {
     console.error("Failed to build registry:", error);
     process.exit(1);

@@ -73,7 +73,6 @@ export default function ProfilePage({ children }: ProfileLayoutProps) {
     return (
         <div className="min-h-screen">
             <div className="container mx-auto max-w-7xl px-4 py-8">
-                {/* Header Section */}
                 <div className="mb-8">
                     <div className="relative">
                         <div className="h-48 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 shadow-xl"></div>

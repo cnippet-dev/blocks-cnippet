@@ -9,7 +9,6 @@ const ALLOWED_EMAIL_DOMAINS = [
     "protonmail.com",
 ];
 
-// Step 1 validation
 export const Step1Schema = z.object({
     firstName: z.string().min(2, "First name must be at least 2 characters"),
     lastName: z.string().min(2, "Last name must be at least 2 characters"),
@@ -17,7 +16,6 @@ export const Step1Schema = z.object({
         .string()
         .email("Invalid email address")
         .refine((email) => {
-            // Check if email contains only allowed special characters (. and @)
             const specialChars = email.replace(/[a-zA-Z0-9]/g, "");
             const allowedSpecialChars = new Set([".", "@"]);
             for (const char of specialChars) {
@@ -33,7 +31,6 @@ export const Step1Schema = z.object({
         }, "Please use a supported email provider"),
 });
 
-// Step 2 validation
 export const Step2Schema = z.object({
     password: z
         .string()
@@ -42,12 +39,10 @@ export const Step2Schema = z.object({
         .regex(/[0-9]/, "Requires at least one number"),
 });
 
-// Step 3 validation
 export const Step3Schema = z.object({
     otp: z.string().length(6, "OTP must be 6 characters"),
 });
 
-// Complete form validation
 export const SignUpSchema = z
     .object({
         username: z
@@ -63,7 +58,6 @@ export const SignUpSchema = z
             .string()
             .email("Invalid email address")
             .refine((email) => {
-                // Check if email contains only allowed special characters (. and @)
                 const specialChars = email.replace(/[a-zA-Z0-9]/g, "");
                 const allowedSpecialChars = new Set([".", "@"]);
                 for (const char of specialChars) {

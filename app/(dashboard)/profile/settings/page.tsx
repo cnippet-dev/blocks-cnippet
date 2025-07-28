@@ -62,14 +62,12 @@ export default function SettingsPage() {
             if ("general" in result.error) {
                 toast.error(result.error.general);
             } else {
-                // Handle field-specific errors if any (though for simple settings, general is more likely)
                 toast.error(
                     "Failed to save settings. Please check your inputs.",
                 );
             }
         } else {
             toast.success(result?.message || "Settings saved successfully!");
-            // Optionally update the client session to reflect new settings
             if (result?.user) {
                 await update({
                     user: {
@@ -100,7 +98,6 @@ export default function SettingsPage() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                    {/* Theme Selection */}
                     <div className="space-y-2">
                         <Label htmlFor="theme">Theme</Label>
                         <Select
@@ -123,7 +120,6 @@ export default function SettingsPage() {
                         </p>
                     </div>
 
-                    {/* Notification Preferences */}
                     <div className="space-y-4">
                         <h3 className="text-lg font-semibold">Notifications</h3>
                         <div className="flex items-center justify-between">
@@ -151,7 +147,6 @@ export default function SettingsPage() {
                         </p>
                     </div>
 
-                    {/* Language Settings */}
                     <div className="space-y-2">
                         <Label htmlFor="language">Language</Label>
                         <Select value={language} onValueChange={setLanguage}>
@@ -169,7 +164,6 @@ export default function SettingsPage() {
                         </p>
                     </div>
 
-                    {/* Timezone Settings */}
                     <div className="space-y-2">
                         <Label htmlFor="timezone">Timezone</Label>
                         <Select value={timezone} onValueChange={setTimezone}>

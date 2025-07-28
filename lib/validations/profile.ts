@@ -1,4 +1,3 @@
-// lib/validations/profile.ts
 import { z } from "zod";
 
 export const updateGeneralInfoSchema = z.object({
@@ -39,5 +38,5 @@ export const updateUserSettingsSchema = z.object({
         .string()
         .min(2, "Language must be at least 2 characters.")
         .optional(), // e.g., 'en', 'es', 'fr'
-    timezone: z.string().min(3, "Timezone is required.").optional(), // e.g., 'UTC', 'EST', 'IST'
+    timezone: z.string().min(3, "Timezone is required.").optional(),
 });

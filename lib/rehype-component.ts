@@ -43,7 +43,6 @@ export function rehypeComponent() {
                                 : component.files[0];
                         }
 
-                        // Read the source file.
                         const filePath = path.join(process.cwd(), src);
                         let source = fs.readFileSync(filePath, "utf8");
 
@@ -169,19 +168,4 @@ export function rehypeComponent() {
 
 function getNodeAttributeByName(node: UnistNode, name: string) {
     return node.attributes?.find((attribute) => attribute.name === name);
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getComponentSourceFileContent(node: UnistNode) {
-    const src = getNodeAttributeByName(node, "src")?.value as string;
-
-    if (!src) {
-        return null;
-    }
-
-    // Read the source file.
-    const filePath = path.join(process.cwd(), src);
-    const source = fs.readFileSync(filePath, "utf8");
-
-    return source;
 }

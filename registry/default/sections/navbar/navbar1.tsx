@@ -13,7 +13,6 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { NavigationMenuViewport } from "@radix-ui/react-navigation-menu";
 
 import {
     DropdownMenu,

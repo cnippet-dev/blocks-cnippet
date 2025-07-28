@@ -9,7 +9,6 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { ImperativePanelHandle } from "react-resizable-panels";
 
 import {
-    ResizableHandle,
     ResizablePanel,
     ResizablePanelGroup,
 } from "@/components/ui/resizable";

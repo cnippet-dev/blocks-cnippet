@@ -1,15 +1,13 @@
-// lib/data/pricing-plans.ts
 import { z } from "zod";
 import { subscriptionPlanSchema } from "@/lib/validations/subscription";
 
-// Define the type for a pricing plan based on your Zod schema
 export type PricingPlan = z.infer<typeof subscriptionPlanSchema>;
 
 export const PRICING_PLANS: PricingPlan[] = [
     {
         id: "basic-monthly",
         name: "Basic",
-        price: 1, // In INR (e.g., 499 means 4.99 INR or as per your currency logic)
+        price: 1,
         features: ["5 Projects", "Basic Analytics", "Community Support"],
         duration: "Monthly",
         popular: false,
@@ -30,7 +28,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     {
         id: "enterprise-annually",
         name: "Enterprise",
-        price: 9999, // Annual price
+        price: 9999,
         features: [
             "All Pro features",
             "Dedicated Account Manager",

@@ -2,21 +2,12 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { RiInfinityLine, RiSparkling2Fill, RiStarFill } from "@remixicon/react";
+import { RiSparkling2Fill, RiStarFill } from "@remixicon/react";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default function HeroSection() {
-    const [email, setEmail] = useState("");
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log("Email submitted:", email);
-    };
-
     return (
         <section className="min-h-screen bg-[#f5f3f0] px-4 py-20 md:px-8 lg:px-16">
             <div className="mx-auto max-w-7xl">
@@ -29,7 +20,7 @@ export default function HeroSection() {
                             </span>
                         </h1>
 
-                        <p className="font-kumb mx-auto max-w-2xl text-xl font-light leading-relaxed text-gray-600">
+                        <p className="font-kumb mx-auto max-w-2xl text-xl leading-relaxed font-light text-gray-600">
                             A calm and steady mind is the foundation of every
                             meaningful change — start within, and watch life
                             shift around you.

@@ -26,10 +26,8 @@ export async function submitContactForm(
     formData: ContactFormData
 ): Promise<ContactResult> {
     try {
-        // Validate the form data
         const validatedData = ContactFormSchema.parse(formData);
 
-        // Create the contact record in the database
         const contact = await prisma.contact.create({
             data: {
                 name: validatedData.name,
@@ -39,7 +37,6 @@ export async function submitContactForm(
             },
         });
 
-        // Send email notification
         try {
             const adminEmail = process.env.ADMIN_EMAIL || process.env.FROM_EMAIL;
             if (adminEmail) {
@@ -61,7 +58,6 @@ export async function submitContactForm(
             }
         } catch (emailError) {
             console.error("Failed to send contact notification email:", emailError);
-            // Don't fail the form submission if email fails
         }
 
         return {
