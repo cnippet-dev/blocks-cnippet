@@ -14,7 +14,6 @@ type ActionResponse<T extends z.ZodTypeAny> =
     | { success: true; message: string; data?: any }
     | { error: { general: string } | { [K in keyof z.infer<T>]?: string[] } };
 
-
 //eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function getActiveSubscription(): Promise<ActionResponse<any>> {
     const session = await getUserSession();
@@ -27,10 +26,9 @@ export async function getActiveSubscription(): Promise<ActionResponse<any>> {
             where: {
                 userId: session.user.id,
                 status: "ACTIVE",
-                // Optionally, add logic for most recent active subscription if multiple exist
             },
             orderBy: {
-                createdAt: "desc", // Get the most recent active subscription
+                createdAt: "desc",
             },
         });
 
@@ -53,9 +51,6 @@ export async function getActiveSubscription(): Promise<ActionResponse<any>> {
     }
 }
 
-/**
- * Cancels an active subscription for the current user.
- */
 export async function cancelSubscription(
     values: z.infer<typeof cancelSubscriptionSchema>,
 ): Promise<ActionResponse<typeof cancelSubscriptionSchema>> {
@@ -96,13 +91,9 @@ export async function cancelSubscription(
             };
         }
 
-        // In a real scenario, you'd also interact with Razorpay subscriptions API here
-        // to cancel recurring payments if applicable.
-        // For simplicity, we just update the database status.
-
         await prisma.subscription.update({
             where: { id: subscriptionId },
-            data: { status: "cancelled", endDate: new Date() }, // Set end date to now or end of current billing period
+            data: { status: "cancelled", endDate: new Date() },
         });
 
         return {
@@ -118,7 +109,3 @@ export async function cancelSubscription(
         };
     }
 }
-
-// You can add more actions like:
-// - updateSubscriptionPlan (for upgrades/downgrades)
-// - getSubscriptionHistory (all past subscriptions)

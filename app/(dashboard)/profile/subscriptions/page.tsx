@@ -1,4 +1,3 @@
-// app/profile/subscriptions/page.tsx
 "use client";
 
 import {
@@ -21,7 +20,7 @@ import {
     DialogFooter,
 } from "@/components/ui/dialog-cn";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Calendar, CheckCircle2 } from "lucide-react"; // Icons
+import { Loader2, Calendar, CheckCircle2 } from "lucide-react";
 import {
     getActiveSubscription,
     cancelSubscription,
@@ -29,15 +28,14 @@ import {
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link"; // Import Link
-import { PRICING_PLANS } from "@/config/pricing-plan"; // Import pricing plans
+import { PRICING_PLANS } from "@/config/pricing-plan";
 
 interface SubscriptionData {
     id: string;
-    plan: string; // Changed from planName to plan based on schema
+    plan: string;
     status: string;
-    startDate: string; // ISO string
-    endDate: string; // ISO string
-    // Add other fields you might need to display, e.g., razorpayOrderId, razorpayPaymentId
+    startDate: string;
+    endDate: string;
 }
 
 export default function SubscriptionsPage() {
@@ -50,12 +48,11 @@ export default function SubscriptionsPage() {
     const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
     const [currentPlanFeatures, setCurrentPlanFeatures] = useState<string[]>(
         [],
-    ); // State for features
-    const [hasLoadedSubscription, setHasLoadedSubscription] = useState(false); // New state to prevent re-fetching
+    );
+    const [hasLoadedSubscription, setHasLoadedSubscription] = useState(false);
 
     useEffect(() => {
         const fetchSubscription = async () => {
-            // Only fetch if session is authenticated and we haven't loaded it yet
             if (status === "loading" || hasLoadedSubscription) return;
             if (!session?.user?.id) {
                 setIsLoading(false);
@@ -75,29 +72,28 @@ export default function SubscriptionsPage() {
                     ...result.data,
                     startDate: new Date(
                         result.data.startDate,
-                    ).toLocaleDateString(), // Format date
-                    endDate: new Date(result.data.endDate).toLocaleDateString(), // Format date
+                    ).toLocaleDateString(),
+                    endDate: new Date(result.data.endDate).toLocaleDateString(),
                 });
 
-                // Find the corresponding pricing plan to get its features
                 const matchingPlan = PRICING_PLANS.find(
                     (p) => p.name === result.data.plan,
                 );
                 if (matchingPlan) {
                     setCurrentPlanFeatures(matchingPlan.features);
                 } else {
-                    setCurrentPlanFeatures([]); // No matching plan found
+                    setCurrentPlanFeatures([]);
                 }
             } else {
                 setCurrentSubscription(null);
                 setCurrentPlanFeatures([]);
             }
             setIsLoading(false);
-            setHasLoadedSubscription(true); // Mark as loaded after the first successful fetch
+            setHasLoadedSubscription(true);
         };
 
         fetchSubscription();
-    }, [session, status, hasLoadedSubscription]); // Add hasLoadedSubscription to dependencies
+    }, [session, status, hasLoadedSubscription]);
 
     const handleCancelSubscription = async () => {
         if (!currentSubscription) return;
@@ -115,7 +111,6 @@ export default function SubscriptionsPage() {
             toast.success(
                 result?.message || "Subscription cancelled successfully!",
             );
-            // Manually update the status in UI or re-fetch (by setting hasLoadedSubscription to false)
             setCurrentSubscription((prev) =>
                 prev
                     ? {
@@ -125,7 +120,7 @@ export default function SubscriptionsPage() {
                       }
                     : null,
             );
-            setHasLoadedSubscription(false); // Force re-fetch on next re-render to get accurate status
+            setHasLoadedSubscription(false);
         }
     };
 
@@ -171,7 +166,6 @@ export default function SubscriptionsPage() {
                                 className="ml-2 capitalize"
                             >
                                 {currentSubscription.status.toLowerCase()}{" "}
-                                {/* Display status in lowercase */}
                             </Badge>
                         </CardTitle>
                         <CardDescription>
@@ -184,8 +178,6 @@ export default function SubscriptionsPage() {
                                 <p className="text-lg font-semibold">
                                     {currentSubscription.plan}
                                 </p>{" "}
-                                {/* Changed from planName to plan */}
-                                {/* <p className="text-2xl font-bold mt-2">₹{currentSubscription.planPrice}</p> You might need to fetch this from PRICING_PLANS */}
                                 <p className="mt-1 flex items-center text-sm text-gray-600">
                                     <Calendar className="mr-1 h-4 w-4" /> Start
                                     Date: {currentSubscription.startDate}
@@ -297,8 +289,8 @@ export default function SubscriptionsPage() {
                     <CardHeader className="text-center">
                         <CardTitle>No Active Subscription</CardTitle>
                         <CardDescription>
-                            It looks like you don&apos;t have an active subscription
-                            with us.
+                            It looks like you don&apos;t have an active
+                            subscription with us.
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="text-center">

@@ -1,4 +1,3 @@
-// lib/validations/payment.ts
 import { z } from "zod";
 
 export const createRazorpayOrderSchema = z.object({

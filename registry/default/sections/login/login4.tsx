@@ -1,13 +1,13 @@
 "use client";
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { RiEyeFill, RiEyeOffFill } from "@remixicon/react";
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { GalleryVerticalEnd } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { RiEye2Fill, RiEyeFill, RiEyeOffFill } from "@remixicon/react";
-import { useState } from "react";
 
 export default function LoginForm({
     className,
@@ -16,7 +16,7 @@ export default function LoginForm({
     const [showPassword, setShowPassword] = useState(false);
 
     return (
-        <div className="grid h-screen font-sans lg:grid-cols-2 overflow-hidden">
+        <div className="grid h-screen overflow-hidden font-sans lg:grid-cols-2">
             <div className="flex flex-col gap-4 p-6 md:p-10">
                 <div className="flex justify-center gap-2 md:justify-start">
                     <Link
@@ -120,7 +120,10 @@ export default function LoginForm({
                             </div>
                             <div className="text-center text-sm font-medium">
                                 Already have an account?{" "}
-                                <Link href="#" className="text-violet-600 hover:underline underline-offset-1.5">
+                                <Link
+                                    href="#"
+                                    className="underline-offset-1.5 text-violet-600 hover:underline"
+                                >
                                     Sign up
                                 </Link>
                             </div>
@@ -136,7 +139,7 @@ export default function LoginForm({
             </div>
 
             <div className="relative hidden h-full py-4 pl-4 lg:block">
-                <div className="absolute w-full h-1/4 bottom-0 bg-gradient-to-tr from-white/80 to-transparent z-50"/>
+                <div className="absolute bottom-0 z-50 h-1/4 w-full bg-gradient-to-tr from-white/80 to-transparent" />
                 <div className="flex h-full items-center rounded-tl-2xl rounded-bl-2xl bg-violet-50">
                     <div className="grid translate-x-40 grid-cols-2 items-center gap-6">
                         <Image

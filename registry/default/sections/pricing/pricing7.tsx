@@ -9,43 +9,10 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import {
-    ThumbsUp,
-    Target,
-    Download,
-    HardDrive,
-    Shield,
-    Zap,
-    Check,
-    Badge,
-} from "lucide-react";
+import { Check } from "lucide-react";
 
 export default function Component() {
     const [isYearly, setIsYearly] = useState(true);
-
-    const pricingTiers = [
-        { sends: "2,500", price: "Included", isIncluded: true },
-        {
-            sends: "5,000",
-            price: isYearly ? "$320/yr" : "$32/mo",
-            isIncluded: false,
-        },
-        {
-            sends: "7,500",
-            price: isYearly ? "$490/yr" : "$49/mo",
-            isIncluded: false,
-        },
-        {
-            sends: "10,000",
-            price: isYearly ? "$990/yr" : "$99/mo",
-            isIncluded: false,
-        },
-        {
-            sends: "12,500",
-            price: isYearly ? "$1,250/yr" : "$125/mo",
-            isIncluded: false,
-        },
-    ];
 
     return (
         <div className="min-h-screen bg-white px-4 py-16">
@@ -74,7 +41,6 @@ export default function Component() {
                         </CardHeader>
 
                         <CardContent className="space-y-6">
-                            {/* Price */}
                             <div className="space-y-1">
                                 <div className="flex items-center gap-2">
                                     <span className="text-4xl font-bold text-gray-900">
@@ -152,7 +118,6 @@ export default function Component() {
                         </CardContent>
                     </Card>
 
-                    {/* Jambo+ Plan (Most Popular) */}
                     <Card className="relative border-2 border-orange-500 bg-white shadow-lg transition-shadow hover:shadow-xl">
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform rounded-full bg-orange-600 px-2 text-sm text-white">
                             MOST POPULAR
@@ -168,7 +133,6 @@ export default function Component() {
                         </CardHeader>
 
                         <CardContent className="space-y-6">
-                            {/* Price */}
                             <div className="-mx-6 rounded-lg bg-orange-50 p-4">
                                 <div className="flex gap-2 px-6">
                                     <span className="text-4xl font-bold text-orange-500">
@@ -181,7 +145,6 @@ export default function Component() {
                                 </div>
                             </div>
 
-                            {/* Features */}
                             <div className="space-y-4">
                                 <div className="flex items-start gap-3">
                                     <div className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
@@ -262,7 +225,6 @@ export default function Component() {
                                 </div>
                             </div>
 
-                            {/* Description */}
                             <div className="border-t pt-4">
                                 <h4 className="mb-2 font-medium text-gray-900">
                                     More description here
@@ -273,14 +235,12 @@ export default function Component() {
                                 </p>
                             </div>
 
-                            {/* CTA Button */}
                             <Button className="w-full bg-gray-900 py-3 text-white hover:bg-gray-800">
                                 Try now
                             </Button>
                         </CardContent>
                     </Card>
 
-                    {/* Custom Plan */}
                     <Card className="relative h-fit border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md">
                         <CardHeader className="pb-6">
                             <CardTitle className="text-2xl font-bold text-gray-900">
@@ -292,7 +252,6 @@ export default function Component() {
                         </CardHeader>
 
                         <CardContent className="space-y-6">
-                            {/* Contact Us */}
                             <div className="py-3 text-center">
                                 <Button
                                     variant="outline"
@@ -302,7 +261,6 @@ export default function Component() {
                                 </Button>
                             </div>
 
-                            {/* Features */}
                             <div className="space-y-4">
                                 <div className="flex items-start gap-3">
                                     <div className="mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
@@ -335,7 +293,6 @@ export default function Component() {
                                 </div>
                             </div>
 
-                            {/* Description */}
                             <div className="border-t pt-4">
                                 <h4 className="mb-2 font-medium text-gray-900">
                                     More description here

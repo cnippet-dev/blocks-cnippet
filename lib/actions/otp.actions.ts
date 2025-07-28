@@ -23,7 +23,7 @@ async function storeOTP(email: string, otp: string) {
             update: {
                 code: otp,
                 expiresAt,
-                attempts: 0, // Reset attempts on new OTP
+                attempts: 0,
                 createdAt: new Date(),
             },
             create: {
@@ -66,10 +66,8 @@ export async function sendOTP(email: string) {
 
 export async function verifyOTP(email: string, otp: string) {
     try {
-        // Get OTP record
         const otpRecord = await prisma.otp.findUnique({ where: { email } });
 
-        // Validate OTP record
         if (!otpRecord) {
             return {
                 error: "OTP not found. Please request a new one.",
@@ -77,7 +75,6 @@ export async function verifyOTP(email: string, otp: string) {
             };
         }
 
-        // Check if expired
         if (otpRecord.expiresAt < new Date()) {
             await prisma.otp.delete({ where: { email } });
             return {
@@ -86,7 +83,6 @@ export async function verifyOTP(email: string, otp: string) {
             };
         }
 
-        // Check max attempts
         if (otpRecord.attempts >= MAX_ATTEMPTS) {
             await prisma.otp.delete({ where: { email } });
             return {
@@ -95,9 +91,7 @@ export async function verifyOTP(email: string, otp: string) {
             };
         }
 
-        // Validate OTP code
         if (otpRecord.code !== otp) {
-            // Increment attempt counter
             await prisma.otp.update({
                 where: { email },
                 data: { attempts: { increment: 1 } },
@@ -116,7 +110,6 @@ export async function verifyOTP(email: string, otp: string) {
             };
         }
 
-        // OTP is valid
         await prisma.otp.delete({ where: { email } });
         return { success: true };
     } catch (error) {

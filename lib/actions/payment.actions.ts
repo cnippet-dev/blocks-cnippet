@@ -1,26 +1,24 @@
-// lib/actions/payment.actions.ts
 "use server";
 
 import prisma from "@/lib/prisma";
 import Razorpay from "razorpay";
 import crypto from "crypto";
-import { Resend } from "resend"; // Assuming Resend is used for emails
+import { Resend } from "resend";
 import { getUserSession } from "./auth.actions";
 
-// --- Interfaces from previous working code ---
 interface PaymentData {
     amount: number;
-    plan: string; // The name of the plan (e.g., "PRO")
+    plan: string;
     userId: string;
-    duration: string; // Add duration (e.g., 'monthly', 'annual')
+    duration: string;
 }
 
 interface PaymentResult {
     success?: boolean;
     orderId?: string;
-    amount?: number; // Original amount in rupees/currency units
+    amount?: number;
     currency?: string;
-    paymentId?: string; // Internal DB payment record ID
+    paymentId?: string;
     error?: string;
 }
 
@@ -28,53 +26,38 @@ interface VerificationResult {
     success?: boolean;
     error?: string;
 }
-// --- End Interfaces from previous working code ---
 
-const resend: Resend = new Resend(process.env.RESEND_API_KEY as string); // Initialize Resend
+const resend: Resend = new Resend(process.env.RESEND_API_KEY as string);
 
 const razorpay = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID!,
-    key_secret: process.env.RAZORPAY_SECRET_ID!, // Use RAZORPAY_SECRET_ID as in previous working code
+    key_secret: process.env.RAZORPAY_SECRET_ID!,
 });
 
-/**
- * Creates a Razorpay order on the server and records a pending payment in the database.
- * This is based on your previously working createPayment.
- */
 export async function createPayment(
     paymentData: PaymentData,
 ): Promise<PaymentResult> {
     try {
         const { amount, plan, userId, duration } = paymentData;
 
-        // Validate user exists (important for security and data integrity)
-        // const user = await prisma.user.findUnique({
-        //     where: { id: userId },
-        // });
-
-        // if (!user) {
-        //     return { error: "User not found" };
-        // }
-
-        const amountInPaise = Math.round(amount * 100); // Razorpay expects amount in paisa
-        const currency = "INR"; // Assuming INR as currency for Razorpay
+        const amountInPaise = Math.round(amount * 100);
+        const currency = "INR";
 
         if (!amountInPaise || amountInPaise <= 0) {
             return { error: "Invalid payment amount" };
         }
 
         const options = {
-            // Explicitly type for correctness
-            amount: amountInPaise, // Amount in paisa, as a number
+            amount: amountInPaise,
             currency: currency,
-            receipt: `rcpt_${Date.now().toString().slice(-8)}_${userId.slice(-6)}`, // Unique receipt ID
-            payment_capture: 1, // Auto capture payment on success
+            receipt: `rcpt_${Date.now().toString().slice(-8)}_${userId.slice(-6)}`,
+            payment_capture: 1,
             notes: {
-                description: `Subscription payment for ${plan} plan`.toString(), // Explicitly cast to string
-                planName: plan.toString(), // Explicitly cast to string
-                userId: userId.toString(), // Explicitly cast to string
-                originalAmount: amount.toString(), // Store original amount as string in notes
-                duration: duration.toString(), // Store duration in notes
+                description: `Subscription payment for ${plan} plan`.toString(),
+                planName: plan.toString(),
+                userId: userId.toString(),
+                originalAmount: amount.toString(),
+                duration: duration.toString(),
             },
         };
 
@@ -90,14 +73,13 @@ export async function createPayment(
                 };
             }
 
-            // Create payment record in your database with PENDING status
             const payment = await prisma.payment.create({
                 data: {
                     userId: userId,
-                    amount: amount, // Store original amount (e.g., in rupees)
+                    amount: amount,
                     currency: currency,
                     receiptId: options.receipt,
-                    status: "PENDING", // Initial status
+                    status: "PENDING",
                     razorpayOrderId: order.id,
                     description: `Subscription payment for ${plan} plan`,
                 },
@@ -106,13 +88,13 @@ export async function createPayment(
             const result: PaymentResult = {
                 success: true,
                 orderId: order.id,
-                amount: amount, // Return original amount for client-side Razorpay checkout options
+                amount: amount,
                 currency: currency,
-                paymentId: payment.id, // Return internal DB payment ID
+                paymentId: payment.id,
             };
 
             return result;
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            //eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             console.error(
                 "[RAZORPAY_ORDER_CREATE] Error creating Razorpay order:",
@@ -124,40 +106,34 @@ export async function createPayment(
                 "Failed to create payment order. Please try again.";
             return { error: errorMessage };
         }
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        //eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         console.error("[PAYMENT_CREATE] General error:", error);
         return { error: "Something went wrong while initiating payment." };
     }
 }
 
-/**
- * Verifies a Razorpay payment signature and updates payment/subscription status in the database.
- * This is based on your previously working verifyPayment.
- */
 export async function verifyPayment(
     razorpay_order_id: string,
     razorpay_payment_id: string,
     razorpay_signature: string,
     userId: string,
-    planId: string, // This 'plan' parameter will be used to create the subscription if not retrieved from notes
-    duration: string, // Add duration parameter
+    planId: string,
+    duration: string,
 ): Promise<VerificationResult> {
     try {
         if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
             return { error: "Missing payment verification details" };
         }
 
-        // Verify payment signature
         const body = razorpay_order_id + "|" + razorpay_payment_id;
         const expectedSignature = crypto
-            .createHmac("sha256", process.env.RAZORPAY_SECRET_ID!) // Use RAZORPAY_SECRET_ID for signature verification
+            .createHmac("sha256", process.env.RAZORPAY_SECRET_ID!)
             .update(body.toString())
             .digest("hex");
 
         if (expectedSignature !== razorpay_signature) {
             console.error("[PAYMENT_VERIFuY] Invalid signature.");
-            // Update payment to FAILED in DB if signature doesn't match
             await prisma.payment.updateMany({
                 where: { razorpayOrderId: razorpay_order_id, userId: userId },
                 data: {
@@ -169,9 +145,8 @@ export async function verifyPayment(
             return { error: "Invalid payment signature." };
         }
 
-        // Find the payment record in your DB
         const payment = await prisma.payment.findUnique({
-            where: { razorpayOrderId: razorpay_order_id, userId: userId }, // Add userId to where clause for security
+            where: { razorpayOrderId: razorpay_order_id, userId: userId },
         });
 
         if (!payment) {
@@ -179,7 +154,6 @@ export async function verifyPayment(
             return { error: "Payment record not found." };
         }
 
-        // Fetch payment details from Razorpay to confirm capture status
         const razorpayPaymentDetails =
             await razorpay.payments.fetch(razorpay_payment_id);
         if (razorpayPaymentDetails.status !== "captured") {
@@ -199,9 +173,8 @@ export async function verifyPayment(
             };
         }
 
-        // Update payment status to SUCCESS
         await prisma.payment.update({
-            where: { id: payment.id }, // Use internal payment ID for update
+            where: { id: payment.id },
             data: {
                 status: "SUCCESS",
                 razorpayPaymentId: razorpay_payment_id,
@@ -209,7 +182,6 @@ export async function verifyPayment(
             },
         });
 
-        // Create subscription
         const startDate = new Date();
         const endDate = new Date();
         if (duration === "monthly") {
@@ -217,11 +189,9 @@ export async function verifyPayment(
         } else if (duration === "annual" || duration === "yearly") {
             endDate.setFullYear(endDate.getFullYear() + 1);
         } else {
-            // Default to 1 year if duration is not recognized
             endDate.setFullYear(endDate.getFullYear() + 1);
         }
 
-        // Check for existing active subscription and expire it if necessary
         const existingActiveSubscription = await prisma.subscription.findFirst({
             where: { userId: userId, status: "ACTIVE" },
             orderBy: { createdAt: "desc" },
@@ -235,7 +205,7 @@ export async function verifyPayment(
                 where: { id: existingActiveSubscription.id },
                 data: {
                     status: "EXPIRED",
-                    endDate: new Date(), // Set end date to now for immediate expiration
+                    endDate: new Date(),
                 },
             });
         }
@@ -243,30 +213,28 @@ export async function verifyPayment(
         await prisma.subscription.create({
             data: {
                 userId: userId,
-                plan: planId, // Use the plan name passed from client
+                plan: planId,
                 status: "ACTIVE",
                 startDate: startDate,
                 endDate: endDate,
-                paymentId: payment.id, // Link to the Payment record
+                paymentId: payment.id,
                 razorpayOrderId: razorpay_order_id,
                 razorpayPaymentId: razorpay_payment_id,
             },
         });
 
-        // Update user's pro status
         await prisma.user.update({
             where: { id: userId },
             data: { pro: true },
         });
 
-        // Send confirmation email (optional, using Resend)
         const user = await prisma.user.findUnique({
             where: { id: userId },
         });
 
         if (user?.email) {
             await resend.emails.send({
-                from: "subscription@yourapp.com", // Replace with your verified Resend domain
+                from: "subscription@yourapp.com",
                 to: user.email,
                 subject: "Subscription Confirmation",
                 html: `<p>Thank you for subscribing to the ${planId} plan! Your subscription is now active.</p>`,
@@ -274,7 +242,7 @@ export async function verifyPayment(
         }
 
         return { success: true };
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        //eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         console.error("[PAYMENT_VERIFY] Error:", error);
         const errorMessage =
@@ -284,11 +252,8 @@ export async function verifyPayment(
     }
 }
 
-/**
- * Fetches all payments for the current authenticated user.
- */
 export async function getUserPayments(): Promise<{
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     payments?: any[];
     error?: string;
 }> {
@@ -301,14 +266,11 @@ export async function getUserPayments(): Promise<{
         const payments = await prisma.payment.findMany({
             where: {
                 userId: session.user.id,
-                // Optionally filter by status, e.g., 'SUCCESS'
-                // status: "SUCCESS"
             },
             orderBy: {
-                createdAt: "desc", // Order by most recent payments first
+                createdAt: "desc",
             },
             include: {
-                // Include related subscription if you need details from it
                 subscription: true,
             },
         });

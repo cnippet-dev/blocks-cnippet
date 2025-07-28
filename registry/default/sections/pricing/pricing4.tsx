@@ -28,7 +28,6 @@ export default function Component() {
 
     const handleGetStarted = (plan: string, price: number) => {
         console.log(`Getting started with ${plan} plan at $${price}`);
-        // Add your subscription logic here
     };
 
     return (

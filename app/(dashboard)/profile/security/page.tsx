@@ -1,4 +1,3 @@
-// app/profile/security/page.tsx
 "use client";
 
 import { useForm } from "react-hook-form";
@@ -39,7 +38,7 @@ export default function SecurityPage() {
 
     async function onSubmit(values: z.infer<typeof changePasswordSchema>) {
         setIsPending(true);
-        form.clearErrors(); // Clear previous errors
+        form.clearErrors();
 
         const result = await changeUserPassword(values);
         setIsPending(false);
@@ -76,8 +75,7 @@ export default function SecurityPage() {
             }
         } else {
             toast.success(result?.message || "Password changed successfully!");
-            form.reset(); // Clear form on success
-            // Force a session refetch to ensure UI is up-to-date
+            form.reset();
             if (update) await update();
         }
     }

@@ -71,7 +71,7 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
                 </TabsTrigger>
             );
         }
-        // This covers the case where auth is required but the user is not logged in.
+
         return (
             <TabsTrigger value="login" onClick={() => setActiveTab("login")}>
                 Code
@@ -116,7 +116,7 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
                 </div>
             );
         }
-        return null; // Fallback
+        return null;
     };
 
     return (

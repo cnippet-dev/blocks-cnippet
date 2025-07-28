@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { RiEyeFill, RiEyeOffFill } from "@remixicon/react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent } from "@/components/ui/card";
-import Link from "next/link";
-import { RiEyeFill, RiEyeOffFill } from "@remixicon/react";
 
 export default function Component() {
     const [showPassword, setShowPassword] = useState(false);

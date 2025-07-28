@@ -7,21 +7,6 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-// model User {
-//   id            String       @id @default(auto()) @map("_id") @db.ObjectId
-//   name          String?
-//   username      String?      @unique
-//   email         String?      @unique
-//   image         String?
-//   password      String?
-//   provider      String?
-//   termsAccepted Boolean      @default(false)
-//   emailVerified DateTime?
-//   createdAt     DateTime     @default(now())
-//   updatedAt     DateTime     @updatedAt
-//   resetTokens   ResetToken[]
-// }
-
 model User {
     id                 String         @id @default(auto()) @map("_id") @db.ObjectId
     name               String?
@@ -37,9 +22,7 @@ model User {
     inAppNotifications Boolean?       @default(false)
     preferredLanguage  String?        @default("en")
     preferredTimezone  String?        @default("UTC")
-    pro                Boolean        @default(false) // New field to track pro status
-    // accounts           Account[]
-    // sessions           Session[]
+    pro                Boolean        @default(false)
     subscriptions      Subscription[]
     payments           Payment[]
     ResetToken         ResetToken[]
@@ -49,16 +32,15 @@ model Subscription {
     id        String   @id @default(auto()) @map("_id") @db.ObjectId
     userId    String   @db.ObjectId
     user      User     @relation(fields: [userId], references: [id])
-    plan      String // e.g., "PRO", "ENTERPRISE" (used 'plan' in old code)
-    status    String // e.g., 'ACTIVE', 'CANCELLED', 'EXPIRED'
+    plan      String
+    status    String
     startDate DateTime @default(now())
     endDate   DateTime
-    paymentId String   @unique @db.ObjectId // Link to the Payment record
+    paymentId String   @unique @db.ObjectId
     payment   Payment  @relation(fields: [paymentId], references: [id])
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    // Optionally, you might want to store Razorpay specific IDs directly here for easy lookup
     razorpayOrderId   String?
     razorpayPaymentId String?
 }
@@ -69,11 +51,11 @@ model Payment {
     user              User          @relation(fields: [userId], references: [id])
     amount            Float
     currency          String
-    receiptId         String? // From Razorpay options.receipt
-    status            String // e.g., 'CREATED', 'PENDING', 'SUCCESS', 'FAILED'
-    razorpayOrderId   String        @unique // Razorpay's order ID
-    razorpayPaymentId String?       @unique // Razorpay's payment ID (null initially)
-    method            String? // e.g., 'card', 'upi', 'netbanking'
+    receiptId         String?
+    status            String
+    razorpayOrderId   String        @unique
+    razorpayPaymentId String?       @unique
+    method            String?
     description       String?
     createdAt         DateTime      @default(now())
     updatedAt         DateTime      @updatedAt

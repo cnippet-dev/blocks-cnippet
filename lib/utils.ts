@@ -9,7 +9,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export async function generateResetToken(userId: string): Promise<string> {
     const token = randomBytes(32).toString("hex");
-    const expires = new Date(Date.now() + 3600000); // 1 hour from now
+    const expires = new Date(Date.now() + 3600000);
 
     await prisma.resetToken.create({
         data: {

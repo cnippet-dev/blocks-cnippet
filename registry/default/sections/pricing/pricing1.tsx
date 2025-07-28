@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { Check, Zap, Layers, Database } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -8,7 +10,6 @@ import {
     CardFooter,
     CardHeader,
 } from "@/components/ui/card";
-import { useState } from "react";
 
 const pricingPlans = [
     {
@@ -134,7 +135,6 @@ export default function PricingSection() {
                 })}
             </div>
 
-            {/* Selected Plan Feedback */}
             {selectedPlan && (
                 <div className="mt-8 text-center">
                     <p className="font-medium text-purple-600">

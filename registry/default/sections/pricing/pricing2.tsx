@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { Check } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -9,7 +11,6 @@ import {
     CardHeader,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
 
 const pricingData = {
     monthly: {
@@ -63,7 +64,6 @@ export default function PricingSection() {
 
     return (
         <div className="mx-auto w-full max-w-6xl px-4 py-16">
-            {/* Header */}
             <div className="mb-12 text-center">
                 <p className="mb-4 font-medium text-purple-600">Pricing</p>
                 <h1 className="mb-6 text-4xl font-bold text-gray-900 md:text-5xl">
@@ -74,7 +74,6 @@ export default function PricingSection() {
                     plan free for 30 days.
                 </p>
 
-                {/* Billing Toggle */}
                 <div className="mb-12 inline-flex items-center rounded-2xl bg-gray-100 p-1">
                     <button
                         onClick={() => setBillingPeriod("monthly")}
@@ -105,7 +104,6 @@ export default function PricingSection() {
                 </div>
             </div>
 
-            {/* Pricing Cards */}
             <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2">
                 {plans.map((plan) => {
                     const pricing =
@@ -118,14 +116,6 @@ export default function PricingSection() {
                             key={plan.id}
                             className="relative border border-gray-200 shadow-sm transition-shadow hover:shadow-md"
                         >
-                            {/* {plan.popular && (
-                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform">
-                                    <Badge className="bg-purple-600 text-white">
-                                        Popular
-                                    </Badge>
-                                </div>
-                            )} */}
-
                             <CardHeader className="flex flex-row items-end justify-between pb-6">
                                 <div>
                                     <h3 className="mb-1 text-xl font-semibold text-gray-900">
@@ -202,7 +192,6 @@ export default function PricingSection() {
                 })}
             </div>
 
-            {/* Selection Feedback */}
             {selectedPlan && (
                 <div className="mt-8 text-center">
                     <p className="font-medium text-purple-600">

@@ -62,7 +62,6 @@ export default function BeamPricingSection() {
 
     return (
         <div className="mx-auto w-full max-w-5xl px-4 py-16">
-            {/* Header */}
             <div className="mb-8 flex flex-col items-start justify-between gap-4 text-center md:mb-16 md:flex-row md:gap-0 md:text-left">
                 <div>
                     <div className="mb-3 flex items-center justify-center gap-2 md:justify-start">
@@ -79,7 +78,6 @@ export default function BeamPricingSection() {
                     </p>
                 </div>
 
-                {/* Billing Toggle */}
                 <div className="mx-auto mt-auto flex items-center justify-center gap-3 md:mx-0 md:justify-end">
                     <span
                         className={`font-medium ${!isYearly ? "text-gray-900" : "text-gray-500"}`}
@@ -99,9 +97,7 @@ export default function BeamPricingSection() {
                 </div>
             </div>
 
-            {/* Main Content */}
             <div className="mb-16">
-                {/* Add-Ons Section */}
                 <div>
                     <Card className="grid h-full grid-cols-1 border-gray-200 bg-gray-100 p-[3px] shadow-none md:grid-cols-7">
                         <CardContent className="col-span-5 flex flex-col justify-between space-y-6 p-6">

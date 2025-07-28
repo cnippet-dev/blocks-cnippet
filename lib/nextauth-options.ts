@@ -47,7 +47,6 @@ export const nextauthOptions: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     pages: {
         signIn: "/sign_in",
-        // error: "/sign_in",
     },
     providers: [
         GoogleProvider({
@@ -79,7 +78,6 @@ export const nextauthOptions: NextAuthOptions = {
                 });
 
                 if (!result.success || !result.data?.id) {
-                    // Return null instead of throwing error to prevent redirect
                     return null;
                 }
 
@@ -94,10 +92,8 @@ export const nextauthOptions: NextAuthOptions = {
 
     callbacks: {
         async signIn({ user, account, profile }) {
-            // Handle credentials login
             if (account?.provider === "credentials") {
                 if (!user) {
-                    // Credentials failed - stay on sign-in page
                     return false;
                 }
                 return true;
@@ -106,24 +102,20 @@ export const nextauthOptions: NextAuthOptions = {
             // Handle OAuth login
             if (account?.type === "oauth" && profile) {
                 const result = await signInWithOauth({ account, profile });
-                // If user exists but has no username, mark as needs completion
                 if (result.success && result.data) {
-                    // Attach needsCompletion to user for jwt callback
                     //eslint-disable-next-line @typescript-eslint/no-explicit-any
                     (user as any).needsCompletion = !result.data.username;
                 }
-                return !!result.success; // Always return boolean
+                return !!result.success;
             }
             return true;
         },
         async jwt({ token, trigger, session, account, user }) {
-            // Add provider information to token
             if (account?.provider) {
                 token.provider = account.provider;
             }
 
             if (trigger === "update" && session) {
-                // Handle updates from the session
                 return { ...token, ...session };
             }
 
@@ -136,17 +128,14 @@ export const nextauthOptions: NextAuthOptions = {
                     token.provider = token.provider || userData.provider;
                     token.image = userData.image;
                     token.username = userData.username;
-                    // Add user settings fields to token
                     token.preferredTheme = userData.preferredTheme;
                     token.emailNotifications = userData.emailNotifications;
                     token.inAppNotifications = userData.inAppNotifications;
                     token.preferredLanguage = userData.preferredLanguage;
                     token.preferredTimezone = userData.preferredTimezone;
-                    // If user has no username, needs completion
                     token.needsCompletion = !userData.username;
                 }
             }
-            // If needsCompletion was set during signIn, preserve it
             //eslint-disable-next-line @typescript-eslint/no-explicit-any
             if (user && (user as any).needsCompletion !== undefined) {
                 //eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -162,7 +151,6 @@ export const nextauthOptions: NextAuthOptions = {
                 session.user.provider = token.provider as string;
                 session.user.image = token.image as string;
                 session.user.username = token.username as string | null;
-                // Add user settings fields to session.user
                 session.user.preferredTheme = token.preferredTheme as
                     | string
                     | null;

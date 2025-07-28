@@ -1,13 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, EyeOff, Facebook, Instagram, Linkedin } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
+import Link from "next/link";
 import {
     RiEyeFill,
     RiEyeOffFill,
@@ -15,7 +10,11 @@ import {
     RiInstagramFill,
     RiLinkedinBoxFill,
 } from "@remixicon/react";
-import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function Component() {
     const [showPassword, setShowPassword] = useState(false);
@@ -102,7 +101,6 @@ export default function Component() {
                                             </div>
                                         </div>
 
-                                        {/* App Content */}
                                         <div className="relative mt-10 px-6">
                                             <div className="relative mt-10 hidden h-full py-4 lg:block">
                                                 <div className="flex translate-y-40 flex-col items-end gap-6">
@@ -129,9 +127,7 @@ export default function Component() {
                         </div>
                     </div>
 
-                    {/* Right Column - Login Form */}
                     <div className="mx-auto max-w-md space-y-8 lg:mx-0">
-                        {/* Header */}
                         <div className="space-y-2 text-center lg:text-left">
                             <h2 className="mt-2 text-3xl font-medium">
                                 Login to Cnippet!
@@ -174,9 +170,7 @@ export default function Component() {
                             <div className="w-full border border-dashed border-neutral-300"></div>
                         </div>
 
-                        {/* Form */}
                         <form className="space-y-6">
-                            {/* Name Fields */}
                             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                 <div className="space-y-2">
                                     <Label
@@ -212,7 +206,6 @@ export default function Component() {
                                 </div>
                             </div>
 
-                            {/* Email Field */}
                             <div className="space-y-2">
                                 <Label
                                     htmlFor="email"
