@@ -114,10 +114,10 @@ export default function Cursor1() {
                 <main className="">
                     <Hero ref={targetRef3} />
                     <Sections count={6} />
-                    <Faq />
-                    <Cta />
+                    {/* <Faq /> */}
+                    {/* <Cta /> */}
                 </main>
-                <Footer />
+                {/* <Footer /> */}
             </div>
         </ReactLenis>
     );

@@ -16,38 +16,40 @@ interface Section {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Sections = (props: { count?: number; sections?: any[] }) => {
-    const components = props.sections ?? Object.values(Index["default"]).filter(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (item: any): item is Section =>
-            item.type === "registry:section" && "thumbnail" in item,
-    );
+    const components =
+        props.sections ??
+        Object.values(Index["default"]).filter(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (item: any): item is Section =>
+                item.type === "registry:section" && "thumbnail" in item,
+        );
 
     return (
         <>
-            <section className="mx-auto mt-10 w-full max-w-full border-t border-b px-4 md:mt-20 md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-800 dark:bg-black">
+            <section className="font-kumb mx-auto mt-10 w-full max-w-full border-t border-b px-4 md:mt-16 md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-800 dark:bg-black">
                 <div className="border border-t-0 border-b-0 dark:border-neutral-800">
                     <div className="max-w-3xl px-4 py-16">
-                        <div className="h-fit md:h-[calc(2*theme(fontSize.5xl)*theme(lineHeight.tight))]">
+                        <div className="h-fit">
                             <TypingText
-                                className="text-3xl leading-tight font-medium tracking-tight md:text-5xl"
+                                className="text-3xl leading-tight font-medium tracking-tighter md:text-4xl"
                                 speed={60}
                                 showCursor={false}
                                 once={true}
                             >
-                                Explore wide range of <br />
+                                Explore wide range of{" "}
                                 <span className="text-blue-700">Sections</span>
                             </TypingText>
                         </div>
 
-                        <p className="mt-2 text-base text-gray-500 md:text-lg">
-                            Join thousands of developers who trust Cnippet for
-                            their web development needs. Our ecosystem has
-                            helped teams build everything from simple landing
-                            pages to complex enterprise applications.
+                        <p className="mt-2 text-base text-gray-700 md:text-lg">
+                            A library of 500+ professionally designed, expertly
+                            crafted component examples you can drop into your
+                            Tailwind projects and customize to your heart's
+                            content.
                         </p>
                     </div>
                     <div>
-                        <div className="grid grid-cols-1 border-t md:grid-cols-12 dark:divide-neutral-800 dark:border-neutral-800">
+                        <div className="grid grid-cols-1 divide-x border-t md:grid-cols-12 dark:divide-neutral-800 dark:border-neutral-800">
                             {components
                                 ?.slice(0, props.count)
                                 .map((component, i) => {
@@ -55,7 +57,7 @@ const Sections = (props: { count?: number; sections?: any[] }) => {
                                     return (
                                         <div
                                             key={i}
-                                            className={`relative col-span-4 w-full ${i === 2 || i === 5 ? "border-r-0" : "border-r"} ${i === 5 ? "border-b" : ""} dark:border-neutral-800`}
+                                            className={`relative col-span-3 w-full dark:border-neutral-800`}
                                         >
                                             <Image
                                                 width="960"
@@ -84,12 +86,11 @@ const Sections = (props: { count?: number; sections?: any[] }) => {
                         </div>
                     </div>
 
-                    <div className="grid h-12 grid-cols-1 divide-x border-t md:grid-cols-6 dark:divide-neutral-800 dark:border-neutral-800">
+                    <div className="grid h-12 grid-cols-1 divide-x border-t md:grid-cols-4 dark:divide-neutral-800 dark:border-neutral-800">
                         <div className="col-span-1 hidden md:block"></div>
                         <div className="col-span-1 hidden md:block"></div>
                         <div className="col-span-1 hidden md:block"></div>
-                        <div className="col-span-1 hidden md:block"></div>
-                        <div className="col-span-1 h-full w-full md:col-span-2">
+                        <div className="col-span-1 h-full w-full">
                             <Link
                                 href="/sections"
                                 className="group relative flex h-full w-full items-center justify-center overflow-hidden bg-blue-700"
