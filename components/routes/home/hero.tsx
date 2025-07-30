@@ -196,7 +196,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                                     </p>
                                 </div>
                             </div>
-                            <div className="group col-span-2 flex items-start justify-start gap-2 bg-indigo-50/80 px-4 py-10 dark:bg-background">
+                            <div className="group dark:bg-background col-span-2 flex items-start justify-start gap-2 bg-indigo-50/80 px-4 py-10">
                                 <svg
                                     className="w-20 shrink-0 text-indigo-700 *:data-lift:transition-transform *:data-lift:duration-300 group-hover:*:data-lift:-translate-y-0.5 group-data-selected:*:data-lift:translate-y-0 sm:w-30"
                                     aria-hidden="true"
@@ -281,9 +281,9 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                                     </p>
                                 </div>
                             </div>
-                            <div className="col-span-2 flex items-start justify-start gap-2 px-4 py-10">
+                            <div className="group col-span-2 flex items-start justify-start gap-2 px-4 py-10">
                                 <svg
-                                    className="w-20 shrink-0 *:data-lift:transition-transform *:data-lift:duration-300 group-hover:*:data-lift:-translate-y-0.5 group-data-selected:*:data-lift:translate-y-0 sm:w-30 text-black"
+                                    className="w-20 shrink-0 text-black *:data-lift:transition-transform *:data-lift:duration-300 group-hover:*:data-lift:-translate-y-0.5 group-data-selected:*:data-lift:translate-y-0 sm:w-30"
                                     aria-hidden="true"
                                     fill="none"
                                     viewBox="0 0 120 72"

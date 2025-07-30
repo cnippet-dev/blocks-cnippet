@@ -123,7 +123,7 @@ export default function Cursor1() {
     );
 }
 
-// import Component from '@/registry/default/sections/footer/footer3'
+// import Component from '@/registry/default/sections/footer/footer1'
 // import React from 'react'
 
 // const page = () => {

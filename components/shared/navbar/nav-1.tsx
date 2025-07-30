@@ -81,7 +81,7 @@ const Nav1 = () => {
                                     ))}
                                 <span className="sr-only">Toggle theme</span>
                             </div> */}
-                            <div className="flex w-full items-center justify-center bg-gray-50">
+                            <div className="flex w-full items-center justify-center bg-gray-50 dark:bg-black">
                                 <NavUser />
                             </div>
                         </div>
