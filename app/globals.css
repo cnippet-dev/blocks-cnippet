@@ -156,6 +156,9 @@
     0% {
         transform: perspective(150px) rotateX(0deg);
     }
+    50% {
+        transform: perspective(150px) rotateZ(180deg);
+    }
     100% {
         transform: perspective(150px) rotateX(180deg);
     }

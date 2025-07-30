@@ -44,7 +44,7 @@ const Sections = (props: { count?: number; sections?: any[] }) => {
                         <p className="mt-2 text-base text-gray-700 md:text-lg">
                             A library of 500+ professionally designed, expertly
                             crafted component examples you can drop into your
-                            Tailwind projects and customize to your heart's
+                            Tailwind projects and customize to your heart&apos;s
                             content.
                         </p>
                     </div>

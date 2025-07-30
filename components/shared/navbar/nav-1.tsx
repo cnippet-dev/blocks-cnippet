@@ -3,15 +3,12 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { RiMoonFill, RiSunLine } from "@remixicon/react";
 
-import { CommandMenu } from "@/components/command-menu";
 import NavUser from "./nav-user";
 import { MobileNav } from "./mobile-nav";
 
 const Nav1 = () => {
-    const { theme, setTheme } = useTheme();
-    //eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -29,72 +26,62 @@ const Nav1 = () => {
                                 className="grid grid-cols-4"
                                 href="/"
                             >
-                                <span className="col-span-1 flex size-full w-full items-center justify-center bg-white py-2">
-                                    <Image
-                                        src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-light.png"
-                                        alt=""
-                                        className="size-9"
-                                        width={1080}
-                                        height={1080}
-                                        suppressHydrationWarning
-                                    />
+                                <span className="col-span-1 flex size-full w-full items-center justify-center py-2">
+                                    {mounted && (
+                                        <Image
+                                            src={
+                                                theme === "dark"
+                                                    ? "https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-dark.png"
+                                                    : "https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-light.png"
+                                            }
+                                            alt=""
+                                            className="size-12"
+                                            width={1080}
+                                            height={1080}
+                                            suppressHydrationWarning
+                                        />
+                                    )}
                                 </span>
-                                <span className="col-span-3 hidden items-center justify-start pl-2 font-mono text-base xl:flex">
+                                <span className="col-span-3 hidden items-center justify-start font-mono text-base uppercase xl:flex">
                                     cnippet/blocks
                                 </span>
                             </Link>
                         </div>
 
                         <div className="col-span-4 hidden items-center px-4 md:flex xl:col-span-3">
-                            <nav className="flex items-center gap-4 text-sm xl:gap-6">
-                                <Link
-                                    href="#"
-                                    className="text-foreground/80 hover:text-foreground/80 transition-colors"
-                                >
-                                    Sections
-                                </Link>
-                                <Link
-                                    href="#"
-                                    className="text-foreground/80 hover:text-foreground/80 transition-colors"
-                                >
-                                    Pages
-                                </Link>
-                                <Link
-                                    href="#"
-                                    className="text-foreground/80 hover:text-foreground/80 transition-colors"
-                                >
-                                    Templates
-                                </Link>
+                            <nav className="[&_a]:text-foreground/80 flex items-center gap-4 text-sm xl:gap-6 [&_a]:uppercase [&_a]:transition-colors [&_a]:hover:text-black">
+                                <Link href="/sections">Sections</Link>
+                                <Link href="#">Pages</Link>
+                                <Link href="#">Templates</Link>
                             </nav>
                         </div>
 
-                        <div className="col-span-1 hidden md:block">
-                            <CommandMenu />
-                        </div>
+                        <div className="col-span-1"></div>
 
-                        <div className="col-span-1 hidden h-full cursor-pointer grid-cols-3 divide-x xl:grid dark:divide-neutral-800">
+                        <div className="col-span-1 flex">
                             <div></div>
-                            <div className="group/toggle focus-visible:ring-ring [&amp;_svg]:pointer-events-none [&amp;_svg]:size-5 [&amp;_svg]:shrink-0 bg-muted/50 inline-flex w-full items-center justify-center gap-2 rounded-none px-0 text-sm font-medium whitespace-nowrap transition-colors hover:bg-none focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50">
-                                {theme === "dark" ? (
-                                    <button
-                                        onClick={() => setTheme("light")}
-                                        className={`cursor-pointer rounded-full p-1.5`}
-                                        aria-label="Light mode"
-                                    >
-                                        <RiSunLine className="size-5 text-black dark:text-white" />
-                                    </button>
-                                ) : (
-                                    <button
-                                        onClick={() => setTheme("dark")}
-                                        className={`cursor-pointer rounded-full p-1.5`}
-                                        aria-label="Dark mode"
-                                    >
-                                        <RiMoonFill className="size-5 text-black dark:text-white" />
-                                    </button>
-                                )}
+                            {/* <div className="group/toggle focus-visible:ring-ring [&amp;_svg]:pointer-events-none [&amp;_svg]:size-5 [&amp;_svg]:shrink-0 bg-muted/50 inline-flex w-full items-center justify-center gap-2 rounded-none px-0 text-sm font-medium whitespace-nowrap transition-colors hover:bg-none focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50">
+                                {mounted &&
+                                    (theme === "dark" ? (
+                                        <button
+                                            onClick={() => setTheme("light")}
+                                            className={`cursor-pointer rounded-full p-1.5`}
+                                            aria-label="Light mode"
+                                        >
+                                            <RiSunLine className="size-5 text-black dark:text-white" />
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={() => setTheme("dark")}
+                                            className={`cursor-pointer rounded-full p-1.5`}
+                                            aria-label="Dark mode"
+                                        >
+                                            <RiMoonFill className="size-5 text-black dark:text-white" />
+                                        </button>
+                                    ))}
                                 <span className="sr-only">Toggle theme</span>
-                            </div>
-                            <div className="col-span-1 flex w-full items-center justify-center bg-black">
+                            </div> */}
+                            <div className="flex w-full items-center justify-center bg-gray-50">
                                 <NavUser />
                             </div>
                         </div>

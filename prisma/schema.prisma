@@ -26,6 +26,7 @@ model User {
     subscriptions      Subscription[]
     payments           Payment[]
     ResetToken         ResetToken[]
+    favourites         String[]
 }
 
 model Subscription {

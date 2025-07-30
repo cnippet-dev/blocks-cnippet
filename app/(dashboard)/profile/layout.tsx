@@ -15,6 +15,7 @@ import {
     Calendar,
     Edit3,
     X,
+    Heart,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -60,6 +61,7 @@ export default function ProfilePage({ children }: ProfileLayoutProps) {
 
     const navItems = [
         { name: "General", href: "/profile", icon: User },
+        { name: "Favourites", href: "/profile/favourites", icon: Heart },
         { name: "Settings", href: "/profile/settings", icon: Settings },
         { name: "Security", href: "/profile/security", icon: Shield },
         {

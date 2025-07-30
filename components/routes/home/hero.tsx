@@ -10,7 +10,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                     <div className="border border-t-0 border-b-0 dark:border-neutral-800">
                         <div className="grid grid-cols-6 divide-x dark:divide-neutral-800">
                             <div className="col-span-6 space-y-5 px-4 py-20 md:col-span-4">
-                                <p className="text-gray-700 uppercase tracking-wide text-sm">
+                                <p className="text-sm tracking-wide text-gray-700 uppercase">
                                     Advanced UI components and templates
                                 </p>
                                 <h1 className="mt-2 text-6xl tracking-tighter text-pretty sm:text-8xl">
@@ -36,15 +36,15 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                             </div>
                         </div>
 
-                        <div className="grid h-12 grid-cols-1 divide-x border-t md:grid-cols-6 dark:divide-neutral-800 dark:border-neutral-800">
+                        <div
+                            ref={ref}
+                            className="grid h-12 grid-cols-1 divide-x border-t md:grid-cols-6 dark:divide-neutral-800 dark:border-neutral-800"
+                        >
                             <div className="col-span-1 hidden md:block"></div>
                             <div className="col-span-1 hidden md:block"></div>
                             <div className="col-span-1 hidden md:block"></div>
                             <div className="col-span-1 hidden md:block"></div>
-                            <div
-                                ref={ref}
-                                className="col-span-1 flex h-full w-full"
-                            >
+                            <div className="col-span-1 flex h-full w-full">
                                 <Link
                                     href="#explore"
                                     className="group relative flex h-full w-full items-center justify-center overflow-hidden bg-black"

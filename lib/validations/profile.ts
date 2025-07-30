@@ -29,7 +29,7 @@ export const changePasswordSchema = z
 export const updateUserSettingsSchema = z.object({
     theme: z
         .enum(["light", "dark", "system"], {
-            errorMap: () => ({ message: "Invalid theme selected." }),
+            message: "Invalid theme selected.",
         })
         .optional(),
     emailNotifications: z.boolean().optional(),
@@ -39,4 +39,8 @@ export const updateUserSettingsSchema = z.object({
         .min(2, "Language must be at least 2 characters.")
         .optional(), // e.g., 'en', 'es', 'fr'
     timezone: z.string().min(3, "Timezone is required.").optional(),
+});
+
+export const updateFavouritesSchema = z.object({
+    favourites: z.array(z.string()),
 });
