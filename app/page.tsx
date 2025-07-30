@@ -115,7 +115,7 @@ export default function Cursor1() {
                     <Hero ref={targetRef3} />
                     <Sections count={6} />
                     <Faq />
-                    {/* <Cta /> */}
+                    <Cta />
                 </main>
                 <Footer />
             </div>

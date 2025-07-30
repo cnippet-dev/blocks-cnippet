@@ -5,7 +5,7 @@ import { RiArrowRightLine } from "@remixicon/react";
 const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
     (props, ref) => {
         return (
-            <>
+            <div>
                 <section className="font-kumb mx-auto w-full max-w-full border-t-0 border-b px-4 md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-800 dark:bg-black">
                     <div className="border border-t-0 border-b-0 dark:border-neutral-800">
                         <div className="grid grid-cols-6 divide-x dark:divide-neutral-800">
@@ -36,15 +36,15 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                             </div>
                         </div>
 
-                        <div
-                            ref={ref}
-                            className="grid h-12 grid-cols-1 divide-x border-t md:grid-cols-6 dark:divide-neutral-800 dark:border-neutral-800"
-                        >
+                        <div className="grid h-12 grid-cols-1 divide-x border-t md:grid-cols-6 dark:divide-neutral-800 dark:border-neutral-800">
                             <div className="col-span-1 hidden md:block"></div>
                             <div className="col-span-1 hidden md:block"></div>
                             <div className="col-span-1 hidden md:block"></div>
                             <div className="col-span-1 hidden md:block"></div>
-                            <div className="col-span-1 flex h-full w-full">
+                            <div
+                                ref={ref}
+                                className="col-span-1 flex h-full w-full"
+                            >
                                 <Link
                                     href="#explore"
                                     className="group relative flex h-full w-full items-center justify-center overflow-hidden bg-black"
@@ -85,12 +85,9 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                         </div>
 
                         <div className="grid grid-cols-2 divide-x border-t md:grid-cols-6 dark:divide-neutral-800 dark:border-neutral-800">
-                            <div
-                                ref={ref}
-                                className="group col-span-2 flex items-start justify-start gap-2 px-4 py-10"
-                            >
+                            <div className="group col-span-2 flex items-start justify-start gap-2 px-4 py-10">
                                 <svg
-                                    className="w-20 shrink-0 *:data-lift:transition-transform *:data-lift:duration-300 group-hover:*:data-lift:-translate-y-0.5 group-data-selected:*:data-lift:translate-y-0 sm:w-30"
+                                    className="w-20 shrink-0 text-black *:data-lift:transition-transform *:data-lift:duration-300 group-hover:*:data-lift:-translate-y-0.5 group-data-selected:*:data-lift:translate-y-0 sm:w-30"
                                     aria-hidden="true"
                                     fill="none"
                                     viewBox="0 0 120 72"
@@ -199,10 +196,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                                     </p>
                                 </div>
                             </div>
-                            <div
-                                ref={ref}
-                                className="group col-span-2 flex items-start justify-start gap-2 bg-indigo-50/80 px-4 py-10"
-                            >
+                            <div className="group col-span-2 flex items-start justify-start gap-2 bg-indigo-50/80 px-4 py-10 dark:bg-background">
                                 <svg
                                     className="w-20 shrink-0 text-indigo-700 *:data-lift:transition-transform *:data-lift:duration-300 group-hover:*:data-lift:-translate-y-0.5 group-data-selected:*:data-lift:translate-y-0 sm:w-30"
                                     aria-hidden="true"
@@ -287,12 +281,9 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                                     </p>
                                 </div>
                             </div>
-                            <div
-                                ref={ref}
-                                className="col-span-2 flex items-start justify-start gap-2 px-4 py-10"
-                            >
+                            <div className="col-span-2 flex items-start justify-start gap-2 px-4 py-10">
                                 <svg
-                                    className="w-20 shrink-0 *:data-lift:transition-transform *:data-lift:duration-300 group-hover:*:data-lift:-translate-y-0.5 group-data-selected:*:data-lift:translate-y-0 sm:w-30"
+                                    className="w-20 shrink-0 *:data-lift:transition-transform *:data-lift:duration-300 group-hover:*:data-lift:-translate-y-0.5 group-data-selected:*:data-lift:translate-y-0 sm:w-30 text-black"
                                     aria-hidden="true"
                                     fill="none"
                                     viewBox="0 0 120 72"
@@ -396,7 +387,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                         </div>
                     </div>
                 </section>
-            </>
+            </div>
         );
     },
 );
