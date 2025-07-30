@@ -9,6 +9,7 @@ import {
     updateGeneralInfoSchema,
     changePasswordSchema,
     updateUserSettingsSchema,
+    updateFavouritesSchema,
 } from "@/lib/validations/profile";
 
 type FieldErrors<T extends z.ZodTypeAny> = {
@@ -204,4 +205,39 @@ export async function getCurrentUserProfile() {
         },
     });
     return user;
+}
+
+export async function getUserFavourites() {
+    const session = await getUserSession();
+    if (!session || !session.user || !session.user.id) {
+        return null;
+    }
+    const user = await prisma.user.findUnique({
+        where: { id: session.user.id },
+        select: { favourites: true },
+    });
+    return user?.favourites || [];
+}
+
+export async function updateUserFavourites(values: { favourites: string[] }) {
+    const session = await getUserSession();
+    if (!session || !session.user || !session.user.id) {
+        return { error: { general: "Unauthorized. Please sign in." } };
+    }
+
+    try {
+        const updatedUser = await prisma.user.update({
+            where: { id: session.user.id },
+            data: { favourites: values.favourites },
+            select: { favourites: true },
+        });
+        return { success: true, favourites: updatedUser.favourites };
+    } catch (error) {
+        console.error("Error updating favourites:", error);
+        return {
+            error: {
+                general: "Failed to update favourites. Please try again.",
+            },
+        };
+    }
 }

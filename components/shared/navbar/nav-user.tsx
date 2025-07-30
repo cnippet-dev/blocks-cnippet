@@ -120,9 +120,9 @@ const NavUser = () => {
                             <DialogTrigger asChild>
                                 <Button
                                     size="lg"
-                                    className="[&amp;_svg]:size-4.5 cursor-pointer rounded-full bg-black px-2 hover:bg-black"
+                                    className="[&amp;_svg]:size-4.5 cursor-pointer rounded-full bg-gray-50 shadow-none px-2"
                                 >
-                                    <RiUserFill className="text-white" />
+                                    <RiUserFill className="text-black" />
                                 </Button>
                             </DialogTrigger>
                             <AuthDialog />

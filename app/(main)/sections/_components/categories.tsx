@@ -7,6 +7,7 @@ import {
     ExternalLink,
     X,
     ChevronDown,
+    Heart,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -32,6 +33,7 @@ import { Index } from "@/__registry__";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { useFavourites } from "@/hooks/use-favourites";
 
 const getCategories = () => {
     return Array.from(
@@ -59,6 +61,7 @@ export default function SectionsPage() {
     const urlLicense = searchParams.get("license") || "";
     const categories = getCategories();
     const [viewMode, setViewMode] = React.useState<"grid" | "list">("grid");
+    const { toggleFavourite, isFavourite, isPending } = useFavourites();
 
     const filteredSections = Object.values(Index["default"]).filter(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -361,6 +364,35 @@ export default function SectionsPage() {
                                     >
                                         <CardContent className="p-0">
                                             <div className="relative overflow-hidden">
+                                                {/* Favourite button */}
+                                                <div className="absolute top-3 left-3 z-20">
+                                                    <button
+                                                        aria-label={
+                                                            isFavourite(
+                                                                section.name,
+                                                            )
+                                                                ? "Remove from favourites"
+                                                                : "Add to favourites"
+                                                        }
+                                                        onClick={() =>
+                                                            toggleFavourite(
+                                                                section.name,
+                                                            )
+                                                        }
+                                                        disabled={isPending}
+                                                        className="text-gray-400 hover:text-red-500"
+                                                    >
+                                                        <Heart
+                                                            className={`h-6 w-6 ${
+                                                                isFavourite(
+                                                                    section.name,
+                                                                )
+                                                                    ? "fill-red-500 text-red-500"
+                                                                    : ""
+                                                            }`}
+                                                        />
+                                                    </button>
+                                                </div>
                                                 <Image
                                                     src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/${section.name}.png`}
                                                     alt={section.name}
