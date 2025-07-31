@@ -101,12 +101,17 @@ export async function signInWithOauth({
     profile,
 }: {
     account: Account;
-    profile: Profile & { picture?: string };
+    profile: Profile & { picture?: string; avatar_url?: string };
 }) {
     try {
         const user = await prisma.user.findUnique({
             where: { email: profile.email },
         });
+
+        const image_url =
+            account.provider === "github"
+                ? profile.avatar_url
+                : profile.picture;
 
         if (user) {
             return {
@@ -125,7 +130,7 @@ export async function signInWithOauth({
                 name: profile.name || "",
                 username: "",
                 email: profile.email || "",
-                image: profile.picture,
+                image: image_url,
                 provider: account.provider,
                 emailVerified: new Date(),
             },

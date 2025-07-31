@@ -202,6 +202,7 @@ export async function getCurrentUserProfile() {
             username: true,
             email: true,
             image: true,
+            emailVerified: true,
         },
     });
     return user;
@@ -239,5 +240,23 @@ export async function updateUserFavourites(values: { favourites: string[] }) {
                 general: "Failed to update favourites. Please try again.",
             },
         };
+    }
+}
+
+export async function updateProfileImage(imageUrl: string) {
+    const session = await getUserSession();
+    if (!session || !session.user || !session.user.id) {
+        throw new Error("Unauthorized");
+    }
+
+    try {
+        const updatedUser = await prisma.user.update({
+            where: { id: session.user.id },
+            data: { image: imageUrl },
+        });
+        return updatedUser;
+    } catch (error) {
+        console.error("Error updating profile image:", error);
+        throw new Error("Failed to update profile image");
     }
 }
