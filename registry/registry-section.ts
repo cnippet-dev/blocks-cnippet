@@ -18,8 +18,36 @@ const generateSections = (
 
 export const section: Registry = generateSections([
     {
-        name: "pricing",
-        no: "4",
+        name: "banner",
+        no: "1",
+    },
+    {
+        name: "blogs",
+        no: "1",
+    },
+    {
+        name: "career",
+        no: "1",
+    },
+    {
+        name: "contact",
+        no: "1",
+    },
+    {
+        name: "cta",
+        no: "1",
+    },
+    {
+        name: "faq",
+        no: "1",
+    },
+    {
+        name: "feature",
+        no: "1",
+    },
+    {
+        name: "footer",
+        no: "3",
     },
     {
         name: "hero",
@@ -27,10 +55,30 @@ export const section: Registry = generateSections([
     },
     {
         name: "login",
-        no: "2",
+        no: "4",
     },
     {
-        name: "footer",
-        no: "3",
+        name: "metrics",
+        no: "1",
+    },
+    {
+        name: "navbar",
+        no: "1",
+    },
+    {
+        name: "newsletter",
+        no: "1",
+    },
+    {
+        name: "pricing",
+        no: "7",
+    },
+    {
+        name: "team",
+        no: "1",
+    },
+    {
+        name: "testimonial",
+        no: "1",
     },
 ]);

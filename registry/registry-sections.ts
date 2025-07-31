@@ -22,6 +22,14 @@ const generateSections = (
 };
 
 export const sections = [
+    ...generateSections("banner", 1, ["T"], ["T"]),
+    ...generateSections("blogs", 1, ["T"], ["T"]),
+    ...generateSections("career", 1, ["T"], ["T"]),
+    ...generateSections("contact", 1, ["T"], ["T"]),
+    ...generateSections("cta", 1, ["T"], ["T"]),
+    ...generateSections("faq", 1, ["T"], ["T"]),
+    ...generateSections("feature", 1, ["T"], ["T"]),
+
     ...generateSections(
         "pricing",
         7,
