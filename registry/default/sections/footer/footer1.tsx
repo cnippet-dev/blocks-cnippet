@@ -126,7 +126,7 @@ export default function Component() {
                                 <CardContent className="relative p-0">
                                     <div className="relative h-80 overflow-hidden rounded-lg">
                                         <Image
-                                            src="https://res.cloudinary.com/dphulm0s9/image/upload/v1741613286/h6.jpg"
+                                            src="https://res.cloudinary.com/dcxm3ccir/image/upload/v1741613286/h6.jpg"
                                             alt="Maya Patel"
                                             fill
                                             className="object-cover"
@@ -273,7 +273,7 @@ export default function Component() {
 //                         <div className="col-span-4 flex items-center gap-6 border-b px-4 py-3">
 //                             <div className="flex items-center">
 //                                 <Image
-//                                     src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-light.png"
+//                                     src="https://res.cloudinary.com/dcxm3ccir/image/upload/v1753948225/logo-light.png"
 //                                     alt=""
 //                                     className="size-12"
 //                                     width={1080}

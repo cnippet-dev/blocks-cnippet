@@ -1,39 +1,40 @@
 "use client";
 
 import * as React from "react";
-import {
-    LayoutGrid,
-    Grid3X3,
-    ExternalLink,
-    X,
-    ChevronDown,
-    Heart,
-} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+
+import { Index } from "@/__registry__";
+import { Registry } from "@/registry/schema";
+import { useFavourites } from "@/hooks/use-favourites";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import {
-    Sidebar,
-    SidebarContent,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarGroupLabel,
-    SidebarInset,
-    SidebarProvider,
-    SidebarTrigger,
-} from "@/components/ui/sidebar";
 import {
     Collapsible,
     CollapsibleContent,
     CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { Index } from "@/__registry__";
-import { useRouter, useSearchParams } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
-import { useFavourites } from "@/hooks/use-favourites";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
+    RiArrowDownSLine,
+    RiCloseLine,
+    RiEyeLine,
+    RiHeartFill,
+    RiLayoutColumnLine,
+    RiLayoutRowLine,
+    RiMenu2Line,
+    RiMenuUnfold2Line,
+    RiSearchLine,
+} from "@remixicon/react";
 
 const getCategories = () => {
     return Array.from(
@@ -61,12 +62,23 @@ export default function SectionsPage() {
     const urlLicense = searchParams.get("license") || "";
     const categories = getCategories();
     const [viewMode, setViewMode] = React.useState<"grid" | "list">("grid");
+    const [searchQuery, setSearchQuery] = React.useState("");
+    const [sidebarOpen, setSidebarOpen] = React.useState(true);
     const { toggleFavourite, isFavourite, isPending } = useFavourites();
 
     const filteredSections = Object.values(Index["default"]).filter(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (item: any) => {
             if (item.type !== "registry:sections") return false;
+
+            // Search filter
+            if (
+                searchQuery &&
+                !item.name.toLowerCase().includes(searchQuery.toLowerCase())
+            ) {
+                return false;
+            }
+
             if (selectedCategories.length > 0) {
                 const match = item.name.match(/^(.*?)-/);
                 const category = match ? match[1] : item.name;
@@ -97,368 +109,404 @@ export default function SectionsPage() {
         str.charAt(0).toUpperCase() + str.slice(1);
 
     return (
-        <SidebarProvider>
-            <div className="flex min-h-screen w-full">
-                <Sidebar className="border-r pt-20">
-                    <SidebarContent className="px-3">
-                        <SidebarGroup>
-                            <SidebarGroupLabel className="text-sm font-normal">
-                                Applied Filters
-                                <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    className="ml-auto"
-                                    onClick={() => updateCategoryInUrl([], "")}
-                                >
-                                    Clear all
-                                </Button>
-                            </SidebarGroupLabel>
-                            <SidebarGroupContent>
-                                <div className="mt-2 flex flex-wrap gap-2">
-                                    {selectedCategories.length === 0 &&
-                                        !urlLicense && (
-                                            <span className="text-muted-foreground text-xs">
-                                                No filters applied
-                                            </span>
-                                        )}
-                                    {selectedCategories.map((category) => (
-                                        <Button
-                                            key={category}
-                                            className="flex h-fit cursor-pointer items-center gap-1 rounded-lg bg-purple-200 px-3 py-1 text-purple-700 hover:bg-purple-200"
+        <div className="relative min-h-screen px-4 md:px-10 xl:px-8">
+            <div className="flex border border-t-0">
+                <div
+                    className={`${sidebarOpen ? "w-72 border-r" : "w-0"} bg-white transition-all duration-300`}
+                >
+                    <div
+                        className={`font-kumb ${sidebarOpen ? "sticky" : "block"} top-0 space-y-6`}
+                    >
+                        <div className="relative">
+                            <RiSearchLine className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
+                            <Input
+                                placeholder="Search components..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="h-12 rounded-none border-t-0 border-r-0 border-l-0 border-gray-200 pl-10 shadow-none focus:border-blue-500 focus:ring-blue-500 focus-visible:ring-0"
+                            />
+                        </div>
+
+                        <div className="px-3">
+                            <div className="mb-3 flex items-center justify-between">
+                                <h3 className="font-medium text-gray-900">
+                                    Active Filters
+                                </h3>
+                                {(selectedCategories.length > 0 ||
+                                    urlLicense) && (
+                                    <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        onClick={() =>
+                                            updateCategoryInUrl([], "")
+                                        }
+                                        className="text-xs text-gray-500 hover:text-gray-700"
+                                    >
+                                        Clear all
+                                    </Button>
+                                )}
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                                {selectedCategories.length === 0 &&
+                                    !urlLicense && (
+                                        <span className="text-xs text-gray-400">
+                                            No filters applied
+                                        </span>
+                                    )}
+                                {selectedCategories.map((category) => (
+                                    <Badge
+                                        key={category}
+                                        variant="secondary"
+                                        className="flex items-center gap-1 bg-blue-50 px-3 py-0.5 text-blue-700 hover:bg-blue-100"
+                                    >
+                                        {capitalize(category)}
+                                        <button
+                                            onClick={() => {
+                                                const updated =
+                                                    selectedCategories.filter(
+                                                        (c) => c !== category,
+                                                    );
+                                                updateCategoryInUrl(
+                                                    updated,
+                                                    urlLicense,
+                                                );
+                                            }}
+                                            className="ml-1 cursor-pointer hover:text-blue-900"
                                         >
-                                            <span>{capitalize(category)}</span>
-                                            <div
-                                                className="ml-1 bg-none text-xs text-purple-700 hover:text-purple-900"
+                                            <RiCloseLine className="h-3 w-3" />
+                                        </button>
+                                    </Badge>
+                                ))}
+                                {urlLicense && (
+                                    <Badge
+                                        variant="secondary"
+                                        className="flex items-center gap-1 bg-purple-50 text-purple-700 hover:bg-purple-100"
+                                    >
+                                        {urlLicense === "pro" ? "Pro" : "Free"}
+                                        <button
+                                            onClick={() =>
+                                                updateCategoryInUrl(
+                                                    selectedCategories,
+                                                    "",
+                                                )
+                                            }
+                                            className="ml-1 hover:text-purple-900"
+                                        >
+                                            <RiCloseLine className="h-3 w-3" />
+                                        </button>
+                                    </Badge>
+                                )}
+                            </div>
+                        </div>
+
+                        <Separator />
+
+                        <Collapsible defaultOpen className="px-3">
+                            <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg font-medium text-gray-900">
+                                Categories
+                                <RiArrowDownSLine className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
+                            </CollapsibleTrigger>
+                            <CollapsibleContent className="mt-3">
+                                <div className="flex flex-wrap gap-2">
+                                    {categories
+                                        .filter(
+                                            (category) =>
+                                                !selectedCategories.includes(
+                                                    category,
+                                                ),
+                                        )
+                                        .map((category) => (
+                                            <Button
+                                                key={category}
+                                                variant="outline"
+                                                size="sm"
                                                 onClick={() => {
-                                                    const updated =
-                                                        selectedCategories.filter(
-                                                            (c) =>
-                                                                c !== category,
-                                                        );
+                                                    const updated = [
+                                                        ...selectedCategories,
+                                                        category,
+                                                    ];
                                                     updateCategoryInUrl(
                                                         updated,
                                                         urlLicense,
                                                     );
                                                 }}
+                                                className="cursor-pointer justify-start rounded-xl border-gray-200 text-sm font-normal hover:border-indigo-300 hover:bg-blue-50"
                                             >
-                                                <X className="size-2" />
-                                            </div>
-                                        </Button>
-                                    ))}
-                                    {urlLicense && (
-                                        <Button
-                                            className="flex h-fit cursor-pointer items-center gap-1 rounded-lg bg-blue-200 px-3 py-1 text-blue-700 hover:bg-blue-200"
-                                            onClick={() => {
-                                                updateCategoryInUrl(
-                                                    selectedCategories,
-                                                    "",
-                                                );
-                                            }}
-                                        >
-                                            <span>
-                                                {urlLicense === "pro"
-                                                    ? "Pro"
-                                                    : "Free"}
-                                            </span>
-                                            <div className="ml-1 bg-none text-xs text-blue-700 hover:text-blue-900">
-                                                <X className="size-2" />
-                                            </div>
-                                        </Button>
-                                    )}
+                                                {capitalize(category)}
+                                            </Button>
+                                        ))}
                                 </div>
-                            </SidebarGroupContent>
-                        </SidebarGroup>
-
-                        <Collapsible defaultOpen>
-                            <SidebarGroup>
-                                <CollapsibleTrigger asChild>
-                                    <SidebarGroupLabel className="hover:bg-sidebar-accent cursor-pointer rounded-md text-base font-normal">
-                                        Categories
-                                        <ChevronDown className="ml-auto h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
-                                    </SidebarGroupLabel>
-                                </CollapsibleTrigger>
-                                <CollapsibleContent>
-                                    <SidebarGroupContent>
-                                        <div className="mt-5 flex flex-wrap gap-2">
-                                            {categories
-                                                .filter(
-                                                    (category) =>
-                                                        !selectedCategories.includes(
-                                                            category,
-                                                        ),
-                                                )
-                                                .map((category) => (
-                                                    <Button
-                                                        key={category}
-                                                        variant="outline"
-                                                        onClick={() => {
-                                                            const updated = [
-                                                                ...selectedCategories,
-                                                                category,
-                                                            ];
-                                                            updateCategoryInUrl(
-                                                                updated,
-                                                                urlLicense,
-                                                            );
-                                                        }}
-                                                        className="flex h-fit items-center space-x-2 rounded-md border px-2 py-1"
-                                                    >
-                                                        <Label
-                                                            htmlFor={category}
-                                                            className="cursor-pointer text-[15px] font-normal"
-                                                        >
-                                                            {capitalize(
-                                                                category,
-                                                            )}
-                                                        </Label>
-                                                    </Button>
-                                                ))}
-                                        </div>
-                                    </SidebarGroupContent>
-                                </CollapsibleContent>
-                            </SidebarGroup>
+                            </CollapsibleContent>
                         </Collapsible>
 
-                        <SidebarGroup>
-                            <SidebarGroupLabel className="mt-6 text-sm font-normal">
+                        <Separator />
+
+                        <div className="px-3">
+                            <h3 className="mb-3 font-medium text-gray-900">
                                 License
-                            </SidebarGroupLabel>
-                            <SidebarGroupContent>
-                                <div className="mt-2 flex gap-2">
-                                    <Button
-                                        variant={
-                                            urlLicense === "pro"
-                                                ? "secondary"
-                                                : "outline"
-                                        }
-                                        className="rounded-md px-3 py-1 text-sm"
-                                        onClick={() =>
-                                            updateCategoryInUrl(
-                                                selectedCategories,
-                                                urlLicense === "pro"
-                                                    ? ""
-                                                    : "pro",
-                                            )
-                                        }
-                                    >
-                                        Pro
-                                    </Button>
-                                    <Button
-                                        variant={
-                                            urlLicense === "free"
-                                                ? "secondary"
-                                                : "outline"
-                                        }
-                                        className="rounded-md px-3 py-1 text-sm"
-                                        onClick={() =>
-                                            updateCategoryInUrl(
-                                                selectedCategories,
-                                                urlLicense === "free"
-                                                    ? ""
-                                                    : "free",
-                                            )
-                                        }
-                                    >
-                                        Free
-                                    </Button>
+                            </h3>
+                            <div className="flex gap-2">
+                                <Button
+                                    variant={
+                                        urlLicense === "pro"
+                                            ? "default"
+                                            : "outline"
+                                    }
+                                    size="sm"
+                                    onClick={() =>
+                                        updateCategoryInUrl(
+                                            selectedCategories,
+                                            urlLicense === "pro" ? "" : "pro",
+                                        )
+                                    }
+                                    className={
+                                        urlLicense === "pro"
+                                            ? "bg-purple-600 hover:bg-purple-700"
+                                            : "rounded-lg border-gray-200 hover:border-purple-300 hover:bg-purple-50"
+                                    }
+                                >
+                                    Pro
+                                </Button>
+                                <Button
+                                    variant={
+                                        urlLicense === "free"
+                                            ? "default"
+                                            : "outline"
+                                    }
+                                    size="sm"
+                                    onClick={() =>
+                                        updateCategoryInUrl(
+                                            selectedCategories,
+                                            urlLicense === "free" ? "" : "free",
+                                        )
+                                    }
+                                    className={
+                                        urlLicense === "free"
+                                            ? "bg-black"
+                                            : "rounded-lg border-gray-200 hover:border-green-300 hover:bg-green-50"
+                                    }
+                                >
+                                    Free
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex-1 bg-white">
+                    <header className="border-b bg-white/80 backdrop-blur-sm">
+                        <div className="flex h-[2.95555rem] items-center justify-between px-6">
+                            <div className="flex items-center gap-4">
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => setSidebarOpen(!sidebarOpen)}
+                                    className="[&_svg]:size-5"
+                                >
+                                    {sidebarOpen ? (
+                                        <RiMenuUnfold2Line />
+                                    ) : (
+                                        <RiMenu2Line />
+                                    )}
+                                </Button>
+                                <div className="text-sm text-gray-600">
+                                    {filteredSections.length} components
                                 </div>
-                            </SidebarGroupContent>
-                        </SidebarGroup>
-                    </SidebarContent>
-                </Sidebar>
-
-                <SidebarInset className="flex-1">
-                    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 border-b backdrop-blur">
-                        <div className="flex h-16 items-center gap-4 px-6">
-                            <SidebarTrigger />
-                            <Separator orientation="vertical" className="h-6" />
-
-                            <div className="ml-auto flex items-center gap-2">
-                                <div className="flex items-center gap-1 rounded-md border p-1">
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <div className="flex items-center gap-1 rounded-lg bg-gray-100 p-1">
                                     <Button
                                         variant={
                                             viewMode === "grid"
-                                                ? "outline"
-                                                : "outline"
+                                                ? "default"
+                                                : "ghost"
                                         }
                                         size="sm"
                                         onClick={() => setViewMode("grid")}
+                                        className="h-8 w-8 p-0"
                                     >
-                                        <LayoutGrid className="h-4 w-4" />
+                                        <RiLayoutColumnLine className="h-4 w-4" />
                                     </Button>
                                     <Button
                                         variant={
                                             viewMode === "list"
-                                                ? "secondary"
+                                                ? "default"
                                                 : "ghost"
                                         }
                                         size="sm"
                                         onClick={() => setViewMode("list")}
+                                        className="h-8 w-8 p-0"
                                     >
-                                        <Grid3X3 className="h-4 w-4" />
-                                    </Button>
-                                </div>
-
-                                <div className="text-muted-foreground flex items-center gap-2 text-sm">
-                                    <span>Sort by:</span>
-                                    <Button variant="ghost" size="sm">
-                                        Newest
-                                        <ChevronDown className="ml-1 h-4 w-4" />
+                                        <RiLayoutRowLine className="h-4 w-4" />
                                     </Button>
                                 </div>
                             </div>
                         </div>
                     </header>
 
+                    {/* Content */}
                     <main className="p-6">
-                        <div className="mb-6">
-                            <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-purple-700 to-blue-800 p-8 text-white">
-                                <div className="relative z-10">
-                                    <div className="mb-2 inline-block rounded-full bg-white/20 px-3 py-1 text-xs">
-                                        Build Better, Faster
-                                    </div>
-                                    <h1 className="mb-2 text-2xl font-medium">
-                                        Build a better website, faster than ever
-                                    </h1>
-                                    <p className="mb-3 max-w-2xl text-sm">
-                                        Browse thousands of components and paste
-                                        them directly into your project. Built
-                                        for every category to help you build
-                                        better, faster.
-                                    </p>
-                                    <div className="flex gap-4">
-                                        <Button className="bg-white text-purple-600 hover:bg-gray-100">
-                                            🔓 Unlock all access
-                                        </Button>
-                                        <Button
-                                            variant="outline"
-                                            className="border-white bg-transparent text-white hover:bg-white/10"
-                                        >
-                                            Learn more
-                                        </Button>
-                                    </div>
+                        {filteredSections.length === 0 ? (
+                            <div className="flex flex-col items-center justify-center py-16 text-center">
+                                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100">
+                                    <RiSearchLine className="h-8 w-8 text-gray-400" />
                                 </div>
-                                <div className="absolute top-0 right-0 h-full w-1/2 opacity-20">
-                                    <div className="h-full w-full bg-gradient-to-l from-white/10 to-transparent" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div
-                            className={`grid gap-6 ${
-                                viewMode === "grid"
-                                    ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-2"
-                                    : "grid-cols-1"
-                            }`}
-                        >
-                            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                            {filteredSections.map((section: any) => {
-                                const match = section.name.match(/^(.*?)-/);
-                                const category = match
-                                    ? match[1]
-                                    : section.name;
-                                return (
-                                    <Card
-                                        key={section.name}
-                                        className="group cursor-pointer border-0 shadow-none"
-                                    >
-                                        <CardContent className="p-0">
-                                            <div className="relative overflow-hidden">
-                                                {/* Favourite button */}
-                                                <div className="absolute top-3 left-3 z-20">
-                                                    <button
-                                                        aria-label={
-                                                            isFavourite(
-                                                                section.name,
-                                                            )
-                                                                ? "Remove from favourites"
-                                                                : "Add to favourites"
-                                                        }
-                                                        onClick={() =>
-                                                            toggleFavourite(
-                                                                section.name,
-                                                            )
-                                                        }
-                                                        disabled={isPending}
-                                                        className="text-gray-400 hover:text-red-500"
-                                                    >
-                                                        <Heart
-                                                            className={`h-6 w-6 ${
-                                                                isFavourite(
-                                                                    section.name,
-                                                                )
-                                                                    ? "fill-red-500 text-red-500"
-                                                                    : ""
-                                                            }`}
-                                                        />
-                                                    </button>
-                                                </div>
-                                                <Image
-                                                    src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/${section.name}.png`}
-                                                    alt={section.name}
-                                                    width={4210}
-                                                    height={1080}
-                                                    className="aspect-video h-full w-full rounded-2xl border object-cover object-top"
-                                                />
-                                                <div className="absolute top-3 right-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                                    <Button
-                                                        size="sm"
-                                                        variant="secondary"
-                                                        className="h-8 w-8 rounded-full p-0"
-                                                    >
-                                                        <Link
-                                                            href={`/sections/${section.name.split("-")[0]}`}
-                                                            target="_blank"
-                                                        >
-                                                            <ExternalLink className="h-4 w-4" />
-                                                        </Link>
-                                                    </Button>
-                                                </div>
-                                            </div>
-
-                                            <div className="p-4">
-                                                <div className="mb-2 flex items-center justify-between">
-                                                    <h3 className="group-hover:text-primary text-lg font-semibold">
-                                                        {capitalize(
-                                                            section.name,
-                                                        )}
-                                                    </h3>
-                                                    {section.pro && (
-                                                        <Badge
-                                                            variant="secondary"
-                                                            className="bg-purple-100 text-purple-700"
-                                                        >
-                                                            Pro
-                                                        </Badge>
-                                                    )}
-                                                </div>
-                                                <p className="text-muted-foreground mb-3 text-sm">
-                                                    {category}
-                                                </p>
-                                            </div>
-                                        </CardContent>
-                                    </Card>
-                                );
-                            })}
-                        </div>
-
-                        {filteredSections.length === 0 && (
-                            <div className="py-12 text-center">
-                                <p className="text-muted-foreground">
-                                    No sections found matching your filters.
+                                <h3 className="mb-2 text-lg font-semibold text-gray-900">
+                                    No components found
+                                </h3>
+                                <p className="mb-4 text-gray-600">
+                                    Try adjusting your filters or search terms
                                 </p>
                                 <Button
                                     variant="outline"
-                                    className="mt-4 bg-transparent"
-                                    onClick={() => updateCategoryInUrl([], "")}
+                                    onClick={() => {
+                                        updateCategoryInUrl([], "");
+                                        setSearchQuery("");
+                                    }}
                                 >
                                     Clear all filters
                                 </Button>
                             </div>
+                        ) : (
+                            <div
+                                className={`grid gap-6 ${
+                                    viewMode === "grid"
+                                        ? "grid-cols-1 md:grid-cols-2 xl:grid-cols-2"
+                                        : "grid-cols-1"
+                                }`}
+                            >
+                                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                                {filteredSections.map((section: any) => {
+                                    const match = section.name.match(/^(.*?)-/);
+                                    const category = match
+                                        ? match[1]
+                                        : section.name;
+                                    return (
+                                        <Card
+                                            key={section.name}
+                                            className="group overflow-hidden border-none shadow-none"
+                                        >
+                                            <CardContent className="p-0">
+                                                <div className="relative overflow-hidden">
+                                                    <div className="relative overflow-hidden rounded-xl border">
+                                                        <Image
+                                                            src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753946156/${section.name}.png`}
+                                                            alt={section.name}
+                                                            width={4210}
+                                                            height={1080}
+                                                            className="aspect-video w-full object-cover object-top"
+                                                        />
+                                                        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                                                    </div>
+
+                                                    <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-0 transition-all duration-300 ease-in group-hover:bottom-4 group-hover:opacity-100">
+                                                        <div className="flex items-center justify-center gap-2">
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger
+                                                                        asChild
+                                                                    >
+                                                                        <Button
+                                                                            onClick={() =>
+                                                                                toggleFavourite(
+                                                                                    section.name,
+                                                                                )
+                                                                            }
+                                                                            disabled={
+                                                                                isPending
+                                                                            }
+                                                                            className="h-8 w-fit cursor-pointer rounded-md bg-white p-3 shadow-sm backdrop-blur-sm transition-all duration-200 hover:bg-white [&_svg]:size-4.5"
+                                                                        >
+                                                                            <RiHeartFill
+                                                                                className={` ${
+                                                                                    isFavourite(
+                                                                                        section.name,
+                                                                                    )
+                                                                                        ? "fill-red-500 text-red-500"
+                                                                                        : "text-gray-800 hover:text-red-500"
+                                                                                }`}
+                                                                            />
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+
+                                                                    <TooltipContent
+                                                                        side="top"
+                                                                        showArrow={
+                                                                            true
+                                                                        }
+                                                                        className="dark px-2 py-1 text-xs"
+                                                                    >
+                                                                        {isFavourite(
+                                                                            section.name,
+                                                                        )
+                                                                            ? "Remove from favourites"
+                                                                            : "Add to favourites"}
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
+
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger
+                                                                        asChild
+                                                                    >
+                                                                        <Button
+                                                                            size="sm"
+                                                                            className="h-8 cursor-pointer rounded-md bg-white p-3 shadow-sm backdrop-blur-sm hover:bg-white [&_svg]:size-4.5"
+                                                                        >
+                                                                            <Link
+                                                                                href={`/sections/${section.name.split("-")[0]}`}
+                                                                                target="_blank"
+                                                                            >
+                                                                                <RiEyeLine className="size-5 text-gray-800" />
+                                                                            </Link>
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+
+                                                                    <TooltipContent
+                                                                        side="top"
+                                                                        showArrow={
+                                                                            true
+                                                                        }
+                                                                        className="dark px-2 py-1 text-xs"
+                                                                    >
+                                                                        Preview
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="p-4">
+                                                    <div className="mb-1 flex items-start justify-between">
+                                                        <h3 className="text-lg font-semibold text-gray-900">
+                                                            {capitalize(
+                                                                section.name.replace(
+                                                                    /-/g,
+                                                                    " 0",
+                                                                ),
+                                                            )}
+                                                        </h3>
+                                                        {section.pro && (
+                                                            <Badge className="border-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white">
+                                                                Pro
+                                                            </Badge>
+                                                        )}
+                                                    </div>
+                                                    <p className="text-sm text-gray-500 capitalize">
+                                                        {category}
+                                                    </p>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    );
+                                })}
+                            </div>
                         )}
                     </main>
-                </SidebarInset>
+                </div>
             </div>
-        </SidebarProvider>
+        </div>
     );
 }

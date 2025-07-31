@@ -7,7 +7,7 @@ interface ProfileLayoutProps {
     children: ReactNode;
 }
 
-const Navbar = dynamic(() => import("@/components/shared/navbar/nav-1"));
+const Navbar = dynamic(() => import("@/components/shared/navbar"));
 const Footer = dynamic(() => import("@/components/shared/footer"));
 
 export default function ProfileLayout({ children }: ProfileLayoutProps) {

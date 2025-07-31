@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { RiArrowRightLine } from "@remixicon/react";
 
-const Navbar = dynamic(() => import("@/components/shared/navbar/nav-1"));
+const Navbar = dynamic(() => import("@/components/shared/navbar"));
 const Footer = dynamic(() => import("@/components/shared/footer"));
 const Cta = dynamic(() => import("@/components/routes/home/cta"));
 

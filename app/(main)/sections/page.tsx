@@ -2,12 +2,12 @@
 
 import { Suspense } from "react";
 import SectionsPage from "./_components/categories";
-import Navbar from "@/components/shared/navbar/nav-1";
+import Navbar from "@/components/shared/navbar";
 
 const page = () => {
     return (
         <>
-            <Navbar />
+            <Navbar className="px-4 md:px-10 xl:px-8" />
             <Suspense>
                 <SectionsPage />
             </Suspense>

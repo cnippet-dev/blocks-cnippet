@@ -18,7 +18,7 @@ export default function Component() {
             <div
                 className="absolute inset-0 bg-cover"
                 style={{
-                    backgroundImage: `url('https://res.cloudinary.com/dphulm0s9/image/upload/v1741613286/h5.jpg')`,
+                    backgroundImage: `url('https://res.cloudinary.com/dcxm3ccir/image/upload/v1753942284/h2.jpg')`,
                     height: "100vh",
                 }}
             >
@@ -27,8 +27,8 @@ export default function Component() {
 
             {/* Content */}
             <div className="relative z-10 flex min-h-screen items-center justify-end p-4">
-                <Card className="h-[80vh] w-full max-w-lg border-0 bg-white shadow-2xl backdrop-blur-sm">
-                    <CardContent className="space-y-6 px-10 py-20">
+                <Card className="h-[90vh] w-full max-w-lg border-0 bg-white shadow-2xl backdrop-blur-sm">
+                    <CardContent className="flex h-full flex-col space-y-6 px-10 pt-10">
                         <div className="space-y-2 text-left">
                             <h1 className="mt-2 text-3xl font-normal md:text-5xl">
                                 Create an account
@@ -133,7 +133,7 @@ export default function Component() {
                             </div>
                         </form>
 
-                        <p className="mt-40 text-xs leading-relaxed text-gray-500">
+                        <p className="mt-auto text-xs leading-relaxed text-gray-500">
                             By clicking Create account, I agree that I have read
                             and accepted the{" "}
                             <button className="text-orange-500 underline-offset-4 hover:text-orange-600 hover:underline">

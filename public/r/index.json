@@ -10,7 +10,7 @@
       }
     ],
     "number": "4",
-    "thumbnail": "https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/pricing.png"
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/pricing.png"
   },
   {
     "name": "hero",
@@ -23,7 +23,7 @@
       }
     ],
     "number": "2",
-    "thumbnail": "https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/hero.png"
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/hero.png"
   },
   {
     "name": "login",
@@ -36,7 +36,7 @@
       }
     ],
     "number": "2",
-    "thumbnail": "https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/login.png"
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/login.png"
   },
   {
     "name": "footer",
@@ -49,6 +49,6 @@
       }
     ],
     "number": "3",
-    "thumbnail": "https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/footer.png"
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/footer.png"
   }
 ]

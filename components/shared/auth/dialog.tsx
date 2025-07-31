@@ -112,7 +112,7 @@ const AuthDialog = () => {
                     <Link className="flex items-center justify-center" href="/">
                         {theme === "dark" ? (
                             <Image
-                                src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-dark.png"
+                                src="https://res.cloudinary.com/dcxm3ccir/image/upload/v1753948226/logo-dark.png"
                                 alt=""
                                 className="size-14 rounded-full"
                                 width={1080}
@@ -120,7 +120,7 @@ const AuthDialog = () => {
                             />
                         ) : (
                             <Image
-                                src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-light.png"
+                                src="https://res.cloudinary.com/dcxm3ccir/image/upload/v1753948225/logo-light.png"
                                 alt=""
                                 className="size-14 rounded-full"
                                 width={1080}

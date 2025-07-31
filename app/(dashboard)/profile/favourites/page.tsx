@@ -21,7 +21,7 @@ export default async function FavouritesPage() {
                         >
                             <div className="mb-4 aspect-video overflow-hidden rounded-lg">
                                 <Image
-                                    src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/${fav}.png`}
+                                    src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753447263/${fav}.png`}
                                     alt={fav}
                                     width={4210}
                                     height={1080}

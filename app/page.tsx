@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import { ReactLenis } from "lenis/react";
 
-const Nav1 = dynamic(() => import("@/components/shared/navbar/nav-1"));
+const Navbar = dynamic(() => import("@/components/shared/navbar"));
 const Hero = dynamic(() => import("@/components/routes/home/hero"));
 const Faq = dynamic(() => import("@/components/routes/home/faq"));
 const Footer = dynamic(() => import("@/components/shared/footer"));
@@ -110,7 +110,7 @@ export default function Cursor1() {
                     </motion.div>
                 </Cursor>
 
-                <Nav1 />
+                <Navbar className="px-4 md:px-10 xl:px-20 2xl:px-30" />
                 <main className="">
                     <Hero ref={targetRef3} />
                     <Sections count={6} />

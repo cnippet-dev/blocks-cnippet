@@ -60,19 +60,19 @@ export default function HeroSection() {
                         <div className="mt-auto flex flex-col items-start gap-4">
                             <div className="flex -space-x-2">
                                 <Avatar className="size-13 border-2 border-white">
-                                    <AvatarImage src="https://res.cloudinary.com/dphulm0s9/image/upload/v1739106437/a1.jpg" />
+                                    <AvatarImage src="https://res.cloudinary.com/dcxm3ccir/image/upload/v1739106437/a1.jpg" />
                                     <AvatarFallback>U1</AvatarFallback>
                                 </Avatar>
                                 <Avatar className="size-13 border-2 border-white">
-                                    <AvatarImage src="https://res.cloudinary.com/dphulm0s9/image/upload/v1739106437/a2.jpg" />
+                                    <AvatarImage src="https://res.cloudinary.com/dcxm3ccir/image/upload/v1739106437/a2.jpg" />
                                     <AvatarFallback>U1</AvatarFallback>
                                 </Avatar>
                                 <Avatar className="size-13 border-2 border-white">
-                                    <AvatarImage src="https://res.cloudinary.com/dphulm0s9/image/upload/v1739106437/a3.jpg" />
+                                    <AvatarImage src="https://res.cloudinary.com/dcxm3ccir/image/upload/v1739106437/a3.jpg" />
                                     <AvatarFallback>U1</AvatarFallback>
                                 </Avatar>
                                 <Avatar className="size-13 border-2 border-white">
-                                    <AvatarImage src="https://res.cloudinary.com/dphulm0s9/image/upload/v1739106437/a4.jpg" />
+                                    <AvatarImage src="https://res.cloudinary.com/dcxm3ccir/image/upload/v1739106437/a4.jpg" />
                                     <AvatarFallback>U1</AvatarFallback>
                                 </Avatar>
                             </div>
@@ -89,7 +89,7 @@ export default function HeroSection() {
                     <div className="relative col-span-5">
                         <div className="relative">
                             <Image
-                                src="https://res.cloudinary.com/dphulm0s9/image/upload/v1741613286/h6.jpg"
+                                src="https://res.cloudinary.com/dcxm3ccir/image/upload/v1741613286/h6.jpg"
                                 alt="Woman in meditation pose against blue sky"
                                 width={1920}
                                 height={1080}

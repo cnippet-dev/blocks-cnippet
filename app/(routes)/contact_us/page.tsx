@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-const Navbar = dynamic(() => import("@/components/shared/navbar/nav-1"));
+const Navbar = dynamic(() => import("@/components/shared/navbar"));
 const Footer = dynamic(() => import("@/components/shared/footer"));
 const ContactForm = dynamic(() => import("@/components/shared/form/contact"));
 

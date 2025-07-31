@@ -53,7 +53,7 @@ export default function Component() {
                     <div className="flex items-center gap-4">
                         <div className="flex flex-col items-center gap-2">
                             <Image
-                                src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-light.png"
+                                src="https://res.cloudinary.com/dcxm3ccir/image/upload/v1753948225/logo-light.png"
                                 alt=""
                                 className="size-13"
                                 width={1080}

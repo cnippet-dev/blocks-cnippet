@@ -66,8 +66,8 @@ export default function EchoFooter() {
                                     <Image
                                         src={
                                             theme === "dark"
-                                                ? "https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-dark.png"
-                                                : "https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-light.png"
+                                                ? "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753948226/logo-dark.png"
+                                                : "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753948225/logo-light.png"
                                         }
                                         alt=""
                                         className="size-12"
