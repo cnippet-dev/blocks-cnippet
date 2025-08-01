@@ -23,7 +23,7 @@ import {
 
 import { createPayment } from "@/lib/actions/payment.actions";
 
-const Navbar = dynamic(() => import("@/components/shared/navbar/nav-1"));
+const Navbar = dynamic(() => import("@/components/shared/navbar"));
 const Footer = dynamic(() => import("@/components/shared/footer"));
 const Faq = dynamic(() => import("@/components/routes/home/faq"));
 

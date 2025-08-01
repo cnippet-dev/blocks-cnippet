@@ -10,16 +10,20 @@ import {
     Settings,
     Shield,
     CreditCard,
-    Camera,
-    MapPin,
     Calendar,
     Edit3,
     X,
     Heart,
+    Loader2,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { getCurrentUserProfile } from "@/lib/actions/profile.actions";
+import {
+    getCurrentUserProfile,
+    updateProfileImage,
+} from "@/lib/actions/profile.actions";
+import { toast } from "sonner";
+import { AvatarUpload } from "@/components/file-upload";
 
 interface ProfileLayoutProps {
     children: React.ReactNode;
@@ -31,6 +35,7 @@ export default function ProfilePage({ children }: ProfileLayoutProps) {
     //eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [profile, setProfile] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const [isUploading, setIsUploading] = useState(false);
 
     useEffect(() => {
         async function fetchProfile() {
@@ -59,6 +64,8 @@ export default function ProfilePage({ children }: ProfileLayoutProps) {
         );
     }
 
+    console.log(profile);
+
     const navItems = [
         { name: "General", href: "/profile", icon: User },
         { name: "Favourites", href: "/profile/favourites", icon: Heart },
@@ -71,6 +78,22 @@ export default function ProfilePage({ children }: ProfileLayoutProps) {
         },
         { name: "Billing", href: "/profile/billing", icon: CreditCard },
     ];
+
+    const handleImageUpload = async (url: string) => {
+        try {
+            setIsUploading(true);
+            await updateProfileImage(url);
+
+            //eslint-disable-next-line @typescript-eslint/no-explicit-any
+            setProfile((prev: any) => ({ ...prev, image: url }));
+            toast.success("Profile image updated successfully!");
+        } catch (error) {
+            console.error("Profile image update failed:", error);
+            toast.error("Failed to update profile image");
+        } finally {
+            setIsUploading(false);
+        }
+    };
 
     return (
         <div className="min-h-screen">
@@ -93,12 +116,21 @@ export default function ProfilePage({ children }: ProfileLayoutProps) {
                                             : "DK"}
                                     </AvatarFallback>
                                 </Avatar>
-                                <Button
-                                    size="sm"
-                                    className="absolute -right-2 -bottom-2 h-10 w-10 rounded-full border bg-white p-0 text-slate-600 shadow-lg hover:bg-slate-50"
-                                >
-                                    <Camera className="h-4 w-4" />
-                                </Button>
+                                <div className="absolute -right-2 -bottom-2">
+                                    {isUploading ? (
+                                        <Button
+                                            size="icon"
+                                            className="h-10 w-10 rounded-full bg-white"
+                                            disabled
+                                        >
+                                            <Loader2 className="h-4 w-4 animate-spin text-gray-700" />
+                                        </Button>
+                                    ) : (
+                                        <AvatarUpload
+                                            onSuccess={handleImageUpload}
+                                        />
+                                    )}
+                                </div>
                             </div>
                         </div>
                         <div className="absolute top-4 right-4">
@@ -117,20 +149,16 @@ export default function ProfilePage({ children }: ProfileLayoutProps) {
                                 <h1 className="mb-2 text-3xl font-bold text-slate-900">
                                     {profile.name}
                                 </h1>
-                                <p className="mb-4 text-slate-600">
-                                    @{profile.username}
-                                </p>
-                                <div className="flex items-center gap-6 text-sm text-slate-500">
-                                    <div className="flex items-center gap-1">
-                                        <MapPin className="h-4 w-4" />
-                                        {/* No location field in user model, fallback to N/A */}
-                                        N/A
-                                    </div>
+
+                                <div className="flex items-center gap-10 text-sm text-slate-500">
+                                    <p className="text-slate-600">
+                                        @{profile.username}
+                                    </p>
+
                                     <div className="flex items-center gap-1">
                                         <Calendar className="h-4 w-4" />
-                                        {/* No join date in profile, fallback to static or remove */}
-                                        {/* Joined March 2023 */}
-                                        Joined {new Date().toLocaleDateString()}
+                                        Joined{" "}
+                                        {profile.emailVerified.toLocaleDateString()}
                                     </div>
                                 </div>
                             </div>

@@ -26,7 +26,7 @@ export default function Component() {
                     <div className="flex flex-col items-center justify-center gap-4 text-center">
                         <div className="h-14 rounded-2xl border bg-white shadow-sm">
                             <Image
-                                src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-light.png"
+                                src="https://res.cloudinary.com/dcxm3ccir/image/upload/v1753948225/logo-light.png"
                                 alt=""
                                 className="size-13"
                                 width={1080}
@@ -54,7 +54,7 @@ export default function Component() {
                                 <div className="h-[520px] w-72 rounded-[3rem] bg-black p-2 shadow-2xl">
                                     <div className="absolute top-24 z-50">
                                         <Image
-                                            src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/hero-2.png`}
+                                            src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753447263/hero-2.png`}
                                             alt=""
                                             width={4210}
                                             height={1080}
@@ -105,14 +105,14 @@ export default function Component() {
                                             <div className="relative mt-10 hidden h-full py-4 lg:block">
                                                 <div className="flex translate-y-40 flex-col items-end gap-6">
                                                     <Image
-                                                        src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/pricing-2.png`}
+                                                        src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753447263/pricing-2.png`}
                                                         alt=""
                                                         width={4210}
                                                         height={1080}
                                                         className="aspect-[16/10] h-full w-full rounded-2xl border bg-white object-cover object-top p-1"
                                                     />
                                                     <Image
-                                                        src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/pricing-2.png`}
+                                                        src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753447263/pricing-2.png`}
                                                         alt=""
                                                         width={4210}
                                                         height={1080}

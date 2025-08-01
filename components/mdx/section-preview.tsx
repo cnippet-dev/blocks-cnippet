@@ -13,6 +13,12 @@ import { Separator } from "../ui/separator";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import { useConfig } from "@/lib/use-config";
 import { useProStatus } from "@/lib/get-pro";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "../ui/tooltip";
 
 interface SectionPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
     name: string;
@@ -120,67 +126,87 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
     };
 
     return (
-        <div className={`relative mx-auto mt-32 first:mt-0`}>
-            <div className="relative flex flex-col items-start justify-between md:flex-row md:items-center">
-                <div className="ml-auto flex items-center gap-10 md:-mt-13">
-                    <div className="flex items-center gap-2">
-                        <Tabs
-                            defaultValue="preview"
-                            value={activeTab}
-                            onValueChange={(value) =>
-                                setActiveTab(
-                                    value as
-                                        | "preview"
-                                        | "code"
-                                        | "login"
-                                        | "pro",
-                                )
-                            }
-                            className="w-full"
-                        >
-                            <TabsList className="grid h-8 grid-cols-2 items-center rounded-md p-0.5 *:data-[slot=tabs-trigger]:h-6 *:data-[slot=tabs-trigger]:rounded-sm *:data-[slot=tabs-trigger]:px-2 *:data-[slot=tabs-trigger]:text-xs">
-                                <TabsTrigger
-                                    value="preview"
-                                    onClick={() => setActiveTab("preview")}
+        <TooltipProvider delayDuration={0}>
+            <Tooltip>
+                <div className={`relative mx-auto mt-32 first:mt-0`}>
+                    <div className="relative flex flex-col items-start justify-between md:flex-row md:items-center">
+                        <div className="ml-auto flex items-center gap-10 md:-mt-13">
+                            <div className="flex items-center gap-2">
+                                <Tabs
+                                    defaultValue="preview"
+                                    value={activeTab}
+                                    onValueChange={(value) =>
+                                        setActiveTab(
+                                            value as
+                                                | "preview"
+                                                | "code"
+                                                | "login"
+                                                | "pro",
+                                        )
+                                    }
+                                    className="w-full"
                                 >
-                                    Preview
-                                </TabsTrigger>
-                                {isProLoading ? (
-                                    <div className="px-2 text-xs">...</div>
-                                ) : (
-                                    renderTabs()
-                                )}
-                            </TabsList>
-                        </Tabs>
-                        <Separator orientation="vertical" className="!h-6" />
-                        <Button
-                            size="icon"
-                            variant="ghost"
-                            className="size-6 rounded-sm p-0 pr-4"
-                            asChild
-                            title="Open in New Tab"
-                        >
-                            <Link href={`/preview/${name}`} target="_blank">
-                                <span className="sr-only">Open in New Tab</span>
-                                <Fullscreen />
-                            </Link>
-                        </Button>
+                                    <TabsList className="grid h-8 grid-cols-2 items-center rounded-md p-0.5 *:data-[slot=tabs-trigger]:h-6 *:data-[slot=tabs-trigger]:rounded-sm *:data-[slot=tabs-trigger]:px-2 *:data-[slot=tabs-trigger]:text-xs">
+                                        <TabsTrigger
+                                            value="preview"
+                                            onClick={() =>
+                                                setActiveTab("preview")
+                                            }
+                                        >
+                                            Preview
+                                        </TabsTrigger>
+                                        {isProLoading ? (
+                                            <div className="px-2 text-xs">
+                                                ...
+                                            </div>
+                                        ) : (
+                                            renderTabs()
+                                        )}
+                                    </TabsList>
+                                </Tabs>
+                                <Separator
+                                    orientation="vertical"
+                                    className="!h-6"
+                                />
+                                <TooltipTrigger>
+                                    <Button
+                                        size="icon"
+                                        variant="ghost"
+                                        className="mr-4 size-6 rounded-sm px-4"
+                                        asChild
+                                    >
+                                        <Link
+                                            href={`/preview/${name}`}
+                                            target="_blank"
+                                        >
+                                            <Fullscreen />
+                                        </Link>
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent
+                                    side="bottom"
+                                    className="px-1 py-1 text-xs"
+                                >
+                                    Fullscreen
+                                </TooltipContent>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <React.Suspense
-                fallback={
-                    <div className="flex min-h-[40vh] items-center justify-center gap-2">
-                        <div className="loader"></div>
-                        Loading component...
-                    </div>
-                }
-            >
-                <div className="overflow- col-span-2 row-start-2 mx-auto mt-8 min-w-0 border border-r-0 border-l-0">
-                    {renderContent()}
+                    <React.Suspense
+                        fallback={
+                            <div className="flex min-h-[40vh] items-center justify-center gap-2">
+                                <div className="loader"></div>
+                                Loading component...
+                            </div>
+                        }
+                    >
+                        <div className="overflow- col-span-2 row-start-2 mx-auto mt-8 min-w-0 border border-r-0 border-l-0">
+                            {renderContent()}
+                        </div>
+                    </React.Suspense>
                 </div>
-            </React.Suspense>
-        </div>
+            </Tooltip>
+        </TooltipProvider>
     );
 }

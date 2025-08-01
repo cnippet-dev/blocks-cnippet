@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { Mdx } from "@/mdx-components";
 
 import { allSections } from "@/.content-collections/generated";
-const Navbar = dynamic(() => import("@/components/shared/navbar/nav-1"));
+const Navbar = dynamic(() => import("@/components/shared/navbar"));
 const Footer = dynamic(() => import("@/components/shared/footer"));
 
 import { BASE_URL } from "@/config/docs";
@@ -33,9 +33,9 @@ export default async function Blogpage({ params }: { params: Params }) {
 
     return (
         <>
-            <Navbar />
+            <Navbar className="px-4 md:px-10 xl:px-20" />
             <main className="">
-                <div className="mx-auto w-full max-w-full border-t-0 border-b px-4 md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-800 dark:bg-black">
+                <div className="mx-auto w-full max-w-full border-t-0 border-b px-4 md:px-10 xl:px-20 dark:border-neutral-800 dark:bg-black">
                     <div className="border border-t-0 border-b-0 dark:border-neutral-800">
                         {doc?.body && <Mdx code={doc?.body.code} />}
                     </div>

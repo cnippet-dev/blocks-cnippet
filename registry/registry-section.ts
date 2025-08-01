@@ -12,14 +12,42 @@ const generateSections = (
         // files: [`${BASE_PATH}/sections/${section.name}/${section.name}-1.tsx`],
         files: [`${BASE_PATH}/sections/hero/hero1.tsx`],
         number: section.no,
-        thumbnail: `https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/${section.name}.png`,
+        thumbnail: `https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/${section.name}.png`,
     }));
 };
 
 export const section: Registry = generateSections([
     {
-        name: "pricing",
-        no: "4",
+        name: "banner",
+        no: "1",
+    },
+    {
+        name: "blog",
+        no: "1",
+    },
+    {
+        name: "career",
+        no: "1",
+    },
+    {
+        name: "contact",
+        no: "1",
+    },
+    {
+        name: "cta",
+        no: "1",
+    },
+    {
+        name: "faq",
+        no: "1",
+    },
+    {
+        name: "feature",
+        no: "1",
+    },
+    {
+        name: "footer",
+        no: "3",
     },
     {
         name: "hero",
@@ -27,10 +55,30 @@ export const section: Registry = generateSections([
     },
     {
         name: "login",
-        no: "2",
+        no: "4",
     },
     {
-        name: "footer",
-        no: "3",
+        name: "metrics",
+        no: "1",
+    },
+    {
+        name: "navbar",
+        no: "1",
+    },
+    {
+        name: "newsletter",
+        no: "1",
+    },
+    {
+        name: "pricing",
+        no: "7",
+    },
+    {
+        name: "team",
+        no: "1",
+    },
+    {
+        name: "testimonial",
+        no: "1",
     },
 ]);

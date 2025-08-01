@@ -24,7 +24,7 @@ export default function LoginForm({
                         className="flex items-center gap-2 font-medium"
                     >
                         <Image
-                            src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-light.png"
+                            src="https://res.cloudinary.com/dcxm3ccir/image/upload/v1753948225/logo-light.png"
                             alt=""
                             className="size-9"
                             width={1080}
@@ -43,7 +43,7 @@ export default function LoginForm({
                             <div className="flex flex-col items-start gap-2 text-left">
                                 <div className="rounded-lg bg-gradient-to-br from-purple-500 to-blue-500">
                                     <Image
-                                        src="https://res.cloudinary.com/dphulm0s9/image/upload/v1746006954/logo-dark.png"
+                                        src="https://res.cloudinary.com/dcxm3ccir/image/upload/v1753948226/logo-dark.png"
                                         alt=""
                                         className="size-12"
                                         width={1080}
@@ -143,42 +143,42 @@ export default function LoginForm({
                 <div className="flex h-full items-center rounded-tl-2xl rounded-bl-2xl bg-violet-50">
                     <div className="grid translate-x-40 grid-cols-2 items-center gap-6">
                         <Image
-                            src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/hero-2.png`}
+                            src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753447263/hero-2.png`}
                             alt=""
                             width={4210}
                             height={1080}
                             className="aspect-[16/10] h-full w-full rounded-2xl border bg-white object-cover object-top p-1"
                         />
                         <Image
-                            src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/pricing-2.png`}
+                            src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753447263/pricing-2.png`}
                             alt=""
                             width={4210}
                             height={1080}
                             className="aspect-[16/10] h-full w-full rounded-2xl border bg-white object-cover object-top p-1"
                         />
                         <Image
-                            src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/pricing-3.png`}
+                            src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753447263/pricing-3.png`}
                             alt=""
                             width={4210}
                             height={1080}
                             className="aspect-[16/10] h-full w-full -translate-x-20 rounded-2xl border bg-white object-cover object-top p-1"
                         />
                         <Image
-                            src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/hero-1.png`}
+                            src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753447263/hero-1.png`}
                             alt=""
                             width={4210}
                             height={1080}
                             className="aspect-[16/10] h-full w-full -translate-x-20 rounded-2xl border bg-white object-cover object-top p-1"
                         />
                         <Image
-                            src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/pricing-4.png`}
+                            src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753447263/pricing-4.png`}
                             alt=""
                             width={4210}
                             height={1080}
                             className="aspect-[16/10] h-full w-full rounded-2xl border bg-white object-cover object-top p-1"
                         />
                         <Image
-                            src={`https://res.cloudinary.com/dphulm0s9/image/upload/v1753447263/pricing-5.png`}
+                            src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753447263/pricing-5.png`}
                             alt=""
                             width={4210}
                             height={1080}

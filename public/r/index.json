@@ -1,7 +1,7 @@
 [
   {
-    "name": "pricing",
-    "slug": "/sections/pricing",
+    "name": "banner",
+    "slug": "/sections/banner",
     "type": "registry:section",
     "files": [
       {
@@ -9,12 +9,12 @@
         "type": "registry:section"
       }
     ],
-    "number": "4",
-    "thumbnail": "https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/pricing.png"
+    "number": "1",
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/banner.png"
   },
   {
-    "name": "hero",
-    "slug": "/sections/hero",
+    "name": "blog",
+    "slug": "/sections/blog",
     "type": "registry:section",
     "files": [
       {
@@ -22,12 +22,12 @@
         "type": "registry:section"
       }
     ],
-    "number": "2",
-    "thumbnail": "https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/hero.png"
+    "number": "1",
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/blog.png"
   },
   {
-    "name": "login",
-    "slug": "/sections/login",
+    "name": "career",
+    "slug": "/sections/career",
     "type": "registry:section",
     "files": [
       {
@@ -35,8 +35,60 @@
         "type": "registry:section"
       }
     ],
-    "number": "2",
-    "thumbnail": "https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/login.png"
+    "number": "1",
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/career.png"
+  },
+  {
+    "name": "contact",
+    "slug": "/sections/contact",
+    "type": "registry:section",
+    "files": [
+      {
+        "path": "registry/default/sections/hero/hero1.tsx",
+        "type": "registry:section"
+      }
+    ],
+    "number": "1",
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/contact.png"
+  },
+  {
+    "name": "cta",
+    "slug": "/sections/cta",
+    "type": "registry:section",
+    "files": [
+      {
+        "path": "registry/default/sections/hero/hero1.tsx",
+        "type": "registry:section"
+      }
+    ],
+    "number": "1",
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/cta.png"
+  },
+  {
+    "name": "faq",
+    "slug": "/sections/faq",
+    "type": "registry:section",
+    "files": [
+      {
+        "path": "registry/default/sections/hero/hero1.tsx",
+        "type": "registry:section"
+      }
+    ],
+    "number": "1",
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/faq.png"
+  },
+  {
+    "name": "feature",
+    "slug": "/sections/feature",
+    "type": "registry:section",
+    "files": [
+      {
+        "path": "registry/default/sections/hero/hero1.tsx",
+        "type": "registry:section"
+      }
+    ],
+    "number": "1",
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/feature.png"
   },
   {
     "name": "footer",
@@ -49,6 +101,110 @@
       }
     ],
     "number": "3",
-    "thumbnail": "https://res.cloudinary.com/dphulm0s9/image/upload/v1751293059/footer.png"
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/footer.png"
+  },
+  {
+    "name": "hero",
+    "slug": "/sections/hero",
+    "type": "registry:section",
+    "files": [
+      {
+        "path": "registry/default/sections/hero/hero1.tsx",
+        "type": "registry:section"
+      }
+    ],
+    "number": "2",
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/hero.png"
+  },
+  {
+    "name": "login",
+    "slug": "/sections/login",
+    "type": "registry:section",
+    "files": [
+      {
+        "path": "registry/default/sections/hero/hero1.tsx",
+        "type": "registry:section"
+      }
+    ],
+    "number": "4",
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/login.png"
+  },
+  {
+    "name": "metrics",
+    "slug": "/sections/metrics",
+    "type": "registry:section",
+    "files": [
+      {
+        "path": "registry/default/sections/hero/hero1.tsx",
+        "type": "registry:section"
+      }
+    ],
+    "number": "1",
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/metrics.png"
+  },
+  {
+    "name": "navbar",
+    "slug": "/sections/navbar",
+    "type": "registry:section",
+    "files": [
+      {
+        "path": "registry/default/sections/hero/hero1.tsx",
+        "type": "registry:section"
+      }
+    ],
+    "number": "1",
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/navbar.png"
+  },
+  {
+    "name": "newsletter",
+    "slug": "/sections/newsletter",
+    "type": "registry:section",
+    "files": [
+      {
+        "path": "registry/default/sections/hero/hero1.tsx",
+        "type": "registry:section"
+      }
+    ],
+    "number": "1",
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/newsletter.png"
+  },
+  {
+    "name": "pricing",
+    "slug": "/sections/pricing",
+    "type": "registry:section",
+    "files": [
+      {
+        "path": "registry/default/sections/hero/hero1.tsx",
+        "type": "registry:section"
+      }
+    ],
+    "number": "7",
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/pricing.png"
+  },
+  {
+    "name": "team",
+    "slug": "/sections/team",
+    "type": "registry:section",
+    "files": [
+      {
+        "path": "registry/default/sections/hero/hero1.tsx",
+        "type": "registry:section"
+      }
+    ],
+    "number": "1",
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/team.png"
+  },
+  {
+    "name": "testimonial",
+    "slug": "/sections/testimonial",
+    "type": "registry:section",
+    "files": [
+      {
+        "path": "registry/default/sections/hero/hero1.tsx",
+        "type": "registry:section"
+      }
+    ],
+    "number": "1",
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/testimonial.png"
   }
 ]

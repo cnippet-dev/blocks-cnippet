@@ -1,4 +1,4 @@
-generator client {
+    generator client {
     provider = "prisma-client-js"
 }
 
@@ -12,21 +12,21 @@ model User {
     name               String?
     username           String?        @unique
     email              String?        @unique
-    emailVerified      DateTime?
     image              String?
     password           String?
     provider           String?
+    pro                Boolean        @default(false)
     termsAccepted      Boolean        @default(false)
-    preferredTheme     String?        @default("system")
     emailNotifications Boolean?       @default(true)
     inAppNotifications Boolean?       @default(false)
+    preferredTheme     String?        @default("system")
     preferredLanguage  String?        @default("en")
     preferredTimezone  String?        @default("UTC")
-    pro                Boolean        @default(false)
     subscriptions      Subscription[]
     payments           Payment[]
     ResetToken         ResetToken[]
     favourites         String[]
+    emailVerified      DateTime?
 }
 
 model Subscription {
