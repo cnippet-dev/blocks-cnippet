@@ -189,6 +189,22 @@ export const Index = {
         files: ["registry/default/sections/blog/blog4.tsx"],
         component: React.lazy(() => import("@/registry/default/sections/blog/blog4.tsx")),
       },
+      "blog-5": {
+        name: "blog-5",
+        type: "registry:sections",
+        auth: false,
+        pro: false,
+        files: ["registry/default/sections/blog/blog5.tsx"],
+        component: React.lazy(() => import("@/registry/default/sections/blog/blog5.tsx")),
+      },
+      "blog-6": {
+        name: "blog-6",
+        type: "registry:sections",
+        auth: true,
+        pro: true,
+        files: ["registry/default/sections/blog/blog6.tsx"],
+        component: React.lazy(() => import("@/registry/default/sections/blog/blog6.tsx")),
+      },
       "career-1": {
         name: "career-1",
         type: "registry:sections",
