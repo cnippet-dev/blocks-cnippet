@@ -23,20 +23,21 @@ const generateSections = (
 
 export const sections = [
     ...generateSections("banner", 1, ["T"], ["T"]),
-    ...generateSections("blogs", 1, ["T"], ["T"]),
+    ...generateSections("blog", 4, ["F", "F", "T", "F"], ["F", "F", "T", "F"]),
     ...generateSections("career", 1, ["T"], ["T"]),
     ...generateSections("contact", 1, ["T"], ["T"]),
     ...generateSections("cta", 1, ["T"], ["T"]),
     ...generateSections("faq", 1, ["T"], ["T"]),
     ...generateSections("feature", 1, ["T"], ["T"]),
-
+    ...generateSections("footer", 3, ["F", "F", "F"], ["F", "F", "F"]),
+    ...generateSections("hero", 2, ["T", "T"], ["T", "T"]),
+    ...generateSections("login", 4, ["F", "F", "F", "F"], ["F", "F", "F", "F"]),
     ...generateSections(
         "pricing",
         7,
         ["F", "F", "T", "F", "T", "F", "T"],
         ["F", "F", "T", "F", "F", "F", "F"],
     ),
-    ...generateSections("hero", 2, ["T", "T"], ["T", "T"]),
-    ...generateSections("login", 4, ["F", "F", "F", "F"], ["F", "F", "F", "F"]),
-    ...generateSections("footer", 3, ["F", "F", "F"], ["F", "F", "F"]),
+    ...generateSections("team", 1, ["F"], ["F"]),
+    ...generateSections("testimonial", 1, ["F"], ["F"]),
 ];

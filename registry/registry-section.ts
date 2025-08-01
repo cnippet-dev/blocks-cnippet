@@ -22,7 +22,7 @@ export const section: Registry = generateSections([
         no: "1",
     },
     {
-        name: "blogs",
+        name: "blog",
         no: "1",
     },
     {

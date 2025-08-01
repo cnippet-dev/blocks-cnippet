@@ -84,7 +84,7 @@ export default function ProfilePage({ children }: ProfileLayoutProps) {
             setIsUploading(true);
             await updateProfileImage(url);
 
-            // Update local state to show new image immediately
+            //eslint-disable-next-line @typescript-eslint/no-explicit-any
             setProfile((prev: any) => ({ ...prev, image: url }));
             toast.success("Profile image updated successfully!");
         } catch (error) {

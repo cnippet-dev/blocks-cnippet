@@ -9,7 +9,6 @@ import {
     updateGeneralInfoSchema,
     changePasswordSchema,
     updateUserSettingsSchema,
-    updateFavouritesSchema,
 } from "@/lib/validations/profile";
 
 type FieldErrors<T extends z.ZodTypeAny> = {

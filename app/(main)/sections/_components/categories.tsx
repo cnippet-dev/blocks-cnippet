@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { Index } from "@/__registry__";
-import { Registry } from "@/registry/schema";
 import { useFavourites } from "@/hooks/use-favourites";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

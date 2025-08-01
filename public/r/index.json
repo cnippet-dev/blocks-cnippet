@@ -13,8 +13,8 @@
     "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/banner.png"
   },
   {
-    "name": "blogs",
-    "slug": "/sections/blogs",
+    "name": "blog",
+    "slug": "/sections/blog",
     "type": "registry:section",
     "files": [
       {
@@ -23,7 +23,7 @@
       }
     ],
     "number": "1",
-    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/blogs.png"
+    "thumbnail": "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/blog.png"
   },
   {
     "name": "career",

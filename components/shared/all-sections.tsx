@@ -49,7 +49,7 @@ const Sections = (props: { count?: number; sections?: any[] }) => {
                         </p>
                     </div>
                     <div>
-                        <div className="grid grid-cols-1 divide-x border-t md:grid-cols-12 dark:divide-neutral-800 dark:border-neutral-800">
+                        <div className="grid grid-cols-1 divide-x border-t divide-y md:grid-cols-12 dark:divide-neutral-800 dark:border-neutral-800">
                             {components
                                 ?.slice(0, props.count)
                                 .map((component, i) => {
