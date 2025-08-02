@@ -23,9 +23,14 @@ const generateSections = (
 
 export const sections = [
     ...generateSections("banner", 1, ["T"], ["T"]),
-    ...generateSections("blog", 4, ["F", "F", "T", "F"], ["F", "F", "T", "F"]),
+    ...generateSections(
+        "blog",
+        6,
+        ["F", "F", "T", "F", "F", "T"],
+        ["F", "F", "T", "F", "F", "T"],
+    ),
     ...generateSections("career", 1, ["T"], ["T"]),
-    ...generateSections("contact", 1, ["T"], ["T"]),
+    ...generateSections("contact", 2, ["F", "F"], ["F", "F"]),
     ...generateSections("cta", 1, ["T"], ["T"]),
     ...generateSections("faq", 1, ["T"], ["T"]),
     ...generateSections("feature", 1, ["T"], ["T"]),

@@ -63,7 +63,14 @@ export default function SectionsPage() {
     const [viewMode, setViewMode] = React.useState<"grid" | "list">("grid");
     const [searchQuery, setSearchQuery] = React.useState("");
     const [sidebarOpen, setSidebarOpen] = React.useState(true);
+    const [failedImages, setFailedImages] = React.useState<Set<string>>(
+        new Set(),
+    );
     const { toggleFavourite, isFavourite, isPending } = useFavourites();
+
+    const handleImageError = (sectionName: string) => {
+        setFailedImages((prev) => new Set(prev).add(sectionName));
+    };
 
     const filteredSections = Object.values(Index["default"]).filter(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -388,13 +395,36 @@ export default function SectionsPage() {
                                             <CardContent className="p-0">
                                                 <div className="relative overflow-hidden">
                                                     <div className="relative overflow-hidden rounded-xl border">
-                                                        <Image
-                                                            src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753946156/${section.name}.png`}
-                                                            alt={section.name}
-                                                            width={4210}
-                                                            height={1080}
-                                                            className="aspect-video w-full object-cover object-top"
-                                                        />
+                                                        {failedImages.has(
+                                                            section.name,
+                                                        ) ? (
+                                                            <Image
+                                                                src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753946156/coming-soon.png`}
+                                                                alt={
+                                                                    section.name
+                                                                }
+                                                                width={4210}
+                                                                height={1080}
+                                                                suppressHydrationWarning
+                                                                className="aspect-video w-full object-cover object-top"
+                                                            />
+                                                        ) : (
+                                                            <Image
+                                                                src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753946156/${section.name}.png`}
+                                                                alt={
+                                                                    section.name
+                                                                }
+                                                                width={4210}
+                                                                height={1080}
+                                                                suppressHydrationWarning
+                                                                className="aspect-video w-full object-cover object-top"
+                                                                onError={() =>
+                                                                    handleImageError(
+                                                                        section.name,
+                                                                    )
+                                                                }
+                                                            />
+                                                        )}
                                                         <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                                                     </div>
 

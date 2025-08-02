@@ -113,8 +113,6 @@ export default function Component() {
                         </Card>
                     ))}
                 </div>
-
-                <div className="flex justify-center"></div>
             </div>
         </div>
     );

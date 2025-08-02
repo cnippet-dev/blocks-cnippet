@@ -39,29 +39,50 @@ export default function Component() {
     return (
         <section className="bg-white px-4 py-16">
             <div className="mx-auto max-w-7xl">
-                <div className="mb-12 text-center">
-                    <p className="mb-4 text-sm font-medium tracking-wider text-gray-900 uppercase">
-                        CAPTION
+                <div className="mb-12 flex items-start justify-between text-left">
+                    <div>
+                        <p className="mb-4 text-sm font-medium tracking-wider text-gray-900 uppercase">
+                            CAPTION
+                        </p>
+                        <h2 className="text-4xl font-medium text-gray-900 md:text-6xl">
+                            Blog Articles
+                        </h2>
+                    </div>
+                    <p className="mt-auto max-w-xl text-gray-600">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Praesent diam nulla, hendrerit finibus
                     </p>
-                    <h2 className="text-4xl font-medium text-gray-900 md:text-5xl">
-                        Blog Articles
-                    </h2>
                 </div>
 
-                <div className="grid gap-8 md:grid-cols-3">
+                <div className="grid grid-rows-2 gap-8 md:grid-cols-12">
                     {articlesData.map((article) => (
                         <div
                             key={article.id}
-                            className="border-0 bg-white shadow-none transition-shadow hover:shadow-none"
+                            className={`border-0 bg-white shadow-none transition-shadow hover:shadow-none ${
+                                article.id === 1
+                                    ? "col-span-5 row-span-2"
+                                    : "col-span-7 grid-rows-2"
+                            }`}
                         >
-                            <div className="p-0">
+                            <div
+                                className={`${
+                                    article.id === 1
+                                        ? "flex flex-col"
+                                        : "flow-row flex gap-4"
+                                }`}
+                            >
                                 <div className="relative mb-6">
                                     <img
                                         src={
                                             article.image || "/placeholder.svg"
                                         }
                                         alt={article.title}
-                                        className="aspect-square h-80 w-full rounded-xl object-cover"
+                                        className={` ${
+                                            article.id === 1
+                                                ? "aspect-square h-80"
+                                                : "aspect-video h-60"
+                                        } w-full rounded-xl object-cover`}
                                     />
                                     <Badge
                                         variant="secondary"
@@ -80,7 +101,6 @@ export default function Component() {
                                         {article.description}
                                     </p>
 
-                                    {/* Read More Link and Date */}
                                     <div className="flex items-center justify-between">
                                         <Link
                                             href={article.readMoreLink}

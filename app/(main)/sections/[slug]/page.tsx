@@ -7,25 +7,43 @@ import { Mdx } from "@/mdx-components";
 import { allSections } from "@/.content-collections/generated";
 const Navbar = dynamic(() => import("@/components/shared/navbar"));
 const Footer = dynamic(() => import("@/components/shared/footer"));
-
 import { BASE_URL } from "@/config/docs";
 
-type Params = Promise<{ slug: string }>;
+export const revalidate = 60;
 
-async function getSectionDoc({ slug }: { slug: string }) {
-    try {
-        const doc = allSections.find((doc) => doc.slugAsParams === slug);
-        return doc ? { ...doc, link: `/sections/${slug}` } : null;
-    } catch (error) {
-        console.error("Error fetching component:", error);
-        return null;
-    }
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+    return allSections.map((doc) => ({
+        slug: doc.slugAsParams,
+    }));
 }
 
-export default async function Blogpage({ params }: { params: Params }) {
+function getComponentDoc({ slug }: { slug: string }) {
+    return allSections.find((doc) => doc.slugAsParams === slug);
+}
+
+
+// type Params = Promise<{ slug: string }>;
+
+// async function getSectionDoc({ slug }: { slug: string }) {
+//     try {
+//         const doc = allSections.find((doc) => doc.slugAsParams === slug);
+//         return doc ? { ...doc, link: `/sections/${slug}` } : null;
+//     } catch (error) {
+//         console.error("Error fetching component:", error);
+//         return null;
+//     }
+// }
+
+export default async function Blogpage({
+    params,
+}: {
+    params: Promise<{ slug: string }>;
+}) {
     const slug = await params;
 
-    const doc = await getSectionDoc(slug);
+    const doc = getComponentDoc(slug);
 
     if (!doc) {
         return <div>Component not found.</div>;
@@ -49,10 +67,10 @@ export default async function Blogpage({ params }: { params: Params }) {
 export async function generateMetadata({
     params,
 }: {
-    params: Params;
+    params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
     const slug = await params;
-    const doc = await getSectionDoc(slug);
+    const doc = getComponentDoc(slug);
 
     if (!doc) {
         return {
@@ -69,10 +87,6 @@ export async function generateMetadata({
 
         title: doc.title,
         description: doc.description,
-
-        alternates: {
-            canonical: `${BASE_URL}/sections/${slug}`,
-        },
 
         openGraph: {
             type: "article",

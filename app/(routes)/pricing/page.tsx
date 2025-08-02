@@ -85,13 +85,13 @@ export default function PricingPage() {
     const handleSubscribe = async (plan: any) => {
         if (status === "unauthenticated") {
             toast.info("Please sign in to subscribe.");
-            router.push("/sign-in");
+            router.push("/sign_in");
             return;
         }
 
         if (!session?.user?.id) {
             toast.info("Please sign in to subscribe.");
-            router.push("/sign-in");
+            router.push("/sign_in");
             return;
         }
 
