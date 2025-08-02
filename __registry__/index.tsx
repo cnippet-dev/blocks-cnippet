@@ -216,10 +216,18 @@ export const Index = {
       "contact-1": {
         name: "contact-1",
         type: "registry:sections",
-        auth: true,
-        pro: true,
+        auth: false,
+        pro: false,
         files: ["registry/default/sections/contact/contact1.tsx"],
         component: React.lazy(() => import("@/registry/default/sections/contact/contact1.tsx")),
+      },
+      "contact-2": {
+        name: "contact-2",
+        type: "registry:sections",
+        auth: false,
+        pro: false,
+        files: ["registry/default/sections/contact/contact2.tsx"],
+        component: React.lazy(() => import("@/registry/default/sections/contact/contact2.tsx")),
       },
       "cta-1": {
         name: "cta-1",

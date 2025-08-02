@@ -2,9 +2,13 @@ import React from "react";
 import { Index } from "@/__registry__";
 import { ScreenShift } from "../_components/screen-shift";
 
-type Params = Promise<{ slug: string }>;
+// type Params = Promise<{ slug: string }>;
 
-const PreviewPage = async ({ params }: { params: Params }) => {
+const PreviewPage = async ({
+    params,
+}: {
+    params: Promise<{ slug: string }>;
+}) => {
     const slug = await params;
 
     const Preview =
