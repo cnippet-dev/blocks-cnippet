@@ -293,6 +293,14 @@ export const Index = {
         files: ["registry/default/sections/hero/hero2.tsx"],
         component: React.lazy(() => import("@/registry/default/sections/hero/hero2.tsx")),
       },
+      "hero-3": {
+        name: "hero-3",
+        type: "registry:sections",
+        auth: true,
+        pro: true,
+        files: ["registry/default/sections/hero/hero3.tsx"],
+        component: React.lazy(() => import("@/registry/default/sections/hero/hero3.tsx")),
+      },
       "login-1": {
         name: "login-1",
         type: "registry:sections",
