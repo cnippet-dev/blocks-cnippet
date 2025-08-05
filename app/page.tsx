@@ -175,7 +175,7 @@
 
 // export default InteractivePage;
 
-import Component from "@/registry/default/sections/hero/hero3";
+import Component from "@/registry/default/sections/hero/hero5";
 import React from "react";
 
 const page = () => {

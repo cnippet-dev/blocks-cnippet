@@ -89,7 +89,7 @@ export default function HeroSection() {
                     <div className="relative col-span-5">
                         <div className="relative">
                             <Image
-                                src="https://res.cloudinary.com/dcxm3ccir/image/upload/v1741613286/h6.jpg"
+                                src="https://res.cloudinary.com/dcxm3ccir/image/upload/v1741613286/h18.jpg"
                                 alt="Woman in meditation pose against blue sky"
                                 width={1920}
                                 height={1080}
