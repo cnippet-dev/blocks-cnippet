@@ -207,7 +207,7 @@ export default function PricingPage() {
                 strategy="lazyOnload"
             />
 
-            <Navbar />
+            <Navbar className="px-4 md:px-10 xl:px-20 2xl:px-30" />
             <TooltipProvider>
                 <div className="dark:bg-background mx-auto w-full max-w-full border-t-0 border-b px-4 md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-800">
                     <div className="border border-t-0 border-b-0 dark:border-neutral-800">

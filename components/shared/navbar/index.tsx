@@ -1,13 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
-import { useTheme } from "next-themes";
 
 import NavUser from "./nav-user";
 import { MobileNav } from "./mobile-nav";
 
-const Nav1 = ({ className }: { className?: string }) => {
+const Navbar = ({ className }: { className?: string }) => {
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
@@ -98,4 +98,4 @@ const Nav1 = ({ className }: { className?: string }) => {
     );
 };
 
-export default Nav1;
+export default Navbar;
