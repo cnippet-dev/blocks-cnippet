@@ -32,11 +32,9 @@ const userSignInValidation = z.object({
 });
 
 const AuthDialog = () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [loading, setLoading] = useState(false);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [loading1, setLoading1] = useState(false);
-    const [loading2, setLoading2] = useState(false);
+    const [isLoading, setIsLoading] = useState<
+        "signin" | "google" | "github" | null
+    >(null);
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
@@ -52,33 +50,19 @@ const AuthDialog = () => {
     });
 
     const loginWithGoogle = async () => {
-        const result = await signIn("google", {
-            callbackUrl: "/about_you",
-            redirect: false,
-        });
-
-        if (result?.error) {
-            setError(result.error);
-        } else if (result?.url) {
-            router.push(result.url);
-        }
+        setIsLoading("google");
+        await signIn("google", { redirect: false });
+        setIsLoading(null);
     };
 
     const loginWithGit = async () => {
-        const result = await signIn("github", {
-            callbackUrl: "/about_you",
-            redirect: false,
-        });
-
-        if (result?.error) {
-            setError(result.error);
-        } else if (result?.url) {
-            router.push(result.url);
-        }
+        setIsLoading("github");
+        await signIn("github", { redirect: false });
+        setIsLoading(null);
     };
 
     async function onSubmit(values: z.infer<typeof userSignInValidation>) {
-        setLoading2(true);
+        setIsLoading("signin");
 
         try {
             const result = await signIn("credentials", {
@@ -96,11 +80,12 @@ const AuthDialog = () => {
             toast.success("Successfully signed in!");
             router.push("/");
         } catch (error) {
+            setError(error as string);
             toast.error(
                 `An unexpected error occurred. Please try again. ${error}`,
             );
         } finally {
-            setLoading2(false);
+            setIsLoading(null);
         }
     }
 
@@ -209,9 +194,9 @@ const AuthDialog = () => {
                         <Button
                             type="submit"
                             className="group relative flex h-12 w-full cursor-pointer items-center justify-center overflow-hidden rounded-none bg-blue-700 text-white shadow-none hover:bg-blue-800"
-                            disabled={loading2}
+                            disabled={isLoading === "signin"}
                         >
-                            {loading2 ? (
+                            {isLoading === "signin" ? (
                                 <>
                                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                     Signing in...
@@ -254,7 +239,7 @@ const AuthDialog = () => {
                         className="group relative flex h-12 items-center justify-center gap-2 overflow-hidden rounded-none border border-neutral-900 bg-white shadow-none dark:bg-black"
                     >
                         <div className="absolute inset-0 w-full -translate-x-[100%] bg-black transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
-                        {loading1 ? (
+                        {isLoading === "github" ? (
                             <Loader2 className="relative z-10 size-6 animate-spin text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
                         ) : (
                             <RiGithubFill className="relative z-10 size-6 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
@@ -268,7 +253,7 @@ const AuthDialog = () => {
                         className="group relative flex h-12 items-center justify-center gap-2 overflow-hidden rounded-none border border-neutral-900 bg-white shadow-none dark:bg-black"
                     >
                         <div className="absolute inset-0 w-full -translate-x-[100%] bg-black transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
-                        {loading ? (
+                        {isLoading === "google" ? (
                             <Loader2 className="relative z-10 size-6 animate-spin text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
                         ) : (
                             <RiGoogleFill className="relative z-10 size-5 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />

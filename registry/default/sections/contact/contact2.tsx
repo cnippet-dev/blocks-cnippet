@@ -273,9 +273,9 @@ export default function ContactSection() {
                                 <path
                                     d="M-302.316 -438C-345.03 -335.213 -349.374 -223.272 -302.316 -158.312C-247.534 -82.6905 -123.092 -70.7382 91.5694 -211.017C-164.578 460.946 374.375 -176.105 204.032 128"
                                     stroke="#EEEEF0"
-                                    stroke-width="40"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
+                                    strokeWidth="40"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
                                 ></path>
                             </g>
                             <defs>
@@ -303,9 +303,9 @@ export default function ContactSection() {
                                 <path
                                     d="M-300.282 416.905C-212.053 484.767 -105.05 517.935 -30.1242 489.294C57.0991 455.951 100.852 338.843 20.912 95.1887C603.682 516.525 127.829 -168.945 377.485 74.3019"
                                     stroke="#EEEEF0"
-                                    stroke-width="40"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
+                                    strokeWidth="40"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
                                 ></path>
                             </g>
                             <defs>

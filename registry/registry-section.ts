@@ -23,7 +23,7 @@ export const section: Registry = generateSections([
     },
     {
         name: "blog",
-        no: "1",
+        no: "6",
     },
     {
         name: "career",
@@ -31,7 +31,7 @@ export const section: Registry = generateSections([
     },
     {
         name: "contact",
-        no: "1",
+        no: "2",
     },
     {
         name: "cta",
@@ -51,7 +51,7 @@ export const section: Registry = generateSections([
     },
     {
         name: "hero",
-        no: "2",
+        no: "5",
     },
     {
         name: "login",

@@ -14,7 +14,7 @@ import { Cursor } from "@/components/motion/cursor";
 import { AnimatePresence, motion } from "motion/react";
 import { PlusIcon } from "lucide-react";
 
-export default function Cursor1() {
+export default function Home() {
     const [isHovering, setIsHovering] = useState(false);
     const [isHovering2, setIsHovering2] = useState(false);
     const [isHovering3, setIsHovering3] = useState(false);
@@ -123,7 +123,7 @@ export default function Cursor1() {
     );
 }
 
-// import Component from "@/registry/default/sections/contact/contact2";
+// import Component from "@/registry/default/sections/hero/hero5";
 // import React from "react";
 
 // const page = () => {

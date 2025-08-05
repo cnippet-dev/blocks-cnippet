@@ -3,14 +3,14 @@ import { RiArrowRightLine } from "@remixicon/react";
 const Cta = () => {
     return (
         <>
-            <section className="mx-auto w-full max-w-[1536px] border-t-0 border-b bg-blue-700 pl-4 text-white md:pl-30 dark:bg-blue-700 dark:border-neutral-800">
+            <section className="mx-auto w-full max-w-[1536px] border-t-0 border-b bg-black pl-4 text-white md:pl-30 dark:border-neutral-800 dark:bg-blue-700">
                 <div className="grid grid-cols-6 divide-x dark:divide-neutral-800">
                     <div className="col-span-5 py-28">
-                        <h2 className="text-2xl leading-tight font-medium tracking-tight md:text-5xl">
+                        <h2 className="text-2xl leading-tight font-normal tracking-tight md:text-5xl">
                             Start Building with Ready-Made Sections, Pages, and
                             Templates
                         </h2>
-                        <p className="mt-4 text-gray-100">
+                        <p className="mt-4 max-w-2xl text-gray-100">
                             block.cnippet.site gives you instant access to a
                             growing library of website sections, full pages, and
                             complete templates. Build your next project faster,

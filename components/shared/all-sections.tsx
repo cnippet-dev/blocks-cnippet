@@ -49,7 +49,7 @@ const Sections = (props: { count?: number; sections?: any[] }) => {
                         </p>
                     </div>
                     <div>
-                        <div className="grid grid-cols-1 divide-x border-t divide-y md:grid-cols-12 dark:divide-neutral-800 dark:border-neutral-800">
+                        <div className="grid grid-cols-1 border-t md:grid-cols-12 dark:divide-neutral-800 dark:border-neutral-800">
                             {components
                                 ?.slice(0, props.count)
                                 .map((component, i) => {
@@ -57,7 +57,7 @@ const Sections = (props: { count?: number; sections?: any[] }) => {
                                     return (
                                         <div
                                             key={i}
-                                            className={`relative col-span-3 w-full dark:border-neutral-800`}
+                                            className={`${`relative col-span-3 w-full border-b dark:border-neutral-800 ${i === 3 || i === 7 || i === 11 ? "" : "border-r"}`}`}
                                         >
                                             <Image
                                                 width="960"
@@ -71,7 +71,7 @@ const Sections = (props: { count?: number; sections?: any[] }) => {
                                             <div className="flex flex-col items-start p-4">
                                                 <Link
                                                     href={section.slug}
-                                                    className="font-medium text-black/80 capitalize dark:text-neutral-400"
+                                                    className="font-medium text-black/80 capitalize dark:text-white"
                                                 >
                                                     {component.name}
                                                     <span className="absolute inset-0"></span>
@@ -86,7 +86,7 @@ const Sections = (props: { count?: number; sections?: any[] }) => {
                         </div>
                     </div>
 
-                    <div className="grid h-12 grid-cols-1 divide-x border-t md:grid-cols-4 dark:divide-neutral-800 dark:border-neutral-800">
+                    <div className="grid h-12 grid-cols-1 divide-x md:grid-cols-4 dark:divide-neutral-800 dark:border-neutral-800">
                         <div className="col-span-1 hidden md:block"></div>
                         <div className="col-span-1 hidden md:block"></div>
                         <div className="col-span-1 hidden md:block"></div>

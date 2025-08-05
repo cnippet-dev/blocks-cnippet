@@ -35,7 +35,12 @@ export const sections = [
     ...generateSections("faq", 1, ["T"], ["T"]),
     ...generateSections("feature", 1, ["T"], ["T"]),
     ...generateSections("footer", 3, ["F", "F", "F"], ["F", "F", "F"]),
-    ...generateSections("hero", 2, ["T", "T"], ["T", "T"]),
+    ...generateSections(
+        "hero",
+        5,
+        ["F", "F", "T", "T", "T"],
+        ["F", "F", "T", "T", "T"],
+    ),
     ...generateSections("login", 4, ["F", "F", "F", "F"], ["F", "F", "F", "F"]),
     ...generateSections(
         "pricing",

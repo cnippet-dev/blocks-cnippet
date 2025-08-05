@@ -2,8 +2,15 @@
 
 import React from "react";
 import { signOut, useSession } from "next-auth/react";
-import { Sparkles, BadgeCheck, CreditCard, Bell, LogOut } from "lucide-react";
-import { RiUserFill } from "@remixicon/react";
+import {
+    RiBankCardFill,
+    RiHeart2Fill,
+    RiLogoutBoxRFill,
+    RiSettings2Fill,
+    RiSparkling2Fill,
+    RiUserFill,
+    RiUserSettingsFill,
+} from "@remixicon/react";
 import Link from "next/link";
 
 import {
@@ -63,15 +70,15 @@ const NavUser = () => {
                                 </div>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent
-                                className="w-52 rounded-none"
+                                className="w-52 rounded-xl dark:border-neutral-700"
                                 side="bottom"
-                                align="center"
-                                sideOffset={15}
+                                align="end"
+                                sideOffset={10}
                             >
                                 <DropdownMenuLabel className="p-0 font-normal">
                                     <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                                         <div className="grid flex-1 text-left text-sm leading-tight">
-                                            <span className="truncate font-semibold text-black">
+                                            <span className="truncate font-medium text-black dark:text-white">
                                                 {" "}
                                                 {session.user?.name}
                                             </span>
@@ -84,8 +91,13 @@ const NavUser = () => {
                                 <DropdownMenuSeparator />
                                 <DropdownMenuGroup>
                                     <DropdownMenuItem>
-                                        <Sparkles className="size-4" />
-                                        Upgrade to Pro
+                                        <Link
+                                            href="/pricing"
+                                            className="flex w-full items-center gap-2"
+                                        >
+                                            <RiSparkling2Fill className="size-4" />
+                                            Upgrade to Pro
+                                        </Link>
                                     </DropdownMenuItem>
                                 </DropdownMenuGroup>
                                 <DropdownMenuSeparator />
@@ -95,22 +107,44 @@ const NavUser = () => {
                                             href="/profile"
                                             className="flex w-full items-center gap-2"
                                         >
-                                            <BadgeCheck className="size-4" />
+                                            <RiUserSettingsFill className="size-4" />
                                             Profile
                                         </Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem>
-                                        <CreditCard className="size-4" />
-                                        Billing
+                                        <Link
+                                            href="/profile/favourites"
+                                            className="flex w-full items-center gap-2"
+                                        >
+                                            <RiHeart2Fill className="size-4" />
+                                            Favourites
+                                        </Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem>
-                                        <Bell className="size-4" />
-                                        Notifications
+                                        <Link
+                                            href="/profile/billing"
+                                            className="flex w-full items-center gap-2"
+                                        >
+                                            <RiBankCardFill className="size-4" />
+                                            Billing
+                                        </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem>
+                                        <Link
+                                            href="/profile/settings"
+                                            className="flex w-full items-center gap-2"
+                                        >
+                                            <RiSettings2Fill className="size-4" />
+                                            Settings
+                                        </Link>
                                     </DropdownMenuItem>
                                 </DropdownMenuGroup>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem onClick={() => signOut()}>
-                                    <LogOut className="size-4" />
+                                <DropdownMenuItem
+                                    onClick={() => signOut()}
+                                    className="cursor-pointer"
+                                >
+                                    <RiLogoutBoxRFill className="size-4" />
                                     Log out
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
@@ -120,9 +154,9 @@ const NavUser = () => {
                             <DialogTrigger asChild>
                                 <Button
                                     size="lg"
-                                    className="[&amp;_svg]:size-4.5 cursor-pointer rounded-full bg-gray-50 shadow-none px-2"
+                                    className="[&amp;_svg]:size-4.5 group cursor-pointer rounded-full bg-gray-50 px-3 shadow-none"
                                 >
-                                    <RiUserFill className="text-black" />
+                                    <RiUserFill className="text-black group-hover:text-white" />
                                 </Button>
                             </DialogTrigger>
                             <AuthDialog />

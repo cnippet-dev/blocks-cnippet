@@ -116,12 +116,12 @@ export default function SectionsPage() {
 
     return (
         <div className="relative min-h-screen px-4 md:px-10 xl:px-8">
-            <div className="flex border border-t-0">
+            <div className="grid grid-cols-12 border border-t-0">
                 <div
-                    className={`${sidebarOpen ? "w-72 border-r" : "w-0"} bg-white transition-all duration-300`}
+                    className={`${sidebarOpen ? "col-span-2" : "hidden"} bg-white transition-all duration-300`}
                 >
                     <div
-                        className={`font-kumb ${sidebarOpen ? "sticky" : "block"} top-0 space-y-6`}
+                        className={` ${sidebarOpen ? "sticky" : "block"} top-0 space-y-6`}
                     >
                         <div className="relative">
                             <RiSearchLine className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
@@ -163,7 +163,7 @@ export default function SectionsPage() {
                                     <Badge
                                         key={category}
                                         variant="secondary"
-                                        className="flex items-center gap-1 bg-blue-50 px-3 py-0.5 text-blue-700 hover:bg-blue-100"
+                                        className="flex items-center gap-1 bg-blue-50 px-3 py-0.5 text-sm text-blue-700 shadow-sm shadow-blue-300 hover:bg-blue-100"
                                     >
                                         {capitalize(category)}
                                         <button
@@ -186,7 +186,7 @@ export default function SectionsPage() {
                                 {urlLicense && (
                                     <Badge
                                         variant="secondary"
-                                        className="flex items-center gap-1 bg-purple-50 text-purple-700 hover:bg-purple-100"
+                                        className="flex items-center gap-1 bg-purple-50 px-2 py-0.5 text-sm shadow-sm text-purple-700 shadow-purple-300 hover:bg-purple-100"
                                     >
                                         {urlLicense === "pro" ? "Pro" : "Free"}
                                         <button
@@ -205,9 +205,10 @@ export default function SectionsPage() {
                             </div>
                         </div>
 
-                        <Separator />
-
-                        <Collapsible defaultOpen className="px-3">
+                        <Collapsible
+                            defaultOpen
+                            className="border-t border-b border-dashed px-3 py-7"
+                        >
                             <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg font-medium text-gray-900">
                                 Categories
                                 <RiArrowDownSLine className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
@@ -236,7 +237,7 @@ export default function SectionsPage() {
                                                         urlLicense,
                                                     );
                                                 }}
-                                                className="cursor-pointer justify-start rounded-xl border-gray-200 text-sm font-normal hover:border-indigo-300 hover:bg-blue-50"
+                                                className="cursor-pointer justify-start rounded-full border-gray-200 text-sm font-normal shadow-none hover:border-indigo-300 hover:bg-blue-50"
                                             >
                                                 {capitalize(category)}
                                             </Button>
@@ -244,8 +245,6 @@ export default function SectionsPage() {
                                 </div>
                             </CollapsibleContent>
                         </Collapsible>
-
-                        <Separator />
 
                         <div className="px-3">
                             <h3 className="mb-3 font-medium text-gray-900">
@@ -268,7 +267,7 @@ export default function SectionsPage() {
                                     className={
                                         urlLicense === "pro"
                                             ? "bg-purple-600 hover:bg-purple-700"
-                                            : "rounded-lg border-gray-200 hover:border-purple-300 hover:bg-purple-50"
+                                            : "rounded-lg border-gray-200 text-sm font-normal shadow-none hover:border-purple-300 hover:bg-purple-50"
                                     }
                                 >
                                     Pro
@@ -289,7 +288,7 @@ export default function SectionsPage() {
                                     className={
                                         urlLicense === "free"
                                             ? "bg-black"
-                                            : "rounded-lg border-gray-200 hover:border-green-300 hover:bg-green-50"
+                                            : "rounded-lg border-gray-200 text-sm font-normal shadow-none hover:border-green-300 hover:bg-green-50"
                                     }
                                 >
                                     Free
@@ -299,7 +298,9 @@ export default function SectionsPage() {
                     </div>
                 </div>
 
-                <div className="flex-1 bg-white">
+                <div
+                    className={`${sidebarOpen ? "col-span-10 border-l" : "col-span-12"} flex-1 bg-white`}
+                >
                     <header className="border-b bg-white/80 backdrop-blur-sm">
                         <div className="flex h-[2.95555rem] items-center justify-between px-6">
                             <div className="flex items-center gap-4">
@@ -394,7 +395,7 @@ export default function SectionsPage() {
                                         >
                                             <CardContent className="p-0">
                                                 <div className="relative overflow-hidden">
-                                                    <div className="relative overflow-hidden rounded-xl border">
+                                                    <div className="relative overflow-hidden rounded-xl border border-gray-200">
                                                         {failedImages.has(
                                                             section.name,
                                                         ) ? (
