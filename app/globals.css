@@ -145,6 +145,45 @@
     }
 }
 
+
+.cnippet-dot {
+    --border-bottom-width: 1px;
+    --border-color: #e5eaf0;
+    --border-left-width: 1px;
+    --border-right-width: 1px;
+    --border-style: solid;
+    --border-top-width: 1px;
+    aspect-ratio: 1 / 1;
+    background-color: #f9fafb;
+    border-radius: 99px;
+    box-shadow: rgb(255, 255, 255) 0px 0px 0px 4px;
+    flex: 0 0 auto;
+    height: 12px;
+    left: -5px;
+    overflow: hidden;
+    position: absolute;
+    top: 75px;
+    width: 12px;
+    z-index: 1;
+}
+
+.framer-F0Cuz[data-border="true"]::after,
+.framer-F0Cuz [data-border="true"]::after {
+    content: "";
+    border-width: var(--border-top-width, 0) var(--border-right-width, 0)
+        var(--border-bottom-width, 0) var(--border-left-width, 0);
+    border-color: var(--border-color, none);
+    border-style: var(--border-style, none);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    box-sizing: border-box;
+    left: 0px;
+    top: 0px;
+    border-radius: inherit;
+    pointer-events: none;
+}
+
 .legal_page a {
     @apply text-blue-600 dark:text-blue-500;
 }

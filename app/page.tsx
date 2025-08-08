@@ -55,7 +55,7 @@ export default function Home() {
     return (
         <ReactLenis root>
             <div className="">
-                <Cursor
+                {/* <Cursor
                     attachToParent
                     variants={{
                         initial: { scale: 0.3, opacity: 0 },
@@ -108,16 +108,16 @@ export default function Home() {
                             ) : null}
                         </AnimatePresence>
                     </motion.div>
-                </Cursor>
+                </Cursor> */}
 
-                <Navbar className="px-4 md:px-10 xl:px-20 2xl:px-30" />
+                {/* <Navbar className="px-4 md:px-10 xl:px-20 2xl:px-30" /> */}
                 <main className="">
                     <Hero ref={targetRef3} />
-                    <Sections count={15} />
-                    <Faq />
-                    <Cta />
+                    {/* <Sections count={15} /> */}
+                    {/* <Faq /> */}
+                    {/* <Cta /> */}
                 </main>
-                <Footer />
+                {/* <Footer /> */}
             </div>
         </ReactLenis>
     );

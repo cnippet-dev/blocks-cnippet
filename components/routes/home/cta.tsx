@@ -3,9 +3,9 @@ import { RiArrowRightLine } from "@remixicon/react";
 const Cta = () => {
     return (
         <>
-            <section className="mx-auto w-full max-w-[1536px] border-t-0 border-b bg-black pl-4 text-white md:pl-30 dark:border-neutral-800 dark:bg-blue-700">
-                <div className="grid grid-cols-6 divide-x dark:divide-neutral-800">
-                    <div className="col-span-5 py-28">
+            <section className="mx-auto w-full max-w-[1536px] border-t-0 border-b bg-black pl-0 text-white md:pl-30 dark:border-neutral-800 dark:bg-blue-700">
+                <div className="grid grid-cols-1 divide-x md:grid-cols-6 dark:divide-neutral-800">
+                    <div className="px-4 py-28 md:col-span-5 md:px-0">
                         <h2 className="text-2xl leading-tight font-normal tracking-tight md:text-5xl">
                             Start Building with Ready-Made Sections, Pages, and
                             Templates

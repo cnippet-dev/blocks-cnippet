@@ -58,9 +58,9 @@ export default function EchoFooter() {
     return (
         <footer className="font-kumb dark:bg-background bg-white px-6 py-12">
             <div className="mx-auto max-w-7xl">
-                <div className="grid grid-cols-1 gap-12 lg:grid-cols-6">
-                    <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:col-span-4">
-                        <div className="col-span-4 mb-16 flex items-center gap-6">
+                <div className="grid grid-cols-1 gap-8 md:gap-12 lg:grid-cols-6">
+                    <div className="grid grid-cols-2 gap-0 md:grid-cols-4 md:gap-8 lg:col-span-4">
+                        <div className="col-span-4 mb-16 flex flex-wrap items-center gap-6">
                             <div className="flex items-center">
                                 {mounted && (
                                     <Image
@@ -113,6 +113,7 @@ export default function EchoFooter() {
                                 )}
                             </div>
                         </div>
+
                         {footerLinks.map((section, index) => (
                             <div key={`${section.title}-${index}`}>
                                 <h3 className="mb-6 font-medium text-gray-900 dark:text-white">
@@ -133,16 +134,18 @@ export default function EchoFooter() {
                             </div>
                         ))}
 
-                        <div className="col-span-4">
+                        <div className="col-span-4 hidden md:block">
                             <Separator className="my-6" />
 
-                            <div className="flex w-full justify-between text-xs">
+                            <div className="flex w-full flex-col justify-between gap-4 text-xs md:flex-row md:gap-0">
                                 <div className="flex items-center gap-4 text-gray-700 underline-offset-2 dark:text-neutral-300 [&_a]:hover:text-gray-900 [&_a]:hover:underline [&_a]:dark:hover:text-white">
                                     <Link href="/legal/terms">Terms</Link>
                                     <Link href="/legal/privacy">Privacy</Link>
-                                    <Link href="/legal/cancellation">Cancellation</Link>
+                                    <Link href="/legal/cancellation">
+                                        Cancellation
+                                    </Link>
                                 </div>
-                                <div className="text-sm text-gray-700 dark:text-neutral-400">
+                                <div className="text-xs text-gray-700 md:text-sm dark:text-neutral-400">
                                     ©2025 All Rights Reserved - cnippet.dev
                                 </div>
                             </div>
@@ -196,7 +199,7 @@ export default function EchoFooter() {
                             </div>
                         </div>
                         <div className="text-center">
-                            <div className="flex">
+                            <div className="flex justify-between">
                                 <svg
                                     className="w-20 shrink-0 text-black *:data-lift:transition-transform *:data-lift:duration-300 group-hover:*:data-lift:-translate-y-0.5 group-data-selected:*:data-lift:translate-y-0 sm:w-30"
                                     aria-hidden="true"
@@ -468,6 +471,23 @@ export default function EchoFooter() {
                                 <p className="text-sm text-gray-600 dark:text-gray-500">
                                     Cnippet become a tech-driven legal solutions
                                 </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="block md:hidden">
+                        <Separator className="my-6" />
+
+                        <div className="flex w-full flex-col justify-between gap-4 text-xs md:flex-row md:gap-0">
+                            <div className="flex items-center gap-4 text-gray-700 underline-offset-2 dark:text-neutral-300 [&_a]:hover:text-gray-900 [&_a]:hover:underline [&_a]:dark:hover:text-white">
+                                <Link href="/legal/terms">Terms</Link>
+                                <Link href="/legal/privacy">Privacy</Link>
+                                <Link href="/legal/cancellation">
+                                    Cancellation
+                                </Link>
+                            </div>
+                            <div className="text-xs text-gray-700 md:text-sm dark:text-neutral-400">
+                                ©2025 All Rights Reserved - cnippet.dev
                             </div>
                         </div>
                     </div>

@@ -25,7 +25,7 @@ export function MobileNav() {
             <DrawerTrigger asChild>
                 <Button
                     variant="ghost"
-                    className="h-8 w-full gap-4 pl-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+                    className="flex h-8 w-full items-center gap-4 pl-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
