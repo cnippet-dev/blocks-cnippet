@@ -397,18 +397,18 @@
 // export default Hero;
 
 import { forwardRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
+
 import {
-    RiArrowRightLine,
     RiArrowRightUpLine,
-    RiArrowUpLine,
     RiFlashlightFill,
 } from "@remixicon/react";
 import { motion } from "motion/react";
+import { ExternalLink} from "lucide-react";
+
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
 
 const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
     (props, ref) => {
