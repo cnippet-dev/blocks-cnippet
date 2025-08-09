@@ -55,7 +55,7 @@ export default function Home() {
     return (
         <ReactLenis root>
             <div className="">
-                {/* <Cursor
+                <Cursor
                     attachToParent
                     variants={{
                         initial: { scale: 0.3, opacity: 0 },
@@ -76,7 +76,7 @@ export default function Home() {
                             width: isHovering || isHovering2 ? 80 : 16,
                             height: isHovering || isHovering2 ? 32 : 16,
                         }}
-                        className={`flex items-center justify-center rounded-[24px] ${isHovering3 ? "bg-white backdrop-blur-md dark:bg-gray-300/40" : "bg-blue-600 backdrop-blur-md dark:bg-gray-300/40"} transition-all duration-500`}
+                        className={`flex items-center justify-center cursor-pointer rounded-[24px] ${isHovering3 ? "bg-white backdrop-blur-md dark:bg-gray-300/40" : "bg-blue-600 backdrop-blur-md dark:bg-gray-300/40"} transition-all duration-500`}
                     >
                         <AnimatePresence>
                             {isHovering ? (
@@ -108,7 +108,7 @@ export default function Home() {
                             ) : null}
                         </AnimatePresence>
                     </motion.div>
-                </Cursor> */}
+                </Cursor>
 
                 {/* <Navbar className="px-4 md:px-10 xl:px-20 2xl:px-30" /> */}
                 <main className="">
@@ -117,7 +117,7 @@ export default function Home() {
                     {/* <Faq /> */}
                     {/* <Cta /> */}
                 </main>
-                {/* <Footer /> */}
+                <Footer />
             </div>
         </ReactLenis>
     );

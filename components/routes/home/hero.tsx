@@ -408,6 +408,7 @@ import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
     (props, ref) => {
@@ -795,7 +796,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
             //     </section>
             // </div>
 
-            <section className="framer-F0Cuz relative h-screen">
+            <section className="relative h-screen">
                 <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-0 flex w-full overflow-visible">
                     <div
                         className="absolute top-20 left-0 z-0 h-[1px] w-full flex-auto overflow-hidden border-t border-dashed border-gray-200"
@@ -842,13 +843,19 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                         {/* Logo */}
                         <motion.div
                             whileHover={{ scale: 1.05 }}
-                            className="flex items-center space-x-2"
+                            className="flex items-center"
                         >
-                            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-black">
-                                <div className="h-4 w-4 rotate-45 transform rounded-sm border-2 border-white"></div>
-                            </div>
-                            <span className="text-xl font-semibold text-gray-900">
-                                SquareUi
+                            <Image
+                                src="https:res.cloudinary.com/dcxm3ccir/image/upload/v1753948226/logo-light.png"
+                                alt=""
+                                className="size-10"
+                                width={1080}
+                                height={1080}
+                                suppressHydrationWarning
+                            />
+                            <span className="text-xl font-semibold tracking-tight text-gray-900">
+                                Cnippet{" "}
+                                <span className="text-gray-400">Blocks</span>
                             </span>
                         </motion.div>
 
