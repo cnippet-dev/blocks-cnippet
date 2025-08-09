@@ -22,7 +22,7 @@ const Navbar = ({ className }: { className?: string }) => {
             >
                 <div className="w-full border border-t-0 border-r-0 border-b-0 dark:border-neutral-800">
                     <div className="grid grid-cols-2 divide-x-0 md:grid-cols-6 md:divide-x dark:divide-neutral-800">
-                        <div className="col-span-1 md:col-span-1">
+                        <div className="col-span-1">
                             <Link
                                 suppressHydrationWarning
                                 className="grid grid-cols-4"
@@ -37,7 +37,7 @@ const Navbar = ({ className }: { className?: string }) => {
                                                     : "https://res.cloudinary.com/dcxm3ccir/image/upload/v1753948225/logo-light.png"
                                             }
                                             alt=""
-                                            className="size-12"
+                                            className="size-12 object-cover"
                                             width={1080}
                                             height={1080}
                                             suppressHydrationWarning
@@ -58,10 +58,10 @@ const Navbar = ({ className }: { className?: string }) => {
                             </nav>
                         </div>
 
-                        <div className="col-span-1"></div>
+                        <div className="col-span-1 hidden xl:block"></div>
 
-                        <div className="col-span-1 flex">
-                            <div></div>
+                        <div className="col-span-1 flex items-center justify-end border-r">
+                            {/* <div></div> */}
                             {/* <div className="group/toggle focus-visible:ring-ring [&amp;_svg]:pointer-events-none [&amp;_svg]:size-5 [&amp;_svg]:shrink-0 bg-muted/50 inline-flex w-full items-center justify-center gap-2 rounded-none px-0 text-sm font-medium whitespace-nowrap transition-colors hover:bg-none focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50">
                                 {mounted &&
                                     (theme === "dark" ? (
@@ -83,13 +83,12 @@ const Navbar = ({ className }: { className?: string }) => {
                                     ))}
                                 <span className="sr-only">Toggle theme</span>
                             </div> */}
-                            <div className="flex w-full items-center justify-center bg-gray-50 dark:bg-black">
+                            <div className="flex h-full w-20 items-center justify-center bg-gray-50 md:w-full dark:bg-black">
                                 <NavUser />
                             </div>
-                        </div>
-
-                        <div className="col-span-1 ml-auto flex items-center justify-end md:col-span-0 md:hidden">
-                            <MobileNav />
+                            <div className="px-2 md:px-0">
+                                <MobileNav />
+                            </div>
                         </div>
                     </div>
                 </div>

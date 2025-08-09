@@ -76,7 +76,7 @@ export default function Home() {
                             width: isHovering || isHovering2 ? 80 : 16,
                             height: isHovering || isHovering2 ? 32 : 16,
                         }}
-                        className={`flex items-center justify-center rounded-[24px] ${isHovering3 ? "bg-white backdrop-blur-md dark:bg-gray-300/40" : "bg-blue-600 backdrop-blur-md dark:bg-gray-300/40"} transition-all duration-500`}
+                        className={`flex items-center justify-center cursor-pointer rounded-[24px] ${isHovering3 ? "bg-white backdrop-blur-md dark:bg-gray-300/40" : "bg-blue-600 backdrop-blur-md dark:bg-gray-300/40"} transition-all duration-500`}
                     >
                         <AnimatePresence>
                             {isHovering ? (
@@ -110,12 +110,12 @@ export default function Home() {
                     </motion.div>
                 </Cursor>
 
-                <Navbar className="px-4 md:px-10 xl:px-20 2xl:px-30" />
+                {/* <Navbar className="px-4 md:px-10 xl:px-20 2xl:px-30" /> */}
                 <main className="">
                     <Hero ref={targetRef3} />
-                    <Sections count={15} />
-                    <Faq />
-                    <Cta />
+                    {/* <Sections count={15} /> */}
+                    {/* <Faq /> */}
+                    {/* <Cta /> */}
                 </main>
                 <Footer />
             </div>

@@ -61,7 +61,7 @@ const Faq = () => {
                 </div> */}
 
                 <div className="">
-                    <div className="grid h-full w-full divide-x-0 divide-y border border-b-0 border-t-0 md:grid-cols-4 md:divide-x md:divide-y-0 dark:divide-neutral-900 dark:border-neutral-900">
+                    <div className="grid h-full w-full divide-x-0 divide-y border border-b-0 border-t-0 grid-cols-1 md:grid-cols-4 md:divide-x md:divide-y-0 dark:divide-neutral-900 dark:border-neutral-900">
                         <div className="col-span-1 w-full bg-white px-4 py-8 text-left md:px-10 md:py-16 dark:bg-black">
                             <div className="sticky top-20">
                                 <h2 className="text-4xl leading-tight font-medium tracking-tight md:text-5xl">
