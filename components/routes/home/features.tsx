@@ -1,241 +1,261 @@
-import { forwardRef, useState } from "react";
-import { RiArrowRightLine } from "@remixicon/react";
 import { motion } from "motion/react";
-import Link from "next/link";
+import React from "react";
 
-import { TypingText } from "@/components/motion/typing-text";
+import {
+    Zap,
+    FileText,
+    Cloud,
+    Lightbulb,
+    TrendingUp,
+    Users,
+} from "lucide-react";
 
-const metrics = [
+const features = [
     {
-        title: "500+",
-        description: "UI Components",
-        content: "ui.cnippet.site",
-        content2:
-            "Core components, motion effects, text animations, charts, and interactive elements for modern web applications.",
+        icon: Zap,
+        title: "Build Faster",
+        description:
+            "Cnippet Blocks helps you skip the setup and jump straight into design. All components are ready to use and well-organized.",
     },
     {
-        title: "100+",
-        description: "Page Templates",
-        content: "block.cnippet.site",
-        content2:
-            "Complete sections, landing pages, about pages, contact forms, and full website templates ready to deploy.",
+        icon: FileText,
+        title: "Stay Consistent",
+        description:
+            "Using a design system with unified styles, grids, and variables keeps everything working together, no guessing or manual tweaks.",
     },
     {
-        title: "200+",
-        description: "Guides & Tutorials",
-        content: "next.cnippet.site",
-        content2:
-            "Comprehensive guides for authentication, payment gateways, SEO optimization, and advanced web development techniques.",
+        icon: Cloud,
+        title: "Stop Rebuilding the Basics",
+        description:
+            "You don't need to remake buttons, forms, or cards from scratch on every project. Cnippet Blocks gives you everything upfront.",
     },
     {
-        title: "24/7",
-        description: "Support",
-        content: "Community Driven",
-        content2:
-            "Active community support, documentation, and resources to help you succeed with every project.",
+        icon: Lightbulb,
+        title: "Work Smarter, Not Harder",
+        description:
+            "A design system saves hours on every project. Spend more time on product thinking, not pushing pixels.",
+    },
+    {
+        icon: TrendingUp,
+        title: "Scale Without the Mess",
+        description:
+            "As your project grows, so does the design complexity. Cnippet Blocks keeps things organized so it doesn't fall apart.",
+    },
+    {
+        icon: Users,
+        title: "Get Everyone on the Same Page",
+        description:
+            "Designers and devs use the same components and rules. That means fewer mistakes, faster delivery, and less back-and-forth.",
     },
 ];
 
-const Features = forwardRef<HTMLDivElement>((props, ref) => {
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.2,
+        },
+    },
+};
 
+const itemVariants = {
+    hidden: {
+        opacity: 0,
+        y: 30,
+        scale: 0.95,
+    },
+    visible: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: {
+            type: "spring" as const,
+            stiffness: 100,
+            damping: 15,
+            duration: 0.6,
+        },
+    },
+};
+
+const headerVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            type: "spring" as const,
+            stiffness: 100,
+            damping: 15,
+            duration: 0.8,
+        },
+    },
+};
+
+const Features = () => {
     return (
-        <>
-            <section
-                {...props}
-                className="mx-auto w-full max-w-full border-t-0 border-b px-4 md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-800 dark:bg-black"
-            >
-                <div className="border border-t-0 border-b-0 dark:border-neutral-800">
-                    <div className="max-w-2xl px-4 py-10 md:py-20">
-                        <div className="h-[calc(2*theme(fontSize.6xl)*theme(lineHeight.normal))] md:h-[calc(2*theme(fontSize.5xl)*theme(lineHeight.tight))]">
-                            <TypingText
-                                className="text-3xl leading-tight font-medium tracking-tight md:text-5xl"
-                                speed={60}
-                                showCursor={false}
-                                once={true}
-                            >
-                                Everything You Need for a Complete Website
-                            </TypingText>
-                        </div>
+        <section className="relative h-full">
+            <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-0 flex w-full overflow-visible">
+                <div
+                    className="absolute top-20 left-0 z-0 h-[1px] w-full flex-auto overflow-hidden border-t border-dashed border-gray-200"
+                    data-border="true"
+                    data-framer-name="Top divider"
+                ></div>
 
-                        <p className="mt-2 text-gray-500">
-                            Cnippet block offers a growing library of ready-made
-                            sections (like hero, features, team), full pages
-                            (landing, about, contact), and complete website
-                            templates. Build your next project faster with
-                            SEO-friendly, customizable blocks.
-                        </p>
-                    </div>
-                    <div className="grid grid-cols-2 divide-x border-t md:grid-cols-6 dark:divide-neutral-800 dark:border-neutral-800">
+                <div
+                    className="absolute top-0 left-1/2 z-0 h-full w-full max-w-7xl flex-auto -translate-x-1/2 overflow-visible"
+                    data-framer-name="Vertical lines"
+                >
+                    <div
+                        className="absolute right-0 bottom-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200"
+                        data-border="true"
+                        data-framer-name="Right line"
+                    >
                         <div
-                            ref={ref}
-                            className="col-span-2 flex flex-col items-start justify-start gap-2 px-4 py-10"
-                        >
-                            <h3 className="text-2xl font-medium tracking-tight">
-                                ui.cnippet.site - Core Components
-                            </h3>
-                            <p className="text-gray-500">
-                                Access 500+ production-ready UI components
-                                including accordions, dialogs, toasts, motion
-                                effects, text animations, and interactive
-                                charts. All components are TypeScript-ready and
-                                optimized for performance.
-                            </p>
-                        </div>
-
-                        <div className="col-span-2 flex flex-col items-start justify-start gap-2 px-4 py-10">
-                            <h3 className="text-2xl font-medium tracking-tight">
-                                block.cnippet.site - Sections & Templates
-                            </h3>
-                            <p className="text-gray-500">
-                                Access 100+ pre-built sections, pages, and full
-                                website templates. Perfect for landing pages,
-                                about pages, contact forms, and more. All blocks
-                                are responsive, SEO-optimized, and easy to
-                                customize for any project.
-                            </p>
-                        </div>
-
-                        <div className="col-span-2 flex flex-col items-start justify-start gap-2 px-4 py-10">
-                            <h3 className="text-2xl font-medium tracking-tight">
-                                next.cnippet.site - Learning Hub
-                            </h3>
-                            <p className="text-gray-500">
-                                Access 200+ comprehensive guides, tutorials, and
-                                implementation examples. Learn about
-                                authentication, payment gateways, SEO,
-                                performance optimization, and advanced web
-                                development techniques.
-                            </p>
-                        </div>
+                            className="cnippet-dot"
+                            data-border="true"
+                            data-framer-name="Ellipsis"
+                        ></div>
                     </div>
-
-                    <div className="grid h-12 grid-cols-1 divide-x border-t md:grid-cols-6 dark:divide-neutral-800 dark:border-neutral-800">
-                        <div className="col-span-1 hidden md:block"></div>
-                        <div className="col-span-1 hidden md:block"></div>
-                        <div className="col-span-1 hidden md:block"></div>
-                        <div className="col-span-1 hidden md:block"></div>
+                    <div
+                        className="absolute bottom-0 left-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200"
+                        data-border="true"
+                        data-framer-name="Left line"
+                    >
                         <div
-                            ref={ref}
-                            className="col-span-1 h-full w-full md:col-span-2"
-                        >
-                            <Link
-                                href="#"
-                                className="group relative flex h-full w-full items-center justify-center overflow-hidden bg-blue-700"
-                            >
-                                <div className="absolute inset-0 w-full -translate-x-[110%] bg-blue-800 transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-blue-600" />
-                                <span className="relative z-10 flex w-full items-center justify-between gap-2 px-4 text-lg text-white duration-300 group-hover:text-white dark:text-white">
-                                    Start Building
-                                    <RiArrowRightLine
-                                        className="text-white"
-                                        size={20}
-                                    />
-                                </span>
-                            </Link>
-                        </div>
-                    </div>
-
-                    <div className="grid h-32 grid-cols-4 divide-x border-t md:h-52 md:grid-cols-6 dark:divide-neutral-800 dark:border-neutral-800">
-                        <div className="col-span-1"></div>
-                        <div className="col-span-1"></div>
-                        <div className="col-span-1"></div>
-
-                        <div className="col-span-1"></div>
-                        <div className="col-span-1 hidden md:block"></div>
-                        <div className="col-span-1 hidden md:block"></div>
+                            className="cnippet-dot"
+                            data-border="true"
+                            data-framer-name="Ellipsis"
+                        ></div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <section className="mx-auto mt-20 w-full max-w-full border-t border-b px-4 md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-800 dark:bg-black">
-                <div className="border border-t-0 border-b-0 dark:border-neutral-800">
-                    <div className="max-w-3xl px-4 py-20">
-                        <div className="h-fit md:h-[calc(2*theme(fontSize.5xl)*theme(lineHeight.tight))]">
-                            <TypingText
-                                className="text-3xl leading-tight font-medium tracking-tight md:text-5xl"
-                                speed={60}
-                                showCursor={false}
-                                once={true}
-                            >
-                                Trusted by Developers <br />{" "}
-                                <span className="text-blue-700">Worldwide</span>
-                            </TypingText>
-                        </div>
-
-                        <p className="mt-2 text-lg text-gray-500">
-                            Join thousands of developers who trust Cnippet for
-                            their web development needs. Our ecosystem has
-                            helped teams build everything from simple landing
-                            pages to complex enterprise applications.
-                        </p>
-                    </div>
-
-                    <div className="grid h-12 grid-cols-2 divide-x border-t md:grid-cols-6 dark:divide-neutral-800 dark:border-neutral-800">
-                        <div className="col-span-1 hidden md:block"></div>
-                        <div className="col-span-1 hidden md:block"></div>
-                        <div className="col-span-1 hidden md:block"></div>
-                        <div className="col-span-1"></div>
-                        <div
-                            ref={ref}
-                            className="col-span-1 h-full w-full md:col-span-2"
+            <div className="relative z-10 pt-4">
+                <div className="mx-auto mt-32 max-w-7xl">
+                    <motion.div
+                        className="mb-16 text-center"
+                        initial="hidden"
+                        animate="visible"
+                        variants={headerVariants}
+                    >
+                        <motion.h1
+                            className="mb-2 text-4xl font-semibold tracking-tight text-gray-500 md:text-4xl"
+                            variants={headerVariants}
                         >
-                            <Link
-                                href="#"
-                                className="group relative flex h-full w-full items-center justify-center overflow-hidden bg-blue-700"
-                            >
-                                <div className="absolute inset-0 w-full -translate-x-[110%] bg-blue-800 transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-blue-600" />
-                                <span className="relative z-10 flex w-full items-center justify-between gap-2 px-4 text-lg text-white duration-300 group-hover:text-white dark:text-white">
-                                    Explore More
-                                    <RiArrowRightLine
-                                        className="text-white"
-                                        size={20}
-                                    />
-                                </span>
-                            </Link>
-                        </div>
-                    </div>
+                            Your current workflow is
+                        </motion.h1>
+                        <motion.h2
+                            className="mb-6 text-4xl font-semibold tracking-tight text-gray-900 md:text-4xl"
+                            variants={headerVariants}
+                            transition={{ delay: 0.1 }}
+                        >
+                            Slowing you down!
+                        </motion.h2>
+                        <motion.p
+                            className="mx-auto max-w-md text-sm text-gray-600"
+                            variants={headerVariants}
+                            transition={{ delay: 0.2 }}
+                        >
+                            Here is why you need a design system
+                        </motion.p>
+                    </motion.div>
+                </div>
 
-                    <div className="grid h-full grid-cols-1 divide-x divide-y border-t md:grid-cols-4 md:divide-y-0 dark:divide-neutral-800 dark:border-neutral-800">
-                        {metrics.map((metric, index) => (
-                            <div
-                                key={index}
-                                className="group col-span-1 flex cursor-pointer flex-col items-start justify-start gap-2 px-4 transition-all duration-300 hover:bg-gray-800 md:py-10 dark:hover:bg-gray-900"
-                                onMouseEnter={() => setHoveredIndex(index)}
-                                onMouseLeave={() => setHoveredIndex(null)}
-                            >
-                                <div>
+                <div className="pb-10">
+                    <motion.div
+                        className="mx-auto grid max-w-5xl grid-cols-1 md:grid-cols-2"
+                        initial="hidden"
+                        animate="visible"
+                        variants={containerVariants}
+                    >
+                        {features.map((feature, index) => {
+                            const IconComponent = feature.icon;
+                            return (
+                                <motion.div
+                                    key={index}
+                                    className={`relative overflow-visible border-dashed bg-white p-12 transition-shadow duration-300 ${index % 2 != 0 && "border-l"} ${index < 4 && "border-b"}`}
+                                    variants={itemVariants}
+                                    whileHover={{
+                                        transition: {
+                                            type: "spring",
+                                            stiffness: 300,
+                                            damping: 20,
+                                        },
+                                    }}
+                                    whileTap={{ scale: 0.98 }}
+                                >
                                     <motion.div
-                                        initial={{ opacity: 0, y: 50 }}
-                                        animate={
-                                            hoveredIndex === index
-                                                ? { opacity: 1, y: 0 }
-                                                : { opacity: 0, y: 40 }
-                                        }
-                                        transition={{ duration: 0.4 }}
+                                        className="flex items-start space-x-4"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{
+                                            delay: index * 0.1 + 0.5,
+                                        }}
                                     >
-                                        <h3 className="mt-5 text-xl font-medium text-black md:mt-0 md:text-white">
-                                            {metric.content}
-                                        </h3>
-                                        <p className="text-gray-400">
-                                            {metric.content2}
-                                        </p>
-                                    </motion.div>
-                                </div>
-                                <h3 className="mt-auto pt-10 text-2xl font-medium tracking-tight group-hover:text-white md:pt-40 md:text-7xl">
-                                    {metric.title}
-                                </h3>
-                                <p className="mb-5 text-xl font-medium text-gray-500 group-hover:text-white md:mb-0">
-                                    {metric.description}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-        </>
-    );
-});
+                                        {index % 2 != 0 && index < 4 && (
+                                            <div
+                                                className="cnippet-dot3"
+                                                data-framer-name="Ellipsis"
+                                            ></div>
+                                        )}
 
-Features.displayName = "Features";
+                                        <motion.div
+                                            className="flex-shrink-0"
+                                            whileHover={{ rotate: 5 }}
+                                            transition={{
+                                                type: "spring",
+                                                stiffness: 300,
+                                            }}
+                                        >
+                                            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
+                                                <IconComponent className="h-6 w-6 text-blue-600" />
+                                            </div>
+                                        </motion.div>
+                                        <div className="flex-1">
+                                            <motion.h3
+                                                className="mb-3 text-xl font-semibold tracking-tighter text-gray-900"
+                                                initial={{
+                                                    opacity: 0,
+                                                    x: -10,
+                                                }}
+                                                animate={{
+                                                    opacity: 1,
+                                                    x: 0,
+                                                }}
+                                                transition={{
+                                                    delay: index * 0.1 + 0.6,
+                                                }}
+                                            >
+                                                {feature.title}
+                                            </motion.h3>
+                                            <motion.p
+                                                className="text-sm leading-relaxed text-gray-700"
+                                                initial={{
+                                                    opacity: 0,
+                                                    x: -10,
+                                                }}
+                                                animate={{
+                                                    opacity: 1,
+                                                    x: 0,
+                                                }}
+                                                transition={{
+                                                    delay: index * 0.1 + 0.7,
+                                                }}
+                                            >
+                                                {feature.description}
+                                            </motion.p>
+                                        </div>
+                                    </motion.div>
+                                </motion.div>
+                            );
+                        })}
+                    </motion.div>
+                </div>
+            </div>
+        </section>
+    );
+};
 
 export default Features;
