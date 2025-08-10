@@ -172,11 +172,12 @@
 
 .cnippet-dot {
     --border-bottom-width: 1px;
-    --border-color: #e5eaf0;
+    --border-color: #1f62b4;
     --border-left-width: 1px;
     --border-right-width: 1px;
     --border-style: solid;
     --border-top-width: 1px;
+    border: solid 1px #e9e9e9;
     aspect-ratio: 1 / 1;
     background-color: #f9fafb;
     border-radius: 99px;

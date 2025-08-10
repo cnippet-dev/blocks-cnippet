@@ -2,11 +2,12 @@
 import dynamic from "next/dynamic";
 import { ReactLenis } from "lenis/react";
 
-const Navbar = dynamic(() => import("@/components/shared/navbar"));
+// const Navbar = dynamic(() => import("@/components/shared/navbar"));
 const Hero = dynamic(() => import("@/components/routes/home/hero"));
-const Faq = dynamic(() => import("@/components/routes/home/faq"));
+const Features = dynamic(() => import("@/components/routes/home/features"));
+// const Faq = dynamic(() => import("@/components/routes/home/faq"));
 const Footer = dynamic(() => import("@/components/shared/footer"));
-const Cta = dynamic(() => import("@/components/routes/home/cta"));
+// const Cta = dynamic(() => import("@/components/routes/home/cta"));
 const Sections = dynamic(() => import("@/components/shared/all-sections"));
 const SlidingImages = dynamic(() => import("@/components/routes/home/sliding"));
 
@@ -14,6 +15,7 @@ import { useRef, useState } from "react";
 import { Cursor } from "@/components/motion/cursor";
 import { AnimatePresence, motion } from "motion/react";
 import { PlusIcon } from "lucide-react";
+import { RiArrowRightLine } from "@remixicon/react";
 
 export default function Home() {
     const [isHovering, setIsHovering] = useState(false);
@@ -74,10 +76,10 @@ export default function Home() {
                 >
                     <motion.div
                         animate={{
-                            width: isHovering || isHovering2 ? 80 : 16,
+                            width: isHovering || isHovering2 ? 70 : 16,
                             height: isHovering || isHovering2 ? 32 : 16,
                         }}
-                        className={`flex items-center justify-center cursor-pointer rounded-[24px] ${isHovering3 ? "bg-white backdrop-blur-md dark:bg-gray-300/40" : "bg-blue-600 backdrop-blur-md dark:bg-gray-300/40"} transition-all duration-500`}
+                        className={`flex w-fit cursor-pointer items-center justify-center rounded-full ${isHovering3 ? "bg-white backdrop-blur-md dark:bg-gray-300/40" : "bg-blue-600 backdrop-blur-md dark:bg-gray-300/40"} transition-all duration-300 ease-in-out`}
                     >
                         <AnimatePresence>
                             {isHovering ? (
@@ -87,9 +89,9 @@ export default function Home() {
                                     exit={{ opacity: 0, scale: 0.6 }}
                                     className="inline-flex w-full items-center justify-center"
                                 >
-                                    <div className="inline-flex items-center text-sm text-white dark:text-black">
-                                        More{" "}
-                                        <PlusIcon className="ml-1 h-4 w-4" />
+                                    <div className="inline-flex items-center text-xs text-white dark:text-black">
+                                        View{" "}
+                                        <RiArrowRightLine className="ml-1 size-3" />
                                     </div>
                                 </motion.div>
                             ) : null}
@@ -114,8 +116,10 @@ export default function Home() {
                 {/* <Navbar className="px-4 md:px-10 xl:px-20 2xl:px-30" /> */}
                 <main className="">
                     <Hero ref={targetRef3} />
+                    <Sections ref={targetRef} count={15} />
+                    <Features />
+
                     <SlidingImages />
-                    {/* <Sections count={15} /> */}
                     {/* <Faq /> */}
                     {/* <Cta /> */}
                 </main>
@@ -124,12 +128,3 @@ export default function Home() {
         </ReactLenis>
     );
 }
-
-// import Component from "@/registry/default/sections/hero/hero5";
-// import React from "react";
-
-// const page = () => {
-//     return <Component />;
-// };
-
-// export default page;

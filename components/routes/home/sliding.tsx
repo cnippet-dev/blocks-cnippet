@@ -1,7 +1,6 @@
-// sliding-image.tsx
 import { useRef } from "react";
-import { useScroll, useTransform, motion } from "motion/react";
 import Image from "next/image";
+import { useScroll, useTransform, motion } from "motion/react";
 import { RiBardFill } from "@remixicon/react";
 
 type SliderItem = {
@@ -64,10 +63,9 @@ export default function SlidingImages() {
 
     const x1 = useTransform(scrollYProgress, [0, 1], [0, 450]);
     const x2 = useTransform(scrollYProgress, [0, 1], [0, -450]);
-    const height = useTransform(scrollYProgress, [0, 0.9], [50, 0]);
 
     return (
-        <div ref={container} className="relative">
+        <div ref={container} className="relative pb-20">
             <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-20 flex w-full overflow-visible">
                 <div
                     className="absolute top-20 left-0 z-0 h-[1px] w-full flex-auto overflow-hidden border-t border-dashed border-gray-200"
@@ -109,11 +107,11 @@ export default function SlidingImages() {
                     <div className="mb-16 space-y-4">
                         <div className="flex w-fit items-center justify-start gap-1 rounded-full border px-3 py-1 text-xs">
                             <RiBardFill className="size-3 text-blue-500" />
-                            <p>Made with SquareUi</p>
+                            <p>Made with Cnippet UI</p>
                         </div>
 
                         <motion.h1 className="text-4xl font-semibold tracking-tight text-black md:text-4xl">
-                            Build your next project with SquareUi
+                            Build your next project with Cnippet Blocks
                         </motion.h1>
 
                         <motion.p
@@ -153,7 +151,7 @@ export default function SlidingImages() {
 
                     <motion.div
                         style={{ x: x2 }}
-                        className="relative left-[-10vw] flex w-[130vw] gap-[3vw]"
+                        className="relative left-[-10vw] mt-16 flex w-[130vw] gap-[3vw]"
                     >
                         {slider2.map((project, index) => (
                             <div
