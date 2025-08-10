@@ -98,7 +98,7 @@ const Features = () => {
         <section className="relative h-full">
             <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-0 flex w-full overflow-visible">
                 <div
-                    className="absolute top-20 left-0 z-0 h-[1px] w-full flex-auto overflow-hidden border-t border-dashed border-gray-200"
+                    className="absolute top-20 left-0 z-0 h-[1px] w-full flex-auto overflow-hidden border-t border-dashed border-gray-200 dark:border-neutral-700"
                     data-border="true"
                     data-framer-name="Top divider"
                 ></div>
@@ -108,7 +108,7 @@ const Features = () => {
                     data-framer-name="Vertical lines"
                 >
                     <div
-                        className="absolute right-0 bottom-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200"
+                        className="absolute right-0 bottom-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200 dark:border-neutral-700"
                         data-border="true"
                         data-framer-name="Right line"
                     >
@@ -119,7 +119,7 @@ const Features = () => {
                         ></div>
                     </div>
                     <div
-                        className="absolute bottom-0 left-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200"
+                        className="absolute bottom-0 left-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200 dark:border-neutral-700"
                         data-border="true"
                         data-framer-name="Left line"
                     >
@@ -141,13 +141,13 @@ const Features = () => {
                         variants={headerVariants}
                     >
                         <motion.h1
-                            className="mb-2 text-4xl font-semibold tracking-tight text-gray-500 md:text-4xl"
+                            className="mb-2 text-4xl font-semibold tracking-tight text-gray-500 md:text-4xl dark:text-white"
                             variants={headerVariants}
                         >
                             Your current workflow is
                         </motion.h1>
                         <motion.h2
-                            className="mb-6 text-4xl font-semibold tracking-tight text-gray-900 md:text-4xl"
+                            className="mb-6 text-4xl font-semibold tracking-tight text-gray-900 md:text-4xl dark:text-gray-400"
                             variants={headerVariants}
                             transition={{ delay: 0.1 }}
                         >
@@ -175,7 +175,7 @@ const Features = () => {
                             return (
                                 <motion.div
                                     key={index}
-                                    className={`relative overflow-visible border-dashed bg-white p-12 transition-shadow duration-300 ${index % 2 != 0 && "border-l"} ${index < 4 && "border-b"}`}
+                                    className={`relative overflow-visible border-dashed p-12 transition-shadow duration-300 ${index % 2 != 0 && "border-l"} ${index < 4 && "border-b"} dark:border-neutral-600`}
                                     variants={itemVariants}
                                     whileHover={{
                                         transition: {
@@ -215,7 +215,7 @@ const Features = () => {
                                         </motion.div>
                                         <div className="flex-1">
                                             <motion.h3
-                                                className="mb-3 text-xl font-semibold tracking-tighter text-gray-900"
+                                                className="mb-3 text-xl font-semibold tracking-tighter text-gray-900 dark:text-gray-100"
                                                 initial={{
                                                     opacity: 0,
                                                     x: -10,
@@ -231,7 +231,7 @@ const Features = () => {
                                                 {feature.title}
                                             </motion.h3>
                                             <motion.p
-                                                className="text-sm leading-relaxed text-gray-700"
+                                                className="text-sm leading-relaxed text-gray-700 dark:text-gray-400"
                                                 initial={{
                                                     opacity: 0,
                                                     x: -10,

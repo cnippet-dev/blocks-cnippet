@@ -4,6 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { motion } from "motion/react";
 
 import { Index } from "@/__registry__";
 import { useFavourites } from "@/hooks/use-favourites";
@@ -32,6 +33,7 @@ import {
     RiMenu2Line,
     RiMenuUnfold2Line,
     RiSearchLine,
+    RiFlashlightFill,
 } from "@remixicon/react";
 
 const getCategories = () => {
@@ -114,428 +116,586 @@ export default function SectionsPage() {
         str.charAt(0).toUpperCase() + str.slice(1);
 
     return (
-        <div className="relative min-h-screen px-4 md:px-10 xl:px-8">
-            <div className="grid grid-cols-12 border border-t-0">
-                <div
-                    className={`${sidebarOpen ? "col-span-2" : "hidden"} bg-white transition-all duration-300`}
-                >
+        <>
+            <section className="relative h-full">
+                <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-0 flex w-full overflow-visible">
                     <div
-                        className={` ${sidebarOpen ? "sticky" : "block"} top-0 space-y-6`}
+                        className="absolute top-0 left-1/2 z-0 h-full w-full max-w-7xl flex-auto -translate-x-1/2 overflow-visible"
+                        data-framer-name="Vertical lines"
                     >
-                        <div className="relative">
-                            <RiSearchLine className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
-                            <Input
-                                placeholder="Search components..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="h-12 rounded-none border-t-0 border-r-0 border-l-0 border-gray-200 pl-10 shadow-none focus:border-blue-500 focus:ring-blue-500 focus-visible:ring-0"
-                            />
-                        </div>
-
-                        <div className="px-3">
-                            <div className="mb-3 flex items-center justify-between">
-                                <h3 className="font-medium text-gray-900">
-                                    Active Filters
-                                </h3>
-                                {(selectedCategories.length > 0 ||
-                                    urlLicense) && (
-                                    <Button
-                                        variant="ghost"
-                                        size="sm"
-                                        onClick={() =>
-                                            updateCategoryInUrl([], "")
-                                        }
-                                        className="text-xs text-gray-500 hover:text-gray-700"
-                                    >
-                                        Clear all
-                                    </Button>
-                                )}
-                            </div>
-                            <div className="flex flex-wrap gap-2">
-                                {selectedCategories.length === 0 &&
-                                    !urlLicense && (
-                                        <span className="text-xs text-gray-400">
-                                            No filters applied
-                                        </span>
-                                    )}
-                                {selectedCategories.map((category) => (
-                                    <Badge
-                                        key={category}
-                                        variant="secondary"
-                                        className="flex items-center gap-1 bg-blue-50 px-3 py-0.5 text-sm text-blue-700 shadow-sm shadow-blue-300 hover:bg-blue-100"
-                                    >
-                                        {capitalize(category)}
-                                        <button
-                                            onClick={() => {
-                                                const updated =
-                                                    selectedCategories.filter(
-                                                        (c) => c !== category,
-                                                    );
-                                                updateCategoryInUrl(
-                                                    updated,
-                                                    urlLicense,
-                                                );
-                                            }}
-                                            className="ml-1 cursor-pointer hover:text-blue-900"
-                                        >
-                                            <RiCloseLine className="h-3 w-3" />
-                                        </button>
-                                    </Badge>
-                                ))}
-                                {urlLicense && (
-                                    <Badge
-                                        variant="secondary"
-                                        className="flex items-center gap-1 bg-purple-50 px-2 py-0.5 text-sm shadow-sm text-purple-700 shadow-purple-300 hover:bg-purple-100"
-                                    >
-                                        {urlLicense === "pro" ? "Pro" : "Free"}
-                                        <button
-                                            onClick={() =>
-                                                updateCategoryInUrl(
-                                                    selectedCategories,
-                                                    "",
-                                                )
-                                            }
-                                            className="ml-1 hover:text-purple-900"
-                                        >
-                                            <RiCloseLine className="h-3 w-3" />
-                                        </button>
-                                    </Badge>
-                                )}
-                            </div>
-                        </div>
-
-                        <Collapsible
-                            defaultOpen
-                            className="border-t border-b border-dashed px-3 py-7"
+                        <div
+                            className="absolute right-0 top-0 bottom-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200"
+                            data-border="true"
+                            data-framer-name="Right line"
                         >
-                            <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg font-medium text-gray-900">
-                                Categories
-                                <RiArrowDownSLine className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
-                            </CollapsibleTrigger>
-                            <CollapsibleContent className="mt-3">
-                                <div className="flex flex-wrap gap-2">
-                                    {categories
-                                        .filter(
-                                            (category) =>
-                                                !selectedCategories.includes(
-                                                    category,
-                                                ),
-                                        )
-                                        .map((category) => (
-                                            <Button
-                                                key={category}
-                                                variant="outline"
-                                                size="sm"
-                                                onClick={() => {
-                                                    const updated = [
-                                                        ...selectedCategories,
-                                                        category,
-                                                    ];
-                                                    updateCategoryInUrl(
-                                                        updated,
-                                                        urlLicense,
-                                                    );
-                                                }}
-                                                className="cursor-pointer justify-start rounded-full border-gray-200 text-sm font-normal shadow-none hover:border-indigo-300 hover:bg-blue-50"
-                                            >
-                                                {capitalize(category)}
-                                            </Button>
-                                        ))}
-                                </div>
-                            </CollapsibleContent>
-                        </Collapsible>
-
-                        <div className="px-3">
-                            <h3 className="mb-3 font-medium text-gray-900">
-                                License
-                            </h3>
-                            <div className="flex gap-2">
-                                <Button
-                                    variant={
-                                        urlLicense === "pro"
-                                            ? "default"
-                                            : "outline"
-                                    }
-                                    size="sm"
-                                    onClick={() =>
-                                        updateCategoryInUrl(
-                                            selectedCategories,
-                                            urlLicense === "pro" ? "" : "pro",
-                                        )
-                                    }
-                                    className={
-                                        urlLicense === "pro"
-                                            ? "bg-purple-600 hover:bg-purple-700"
-                                            : "rounded-lg border-gray-200 text-sm font-normal shadow-none hover:border-purple-300 hover:bg-purple-50"
-                                    }
-                                >
-                                    Pro
-                                </Button>
-                                <Button
-                                    variant={
-                                        urlLicense === "free"
-                                            ? "default"
-                                            : "outline"
-                                    }
-                                    size="sm"
-                                    onClick={() =>
-                                        updateCategoryInUrl(
-                                            selectedCategories,
-                                            urlLicense === "free" ? "" : "free",
-                                        )
-                                    }
-                                    className={
-                                        urlLicense === "free"
-                                            ? "bg-black"
-                                            : "rounded-lg border-gray-200 text-sm font-normal shadow-none hover:border-green-300 hover:bg-green-50"
-                                    }
-                                >
-                                    Free
-                                </Button>
-                            </div>
+                            <div
+                                className="cnippet-dot"
+                                data-border="true"
+                                data-framer-name="Ellipsis"
+                            ></div>
+                        </div>
+                        <div
+                            className="absolute bottom-0 left-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200"
+                            data-border="true"
+                            data-framer-name="Left line"
+                        >
+                            <div
+                                className="cnippet-dot"
+                                data-border="true"
+                                data-framer-name="Ellipsis"
+                            ></div>
                         </div>
                     </div>
                 </div>
 
-                <div
-                    className={`${sidebarOpen ? "col-span-10 border-l" : "col-span-12"} flex-1 bg-white`}
-                >
-                    <header className="border-b bg-white/80 backdrop-blur-sm">
-                        <div className="flex h-[2.95555rem] items-center justify-between px-6">
-                            <div className="flex items-center gap-4">
-                                <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => setSidebarOpen(!sidebarOpen)}
-                                    className="[&_svg]:size-5"
+                <div className="relative z-10 pt-4">
+                    <div className="mx-auto max-w-7xl px-6">
+                        <motion.div
+                            initial={{ y: 30, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="mb-8 text-center"
+                        >
+                            <motion.div
+                                initial={{ scale: 0, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                transition={{ duration: 0.5, delay: 0.4 }}
+                                className="mb-6"
+                            >
+                                <Badge
+                                    variant="secondary"
+                                    className="mb-4 border border-gray-200 bg-gray-100 py-0.5 pr-4 pl-0.5 text-xs text-black transition-colors hover:bg-gray-200"
                                 >
-                                    {sidebarOpen ? (
-                                        <RiMenuUnfold2Line />
-                                    ) : (
-                                        <RiMenu2Line />
-                                    )}
-                                </Button>
-                                <div className="text-sm text-gray-600">
-                                    {filteredSections.length} components
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <div className="flex items-center gap-1 rounded-lg bg-gray-100 p-1">
-                                    <Button
-                                        variant={
-                                            viewMode === "grid"
-                                                ? "default"
-                                                : "ghost"
-                                        }
-                                        size="sm"
-                                        onClick={() => setViewMode("grid")}
-                                        className="h-8 w-8 p-0"
-                                    >
-                                        <RiLayoutColumnLine className="h-4 w-4" />
-                                    </Button>
-                                    <Button
-                                        variant={
-                                            viewMode === "list"
-                                                ? "default"
-                                                : "ghost"
-                                        }
-                                        size="sm"
-                                        onClick={() => setViewMode("list")}
-                                        className="h-8 w-8 p-0"
-                                    >
-                                        <RiLayoutRowLine className="h-4 w-4" />
-                                    </Button>
-                                </div>
+                                    <span className="mr-1 rounded-full border bg-white px-4 py-1 text-xs">
+                                        <RiFlashlightFill className="size-3 text-blue-600" />
+                                    </span>
+                                    Discover Amazing UI Components
+                                </Badge>
+                            </motion.div>
+
+                            <motion.h1
+                                initial={{ y: 30, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 0.8, delay: 0.6 }}
+                                className="mb-4 text-4xl font-semibold tracking-tight text-gray-900 md:text-5xl"
+                            >
+                                Build Faster with{" "}
+                                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                    Premium Components
+                                </span>
+                            </motion.h1>
+
+                            <motion.p
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 0.6, delay: 0.8 }}
+                                className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-700"
+                            >
+                                Explore our collection of professionally designed, fully responsive components
+                                to accelerate your development workflow.
+                            </motion.p>
+                        </motion.div>
+
+                        <div className="relative min-h-screen">
+                            <div className="grid grid-cols-12 gap-8">
+                                {/* Enhanced Sidebar */}
+                                <motion.div
+                                    initial={{ x: -50, opacity: 0 }}
+                                    animate={{ x: 0, opacity: 1 }}
+                                    transition={{ duration: 0.6, delay: 1.0 }}
+                                    className={`${sidebarOpen ? "col-span-3" : "hidden"} bg-white/50 backdrop-blur-sm rounded-2xl border border-gray-200/50 p-6 shadow-sm`}
+                                >
+                                    <div className={`${sidebarOpen ? "sticky" : "block"} top-6 space-y-8`}>
+                                        {/* Search Section */}
+                                        <div className="relative">
+                                            <RiSearchLine className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
+                                            <Input
+                                                placeholder="Search components..."
+                                                value={searchQuery}
+                                                onChange={(e) =>
+                                                    setSearchQuery(e.target.value)
+                                                }
+                                                className="h-12 rounded-xl border-gray-200 pl-12 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus-visible:ring-0 bg-white/80 backdrop-blur-sm"
+                                            />
+                                        </div>
+
+                                        {/* Active Filters */}
+                                        <div className="space-y-4">
+                                            <div className="flex items-center justify-between">
+                                                <h3 className="font-semibold text-gray-900 text-sm">
+                                                    Active Filters
+                                                </h3>
+                                                {(selectedCategories.length > 0 ||
+                                                    urlLicense) && (
+                                                    <Button
+                                                        variant="ghost"
+                                                        size="sm"
+                                                        onClick={() =>
+                                                            updateCategoryInUrl(
+                                                                [],
+                                                                "",
+                                                            )
+                                                        }
+                                                        className="text-xs text-gray-500 hover:text-gray-700"
+                                                    >
+                                                        Clear all
+                                                    </Button>
+                                                )}
+                                            </div>
+                                            <div className="flex flex-wrap gap-2">
+                                                {selectedCategories.length === 0 &&
+                                                    !urlLicense && (
+                                                        <span className="text-xs text-gray-400">
+                                                            No filters applied
+                                                        </span>
+                                                    )}
+                                                {selectedCategories.map(
+                                                    (category) => (
+                                                        <Badge
+                                                            key={category}
+                                                            variant="secondary"
+                                                            className="flex items-center gap-1 bg-blue-50 px-3 py-1 text-sm text-blue-700 shadow-sm hover:bg-blue-100 rounded-full"
+                                                        >
+                                                            {capitalize(category)}
+                                                            <button
+                                                                onClick={() => {
+                                                                    const updated =
+                                                                        selectedCategories.filter(
+                                                                            (c) =>
+                                                                                c !==
+                                                                                category,
+                                                                        );
+                                                                    updateCategoryInUrl(
+                                                                        updated,
+                                                                        urlLicense,
+                                                                    );
+                                                                }}
+                                                                className="ml-1 cursor-pointer hover:text-blue-900"
+                                                            >
+                                                                <RiCloseLine className="h-3 w-3" />
+                                                            </button>
+                                                        </Badge>
+                                                    ),
+                                                )}
+                                                {urlLicense && (
+                                                    <Badge
+                                                        variant="secondary"
+                                                        className="flex items-center gap-1 bg-purple-50 px-3 py-1 text-sm text-purple-700 shadow-sm hover:bg-purple-100 rounded-full"
+                                                    >
+                                                        {urlLicense === "pro"
+                                                            ? "Pro"
+                                                            : "Free"}
+                                                        <button
+                                                            onClick={() =>
+                                                                updateCategoryInUrl(
+                                                                    selectedCategories,
+                                                                    "",
+                                                                )
+                                                            }
+                                                            className="ml-1 hover:text-purple-900"
+                                                        >
+                                                            <RiCloseLine className="h-3 w-3" />
+                                                        </button>
+                                                    </Badge>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        {/* Categories */}
+                                        <Collapsible
+                                            defaultOpen
+                                            className="space-y-4"
+                                        >
+                                            <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg font-semibold text-gray-900 text-sm">
+                                                Categories
+                                                <RiArrowDownSLine className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
+                                            </CollapsibleTrigger>
+                                            <CollapsibleContent className="space-y-3">
+                                                <div className="flex flex-wrap gap-2">
+                                                    {categories
+                                                        .filter(
+                                                            (category) =>
+                                                                !selectedCategories.includes(
+                                                                    category,
+                                                                ),
+                                                        )
+                                                        .map((category) => (
+                                                            <Button
+                                                                key={category}
+                                                                variant="outline"
+                                                                size="sm"
+                                                                onClick={() => {
+                                                                    const updated =
+                                                                        [
+                                                                            ...selectedCategories,
+                                                                            category,
+                                                                        ];
+                                                                    updateCategoryInUrl(
+                                                                        updated,
+                                                                        urlLicense,
+                                                                    );
+                                                                }}
+                                                                className="cursor-pointer justify-start rounded-full border-gray-200 text-sm font-normal shadow-none hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
+                                                            >
+                                                                {capitalize(
+                                                                    category,
+                                                                )}
+                                                            </Button>
+                                                        ))}
+                                                </div>
+                                            </CollapsibleContent>
+                                        </Collapsible>
+
+                                        {/* License */}
+                                        <div className="space-y-3">
+                                            <h3 className="font-semibold text-gray-900 text-sm">
+                                                License
+                                            </h3>
+                                            <div className="flex gap-2">
+                                                <Button
+                                                    variant={
+                                                        urlLicense === "pro"
+                                                            ? "default"
+                                                            : "outline"
+                                                    }
+                                                    size="sm"
+                                                    onClick={() =>
+                                                        updateCategoryInUrl(
+                                                            selectedCategories,
+                                                            urlLicense === "pro"
+                                                                ? ""
+                                                                : "pro",
+                                                        )
+                                                    }
+                                                    className={
+                                                        urlLicense === "pro"
+                                                            ? "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-full"
+                                                            : "rounded-full border-gray-200 text-sm font-normal shadow-none hover:border-purple-300 hover:bg-purple-50 transition-all duration-200"
+                                                    }
+                                                >
+                                                    Pro
+                                                </Button>
+                                                <Button
+                                                    variant={
+                                                        urlLicense === "free"
+                                                            ? "default"
+                                                            : "outline"
+                                                    }
+                                                    size="sm"
+                                                    onClick={() =>
+                                                        updateCategoryInUrl(
+                                                            selectedCategories,
+                                                            urlLicense === "free"
+                                                                ? ""
+                                                                : "free",
+                                                        )
+                                                    }
+                                                    className={
+                                                        urlLicense === "free"
+                                                            ? "bg-black hover:bg-gray-800 rounded-full"
+                                                            : "rounded-full border-gray-200 text-sm font-normal shadow-none hover:border-green-300 hover:bg-green-50 transition-all duration-200"
+                                                    }
+                                                >
+                                                    Free
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </motion.div>
+
+                                {/* Enhanced Main Content */}
+                                <motion.div
+                                    initial={{ x: 50, opacity: 0 }}
+                                    animate={{ x: 0, opacity: 1 }}
+                                    transition={{ duration: 0.6, delay: 1.2 }}
+                                    className={`${sidebarOpen ? "col-span-9" : "col-span-12"} bg-white/50 backdrop-blur-sm rounded-2xl border border-gray-200/50 shadow-sm`}
+                                >
+                                    {/* Enhanced Header */}
+                                    <header className="border-b border-gray-200/50 bg-white/80 backdrop-blur-sm rounded-t-2xl">
+                                        <div className="flex h-16 items-center justify-between px-8">
+                                            <div className="flex items-center gap-6">
+                                                <Button
+                                                    variant="ghost"
+                                                    size="sm"
+                                                    onClick={() =>
+                                                        setSidebarOpen(!sidebarOpen)
+                                                    }
+                                                    className="[&_svg]:size-5 hover:bg-gray-100 rounded-lg"
+                                                >
+                                                    {sidebarOpen ? (
+                                                        <RiMenuUnfold2Line />
+                                                    ) : (
+                                                        <RiMenu2Line />
+                                                    )}
+                                                </Button>
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-sm font-medium text-gray-900">
+                                                        {filteredSections.length}
+                                                    </span>
+                                                    <span className="text-sm text-gray-600">
+                                                        components found
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-4">
+                                                <div className="flex items-center gap-1 rounded-lg bg-gray-100 p-1">
+                                                    <Button
+                                                        variant={
+                                                            viewMode === "grid"
+                                                                ? "default"
+                                                                : "ghost"
+                                                        }
+                                                        size="sm"
+                                                        onClick={() =>
+                                                            setViewMode("grid")
+                                                        }
+                                                        className="h-8 w-8 p-0 rounded-md"
+                                                    >
+                                                        <RiLayoutColumnLine className="h-4 w-4" />
+                                                    </Button>
+                                                    <Button
+                                                        variant={
+                                                            viewMode === "list"
+                                                                ? "default"
+                                                                : "ghost"
+                                                        }
+                                                        size="sm"
+                                                        onClick={() =>
+                                                            setViewMode("list")
+                                                        }
+                                                        className="h-8 w-8 p-0 rounded-md"
+                                                    >
+                                                        <RiLayoutRowLine className="h-4 w-4" />
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </header>
+
+                                    {/* Enhanced Content */}
+                                    <main className="p-8">
+                                        {filteredSections.length === 0 ? (
+                                            <motion.div
+                                                initial={{ y: 20, opacity: 0 }}
+                                                animate={{ y: 0, opacity: 1 }}
+                                                transition={{ duration: 0.6 }}
+                                                className="flex flex-col items-center justify-center py-20 text-center"
+                                            >
+                                                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-r from-blue-100 to-purple-100">
+                                                    <RiSearchLine className="h-10 w-10 text-blue-600" />
+                                                </div>
+                                                <h3 className="mb-3 text-xl font-semibold text-gray-900">
+                                                    No components found
+                                                </h3>
+                                                <p className="mb-6 text-gray-600 max-w-md">
+                                                    Try adjusting your filters or search terms to find what you&apos;re looking for
+                                                </p>
+                                                <Button
+                                                    variant="outline"
+                                                    onClick={() => {
+                                                        updateCategoryInUrl([], "");
+                                                        setSearchQuery("");
+                                                    }}
+                                                    className="rounded-full"
+                                                >
+                                                    Clear all filters
+                                                </Button>
+                                            </motion.div>
+                                        ) : (
+                                            <motion.div
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ duration: 0.6, delay: 1.4 }}
+                                                className={`grid gap-8 ${
+                                                    viewMode === "grid"
+                                                        ? "grid-cols-1 md:grid-cols-2 xl:grid-cols-2"
+                                                        : "grid-cols-1"
+                                                }`}
+                                            >
+                                                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                                                {filteredSections.map((section: any, index: number) => {
+                                                        const match =
+                                                            section.name.match(
+                                                                /^(.*?)-/,
+                                                            );
+                                                        const category = match
+                                                            ? match[1]
+                                                            : section.name;
+                                                        return (
+                                                            <motion.div
+                                                                key={section.name}
+                                                                initial={{ y: 20, opacity: 0 }}
+                                                                animate={{ y: 0, opacity: 1 }}
+                                                                transition={{ 
+                                                                    duration: 0.6, 
+                                                                    delay: 1.6 + (index * 0.1) 
+                                                                }}
+                                                                whileHover={{ 
+                                                                    y: -5,
+                                                                    transition: { duration: 0.2 }
+                                                                }}
+                                                            >
+                                                                <Card className="group overflow-hidden border border-gray-200/50 shadow-sm hover:shadow-lg transition-all duration-300 rounded-2xl bg-white/80 backdrop-blur-sm">
+                                                                    <CardContent className="p-0">
+                                                                        <div className="relative overflow-hidden">
+                                                                            <div className="relative overflow-hidden rounded-t-2xl">
+                                                                                {failedImages.has(
+                                                                                    section.name,
+                                                                                ) ? (
+                                                                                    <Image
+                                                                                        src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753946156/coming-soon.png`}
+                                                                                        alt={
+                                                                                            section.name
+                                                                                        }
+                                                                                        width={
+                                                                                            4210
+                                                                                        }
+                                                                                        height={
+                                                                                            1080
+                                                                                        }
+                                                                                        suppressHydrationWarning
+                                                                                        className="aspect-video w-full object-cover object-top"
+                                                                                    />
+                                                                                ) : (
+                                                                                    <Image
+                                                                                        src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753946156/${section.name}.png`}
+                                                                                        alt={
+                                                                                            section.name
+                                                                                        }
+                                                                                        width={
+                                                                                            4210
+                                                                                        }
+                                                                                        height={
+                                                                                            1080
+                                                                                        }
+                                                                                        suppressHydrationWarning
+                                                                                        className="aspect-video w-full object-cover object-top"
+                                                                                        onError={() =>
+                                                                                            handleImageError(
+                                                                                                section.name,
+                                                                                            )
+                                                                                        }
+                                                                                    />
+                                                                                )}
+                                                                                <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                                                                            </div>
+
+                                                                            <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 opacity-0 transition-all duration-300 ease-in group-hover:bottom-6 group-hover:opacity-100">
+                                                                                <div className="flex items-center justify-center gap-3">
+                                                                                    <TooltipProvider>
+                                                                                        <Tooltip>
+                                                                                            <TooltipTrigger
+                                                                                                asChild
+                                                                                            >
+                                                                                                <Button
+                                                                                                    onClick={() =>
+                                                                                                        toggleFavourite(
+                                                                                                            section.name,
+                                                                                                        )
+                                                                                                    }
+                                                                                                    disabled={
+                                                                                                        isPending
+                                                                                                    }
+                                                                                                    className="h-10 w-fit cursor-pointer rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-white hover:scale-105 [&_svg]:size-5"
+                                                                                                >
+                                                                                                    <RiHeartFill
+                                                                                                        className={` ${
+                                                                                                            isFavourite(
+                                                                                                                section.name,
+                                                                                                            )
+                                                                                                                ? "fill-red-500 text-red-500"
+                                                                                                                : "text-gray-800 hover:text-red-500"
+                                                                                                        }`}
+                                                                                                    />
+                                                                                                </Button>
+                                                                                            </TooltipTrigger>
+
+                                                                                            <TooltipContent
+                                                                                                side="top"
+                                                                                                showArrow={
+                                                                                                    true
+                                                                                                }
+                                                                                                className="dark px-3 py-2 text-sm"
+                                                                                            >
+                                                                                                {isFavourite(
+                                                                                                    section.name,
+                                                                                                )
+                                                                                                    ? "Remove from favourites"
+                                                                                                    : "Add to favourites"}
+                                                                                            </TooltipContent>
+                                                                                        </Tooltip>
+                                                                                    </TooltipProvider>
+
+                                                                                    <TooltipProvider>
+                                                                                        <Tooltip>
+                                                                                            <TooltipTrigger
+                                                                                                asChild
+                                                                                            >
+                                                                                                <Button
+                                                                                                    size="sm"
+                                                                                                    className="h-10 cursor-pointer rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm hover:bg-white hover:scale-105 [&_svg]:size-5"
+                                                                                                >
+                                                                                                    <Link
+                                                                                                        href={`/sections/${section.name.split("-")[0]}`}
+                                                                                                        target="_blank"
+                                                                                                    >
+                                                                                                        <RiEyeLine className="size-5 text-gray-800" />
+                                                                                                    </Link>
+                                                                                                </Button>
+                                                                                            </TooltipTrigger>
+
+                                                                                            <TooltipContent
+                                                                                                side="top"
+                                                                                                showArrow={
+                                                                                                    true
+                                                                                                }
+                                                                                                className="dark px-3 py-2 text-sm"
+                                                                                            >
+                                                                                                Preview
+                                                                                            </TooltipContent>
+                                                                                        </Tooltip>
+                                                                                    </TooltipProvider>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div className="p-6">
+                                                                            <div className="mb-3 flex items-start justify-between">
+                                                                                <h3 className="text-xl font-semibold text-gray-900">
+                                                                                    {capitalize(
+                                                                                        section.name.replace(
+                                                                                            /-/g,
+                                                                                            " 0",
+                                                                                        ),
+                                                                                    )}
+                                                                                </h3>
+                                                                                {section.pro && (
+                                                                                    <Badge className="border-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full px-3 py-1">
+                                                                                        Pro
+                                                                                    </Badge>
+                                                                                )}
+                                                                            </div>
+                                                                            <p className="text-sm text-gray-600 capitalize font-medium">
+                                                                                {
+                                                                                    category
+                                                                                }
+                                                                            </p>
+                                                                        </div>
+                                                                    </CardContent>
+                                                                </Card>
+                                                            </motion.div>
+                                                        );
+                                                    },
+                                                )}
+                                            </motion.div>
+                                        )}
+                                    </main>
+                                </motion.div>
                             </div>
                         </div>
-                    </header>
-
-                    {/* Content */}
-                    <main className="p-6">
-                        {filteredSections.length === 0 ? (
-                            <div className="flex flex-col items-center justify-center py-16 text-center">
-                                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100">
-                                    <RiSearchLine className="h-8 w-8 text-gray-400" />
-                                </div>
-                                <h3 className="mb-2 text-lg font-semibold text-gray-900">
-                                    No components found
-                                </h3>
-                                <p className="mb-4 text-gray-600">
-                                    Try adjusting your filters or search terms
-                                </p>
-                                <Button
-                                    variant="outline"
-                                    onClick={() => {
-                                        updateCategoryInUrl([], "");
-                                        setSearchQuery("");
-                                    }}
-                                >
-                                    Clear all filters
-                                </Button>
-                            </div>
-                        ) : (
-                            <div
-                                className={`grid gap-6 ${
-                                    viewMode === "grid"
-                                        ? "grid-cols-1 md:grid-cols-2 xl:grid-cols-2"
-                                        : "grid-cols-1"
-                                }`}
-                            >
-                                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                                {filteredSections.map((section: any) => {
-                                    const match = section.name.match(/^(.*?)-/);
-                                    const category = match
-                                        ? match[1]
-                                        : section.name;
-                                    return (
-                                        <Card
-                                            key={section.name}
-                                            className="group overflow-hidden border-none shadow-none"
-                                        >
-                                            <CardContent className="p-0">
-                                                <div className="relative overflow-hidden">
-                                                    <div className="relative overflow-hidden rounded-xl border border-gray-200">
-                                                        {failedImages.has(
-                                                            section.name,
-                                                        ) ? (
-                                                            <Image
-                                                                src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753946156/coming-soon.png`}
-                                                                alt={
-                                                                    section.name
-                                                                }
-                                                                width={4210}
-                                                                height={1080}
-                                                                suppressHydrationWarning
-                                                                className="aspect-video w-full object-cover object-top"
-                                                            />
-                                                        ) : (
-                                                            <Image
-                                                                src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753946156/${section.name}.png`}
-                                                                alt={
-                                                                    section.name
-                                                                }
-                                                                width={4210}
-                                                                height={1080}
-                                                                suppressHydrationWarning
-                                                                className="aspect-video w-full object-cover object-top"
-                                                                onError={() =>
-                                                                    handleImageError(
-                                                                        section.name,
-                                                                    )
-                                                                }
-                                                            />
-                                                        )}
-                                                        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                                                    </div>
-
-                                                    <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-0 transition-all duration-300 ease-in group-hover:bottom-4 group-hover:opacity-100">
-                                                        <div className="flex items-center justify-center gap-2">
-                                                            <TooltipProvider>
-                                                                <Tooltip>
-                                                                    <TooltipTrigger
-                                                                        asChild
-                                                                    >
-                                                                        <Button
-                                                                            onClick={() =>
-                                                                                toggleFavourite(
-                                                                                    section.name,
-                                                                                )
-                                                                            }
-                                                                            disabled={
-                                                                                isPending
-                                                                            }
-                                                                            className="h-8 w-fit cursor-pointer rounded-md bg-white p-3 shadow-sm backdrop-blur-sm transition-all duration-200 hover:bg-white [&_svg]:size-4.5"
-                                                                        >
-                                                                            <RiHeartFill
-                                                                                className={` ${
-                                                                                    isFavourite(
-                                                                                        section.name,
-                                                                                    )
-                                                                                        ? "fill-red-500 text-red-500"
-                                                                                        : "text-gray-800 hover:text-red-500"
-                                                                                }`}
-                                                                            />
-                                                                        </Button>
-                                                                    </TooltipTrigger>
-
-                                                                    <TooltipContent
-                                                                        side="top"
-                                                                        showArrow={
-                                                                            true
-                                                                        }
-                                                                        className="dark px-2 py-1 text-xs"
-                                                                    >
-                                                                        {isFavourite(
-                                                                            section.name,
-                                                                        )
-                                                                            ? "Remove from favourites"
-                                                                            : "Add to favourites"}
-                                                                    </TooltipContent>
-                                                                </Tooltip>
-                                                            </TooltipProvider>
-
-                                                            <TooltipProvider>
-                                                                <Tooltip>
-                                                                    <TooltipTrigger
-                                                                        asChild
-                                                                    >
-                                                                        <Button
-                                                                            size="sm"
-                                                                            className="h-8 cursor-pointer rounded-md bg-white p-3 shadow-sm backdrop-blur-sm hover:bg-white [&_svg]:size-4.5"
-                                                                        >
-                                                                            <Link
-                                                                                href={`/sections/${section.name.split("-")[0]}`}
-                                                                                target="_blank"
-                                                                            >
-                                                                                <RiEyeLine className="size-5 text-gray-800" />
-                                                                            </Link>
-                                                                        </Button>
-                                                                    </TooltipTrigger>
-
-                                                                    <TooltipContent
-                                                                        side="top"
-                                                                        showArrow={
-                                                                            true
-                                                                        }
-                                                                        className="dark px-2 py-1 text-xs"
-                                                                    >
-                                                                        Preview
-                                                                    </TooltipContent>
-                                                                </Tooltip>
-                                                            </TooltipProvider>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div className="p-4">
-                                                    <div className="mb-1 flex items-start justify-between">
-                                                        <h3 className="text-lg font-semibold text-gray-900">
-                                                            {capitalize(
-                                                                section.name.replace(
-                                                                    /-/g,
-                                                                    " 0",
-                                                                ),
-                                                            )}
-                                                        </h3>
-                                                        {section.pro && (
-                                                            <Badge className="border-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white">
-                                                                Pro
-                                                            </Badge>
-                                                        )}
-                                                    </div>
-                                                    <p className="text-sm text-gray-500 capitalize">
-                                                        {category}
-                                                    </p>
-                                                </div>
-                                            </CardContent>
-                                        </Card>
-                                    );
-                                })}
-                            </div>
-                        )}
-                    </main>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </section>
+        </>
     );
 }

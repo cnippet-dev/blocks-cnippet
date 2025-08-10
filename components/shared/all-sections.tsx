@@ -52,7 +52,7 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                 <section className="relative h-full pt-10">
                     <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-0 flex w-full overflow-visible">
                         <div
-                            className="absolute top-20 left-0 z-0 h-[1px] w-full flex-auto overflow-hidden border-t border-dashed border-gray-200"
+                            className="absolute top-20 left-0 z-0 h-[1px] w-full flex-auto overflow-hidden border-t border-dashed border-gray-200 dark:border-neutral-700"
                             data-border="true"
                             data-framer-name="Top divider"
                         ></div>
@@ -62,7 +62,7 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                             data-framer-name="Vertical lines"
                         >
                             <div
-                                className="absolute right-0 bottom-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200"
+                                className="absolute right-0 bottom-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200 dark:border-neutral-700"
                                 data-border="true"
                                 data-framer-name="Right line"
                             >
@@ -73,7 +73,7 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                                 ></div>
                             </div>
                             <div
-                                className="absolute bottom-0 left-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200"
+                                className="absolute bottom-0 left-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200 dark:border-neutral-700"
                                 data-border="true"
                                 data-framer-name="Left line"
                             >
@@ -89,12 +89,12 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                     <div className="mx-auto max-w-7xl">
                         <div className="mt-32 max-w-7xl px-10">
                             <div className="mb-16 space-y-4">
-                                <motion.h1 className="text-4xl font-semibold tracking-tight text-black md:text-4xl">
+                                <motion.h1 className="text-4xl font-semibold tracking-tight text-black dark:text-white md:text-4xl">
                                     Explore wide range of Sections
                                 </motion.h1>
 
                                 <motion.p
-                                    className="max-w-md text-gray-600"
+                                    className="max-w-md text-gray-600 dark:text-gray-400"
                                     transition={{ delay: 0.2 }}
                                 >
                                     A library of 500+ professionally designed,
@@ -120,7 +120,7 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                                         return (
                                             <motion.div
                                                 key={index}
-                                                className={`relative overflow-visible border-dashed border-gray-400/50 bg-white p-4 transition-shadow duration-300 ${index !== 3 && index !== 7 && index !== 11 ? "border-r" : ""} ${index <= 11 ? "border-b" : ""}`}
+                                                className={`relative overflow-visible border-dashed border-gray-400/50 bg-white dark:bg-background p-4 transition-shadow duration-300 ${index !== 3 && index !== 7 && index !== 11 ? "border-r" : ""} ${index <= 11 ? "border-b" : ""}`}
                                                 variants={itemVariants}
                                                 whileHover={{
                                                     transition: {
@@ -159,7 +159,7 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                                                             }
                                                             sizes="100vw"
                                                             alt="Description of my image"
-                                                            className="w-full"
+                                                            className="w-full rounded-2xl"
                                                         />
 
                                                         <div className="flex flex-col items-start p-4">

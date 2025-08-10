@@ -6,6 +6,9 @@ import Link from "next/link";
 
 import NavUser from "./nav-user";
 import { MobileNav } from "./mobile-nav";
+import { motion } from "motion/react";
+import { Button } from "@/components/ui/button";
+import { RiArrowRightUpLine } from "@remixicon/react";
 
 const Navbar = ({ className }: { className?: string }) => {
     const { theme } = useTheme();
@@ -17,7 +20,7 @@ const Navbar = ({ className }: { className?: string }) => {
 
     return (
         <>
-            <header
+            {/* <header
                 className={`bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 mx-auto w-full max-w-full border-t-0 border-b backdrop-blur dark:border-neutral-900 dark:bg-black/70 ${className}`}
             >
                 <div className="w-full border border-t-0 border-r-0 border-b-0 dark:border-neutral-800">
@@ -61,28 +64,6 @@ const Navbar = ({ className }: { className?: string }) => {
                         <div className="col-span-1 hidden xl:block"></div>
 
                         <div className="col-span-1 flex items-center justify-end border-r">
-                            {/* <div></div> */}
-                            {/* <div className="group/toggle focus-visible:ring-ring [&amp;_svg]:pointer-events-none [&amp;_svg]:size-5 [&amp;_svg]:shrink-0 bg-muted/50 inline-flex w-full items-center justify-center gap-2 rounded-none px-0 text-sm font-medium whitespace-nowrap transition-colors hover:bg-none focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50">
-                                {mounted &&
-                                    (theme === "dark" ? (
-                                        <button
-                                            onClick={() => setTheme("light")}
-                                            className={`cursor-pointer rounded-full p-1.5`}
-                                            aria-label="Light mode"
-                                        >
-                                            <RiSunLine className="size-5 text-black dark:text-white" />
-                                        </button>
-                                    ) : (
-                                        <button
-                                            onClick={() => setTheme("dark")}
-                                            className={`cursor-pointer rounded-full p-1.5`}
-                                            aria-label="Dark mode"
-                                        >
-                                            <RiMoonFill className="size-5 text-black dark:text-white" />
-                                        </button>
-                                    ))}
-                                <span className="sr-only">Toggle theme</span>
-                            </div> */}
                             <div className="flex h-full w-20 items-center justify-center bg-gray-50 md:w-full dark:bg-black">
                                 <NavUser />
                             </div>
@@ -92,7 +73,128 @@ const Navbar = ({ className }: { className?: string }) => {
                         </div>
                     </div>
                 </div>
-            </header>
+            </header> */}
+
+            <>
+                <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-0 flex w-full overflow-visible">
+                    <div
+                        className="absolute top-20 left-0 z-0 h-[1px] w-full flex-auto overflow-hidden border-t border-dashed border-gray-200 dark:border-neutral-700"
+                        data-border="true"
+                        data-framer-name="Top divider"
+                    ></div>
+
+                    <div
+                        className="absolute top-0 left-1/2 z-0 h-full w-full max-w-7xl flex-auto -translate-x-1/2 overflow-visible"
+                        data-framer-name="Vertical lines"
+                    >
+                        <div
+                            className="absolute right-0 bottom-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200 dark:border-neutral-700"
+                            data-border="true"
+                            data-framer-name="Right line"
+                        >
+                            <div
+                                className="cnippet-dot"
+                                data-border="true"
+                                data-framer-name="Ellipsis"
+                            ></div>
+                        </div>
+                        <div
+                            className="absolute bottom-0 left-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200 dark:border-neutral-700"
+                            data-border="true"
+                            data-framer-name="Left line"
+                        >
+                            <div
+                                className="cnippet-dot"
+                                data-border="true"
+                                data-framer-name="Ellipsis"
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="sticky top-0 z-50">
+                    <div className="sticky top-4 z-50 pt-3 pb-6">
+                        <motion.nav
+                            initial={{ y: -20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.6 }}
+                            className="mx-auto flex max-w-4xl items-center justify-between rounded-full bg-gray-200/60 dark:bg-neutral-800 backdrop-blur-md px-2 py-2"
+                        >
+                            <motion.div
+                                whileHover={{ scale: 1.05 }}
+                                className="flex items-center"
+                            >
+                                <Image
+                                    src="https:res.cloudinary.com/dcxm3ccir/image/upload/v1753948226/logo-light.png"
+                                    alt=""
+                                    className="size-10"
+                                    width={1080}
+                                    height={1080}
+                                    suppressHydrationWarning
+                                />
+                                <span className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                                    Cnippet{" "}
+                                    <span className="text-gray-400 dark:text-gray-500">
+                                        Blocks
+                                    </span>
+                                </span>
+                            </motion.div>
+
+                            <div className="hidden items-center space-x-8 text-sm font-medium md:flex">
+                                {[
+                                    "Benefits",
+                                    "Foundations",
+                                    "Features",
+                                    "Pricing",
+                                    "FAQs",
+                                ].map((item, index) => (
+                                    <motion.div
+                                        key={item}
+                                        initial={{ y: -10, opacity: 0 }}
+                                        animate={{ y: 0, opacity: 1 }}
+                                        transition={{
+                                            duration: 0.4,
+                                            delay: index * 0.1,
+                                        }}
+                                    >
+                                        <Link
+                                            href="#"
+                                            className="text-gray-600 dark:text-gray-100 dark:hover:text-white transition-colors duration-200 hover:text-gray-900"
+                                        >
+                                            {item}
+                                        </Link>
+                                    </motion.div>
+                                ))}
+                            </div>
+
+                            <motion.div
+                                initial={{ y: -10, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 0.4, delay: 0.6 }}
+                                className="flex items-center space-x-4"
+                            >
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="hidden items-center space-x-2 sm:flex"
+                                >
+                                    <RiArrowRightUpLine className="h-4 w-4" />
+                                    <span>Preview</span>
+                                </Button>
+                                <motion.div
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    <Button className="rounded-full bg-black px-6 text-white hover:bg-gray-800">
+                                        Buy Now
+                                        <span className="ml-2">↗</span>
+                                    </Button>
+                                </motion.div>
+                            </motion.div>
+                        </motion.nav>
+                    </div>
+                </div>
+            </>
         </>
     );
 };

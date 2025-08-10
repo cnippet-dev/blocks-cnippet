@@ -13,118 +13,23 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
             <section className="relative h-full">
                 <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-0 flex w-full overflow-visible">
                     <div
-                        className="absolute top-20 left-0 z-0 h-[1px] w-full flex-auto overflow-hidden border-t border-dashed border-gray-200"
-                        data-border="true"
-                        data-framer-name="Top divider"
-                    ></div>
-
-                    <div
                         className="absolute top-0 left-1/2 z-0 h-full w-full max-w-7xl flex-auto -translate-x-1/2 overflow-visible"
                         data-framer-name="Vertical lines"
                     >
                         <div
-                            className="absolute right-0 bottom-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200"
+                            className="absolute top-0 right-0 bottom-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200 dark:border-neutral-700"
                             data-border="true"
                             data-framer-name="Right line"
-                        >
-                            <div
-                                className="cnippet-dot"
-                                data-border="true"
-                                data-framer-name="Ellipsis"
-                            ></div>
-                        </div>
+                        ></div>
                         <div
-                            className="absolute bottom-0 left-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200"
+                            className="absolute bottom-0 left-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200 dark:border-neutral-700"
                             data-border="true"
                             data-framer-name="Left line"
-                        >
-                            <div
-                                className="cnippet-dot"
-                                data-border="true"
-                                data-framer-name="Ellipsis"
-                            ></div>
-                        </div>
+                        ></div>
                     </div>
                 </div>
 
                 <div className="relative z-10 pt-4">
-                    <motion.nav
-                        initial={{ y: -20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.6 }}
-                        className="mx-auto flex max-w-4xl items-center justify-between rounded-full bg-gray-100 px-2 py-2"
-                    >
-                        <motion.div
-                            whileHover={{ scale: 1.05 }}
-                            className="flex items-center"
-                        >
-                            <Image
-                                src="https:res.cloudinary.com/dcxm3ccir/image/upload/v1753948226/logo-light.png"
-                                alt=""
-                                className="size-10"
-                                width={1080}
-                                height={1080}
-                                suppressHydrationWarning
-                            />
-                            <span className="text-xl font-semibold tracking-tight text-gray-900">
-                                Cnippet{" "}
-                                <span className="text-gray-400">Blocks</span>
-                            </span>
-                        </motion.div>
-
-                        <div className="hidden items-center space-x-8 text-sm font-medium md:flex">
-                            {[
-                                "Benefits",
-                                "Foundations",
-                                "Features",
-                                "Pricing",
-                                "FAQs",
-                            ].map((item, index) => (
-                                <motion.div
-                                    key={item}
-                                    initial={{ y: -10, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{
-                                        duration: 0.4,
-                                        delay: index * 0.1,
-                                    }}
-                                >
-                                    <Link
-                                        href="#"
-                                        className="text-gray-600 transition-colors duration-200 hover:text-gray-900"
-                                    >
-                                        {item}
-                                    </Link>
-                                </motion.div>
-                            ))}
-                        </div>
-
-                        <motion.div
-                            initial={{ y: -10, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.4, delay: 0.6 }}
-                            className="flex items-center space-x-4"
-                        >
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                className="hidden items-center space-x-2 sm:flex"
-                            >
-                                <RiArrowRightUpLine className="h-4 w-4" />
-                                <span>Preview</span>
-                            </Button>
-                            <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <Button className="rounded-full bg-black px-6 text-white hover:bg-gray-800">
-                                    Buy Now
-                                    <span className="ml-2">↗</span>
-                                </Button>
-                            </motion.div>
-                        </motion.div>
-                    </motion.nav>
-
                     <div className="mx-auto flex max-w-4xl flex-col items-center justify-center px-6 py-20 text-center">
                         <motion.div
                             initial={{ scale: 0, opacity: 0 }}
@@ -133,9 +38,9 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                         >
                             <Badge
                                 variant="secondary"
-                                className="mb-8 border border-gray-200 bg-gray-100 py-0.5 pr-4 pl-0.5 text-xs text-black transition-colors hover:bg-gray-200"
+                                className="mb-8 border border-gray-200 bg-gray-100 py-0.5 pr-4 pl-0.5 text-xs text-black transition-colors dark:border-neutral-800 hover:bg-gray-200 dark:bg-neutral-950 dark:text-white"
                             >
-                                <span className="mr-1 rounded-full border bg-white px-4 py-1 text-xs">
+                                <span className="mr-1 rounded-full border bg-white px-4 py-1 text-xs dark:border-neutral-800 dark:bg-black">
                                     New
                                 </span>
                                 Cnippet UI version 2.0 is here
@@ -146,7 +51,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                             initial={{ y: 30, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className="mb-6 max-w-3xl text-4xl leading-tight font-semibold tracking-tight text-gray-900 md:text-6xl lg:text-5xl"
+                            className="mb-6 max-w-3xl text-4xl leading-tight font-semibold tracking-tight text-gray-900 dark:text-gray-100 md:text-6xl lg:text-5xl"
                         >
                             Deliver Quality Websites and Web Apps With{" "}
                             <motion.span
@@ -164,13 +69,13 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.6, delay: 0.8 }}
-                            className="mb-8 max-w-2xl text-lg leading-relaxed tracking-tight text-gray-700"
+                            className="mb-8 max-w-2xl text-lg leading-relaxed tracking-tight text-gray-700 dark:text-gray-400"
                         >
                             Ship consistent high-quality ui 10x faster with the
                             most powerful
                             <br />
                             Figma ui kit & design system for{" "}
-                            <span className="font-semibold text-gray-900">
+                            <span className="font-semibold text-gray-900 dark:text-gray-100">
                                 Teams
                             </span>
                         </motion.p>

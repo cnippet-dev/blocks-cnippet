@@ -68,7 +68,7 @@ export default function SlidingImages() {
         <div ref={container} className="relative pb-20">
             <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-20 flex w-full overflow-visible">
                 <div
-                    className="absolute top-20 left-0 z-0 h-[1px] w-full flex-auto overflow-hidden border-t border-dashed border-gray-200"
+                    className="absolute top-20 left-0 z-0 h-[1px] w-full flex-auto overflow-hidden border-t border-dashed border-gray-200 dark:border-neutral-700"
                     data-border="true"
                     data-framer-name="Top divider"
                 ></div>
@@ -78,7 +78,7 @@ export default function SlidingImages() {
                     data-framer-name="Vertical lines"
                 >
                     <div
-                        className="absolute right-0 bottom-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200"
+                        className="absolute right-0 bottom-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200 dark:border-neutral-700"
                         data-border="true"
                         data-framer-name="Right line"
                     >
@@ -89,7 +89,7 @@ export default function SlidingImages() {
                         ></div>
                     </div>
                     <div
-                        className="absolute bottom-0 left-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200"
+                        className="absolute bottom-0 left-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200 dark:border-neutral-700"
                         data-border="true"
                         data-framer-name="Left line"
                     >
@@ -110,12 +110,12 @@ export default function SlidingImages() {
                             <p>Made with Cnippet UI</p>
                         </div>
 
-                        <motion.h1 className="text-4xl font-semibold tracking-tight text-black md:text-4xl">
+                        <motion.h1 className="text-4xl font-semibold tracking-tight text-black md:text-4xl dark:text-white">
                             Build your next project with Cnippet Blocks
                         </motion.h1>
 
                         <motion.p
-                            className="max-w-md text-sm text-gray-600"
+                            className="max-w-md text-sm text-gray-600 dark:text-gray-400"
                             transition={{ delay: 0.2 }}
                         >
                             The perfect starting point for your next web
@@ -125,8 +125,8 @@ export default function SlidingImages() {
                 </div>
 
                 <div className="relative">
-                    <div className="absolute top-0 left-0 z-10 h-full w-40 bg-gradient-to-r from-white" />
-                    <div className="absolute top-0 right-0 z-10 h-full w-40 bg-gradient-to-l from-white" />
+                    <div className="absolute top-0 left-0 z-10 h-full w-40 bg-gradient-to-r from-white dark:from-black" />
+                    <div className="absolute top-0 right-0 z-10 h-full w-40 bg-gradient-to-l from-white dark:from-black" />
 
                     <motion.div
                         style={{ x: x1 }}
@@ -135,7 +135,7 @@ export default function SlidingImages() {
                         {slider1.map((project, index) => (
                             <div
                                 key={index}
-                                className="flex h-[16vw] w-[50%] items-center justify-center rounded-2xl bg-gray-50"
+                                className="flex h-[16vw] w-[50%] items-center justify-center rounded-2xl bg-gray-50 dark:bg-neutral-800"
                             >
                                 <div className="relative h-[90%] w-[90%]">
                                     <Image
