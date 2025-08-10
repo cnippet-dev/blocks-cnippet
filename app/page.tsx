@@ -8,6 +8,7 @@ const Faq = dynamic(() => import("@/components/routes/home/faq"));
 const Footer = dynamic(() => import("@/components/shared/footer"));
 const Cta = dynamic(() => import("@/components/routes/home/cta"));
 const Sections = dynamic(() => import("@/components/shared/all-sections"));
+const SlidingImages = dynamic(() => import("@/components/routes/home/sliding"));
 
 import { useRef, useState } from "react";
 import { Cursor } from "@/components/motion/cursor";
@@ -113,6 +114,7 @@ export default function Home() {
                 {/* <Navbar className="px-4 md:px-10 xl:px-20 2xl:px-30" /> */}
                 <main className="">
                     <Hero ref={targetRef3} />
+                    <SlidingImages />
                     {/* <Sections count={15} /> */}
                     {/* <Faq /> */}
                     {/* <Cta /> */}
