@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const PrivacyPolicy = () => {
     return (
-        <section className="legal_page relative w-full dark:bg-black">
+        <section className="legal_page dark:bg-background relative w-full">
             <div className="mx-auto w-full max-w-7xl px-4 md:px-0">
                 <div className="relative">
                     <div className="absolute -top-2.5 -left-2.5 z-40 mx-auto grid size-5.5 grid-cols-2 grid-rows-2 divide-x divide-y divide-neutral-500">
@@ -21,34 +21,36 @@ const PrivacyPolicy = () => {
                     </div>
 
                     <div className="relative">
-                        <div className="grid size-[5rem] w-full grid-cols-12 grid-rows-1 divide-x divide-y divide-dashed border-dashed first:border-l last:border-r dark:divide-neutral-800 dark:border-neutral-800">
+                        <div className="grid size-[5rem] w-full grid-cols-12 grid-rows-1 divide-x divide-y divide-dashed border-dashed first:border-l last:border-r dark:divide-neutral-700 dark:border-neutral-700">
                             <div className="col-span-1"></div>
                             <div className="col-span-10"></div>
-                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-800"></div>
+                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-700"></div>
                         </div>
 
                         <div className="grid size-[5rem] h-full w-full grid-cols-12 border-dashed first:border-l">
-                            <div className="col-span-1 border-b border-l border-dashed dark:border-neutral-800"></div>
-                            <div className="col-span-10 border border-t-0 border-dashed py-8 dark:border-neutral-800">
+                            <div className="col-span-1 border-b border-l border-dashed dark:border-neutral-700"></div>
+                            <div className="col-span-10 border border-t-0 border-dashed py-8 dark:border-neutral-700">
                                 <h1 className="font-buch text-center text-6xl leading-tight font-medium tracking-tight">
                                     Privacy Policy
                                 </h1>
                             </div>
-                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-800"></div>
+                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-700"></div>
                         </div>
 
                         <div className="grid size-[5rem] w-full grid-cols-12 border-dashed first:border-l">
-                            <div className="col-span-1 border-b border-l border-dashed dark:border-neutral-800"></div>
-                            <div className="col-span-10 flex items-center justify-center border border-t-0 border-dashed dark:border-neutral-800">
+                            <div className="col-span-1 border-b border-l border-dashed dark:border-neutral-700"></div>
+                            <div className="col-span-10 flex items-center justify-center border border-t-0 border-dashed dark:border-neutral-700">
                                 <p className="text-center text-sm text-gray-600 dark:text-gray-400">
                                     Last Updated June 5, 2025
                                 </p>
                             </div>
-                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-800"></div>
+                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-700"></div>
                         </div>
 
-                        <div className="grid w-full grid-cols-12 border border-t-0 border-dashed dark:border-neutral-800">
-                            <div className="col-span-8 px-10 pt-10 pb-20">
+                        <div className="grid w-full grid-cols-12 divide-x divide-dashed border border-t-0 border-dashed dark:divide-neutral-700 dark:border-neutral-700">
+                            <div className="col-span-1" />
+
+                            <div className="col-span-7 px-10 pt-10 pb-20">
                                 <p className="text-gray-700 dark:text-gray-300">
                                     CNIPPET (&quot;we&quot;, &quot;us&quot;, or
                                     &quot;our&quot;) respects your privacy and
@@ -386,7 +388,7 @@ const PrivacyPolicy = () => {
                                     Uttarakhand 248140
                                 </p>
                             </div>
-                            <div className="col-span-4 border-l border-dashed px-10 pt-10 pb-20 dark:border-neutral-800">
+                            <div className="col-span-3 px-10 pt-10 pb-20">
                                 <div className="sticky top-20">
                                     <div className="font-buch flex font-medium">
                                         Privacy Policy
@@ -475,6 +477,7 @@ const PrivacyPolicy = () => {
                                     </ul>
                                 </div>
                             </div>
+                            <div className="col-span-1" />
                         </div>
                     </div>
                 </div>

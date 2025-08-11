@@ -43,43 +43,44 @@ const data = [
 ];
 const LicenseAgreement = () => {
     return (
-        <section className="legal_page relative w-full dark:bg-black">
+        <section className="legal_page dark:bg-background relative w-full">
             <div className="mx-auto w-full max-w-7xl px-4 md:px-0">
                 <div className="relative">
                     <div className="relative">
-                        <div className="grid size-[5rem] w-full grid-cols-12 grid-rows-1 divide-x divide-y divide-dashed border-dashed first:border-l last:border-r dark:divide-neutral-800 dark:border-neutral-800">
+                        <div className="grid size-[5rem] w-full grid-cols-12 grid-rows-1 divide-x divide-y divide-dashed border-dashed first:border-l last:border-r dark:divide-neutral-700 dark:border-neutral-700">
                             <div className="col-span-1"></div>
                             <div className="col-span-10"></div>
-                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-800"></div>
+                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-700"></div>
                         </div>
 
                         <div className="grid size-[5rem] h-full w-full grid-cols-12 border-dashed first:border-l">
-                            <div className="col-span-1 border-b border-l border-dashed dark:border-neutral-800"></div>
-                            <div className="col-span-10 border border-t-0 border-dashed py-8 dark:border-neutral-800">
+                            <div className="col-span-1 border-b border-l border-dashed dark:border-neutral-700"></div>
+                            <div className="col-span-10 border border-t-0 border-dashed py-8 dark:border-neutral-700">
                                 <h1 className="font-buch text-center text-6xl leading-tight font-medium tracking-tight">
                                     License Agreement
                                 </h1>
                             </div>
-                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-800"></div>
+                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-700"></div>
                         </div>
 
                         <div className="grid size-[5rem] w-full grid-cols-12 border-dashed first:border-l">
-                            <div className="col-span-1 border-b border-l border-dashed dark:border-neutral-800"></div>
-                            <div className="col-span-10 flex items-center justify-center border border-t-0 border-dashed dark:border-neutral-800">
+                            <div className="col-span-1 border-b border-l border-dashed dark:border-neutral-700"></div>
+                            <div className="col-span-10 flex items-center justify-center border border-t-0 border-dashed dark:border-neutral-700">
                                 <p className="text-center text-sm text-gray-600 dark:text-gray-400">
                                     Effective March 1, 2025
                                 </p>
                             </div>
-                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-800"></div>
+                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-700"></div>
                         </div>
 
-                        <div className="grid w-full grid-cols-12 border border-t-0 border-dashed dark:border-neutral-800">
-                            <div className="col-span-8 px-10 pt-10 pb-20">
+                        <div className="grid w-full grid-cols-12 divide-x divide-dashed border border-t-0 border-dashed dark:divide-neutral-700 dark:border-neutral-700">
+                            <div className="col-span-1" />
+                            <div className="col-span-7 px-10 pt-10 pb-20">
                                 <div className="grid grid-cols-2 gap-5">
                                     {data.map((item, i) => (
                                         <div
                                             key={i}
-                                            className="rounded-3xl border border-dashed border-gray-300 p-6"
+                                            className="rounded-3xl border border-dashed border-gray-300 p-6 dark:border-neutral-600"
                                         >
                                             <div className="w-fit rounded-full bg-gradient-to-br from-purple-700 to-blue-500 p-2 [&_svg]:size-5 [&_svg]:text-white">
                                                 {item.icon}
@@ -87,7 +88,7 @@ const LicenseAgreement = () => {
                                             <p className="pt-5 text-lg font-medium tracking-tight">
                                                 {item.title}
                                             </p>
-                                            <p className="text-sm text-gray-700">
+                                            <p className="text-sm text-gray-700 dark:text-gray-500">
                                                 {item.description}
                                             </p>
                                         </div>
@@ -314,7 +315,7 @@ const LicenseAgreement = () => {
                                     The Cnippet Team
                                 </p>
                             </div>
-                            <div className="col-span-4 border-l border-dashed px-10 pt-10 pb-20 dark:border-neutral-800">
+                            <div className="col-span-3 px-10 pt-10 pb-20">
                                 <div className="sticky top-20">
                                     <div className="font-buch flex font-medium">
                                         License Agreement
@@ -395,6 +396,7 @@ const LicenseAgreement = () => {
                                     </ul>
                                 </div>
                             </div>
+                            <div className="col-span-1" />
                         </div>
                     </div>
                 </div>

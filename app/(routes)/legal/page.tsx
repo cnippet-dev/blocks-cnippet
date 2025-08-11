@@ -1,3 +1,4 @@
+import { RiArrowRightLine } from "@remixicon/react";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
@@ -53,10 +54,10 @@ export default function Component() {
 
             <div className="mx-auto max-w-2xl py-20">
                 <div className="text-center">
-                    <h1 className="mb-4 text-5xl font-medium tracking-tight text-black">
+                    <h1 className="mb-4 text-5xl font-medium tracking-tight">
                         Cnippet Licences
                     </h1>
-                    <p className="text-gray-700">
+                    <p className="text-gray-700 dark:text-gray-400">
                         Have a specific question? Contact us at
                         support@cnippet.dev
                     </p>
@@ -70,17 +71,17 @@ export default function Component() {
                             href={item.href}
                             className="group cursor-pointer"
                         >
-                            <div className="mt-4 rounded-xl border p-4">
+                            <div className="mt-4 rounded-xl border p-4 dark:border-neutral-800">
                                 <div className="flex items-center justify-between">
                                     <div className="flex-1">
-                                        <h3 className="mb-2 text-lg font-medium tracking-tight text-black">
+                                        <h3 className="mb-2 text-lg font-medium tracking-tight">
                                             {item.title}
                                         </h3>
-                                        <p className="text-sm text-gray-600">
+                                        <p className="text-sm text-gray-600 dark:text-gray-400">
                                             {item.description}
                                         </p>
                                     </div>
-                                    <ChevronRight className="ml-4 h-5 w-5 flex-shrink-0 text-gray-400 transition-colors group-hover:text-gray-600" />
+                                    <RiArrowRightLine className="ml-4 h-5 w-5 flex-shrink-0 text-gray-200 transition-colors group-hover:text-gray-600" />
                                 </div>
                             </div>
                         </Link>

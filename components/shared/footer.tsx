@@ -187,13 +187,13 @@ export default function Component() {
                                                     <Button
                                                         size="sm"
                                                         variant="outline"
-                                                        className="items-start justify-start border-none bg-gray-50 px-0 py-0 text-left text-sm font-normal text-gray-600 shadow-none hover:bg-gray-50 dark:text-gray-400"
+                                                        className="items-start justify-start border-none bg-gray-50 px-0 py-0 text-left text-sm font-normal text-gray-600 shadow-none hover:bg-gray-50 dark:text-gray-400 dark:bg-black dark:hover:bg-black"
                                                     >
                                                         Legal
                                                     </Button>
                                                 </DropdownMenuTrigger>
                                                 <DropdownMenuContent
-                                                    className="top-0 w-56 rounded-2xl"
+                                                    className="top-0 w-56 rounded-2xl dark:border-neutral-800"
                                                     align="start"
                                                     sideOffset={-5}
                                                 >
@@ -312,7 +312,7 @@ export default function Component() {
                                             </button>
                                             <button
                                                 onClick={() => setTheme("dark")}
-                                                className={`rounded-full p-1.5 ${theme === "dark" ? "bg-[#1a1a1a]" : ""}`}
+                                                className={`rounded-full p-1.5 ${theme === "dark" ? "bg-neutral-600" : ""}`}
                                                 aria-label="Dark mode"
                                             >
                                                 <RiMoonFill className="size-4" />
