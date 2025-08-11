@@ -52,12 +52,12 @@ export default function ContactForm() {
     }
 
     return (
-        <section className="relative w-full overflow-hidden dark:bg-black">
+        <section className="relative w-full overflow-hidden">
             <div className="mx-auto w-full max-w-7xl px-4 py-16 md:px-4">
                 <div className="relative w-full">
                     <div className="col-span-10 flex w-full flex-col items-center justify-center bg-white p-8 text-center md:p-16 dark:bg-black">
                         <div className="w-full max-w-md">
-                            <div className="mb-12 text-center">
+                            <div className="mb-12 text-left">
                                 <h2 className="mb-4 text-3xl font-semibold md:text-4xl">
                                     Get in Touch
                                 </h2>
@@ -154,7 +154,7 @@ export default function ContactForm() {
 
                                     <Button
                                         type="submit"
-                                        className="group relative flex h-12 w-full items-center justify-center overflow-hidden rounded-none bg-blue-700 text-white shadow-none hover:bg-blue-800"
+                                        className="group relative flex h-12 w-full items-center justify-center overflow-hidden rounded-none bg-blue-700 text-white shadow-none hover:bg-blue-800 mt-10"
                                         disabled={isLoading}
                                     >
                                         {isLoading ? (
@@ -169,14 +169,14 @@ export default function ContactForm() {
                                 </form>
                             </Form>
 
-                            <div className="mt-12 text-center">
+                            <div className="mt-10 text-left">
                                 <p className="text-sm text-gray-500">
                                     You can also reach us at{" "}
                                     <a
                                         href="mailto:contact@example.com"
                                         className="text-blue-600 hover:underline"
                                     >
-                                        contact@example.com
+                                        contact@cnippet.dev
                                     </a>
                                 </p>
                             </div>

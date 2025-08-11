@@ -145,7 +145,7 @@ export async function verifyPayment(
             return { error: "Invalid payment signature." };
         }
 
-        const payment = await prisma.payment.findUnique({
+        const payment = await prisma.payment.findFirst({
             where: { razorpayOrderId: razorpay_order_id, userId: userId },
         });
 
@@ -156,6 +156,21 @@ export async function verifyPayment(
 
         const razorpayPaymentDetails =
             await razorpay.payments.fetch(razorpay_payment_id);
+
+        // Prevent processing the same Razorpay payment ID more than once
+        const existingByPaymentId = await prisma.payment.findFirst({
+            where: { razorpayPaymentId: razorpay_payment_id },
+        });
+        if (existingByPaymentId && existingByPaymentId.id !== payment.id) {
+            await prisma.payment.update({
+                where: { id: payment.id },
+                data: {
+                    status: "FAILED",
+                    description: "Duplicate razorpayPaymentId detected",
+                },
+            });
+            return { error: "This payment has already been processed." };
+        }
         if (razorpayPaymentDetails.status !== "captured") {
             console.error(
                 `[PAYMENT_VERIFY] Razorpay payment status not captured: ${razorpayPaymentDetails.status}`,
