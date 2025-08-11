@@ -1,22 +1,21 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import NavUser from "./nav-user";
-import { MobileNav } from "./mobile-nav";
+// import { MobileNav } from "./mobile-nav";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { RiArrowRightUpLine } from "@remixicon/react";
 
 const Navbar = ({ className }: { className?: string }) => {
-    const { theme } = useTheme();
-    const [mounted, setMounted] = useState(false);
+    // const { theme } = useTheme();
+    // const [mounted, setMounted] = useState(false);
 
-    useEffect(() => {
-        setMounted(true);
-    }, []);
+    // useEffect(() => {
+    //     setMounted(true);
+    // }, []);
 
     return (
         <>
@@ -76,7 +75,7 @@ const Navbar = ({ className }: { className?: string }) => {
             </header> */}
 
             <>
-                <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-0 flex w-full overflow-visible h-full">
+                <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-0 flex h-full w-full overflow-visible">
                     <div
                         className="absolute top-20 left-0 z-0 h-[1px] w-full flex-auto overflow-hidden border-t border-dashed border-gray-200 dark:border-neutral-700"
                         data-border="true"
@@ -84,7 +83,7 @@ const Navbar = ({ className }: { className?: string }) => {
                     ></div>
 
                     <div
-                        className="absolute top-0 left-1/2 z-0 w-full max-w-7xl h-28 flex-auto -translate-x-1/2 overflow-visible"
+                        className="absolute top-0 left-1/2 z-0 h-28 w-full max-w-7xl flex-auto -translate-x-1/2 overflow-visible"
                         data-framer-name="Vertical lines"
                     >
                         <div

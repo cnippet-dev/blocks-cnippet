@@ -38,7 +38,7 @@ interface SectionsProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Sections = forwardRef<HTMLDivElement, SectionsProps>(
-    ({ count, sections, ...props }, ref) => {
+    ({ count, sections }, ref) => {
         const components =
             sections ??
             Object.values(Index["default"]).filter(

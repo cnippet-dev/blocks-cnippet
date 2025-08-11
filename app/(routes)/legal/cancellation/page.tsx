@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const CancellationPolicy = () => {
     return (
         <section className="legal_page relative w-full dark:bg-black">
-            <div className="mx-auto w-full max-w-6xl px-10 pt-32">
+            <div className="mx-auto w-full max-w-7xl px-4 md:px-0">
                 <div className="relative">
                     <div className="absolute -top-2.5 -left-2.5 z-50 mx-auto grid size-5.5 grid-cols-2 grid-rows-2 divide-x divide-y divide-neutral-500">
                         <div className=" " />
@@ -19,36 +19,36 @@ const CancellationPolicy = () => {
                         <div className=" " />
                     </div>
 
-                    <div className="relative border-t dark:border-neutral-800">
-                        <div className="grid size-[5rem] w-full grid-cols-12 grid-rows-1 divide-x divide-y first:border-l last:border-r dark:divide-neutral-800 dark:border-neutral-800">
+                    <div className="relative">
+                        <div className="grid size-[5rem] w-full grid-cols-12 grid-rows-1 divide-x divide-y divide-dashed border-dashed first:border-l last:border-r dark:divide-neutral-800 dark:border-neutral-800">
                             <div className="col-span-1"></div>
                             <div className="col-span-10"></div>
-                            <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
+                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-800"></div>
                         </div>
 
-                        <div className="grid size-[5rem] h-full w-full grid-cols-12 first:border-l">
-                            <div className="col-span-1 border-b border-l dark:border-neutral-800"></div>
-                            <div className="col-span-10 border border-t-0 py-8 dark:border-neutral-800">
+                        <div className="grid size-[5rem] h-full w-full grid-cols-12 border-dashed first:border-l">
+                            <div className="col-span-1 border-b border-l border-dashed dark:border-neutral-800"></div>
+                            <div className="col-span-10 border border-t-0 border-dashed py-8 dark:border-neutral-800">
                                 <h1 className="font-buch text-center text-6xl leading-tight font-medium tracking-tight">
                                     Cancellation & Refund Policy
                                 </h1>
                             </div>
-                            <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
+                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-800"></div>
                         </div>
 
-                        <div className="grid size-[5rem] w-full grid-cols-12 first:border-l">
-                            <div className="col-span-1 border-b border-l dark:border-neutral-800"></div>
-                            <div className="col-span-10 flex items-center justify-center border border-t-0 dark:border-neutral-800">
-                                <p className="text-center text-sm text-neutral-500 dark:text-neutral-400">
+                        <div className="grid size-[5rem] w-full grid-cols-12 border-dashed first:border-l">
+                            <div className="col-span-1 border-b border-l border-dashed dark:border-neutral-800"></div>
+                            <div className="col-span-10 flex items-center justify-center border border-t-0 border-dashed dark:border-neutral-800">
+                                <p className="text-center text-sm text-gray-600 dark:text-gray-400">
                                     Effective March 1, 2025
                                 </p>
                             </div>
-                            <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
+                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-800"></div>
                         </div>
 
-                        <div className="grid w-full grid-cols-12 border border-t-0 dark:border-neutral-800">
-                            <div className="col-span-8 px-10 pt-10 pb-16">
-                                <p className="text-neutral-600 dark:text-neutral-400">
+                        <div className="grid w-full grid-cols-12 border border-t-0 border-dashed dark:border-neutral-800">
+                            <div className="col-span-8 px-10 pt-10 pb-20">
+                                <p className="text-gray-700 dark:text-gray-300">
                                     This Cancellation & Refund Policy governs
                                     subscription cancellations and refund
                                     requests for purchases made through
@@ -63,11 +63,11 @@ const CancellationPolicy = () => {
                                 >
                                     Subscription Cancellations
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     You may cancel your premium subscription at
                                     any time:
                                 </p>
-                                <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
+                                <ul className="mt-2 list-disc pl-5 text-gray-600 dark:text-gray-400">
                                     <li>
                                         Access your account settings at{" "}
                                         <Link href="/profile">
@@ -82,10 +82,10 @@ const CancellationPolicy = () => {
                                     </li>
                                     <li>Follow the confirmation prompts</li>
                                 </ul>
-                                <p className="pt-3 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-3 text-gray-600 dark:text-gray-400">
                                     <strong>Important Notes:</strong>
                                 </p>
-                                <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
+                                <ul className="mt-2 list-disc pl-5 text-gray-600 dark:text-gray-400">
                                     <li>
                                         Cancellations take effect at the end of
                                         your current billing period
@@ -109,11 +109,11 @@ const CancellationPolicy = () => {
                                 >
                                     Refund Eligibility
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     We offer refunds under these specific
                                     circumstances:
                                 </p>
-                                <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
+                                <ul className="mt-2 list-disc pl-5 text-gray-600 dark:text-gray-400">
                                     <li>
                                         <strong>Technical Issues:</strong> When
                                         platform errors prevent access to
@@ -137,10 +137,10 @@ const CancellationPolicy = () => {
                                         capabilities
                                     </li>
                                 </ul>
-                                <p className="pt-3 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-3 text-gray-600 dark:text-gray-400">
                                     <strong>Non-Refundable Items:</strong>
                                 </p>
-                                <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
+                                <ul className="mt-2 list-disc pl-5 text-gray-600 dark:text-gray-400">
                                     <li>
                                         Subscription fees for periods that have
                                         already been used
@@ -163,10 +163,10 @@ const CancellationPolicy = () => {
                                 >
                                     Refund Request Process
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     To request a refund:
                                 </p>
-                                <ol className="mt-2 list-decimal pl-5 text-neutral-500 dark:text-neutral-400">
+                                <ol className="mt-2 list-decimal pl-5 text-gray-600 dark:text-gray-400">
                                     <li>
                                         Submit a request within 3 days of
                                         purchase to{" "}
@@ -188,10 +188,10 @@ const CancellationPolicy = () => {
                                         screenshots or error logs
                                     </li>
                                 </ol>
-                                <p className="pt-3 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-3 text-gray-600 dark:text-gray-400">
                                     Our support team will:
                                 </p>
-                                <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
+                                <ul className="mt-2 list-disc pl-5 text-gray-600 dark:text-gray-400">
                                     <li>
                                         Acknowledge your request within 24
                                         business hours
@@ -216,11 +216,11 @@ const CancellationPolicy = () => {
                                 >
                                     Special Circumstances
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     In exceptional cases, we may offer refunds
                                     at our discretion:
                                 </p>
-                                <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
+                                <ul className="mt-2 list-disc pl-5 text-gray-600 dark:text-gray-400">
                                     <li>
                                         <strong>Extended Downtime:</strong>{" "}
                                         Platform unavailability exceeding 48
@@ -248,7 +248,7 @@ const CancellationPolicy = () => {
                                 >
                                     Chargeback Policy
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     We are committed to resolving billing
                                     concerns in a fair and transparent manner.
                                     Filing a chargeback without first contacting
@@ -259,7 +259,7 @@ const CancellationPolicy = () => {
                                 <h3 className="pt-5 text-lg font-semibold">
                                     Dispute Resolution First
                                 </h3>
-                                <p className="pt-2 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-2 text-gray-600 dark:text-gray-400">
                                     Before initiating a chargeback through your
                                     bank or payment provider, you are required
                                     to contact our support team at{" "}
@@ -270,14 +270,14 @@ const CancellationPolicy = () => {
                                     business days.
                                 </p>
 
-                                <p className="pt-2 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-2 text-gray-600 dark:text-gray-400">
                                     If you initiate a chargeback without first
                                     attempting to resolve the issue with us
                                     directly, the following actions may be
                                     taken:
                                 </p>
 
-                                <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
+                                <ul className="mt-2 list-disc pl-5 text-gray-600 dark:text-gray-400">
                                     <li>
                                         Immediate suspension of your CNIPPET
                                         account and associated services
@@ -304,7 +304,7 @@ const CancellationPolicy = () => {
                                     </li>
                                 </ul>
 
-                                <p className="pt-3 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-3 text-gray-600 dark:text-gray-400">
                                     We encourage you to contact us at{" "}
                                     <Link href="mailto:support@cnippet.site">
                                         support@cnippet.site
@@ -319,11 +319,11 @@ const CancellationPolicy = () => {
                                 >
                                     Reactivation of Cancelled Accounts
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     You may reactivate a cancelled account
                                     within 6 months:
                                 </p>
-                                <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
+                                <ul className="mt-2 list-disc pl-5 text-gray-600 dark:text-gray-400">
                                     <li>
                                         Previous payment methods will be charged
                                         at current rates
@@ -345,7 +345,7 @@ const CancellationPolicy = () => {
                                 >
                                     Contact Information
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     For cancellation or refund assistance:
                                     <br />
                                     Email:{" "}
@@ -359,7 +359,7 @@ const CancellationPolicy = () => {
                                     Uttarakhand 248140
                                 </p>
                             </div>
-                            <div className="col-span-4 border-l px-10 pt-10 dark:border-neutral-800">
+                            <div className="col-span-4 border-l border-dashed px-10 pt-10 pb-20 dark:border-neutral-800">
                                 <div className="sticky top-20">
                                     <div className="font-buch flex font-medium">
                                         Cancellation Policy

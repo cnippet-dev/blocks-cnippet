@@ -1,6 +1,4 @@
 import { forwardRef } from "react";
-import Image from "next/image"; 
-import Link from "next/link";
 import { RiArrowRightUpLine, RiFlashlightFill } from "@remixicon/react";
 import { motion } from "motion/react";
 

@@ -189,7 +189,7 @@ export default function ContactSection() {
                                     <Input
                                         id="company-website"
                                         type="url"
-                                        placeholder="flowbase.com"
+                                        placeholder="cnippet.dev"
                                         required
                                     />
                                 </div>

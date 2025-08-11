@@ -125,8 +125,8 @@ export default function SlidingImages() {
                 </div>
 
                 <div className="relative">
-                    <div className="absolute top-0 left-0 z-10 h-full w-40 bg-gradient-to-r from-white dark:from-black" />
-                    <div className="absolute top-0 right-0 z-10 h-full w-40 bg-gradient-to-l from-white dark:from-black" />
+                    <div className="absolute top-0 left-0 z-10 h-full w-40 bg-gradient-to-r from-white dark:from-background" />
+                    <div className="absolute top-0 right-0 z-10 h-full w-40 bg-gradient-to-l from-white dark:from-background" />
 
                     <motion.div
                         style={{ x: x1 }}

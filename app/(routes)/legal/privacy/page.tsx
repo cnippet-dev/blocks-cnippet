@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 const PrivacyPolicy = () => {
     return (
-        <main className="legal_page relative w-full dark:bg-black">
-            <div className="mx-auto w-full max-w-6xl px-10 pt-32">
+        <section className="legal_page relative w-full dark:bg-black">
+            <div className="mx-auto w-full max-w-7xl px-4 md:px-0">
                 <div className="relative">
                     <div className="absolute -top-2.5 -left-2.5 z-40 mx-auto grid size-5.5 grid-cols-2 grid-rows-2 divide-x divide-y divide-neutral-500">
                         <div className=" " />
@@ -20,36 +20,36 @@ const PrivacyPolicy = () => {
                         <div className=" " />
                     </div>
 
-                    <div className="relative border-t dark:border-neutral-800">
-                        <div className="grid size-[5rem] w-full grid-cols-12 grid-rows-1 divide-x divide-y first:border-l last:border-r dark:divide-neutral-800 dark:border-neutral-800">
+                    <div className="relative">
+                        <div className="grid size-[5rem] w-full grid-cols-12 grid-rows-1 divide-x divide-y divide-dashed border-dashed first:border-l last:border-r dark:divide-neutral-800 dark:border-neutral-800">
                             <div className="col-span-1"></div>
                             <div className="col-span-10"></div>
-                            <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
+                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-800"></div>
                         </div>
 
-                        <div className="grid size-[5rem] h-full w-full grid-cols-12 first:border-l">
-                            <div className="col-span-1 border-b border-l dark:border-neutral-800"></div>
-                            <div className="col-span-10 border border-t-0 py-8 dark:border-neutral-800">
+                        <div className="grid size-[5rem] h-full w-full grid-cols-12 border-dashed first:border-l">
+                            <div className="col-span-1 border-b border-l border-dashed dark:border-neutral-800"></div>
+                            <div className="col-span-10 border border-t-0 border-dashed py-8 dark:border-neutral-800">
                                 <h1 className="font-buch text-center text-6xl leading-tight font-medium tracking-tight">
                                     Privacy Policy
                                 </h1>
                             </div>
-                            <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
+                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-800"></div>
                         </div>
 
-                        <div className="grid size-[5rem] w-full grid-cols-12 first:border-l">
-                            <div className="col-span-1 border-b border-l dark:border-neutral-800"></div>
-                            <div className="col-span-10 flex items-center justify-center border border-t-0 dark:border-neutral-800">
-                                <p className="text-center text-sm text-neutral-500 dark:text-neutral-400">
+                        <div className="grid size-[5rem] w-full grid-cols-12 border-dashed first:border-l">
+                            <div className="col-span-1 border-b border-l border-dashed dark:border-neutral-800"></div>
+                            <div className="col-span-10 flex items-center justify-center border border-t-0 border-dashed dark:border-neutral-800">
+                                <p className="text-center text-sm text-gray-600 dark:text-gray-400">
                                     Last Updated June 5, 2025
                                 </p>
                             </div>
-                            <div className="col-span-1 border-r border-b dark:border-neutral-800"></div>
+                            <div className="col-span-1 border-r border-b border-dashed dark:border-neutral-800"></div>
                         </div>
 
-                        <div className="grid w-full grid-cols-12 border border-t-0 dark:border-neutral-800">
-                            <div className="col-span-8 px-10 pt-10 pb-16">
-                                <p className="text-neutral-600 dark:text-neutral-400">
+                        <div className="grid w-full grid-cols-12 border border-t-0 border-dashed dark:border-neutral-800">
+                            <div className="col-span-8 px-10 pt-10 pb-20">
+                                <p className="text-gray-700 dark:text-gray-300">
                                     CNIPPET (&quot;we&quot;, &quot;us&quot;, or
                                     &quot;our&quot;) respects your privacy and
                                     is committed to protecting your personal
@@ -68,11 +68,11 @@ const PrivacyPolicy = () => {
                                 >
                                     Information Collection
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     We collect several types of information to
                                     provide and improve our services:
                                 </p>
-                                <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
+                                <ul className="mt-2 list-disc pl-5 text-gray-600 dark:text-gray-400">
                                     <li>
                                         <strong>
                                             Personal Identification Information:
@@ -115,11 +115,11 @@ const PrivacyPolicy = () => {
                                 >
                                     Use of Information
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     We use the collected information for the
                                     following purposes:
                                 </p>
-                                <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
+                                <ul className="mt-2 list-disc pl-5 text-gray-600 dark:text-gray-400">
                                     <li>
                                         To provide, operate, and maintain our
                                         services including component libraries
@@ -159,11 +159,11 @@ const PrivacyPolicy = () => {
                                 >
                                     Data Sharing and Disclosure
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     We do not sell your personal information. We
                                     may share information with:
                                 </p>
-                                <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
+                                <ul className="mt-2 list-disc pl-5 text-gray-600 dark:text-gray-400">
                                     <li>
                                         <strong>Service Providers:</strong>{" "}
                                         Payment processors (Razorpay), analytics
@@ -187,7 +187,7 @@ const PrivacyPolicy = () => {
                                         or sale of assets
                                     </li>
                                 </ul>
-                                <p className="pt-3 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-3 text-gray-600 dark:text-gray-400">
                                     We implement strict data processing
                                     agreements with all third-party services to
                                     ensure GDPR compliance.
@@ -199,11 +199,11 @@ const PrivacyPolicy = () => {
                                 >
                                     Data Security
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     We implement industry-standard security
                                     measures including:
                                 </p>
-                                <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
+                                <ul className="mt-2 list-disc pl-5 text-gray-600 dark:text-gray-400">
                                     <li>
                                         Encryption of data in transit (TLS 1.2+)
                                         and at rest (AES-256)
@@ -225,7 +225,7 @@ const PrivacyPolicy = () => {
                                         firewalls
                                     </li>
                                 </ul>
-                                <p className="pt-3 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-3 text-gray-600 dark:text-gray-400">
                                     Despite these measures, no internet
                                     transmission is 100% secure. We cannot
                                     guarantee absolute security but commit to
@@ -239,11 +239,11 @@ const PrivacyPolicy = () => {
                                 >
                                     Data Retention
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     We retain personal information only as long
                                     as necessary:
                                 </p>
-                                <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
+                                <ul className="mt-2 list-disc pl-5 text-gray-600 dark:text-gray-400">
                                     <li>
                                         Account information: Retained while your
                                         account is active or as needed to
@@ -269,11 +269,11 @@ const PrivacyPolicy = () => {
                                 >
                                     Your Rights
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     Depending on your jurisdiction, you may have
                                     rights to:
                                 </p>
-                                <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
+                                <ul className="mt-2 list-disc pl-5 text-gray-600 dark:text-gray-400">
                                     <li>
                                         Access and receive a copy of your
                                         personal data
@@ -298,7 +298,7 @@ const PrivacyPolicy = () => {
                                         communications
                                     </li>
                                 </ul>
-                                <p className="pt-3 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-3 text-gray-600 dark:text-gray-400">
                                     To exercise these rights, contact{" "}
                                     <Link href="mailto:privacy@cnippet.site">
                                         privacy@cnippet.site
@@ -315,13 +315,13 @@ const PrivacyPolicy = () => {
                                 >
                                     International Data Transfers
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     As a global platform, your information may
                                     be transferred to and processed in countries
                                     outside your residence. We ensure adequate
                                     safeguards through:
                                 </p>
-                                <ul className="mt-2 list-disc pl-5 text-neutral-500 dark:text-neutral-400">
+                                <ul className="mt-2 list-disc pl-5 text-gray-600 dark:text-gray-400">
                                     <li>
                                         EU Standard Contractual Clauses for EEA
                                         data transfers
@@ -342,7 +342,7 @@ const PrivacyPolicy = () => {
                                 >
                                     Children&apos;s Privacy
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     Our services are not directed to individuals
                                     under 16. We do not knowingly collect
                                     personal information from children. If we
@@ -357,7 +357,7 @@ const PrivacyPolicy = () => {
                                 >
                                     Policy Updates
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     We may update this policy periodically. We
                                     will notify you of significant changes via
                                     email or platform notification at least 30
@@ -371,7 +371,7 @@ const PrivacyPolicy = () => {
                                 >
                                     Contact Us
                                 </h2>
-                                <p className="pt-5 text-neutral-500 dark:text-neutral-400">
+                                <p className="pt-5 text-gray-600 dark:text-gray-400">
                                     For privacy-related inquiries, questions or
                                     to exercise your rights:
                                     <br />
@@ -386,7 +386,7 @@ const PrivacyPolicy = () => {
                                     Uttarakhand 248140
                                 </p>
                             </div>
-                            <div className="col-span-4 border-l px-10 py-10 dark:border-neutral-800">
+                            <div className="col-span-4 border-l border-dashed px-10 pt-10 pb-20 dark:border-neutral-800">
                                 <div className="sticky top-20">
                                     <div className="font-buch flex font-medium">
                                         Privacy Policy
@@ -479,7 +479,7 @@ const PrivacyPolicy = () => {
                     </div>
                 </div>
             </div>
-        </main>
+        </section>
     );
 };
 

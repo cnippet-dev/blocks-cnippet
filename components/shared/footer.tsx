@@ -20,13 +20,6 @@ import {
     DropdownMenuContent,
     DropdownMenuGroup,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuPortal,
-    DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { OrbitingCircles } from "../motion/orbiting-circles";
@@ -204,9 +197,9 @@ export default function Component() {
                                                     align="start"
                                                     sideOffset={-5}
                                                 >
-                                                    <DropdownMenuGroup>
+                                                    <DropdownMenuGroup className="[&_a]:w-full">
                                                         <DropdownMenuItem className="rounded-xl">
-                                                            <Link href="#">
+                                                            <Link href="/legal/licence">
                                                                 Licence
                                                             </Link>
                                                         </DropdownMenuItem>
@@ -227,12 +220,12 @@ export default function Component() {
                                                             </Link>
                                                         </DropdownMenuItem>
                                                         <DropdownMenuItem className="rounded-xl">
-                                                            <Link href="#">
+                                                            <Link href="/legal/affiliate">
                                                                 Affiliate Notice
                                                             </Link>
                                                         </DropdownMenuItem>
                                                         <DropdownMenuItem className="rounded-xl">
-                                                            <Link href="#">
+                                                            <Link href="/legal/accessibility">
                                                                 Accessibility
                                                                 Notice
                                                             </Link>
