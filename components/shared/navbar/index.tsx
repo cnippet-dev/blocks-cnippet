@@ -65,7 +65,7 @@ const Navbar = ({ className }: { className?: string }) => {
 
                         <div className="col-span-1 flex items-center justify-end border-r">
                             <div className="flex h-full w-20 items-center justify-center bg-gray-50 md:w-full dark:bg-black">
-                                <NavUser />
+                                
                             </div>
                             <div className="px-2 md:px-0">
                                 <MobileNav />
@@ -76,7 +76,7 @@ const Navbar = ({ className }: { className?: string }) => {
             </header> */}
 
             <>
-                <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-0 flex w-full overflow-visible">
+                <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-0 flex w-full overflow-visible h-full">
                     <div
                         className="absolute top-20 left-0 z-0 h-[1px] w-full flex-auto overflow-hidden border-t border-dashed border-gray-200 dark:border-neutral-700"
                         data-border="true"
@@ -84,7 +84,7 @@ const Navbar = ({ className }: { className?: string }) => {
                     ></div>
 
                     <div
-                        className="absolute top-0 left-1/2 z-0 h-full w-full max-w-7xl flex-auto -translate-x-1/2 overflow-visible"
+                        className="absolute top-0 left-1/2 z-0 w-full max-w-7xl h-28 flex-auto -translate-x-1/2 overflow-visible"
                         data-framer-name="Vertical lines"
                     >
                         <div
@@ -118,12 +118,9 @@ const Navbar = ({ className }: { className?: string }) => {
                             initial={{ y: -20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.6 }}
-                            className="mx-auto flex max-w-4xl items-center justify-between rounded-full bg-gray-200/60 dark:bg-neutral-800 backdrop-blur-md px-2 py-2"
+                            className="mx-auto flex max-w-4xl items-center justify-between rounded-full bg-gray-200/60 px-2 py-2 backdrop-blur-md dark:bg-neutral-800/50"
                         >
-                            <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                className="flex items-center"
-                            >
+                            <Link href="/" className="flex items-center">
                                 <Image
                                     src="https:res.cloudinary.com/dcxm3ccir/image/upload/v1753948226/logo-light.png"
                                     alt=""
@@ -138,7 +135,7 @@ const Navbar = ({ className }: { className?: string }) => {
                                         Blocks
                                     </span>
                                 </span>
-                            </motion.div>
+                            </Link>
 
                             <div className="hidden items-center space-x-8 text-sm font-medium md:flex">
                                 {[
@@ -159,7 +156,7 @@ const Navbar = ({ className }: { className?: string }) => {
                                     >
                                         <Link
                                             href="#"
-                                            className="text-gray-600 dark:text-gray-100 dark:hover:text-white transition-colors duration-200 hover:text-gray-900"
+                                            className="text-gray-600 transition-colors duration-200 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white"
                                         >
                                             {item}
                                         </Link>
@@ -181,7 +178,7 @@ const Navbar = ({ className }: { className?: string }) => {
                                     <RiArrowRightUpLine className="h-4 w-4" />
                                     <span>Preview</span>
                                 </Button>
-                                <motion.div
+                                {/* <motion.div
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                 >
@@ -189,7 +186,8 @@ const Navbar = ({ className }: { className?: string }) => {
                                         Buy Now
                                         <span className="ml-2">↗</span>
                                     </Button>
-                                </motion.div>
+                                </motion.div> */}
+                                <NavUser />
                             </motion.div>
                         </motion.nav>
                     </div>

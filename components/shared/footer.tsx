@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,8 +15,21 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuPortal,
+    DropdownMenuSeparator,
+    DropdownMenuShortcut,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { OrbitingCircles } from "../motion/orbiting-circles";
-import { Moon, Sun } from "lucide-react";
 
 export default function Component() {
     const { theme, setTheme } = useTheme();
@@ -66,7 +79,7 @@ export default function Component() {
 
             <section className="p-4">
                 <div className="rounded-3xl bg-gray-50 py-28 dark:bg-black">
-                    <div className="mx-auto max-w-6xl rounded-4xl bg-white px-10 py-2 shadow-lg dark:bg-background">
+                    <div className="dark:bg-background mx-auto max-w-6xl rounded-4xl bg-white px-10 py-2 shadow-lg">
                         <div className="grid items-center gap-12 lg:grid-cols-2">
                             {/* Left Content */}
                             <div className="space-y-4 py-5">
@@ -176,6 +189,57 @@ export default function Component() {
                                                 Projects
                                                 <RiArrowRightUpLine className="ml-1 h-3 w-3" />
                                             </Link>
+                                            <DropdownMenu>
+                                                <DropdownMenuTrigger asChild>
+                                                    <Button
+                                                        size="sm"
+                                                        variant="outline"
+                                                        className="items-start justify-start border-none bg-gray-50 px-0 py-0 text-left text-sm font-normal text-gray-600 shadow-none hover:bg-gray-50 dark:text-gray-400"
+                                                    >
+                                                        Legal
+                                                    </Button>
+                                                </DropdownMenuTrigger>
+                                                <DropdownMenuContent
+                                                    className="top-0 w-56 rounded-2xl"
+                                                    align="start"
+                                                    sideOffset={-5}
+                                                >
+                                                    <DropdownMenuGroup>
+                                                        <DropdownMenuItem className="rounded-xl">
+                                                            <Link href="#">
+                                                                Licence
+                                                            </Link>
+                                                        </DropdownMenuItem>
+                                                        <DropdownMenuItem className="rounded-xl">
+                                                            <Link href="/legal/terms">
+                                                                Terms of Service
+                                                            </Link>
+                                                        </DropdownMenuItem>
+                                                        <DropdownMenuItem className="rounded-xl">
+                                                            <Link href="/legal/privacy">
+                                                                Privacy Policy
+                                                            </Link>
+                                                        </DropdownMenuItem>
+                                                        <DropdownMenuItem className="rounded-xl">
+                                                            <Link href="/legal/cancellation">
+                                                                Cancellation
+                                                                Policy
+                                                            </Link>
+                                                        </DropdownMenuItem>
+                                                        <DropdownMenuItem className="rounded-xl">
+                                                            <Link href="#">
+                                                                Affiliate Notice
+                                                            </Link>
+                                                        </DropdownMenuItem>
+                                                        <DropdownMenuItem className="rounded-xl">
+                                                            <Link href="#">
+                                                                Accessibility
+                                                                Notice
+                                                            </Link>
+                                                        </DropdownMenuItem>
+                                                    </DropdownMenuGroup>
+                                                </DropdownMenuContent>
+                                            </DropdownMenu>
                                         </div>
                                     </div>
 
@@ -185,14 +249,16 @@ export default function Component() {
                                         </h3>
                                         <div className="hover flex flex-col space-y-3 [&_a]:text-sm [&_a]:text-gray-600 [&_a]:transition-colors [&_a]:hover:text-gray-900 [&_a]:dark:text-gray-400 [&_a]:dark:hover:text-white">
                                             <a
-                                                href="#"
+                                                href="https://dribbble.com/cnippet-dev"
+                                                target="_blank"
                                                 className="flex items-center"
                                             >
                                                 Behance
                                                 <RiArrowRightUpLine className="ml-1 h-3 w-3" />
                                             </a>
                                             <a
-                                                href="#"
+                                                href="https://www.behance.net/cnippetdev"
+                                                target="_blank"
                                                 className="flex items-center"
                                             >
                                                 Dribbble
@@ -231,7 +297,7 @@ export default function Component() {
                             </div>
 
                             {/* Bottom Footer */}
-                            <div className="mt-16 flex flex-col items-center justify-between space-y-4 border-t border-gray-200 pt-8 md:flex-row md:space-y-0">
+                            <div className="mt-16 flex flex-col items-center justify-between space-y-4 border-t border-gray-200 pt-8 md:flex-row md:space-y-0 dark:border-neutral-700">
                                 <div className="flex items-center space-x-4 text-xs font-medium tracking-tight text-gray-600 dark:text-gray-300">
                                     <span>© 2025 Cnippet</span>
                                     <span>•</span>
@@ -241,19 +307,19 @@ export default function Component() {
                                 </div>
                                 <div className="mr-5 ml-auto flex items-end">
                                     {mounted && (
-                                        <div className="flex w-fit gap-2 rounded-full border p-1 dark:border-neutral-800">
+                                        <div className="flex w-fit gap-1 rounded-full border p-0.5 dark:border-neutral-800">
                                             <button
                                                 onClick={() =>
                                                     setTheme("light")
                                                 }
-                                                className={`rounded-full p-0.5 ${theme === "light" ? "bg-slate-100 dark:bg-[#1a1a1a]" : ""}`}
+                                                className={`rounded-full p-1.5 ${theme === "light" ? "bg-slate-200 dark:bg-[#1a1a1a]" : ""}`}
                                                 aria-label="Light mode"
                                             >
                                                 <RiSunFill className="size-4" />
                                             </button>
                                             <button
                                                 onClick={() => setTheme("dark")}
-                                                className={`rounded-full p-0.5 ${theme === "dark" ? "bg-[#1a1a1a]" : ""}`}
+                                                className={`rounded-full p-1.5 ${theme === "dark" ? "bg-[#1a1a1a]" : ""}`}
                                                 aria-label="Dark mode"
                                             >
                                                 <RiMoonFill className="size-4" />

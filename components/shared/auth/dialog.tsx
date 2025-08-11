@@ -90,7 +90,7 @@ const AuthDialog = () => {
     }
 
     return (
-        <DialogContent className="w-full rounded-none bg-white p-0 md:max-w-md dark:bg-black">
+        <DialogContent className="w-full rounded-3xl bg-white p-0 md:max-w-md dark:bg-black">
             <DialogTitle className="sr-only">Sign In form</DialogTitle>
             <div className="isolate w-full max-w-full px-6 py-10 text-center">
                 <div className="mb-6 text-center">
