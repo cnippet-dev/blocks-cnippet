@@ -20,7 +20,7 @@ const components = {
     h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
         <h2
             className={cn(
-                "font-heading px-4 dark:border-dawn-800 mt-16 scroll-m-20 border-b pb-2 text-2xl tracking-tight first:mt-0 pt-8",
+                "mb-4 text-3xl font-medium px-3",
                 className,
             )}
             {...props}
@@ -48,7 +48,7 @@ const components = {
         className,
         ...props
     }: React.HTMLAttributes<HTMLParagraphElement>) => (
-        <p className={cn("mt-3 leading-7 px-4 font-normal", className)} {...props} />
+        <p className={cn("text-gray-400 px-3", className)} {...props} />
     ),
     ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
         <ul className={cn("my-6 ml-6 list-disc", className)} {...props} />
