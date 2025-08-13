@@ -33,7 +33,6 @@ import {
     RiMenu2Line,
     RiMenuUnfold2Line,
     RiSearchLine,
-    RiFlashlightFill,
 } from "@remixicon/react";
 
 const getCategories = () => {
@@ -461,11 +460,7 @@ export default function SectionsPage() {
                                                 }`}
                                             >
                                                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                                                {filteredSections.map(
-                                                    (
-                                                        section: any,
-                                                        index: number,
-                                                    ) => {
+                                                {filteredSections.map((section: any, index: number) => {
                                                         const match =
                                                             section.name.match(
                                                                 /^(.*?)-/,
