@@ -145,7 +145,6 @@ export default function Component() {
                                             className="size-10"
                                             width={1080}
                                             height={1080}
-                                            suppressHydrationWarning
                                         />
                                         <span className="text-xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
                                             Cnippet{" "}

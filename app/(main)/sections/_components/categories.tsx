@@ -124,108 +124,51 @@ export default function SectionsPage() {
                         data-framer-name="Vertical lines"
                     >
                         <div
-                            className="absolute right-0 top-0 bottom-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200"
+                            className="absolute top-0 right-0 bottom-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200 dark:border-neutral-700"
                             data-border="true"
                             data-framer-name="Right line"
-                        >
-                            <div
-                                className="cnippet-dot"
-                                data-border="true"
-                                data-framer-name="Ellipsis"
-                            ></div>
-                        </div>
+                        ></div>
                         <div
-                            className="absolute bottom-0 left-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200"
+                            className="absolute bottom-0 left-0 z-0 h-full w-[1px] border-r border-dashed border-gray-200 dark:border-neutral-700"
                             data-border="true"
                             data-framer-name="Left line"
-                        >
-                            <div
-                                className="cnippet-dot"
-                                data-border="true"
-                                data-framer-name="Ellipsis"
-                            ></div>
-                        </div>
+                        ></div>
                     </div>
                 </div>
 
                 <div className="relative z-10 pt-4">
-                    <div className="mx-auto max-w-7xl px-6">
-                        <motion.div
-                            initial={{ y: 30, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="mb-8 text-center"
-                        >
-                            <motion.div
-                                initial={{ scale: 0, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ duration: 0.5, delay: 0.4 }}
-                                className="mb-6"
-                            >
-                                <Badge
-                                    variant="secondary"
-                                    className="mb-4 border border-gray-200 bg-gray-100 py-0.5 pr-4 pl-0.5 text-xs text-black transition-colors hover:bg-gray-200"
-                                >
-                                    <span className="mr-1 rounded-full border bg-white px-4 py-1 text-xs">
-                                        <RiFlashlightFill className="size-3 text-blue-600" />
-                                    </span>
-                                    Discover Amazing UI Components
-                                </Badge>
-                            </motion.div>
-
-                            <motion.h1
-                                initial={{ y: 30, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ duration: 0.8, delay: 0.6 }}
-                                className="mb-4 text-4xl font-semibold tracking-tight text-gray-900 md:text-5xl"
-                            >
-                                Build Faster with{" "}
-                                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                                    Premium Components
-                                </span>
-                            </motion.h1>
-
-                            <motion.p
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ duration: 0.6, delay: 0.8 }}
-                                className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-700"
-                            >
-                                Explore our collection of professionally designed, fully responsive components
-                                to accelerate your development workflow.
-                            </motion.p>
-                        </motion.div>
-
+                    <div className="mx-auto max-w-7xl px-0">
                         <div className="relative min-h-screen">
                             <div className="grid grid-cols-12 gap-8">
-                                {/* Enhanced Sidebar */}
                                 <motion.div
                                     initial={{ x: -50, opacity: 0 }}
                                     animate={{ x: 0, opacity: 1 }}
                                     transition={{ duration: 0.6, delay: 1.0 }}
-                                    className={`${sidebarOpen ? "col-span-3" : "hidden"} bg-white/50 backdrop-blur-sm rounded-2xl border border-gray-200/50 p-6 shadow-sm`}
+                                    className={`${sidebarOpen ? "col-span-3" : "hidden"} p-6`}
                                 >
-                                    <div className={`${sidebarOpen ? "sticky" : "block"} top-6 space-y-8`}>
-                                        {/* Search Section */}
+                                    <div
+                                        className={`${sidebarOpen ? "sticky" : "block"} top-20 space-y-8`}
+                                    >
                                         <div className="relative">
-                                            <RiSearchLine className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
+                                            <RiSearchLine className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 transform" />
                                             <Input
                                                 placeholder="Search components..."
                                                 value={searchQuery}
                                                 onChange={(e) =>
-                                                    setSearchQuery(e.target.value)
+                                                    setSearchQuery(
+                                                        e.target.value,
+                                                    )
                                                 }
-                                                className="h-12 rounded-xl border-gray-200 pl-12 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus-visible:ring-0 bg-white/80 backdrop-blur-sm"
+                                                className="h-10 rounded-xl border-gray-200 bg-white/80 shadow-sm backdrop-blur-sm focus:border-blue-500 focus:ring-blue-500 focus-visible:ring-0 dark:border-neutral-700 dark:bg-neutral-800"
                                             />
                                         </div>
-
-                                        {/* Active Filters */}
                                         <div className="space-y-4">
                                             <div className="flex items-center justify-between">
-                                                <h3 className="font-semibold text-gray-900 text-sm">
+                                                <h3 className="text-sm font-semibold">
                                                     Active Filters
                                                 </h3>
-                                                {(selectedCategories.length > 0 ||
+                                                {(selectedCategories.length >
+                                                    0 ||
                                                     urlLicense) && (
                                                     <Button
                                                         variant="ghost"
@@ -236,14 +179,15 @@ export default function SectionsPage() {
                                                                 "",
                                                             )
                                                         }
-                                                        className="text-xs text-gray-500 hover:text-gray-700"
+                                                        className="text-xs text-gray-500 hover:text-gray-700 dark:text-neutral-400 dark:hover:text-neutral-300"
                                                     >
                                                         Clear all
                                                     </Button>
                                                 )}
                                             </div>
                                             <div className="flex flex-wrap gap-2">
-                                                {selectedCategories.length === 0 &&
+                                                {selectedCategories.length ===
+                                                    0 &&
                                                     !urlLicense && (
                                                         <span className="text-xs text-gray-400">
                                                             No filters applied
@@ -251,62 +195,56 @@ export default function SectionsPage() {
                                                     )}
                                                 {selectedCategories.map(
                                                     (category) => (
-                                                        <Badge
+                                                        <Button
                                                             key={category}
-                                                            variant="secondary"
-                                                            className="flex items-center gap-1 bg-blue-50 px-3 py-1 text-sm text-blue-700 shadow-sm hover:bg-blue-100 rounded-full"
-                                                        >
-                                                            {capitalize(category)}
-                                                            <button
-                                                                onClick={() => {
-                                                                    const updated =
-                                                                        selectedCategories.filter(
-                                                                            (c) =>
-                                                                                c !==
-                                                                                category,
-                                                                        );
-                                                                    updateCategoryInUrl(
-                                                                        updated,
-                                                                        urlLicense,
+                                                            variant="outline"
+                                                            size="sm"
+                                                            onClick={() => {
+                                                                const updated =
+                                                                    selectedCategories.filter(
+                                                                        (c) =>
+                                                                            c !==
+                                                                            category,
                                                                     );
-                                                                }}
-                                                                className="ml-1 cursor-pointer hover:text-blue-900"
-                                                            >
-                                                                <RiCloseLine className="h-3 w-3" />
-                                                            </button>
-                                                        </Badge>
+                                                                updateCategoryInUrl(
+                                                                    updated,
+                                                                    urlLicense,
+                                                                );
+                                                            }}
+                                                            className="cursor-pointer justify-start gap-1 rounded-full border-gray-200 bg-neutral-200 text-sm font-normal text-black shadow-none transition-all duration-200 hover:bg-neutral-300 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-800 [&_svg]:size-3"
+                                                        >
+                                                            {capitalize(
+                                                                category,
+                                                            )}
+                                                            <RiCloseLine />
+                                                        </Button>
                                                     ),
                                                 )}
                                                 {urlLicense && (
-                                                    <Badge
-                                                        variant="secondary"
-                                                        className="flex items-center gap-1 bg-purple-50 px-3 py-1 text-sm text-purple-700 shadow-sm hover:bg-purple-100 rounded-full"
+                                                    <Button
+                                                        variant="outline"
+                                                        size="sm"
+                                                        className="cursor-pointer justify-start gap-1 rounded-full border-none bg-purple-700 px-2 text-sm font-normal text-white shadow-none transition-all duration-200 hover:bg-purple-600 dark:text-neutral-300 dark:hover:bg-neutral-800 [&_svg]:size-3"
+                                                        onClick={() =>
+                                                            updateCategoryInUrl(
+                                                                selectedCategories,
+                                                                "",
+                                                            )
+                                                        }
                                                     >
                                                         {urlLicense === "pro"
                                                             ? "Pro"
                                                             : "Free"}
-                                                        <button
-                                                            onClick={() =>
-                                                                updateCategoryInUrl(
-                                                                    selectedCategories,
-                                                                    "",
-                                                                )
-                                                            }
-                                                            className="ml-1 hover:text-purple-900"
-                                                        >
-                                                            <RiCloseLine className="h-3 w-3" />
-                                                        </button>
-                                                    </Badge>
+                                                        <RiCloseLine />
+                                                    </Button>
                                                 )}
                                             </div>
                                         </div>
-
-                                        {/* Categories */}
                                         <Collapsible
                                             defaultOpen
                                             className="space-y-4"
                                         >
-                                            <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg font-semibold text-gray-900 text-sm">
+                                            <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg text-sm font-semibold">
                                                 Categories
                                                 <RiArrowDownSLine className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
                                             </CollapsibleTrigger>
@@ -335,7 +273,7 @@ export default function SectionsPage() {
                                                                         urlLicense,
                                                                     );
                                                                 }}
-                                                                className="cursor-pointer justify-start rounded-full border-gray-200 text-sm font-normal shadow-none hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
+                                                                className="cursor-pointer justify-start rounded-full border-gray-200 text-sm font-normal shadow-none transition-all duration-200 hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
                                                             >
                                                                 {capitalize(
                                                                     category,
@@ -345,10 +283,9 @@ export default function SectionsPage() {
                                                 </div>
                                             </CollapsibleContent>
                                         </Collapsible>
-
                                         {/* License */}
                                         <div className="space-y-3">
-                                            <h3 className="font-semibold text-gray-900 text-sm">
+                                            <h3 className="text-sm font-semibold">
                                                 License
                                             </h3>
                                             <div className="flex gap-2">
@@ -369,8 +306,8 @@ export default function SectionsPage() {
                                                     }
                                                     className={
                                                         urlLicense === "pro"
-                                                            ? "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-full"
-                                                            : "rounded-full border-gray-200 text-sm font-normal shadow-none hover:border-purple-300 hover:bg-purple-50 transition-all duration-200"
+                                                            ? "cursor-pointer rounded-full border-neutral-800 bg-gradient-to-r from-purple-700 to-rose-600 text-sm text-white"
+                                                            : "cursor-pointer rounded-full text-sm font-normal shadow-none transition-all duration-200 dark:border-neutral-800"
                                                     }
                                                 >
                                                     Pro
@@ -385,15 +322,16 @@ export default function SectionsPage() {
                                                     onClick={() =>
                                                         updateCategoryInUrl(
                                                             selectedCategories,
-                                                            urlLicense === "free"
+                                                            urlLicense ===
+                                                                "free"
                                                                 ? ""
                                                                 : "free",
                                                         )
                                                     }
                                                     className={
                                                         urlLicense === "free"
-                                                            ? "bg-black hover:bg-gray-800 rounded-full"
-                                                            : "rounded-full border-gray-200 text-sm font-normal shadow-none hover:border-green-300 hover:bg-green-50 transition-all duration-200"
+                                                            ? "cursor-pointer rounded-full border-neutral-800 bg-gradient-to-r from-violet-600 to-blue-700 text-sm text-white"
+                                                            : "cursor-pointer rounded-full text-sm font-normal shadow-none transition-all duration-200 dark:border-neutral-800"
                                                     }
                                                 >
                                                     Free
@@ -403,24 +341,24 @@ export default function SectionsPage() {
                                     </div>
                                 </motion.div>
 
-                                {/* Enhanced Main Content */}
                                 <motion.div
                                     initial={{ x: 50, opacity: 0 }}
                                     animate={{ x: 0, opacity: 1 }}
                                     transition={{ duration: 0.6, delay: 1.2 }}
-                                    className={`${sidebarOpen ? "col-span-9" : "col-span-12"} bg-white/50 backdrop-blur-sm rounded-2xl border border-gray-200/50 shadow-sm`}
+                                    className={`${sidebarOpen ? "col-span-9" : "col-span-12"}`}
                                 >
-                                    {/* Enhanced Header */}
-                                    <header className="border-b border-gray-200/50 bg-white/80 backdrop-blur-sm rounded-t-2xl">
-                                        <div className="flex h-16 items-center justify-between px-8">
+                                    <header className="border-b dark:border-neutral-800">
+                                        <div className="flex h-16 items-center justify-between pr-2">
                                             <div className="flex items-center gap-6">
                                                 <Button
                                                     variant="ghost"
                                                     size="sm"
                                                     onClick={() =>
-                                                        setSidebarOpen(!sidebarOpen)
+                                                        setSidebarOpen(
+                                                            !sidebarOpen,
+                                                        )
                                                     }
-                                                    className="[&_svg]:size-5 hover:bg-gray-100 rounded-lg"
+                                                    className="cursor-pointer rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-800 [&_svg]:size-5"
                                                 >
                                                     {sidebarOpen ? (
                                                         <RiMenuUnfold2Line />
@@ -428,17 +366,19 @@ export default function SectionsPage() {
                                                         <RiMenu2Line />
                                                     )}
                                                 </Button>
-                                                <div className="flex items-center gap-2">
-                                                    <span className="text-sm font-medium text-gray-900">
-                                                        {filteredSections.length}
+                                                <div className="flex items-center gap-1 text-gray-600 dark:text-neutral-400">
+                                                    <span className="text-sm font-medium">
+                                                        {
+                                                            filteredSections.length
+                                                        }
                                                     </span>
-                                                    <span className="text-sm text-gray-600">
+                                                    <span className="text-sm">
                                                         components found
                                                     </span>
                                                 </div>
                                             </div>
                                             <div className="flex items-center gap-4">
-                                                <div className="flex items-center gap-1 rounded-lg bg-gray-100 p-1">
+                                                <div className="flex items-center gap-1 rounded-lg bg-gray-100 p-1 dark:bg-neutral-900">
                                                     <Button
                                                         variant={
                                                             viewMode === "grid"
@@ -449,7 +389,7 @@ export default function SectionsPage() {
                                                         onClick={() =>
                                                             setViewMode("grid")
                                                         }
-                                                        className="h-8 w-8 p-0 rounded-md"
+                                                        className="h-8 w-8 rounded-md p-0"
                                                     >
                                                         <RiLayoutColumnLine className="h-4 w-4" />
                                                     </Button>
@@ -463,7 +403,7 @@ export default function SectionsPage() {
                                                         onClick={() =>
                                                             setViewMode("list")
                                                         }
-                                                        className="h-8 w-8 p-0 rounded-md"
+                                                        className="h-8 w-8 rounded-md p-0"
                                                     >
                                                         <RiLayoutRowLine className="h-4 w-4" />
                                                     </Button>
@@ -473,7 +413,7 @@ export default function SectionsPage() {
                                     </header>
 
                                     {/* Enhanced Content */}
-                                    <main className="p-8">
+                                    <main className="px-2 py-10">
                                         {filteredSections.length === 0 ? (
                                             <motion.div
                                                 initial={{ y: 20, opacity: 0 }}
@@ -487,13 +427,18 @@ export default function SectionsPage() {
                                                 <h3 className="mb-3 text-xl font-semibold text-gray-900">
                                                     No components found
                                                 </h3>
-                                                <p className="mb-6 text-gray-600 max-w-md">
-                                                    Try adjusting your filters or search terms to find what you&apos;re looking for
+                                                <p className="mb-6 max-w-md text-gray-600">
+                                                    Try adjusting your filters
+                                                    or search terms to find what
+                                                    you&apos;re looking for
                                                 </p>
                                                 <Button
                                                     variant="outline"
                                                     onClick={() => {
-                                                        updateCategoryInUrl([], "");
+                                                        updateCategoryInUrl(
+                                                            [],
+                                                            "",
+                                                        );
                                                         setSearchQuery("");
                                                     }}
                                                     className="rounded-full"
@@ -505,7 +450,10 @@ export default function SectionsPage() {
                                             <motion.div
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
-                                                transition={{ duration: 0.6, delay: 1.4 }}
+                                                transition={{
+                                                    duration: 0.6,
+                                                    delay: 1.4,
+                                                }}
                                                 className={`grid gap-8 ${
                                                     viewMode === "grid"
                                                         ? "grid-cols-1 md:grid-cols-2 xl:grid-cols-2"
@@ -513,7 +461,11 @@ export default function SectionsPage() {
                                                 }`}
                                             >
                                                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                                                {filteredSections.map((section: any, index: number) => {
+                                                {filteredSections.map(
+                                                    (
+                                                        section: any,
+                                                        index: number,
+                                                    ) => {
                                                         const match =
                                                             section.name.match(
                                                                 /^(.*?)-/,
@@ -523,22 +475,29 @@ export default function SectionsPage() {
                                                             : section.name;
                                                         return (
                                                             <motion.div
-                                                                key={section.name}
-                                                                initial={{ y: 20, opacity: 0 }}
-                                                                animate={{ y: 0, opacity: 1 }}
-                                                                transition={{ 
-                                                                    duration: 0.6, 
-                                                                    delay: 1.6 + (index * 0.1) 
+                                                                key={
+                                                                    section.name
+                                                                }
+                                                                initial={{
+                                                                    y: 20,
+                                                                    opacity: 0,
                                                                 }}
-                                                                whileHover={{ 
-                                                                    y: -5,
-                                                                    transition: { duration: 0.2 }
+                                                                animate={{
+                                                                    y: 0,
+                                                                    opacity: 1,
+                                                                }}
+                                                                transition={{
+                                                                    duration: 0.6,
+                                                                    delay:
+                                                                        1.6 +
+                                                                        index *
+                                                                            0.1,
                                                                 }}
                                                             >
-                                                                <Card className="group overflow-hidden border border-gray-200/50 shadow-sm hover:shadow-lg transition-all duration-300 rounded-2xl bg-white/80 backdrop-blur-sm">
+                                                                <Card className="group overflow-hidden border-none shadow-none transition-all duration-300">
                                                                     <CardContent className="p-0">
                                                                         <div className="relative overflow-hidden">
-                                                                            <div className="relative overflow-hidden rounded-t-2xl">
+                                                                            <div className="relative overflow-hidden rounded-xl border border-gray-200/40">
                                                                                 {failedImages.has(
                                                                                     section.name,
                                                                                 ) ? (
@@ -580,7 +539,7 @@ export default function SectionsPage() {
                                                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                                                                             </div>
 
-                                                                            <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 opacity-0 transition-all duration-300 ease-in group-hover:bottom-6 group-hover:opacity-100">
+                                                                            <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-0 transition-all duration-300 ease-in group-hover:bottom-6 group-hover:opacity-100">
                                                                                 <div className="flex items-center justify-center gap-3">
                                                                                     <TooltipProvider>
                                                                                         <Tooltip>
@@ -596,7 +555,7 @@ export default function SectionsPage() {
                                                                                                     disabled={
                                                                                                         isPending
                                                                                                     }
-                                                                                                    className="h-10 w-fit cursor-pointer rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-white hover:scale-105 [&_svg]:size-5"
+                                                                                                    className="h-10 w-fit cursor-pointer rounded-lg bg-white p-2 shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-white [&_svg]:size-5.5"
                                                                                                 >
                                                                                                     <RiHeartFill
                                                                                                         className={` ${
@@ -604,7 +563,7 @@ export default function SectionsPage() {
                                                                                                                 section.name,
                                                                                                             )
                                                                                                                 ? "fill-red-500 text-red-500"
-                                                                                                                : "text-gray-800 hover:text-red-500"
+                                                                                                                : "text-black hover:text-red-500"
                                                                                                         }`}
                                                                                                     />
                                                                                                 </Button>
@@ -633,13 +592,13 @@ export default function SectionsPage() {
                                                                                             >
                                                                                                 <Button
                                                                                                     size="sm"
-                                                                                                    className="h-10 cursor-pointer rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm hover:bg-white hover:scale-105 [&_svg]:size-5"
+                                                                                                    className="h-10 cursor-pointer rounded-lg bg-white p-2 shadow-lg backdrop-blur-sm hover:scale-105 hover:bg-white [&_svg]:size-5"
                                                                                                 >
                                                                                                     <Link
                                                                                                         href={`/sections/${section.name.split("-")[0]}`}
                                                                                                         target="_blank"
                                                                                                     >
-                                                                                                        <RiEyeLine className="size-5 text-gray-800" />
+                                                                                                        <RiEyeLine className="size-5 text-black" />
                                                                                                     </Link>
                                                                                                 </Button>
                                                                                             </TooltipTrigger>
@@ -659,9 +618,9 @@ export default function SectionsPage() {
                                                                             </div>
                                                                         </div>
 
-                                                                        <div className="p-6">
-                                                                            <div className="mb-3 flex items-start justify-between">
-                                                                                <h3 className="text-xl font-semibold text-gray-900">
+                                                                        <div className="px-2 py-3">
+                                                                            <div className="mb-1 flex items-start justify-between">
+                                                                                <h3 className="text-xl font-medium tracking-tight">
                                                                                     {capitalize(
                                                                                         section.name.replace(
                                                                                             /-/g,
@@ -670,12 +629,12 @@ export default function SectionsPage() {
                                                                                     )}
                                                                                 </h3>
                                                                                 {section.pro && (
-                                                                                    <Badge className="border-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full px-3 py-1">
+                                                                                    <Badge className="rounded-full border-0 bg-gradient-to-r from-purple-700 to-pink-500 px-1.5 py-0.5 text-xs text-white">
                                                                                         Pro
                                                                                     </Badge>
                                                                                 )}
                                                                             </div>
-                                                                            <p className="text-sm text-gray-600 capitalize font-medium">
+                                                                            <p className="text-sm font-medium text-gray-600 capitalize dark:text-neutral-400">
                                                                                 {
                                                                                     category
                                                                                 }

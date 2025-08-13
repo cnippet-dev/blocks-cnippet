@@ -125,8 +125,8 @@ export default function SlidingImages() {
                 </div>
 
                 <div className="relative">
-                    <div className="absolute top-0 left-0 z-10 h-full w-40 bg-gradient-to-r from-white dark:from-background" />
-                    <div className="absolute top-0 right-0 z-10 h-full w-40 bg-gradient-to-l from-white dark:from-background" />
+                    <div className="dark:from-background absolute top-0 left-0 z-10 h-full w-40 bg-gradient-to-r from-white" />
+                    <div className="dark:from-background absolute top-0 right-0 z-10 h-full w-40 bg-gradient-to-l from-white" />
 
                     <motion.div
                         style={{ x: x1 }}
@@ -156,7 +156,7 @@ export default function SlidingImages() {
                         {slider2.map((project, index) => (
                             <div
                                 key={index}
-                                className="flex h-[16vw] w-[50%] items-center justify-center rounded-2xl bg-gray-50"
+                                className="flex h-[16vw] w-[50%] items-center justify-center rounded-2xl bg-gray-50 dark:bg-neutral-800"
                             >
                                 <div className="relative h-[90%] w-[90%]">
                                     <Image
