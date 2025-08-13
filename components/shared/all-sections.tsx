@@ -89,7 +89,7 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                     <div className="mx-auto max-w-7xl">
                         <div className="mt-32 max-w-7xl px-10">
                             <div className="mb-16 space-y-4">
-                                <motion.h1 className="text-4xl font-semibold tracking-tight text-black dark:text-white md:text-4xl">
+                                <motion.h1 className="text-4xl font-semibold tracking-tight text-black md:text-4xl dark:text-white">
                                     Explore wide range of Sections
                                 </motion.h1>
 
@@ -120,7 +120,7 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                                         return (
                                             <motion.div
                                                 key={index}
-                                                className={`relative overflow-visible border-dashed border-gray-400/50 bg-white dark:bg-background p-4 transition-shadow duration-300 ${index !== 3 && index !== 7 && index !== 11 ? "border-r" : ""} ${index <= 11 ? "border-b" : ""}`}
+                                                className={`dark:bg-background relative overflow-visible border-dashed border-gray-400/50 bg-white p-4 transition-shadow duration-300 ${index !== 3 && index !== 7 && index !== 11 ? "border-r" : ""} ${index <= 11 ? "border-b" : ""}`}
                                                 variants={itemVariants}
                                                 whileHover={{
                                                     transition: {
@@ -159,7 +159,7 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                                                             }
                                                             sizes="100vw"
                                                             alt="Description of my image"
-                                                            className="w-full rounded-2xl"
+                                                            className="w-full rounded-2xl bg-white dark:bg-neutral-800 bg-gradient-to-t from-background "
                                                         />
 
                                                         <div className="flex flex-col items-start p-4">

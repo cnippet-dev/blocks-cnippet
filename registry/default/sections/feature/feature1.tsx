@@ -11,7 +11,7 @@ export default function Component() {
             <div className="mb-8 flex justify-center">
                 <Badge
                     variant="outline"
-                    className="flex items-center gap-2 border-gray-200 bg-white px-4 py-2 text-sm"
+                    className="flex items-center gap-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-black px-4 py-2 text-sm"
                 >
                     <Zap className="h-4 w-4 text-yellow-500" />
                     Empower Innovation!
@@ -20,12 +20,12 @@ export default function Component() {
 
             {/* Main Heading and Subtitle */}
             <div className="mb-16 text-center">
-                <h1 className="mb-6 text-4xl leading-tight font-bold text-gray-900 md:text-5xl">
+                <h1 className="mb-6 text-4xl leading-tight font-bold text-gray-900 dark:text-gray-100 md:text-5xl">
                     The perfect balance
                     <br />
                     of speed and security
                 </h1>
-                <p className="mx-auto max-w-2xl text-lg text-gray-600">
+                <p className="mx-auto max-w-2xl text-lg text-gray-600 dark:text-gray-400">
                     Streamline your workflows while maintaining top-notch
                     security standards.
                 </p>
@@ -35,7 +35,7 @@ export default function Component() {
             <div className="mb-12 grid gap-8 lg:grid-cols-12">
                 {/* Left Panel - User Profile & Chart */}
                 <div className="lg:col-span-4">
-                    <Card className="h-full border-0 bg-gray-50 p-6">
+                    <Card className="h-full border-0 bg-gray-50 dark:bg-gray-900 p-6">
                         <CardContent className="p-0">
                             {/* User Profile */}
                             <div className="mb-6 flex items-center gap-3">
@@ -44,10 +44,10 @@ export default function Component() {
                                     <AvatarFallback>PB</AvatarFallback>
                                 </Avatar>
                                 <div>
-                                    <h3 className="font-semibold text-gray-900">
+                                    <h3 className="font-semibold text-gray-900 dark:text-gray-100">
                                         Peter Bekkers
                                     </h3>
-                                    <p className="text-sm text-gray-600">
+                                    <p className="text-sm text-gray-600 dark:text-gray-400">
                                         Beam Technology
                                     </p>
                                 </div>
@@ -56,14 +56,14 @@ export default function Component() {
                             {/* Plan Toggle */}
                             <div className="mb-8 flex items-center gap-4">
                                 <div className="flex items-center gap-2">
-                                    <div className="h-3 w-3 rounded-full bg-gray-400"></div>
-                                    <span className="text-sm text-gray-600">
+                                    <div className="h-3 w-3 rounded-full bg-gray-400 dark:bg-gray-600"></div>
+                                    <span className="text-sm text-gray-600 dark:text-gray-400">
                                         Free
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <div className="h-3 w-3 rounded-full bg-blue-600"></div>
-                                    <span className="text-sm font-medium text-gray-900">
+                                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                                         Premium
                                     </span>
                                 </div>
@@ -87,6 +87,7 @@ export default function Component() {
                                                 d="M 60 0 L 0 0 0 24"
                                                 fill="none"
                                                 stroke="#f3f4f6"
+                                                className="dark:stroke-gray-800"
                                                 strokeWidth="1"
                                             />
                                         </pattern>

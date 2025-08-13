@@ -90,7 +90,7 @@ export default function Component() {
                         Your mindset <br className="hidden sm:block" />
                         shapes{" "}
                         <motion.span
-                            className="font-normal text-emerald-500 italic"
+                            className="font-normal text-emerald-500 dark:text-emerald-400 italic"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.8, delay: 1 }}
@@ -112,7 +112,7 @@ export default function Component() {
                         >
                             <Button
                                 size="lg"
-                                className="rounded-full bg-white px-8 py-3 text-lg text-black hover:bg-white/90"
+                                className="rounded-full bg-white px-8 py-3 text-lg text-black hover:bg-white/90 dark:bg-white dark:text-black dark:hover:bg-white/90"
                             >
                                 Join us—today
                             </Button>

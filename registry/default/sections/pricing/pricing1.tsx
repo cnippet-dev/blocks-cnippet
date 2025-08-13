@@ -70,11 +70,11 @@ export default function PricingSection() {
     return (
         <div className="mx-auto w-full max-w-7xl px-4 py-16">
             <div className="mb-16 text-left">
-                <p className="mb-4 font-medium text-purple-600">Pricing</p>
-                <h1 className="mb-5 text-4xl font-semibold text-gray-900 md:text-5xl">
+                <p className="mb-4 font-medium text-purple-600 dark:text-purple-400">Pricing</p>
+                <h1 className="mb-5 text-4xl font-semibold text-gray-900 dark:text-gray-100 md:text-5xl">
                     Simple, transparent pricing
                 </h1>
-                <p className="max-w-2xl text-lg text-gray-600">
+                <p className="max-w-2xl text-lg text-gray-600 dark:text-gray-400">
                     We believe Untitled should be accessible to all companies,
                     no matter the size.
                 </p>
@@ -86,17 +86,17 @@ export default function PricingSection() {
                     return (
                         <Card
                             key={plan.id}
-                            className="relative overflow-hidden border border-gray-200 shadow-none transition-shadow hover:shadow-md"
+                            className="relative overflow-hidden border border-gray-200 dark:border-gray-700 shadow-none transition-shadow hover:shadow-md dark:bg-gray-900"
                         >
                             <CardHeader className="pb-8 text-center">
-                                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-100">
-                                    <IconComponent className="size-6 text-purple-600" />
+                                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/20">
+                                    <IconComponent className="size-6 text-purple-600 dark:text-purple-400" />
                                 </div>
-                                <h3 className="mb-4 text-3xl font-medium text-purple-700">
+                                <h3 className="mb-4 text-3xl font-medium text-purple-700 dark:text-purple-400">
                                     {plan.name}
                                 </h3>
                                 <div className="mb-2">
-                                    <span className="text-4xl font-semibold text-gray-900">
+                                    <span className="text-4xl font-semibold text-gray-900 dark:text-gray-100">
                                         {plan.price}
                                     </span>
                                     <span className="text-4xl font-semibold text-gray-900">

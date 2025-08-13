@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 
 export default function Component() {
     return (
-        <div className="relative min-h-screen overflow-hidden bg-[#fdf9ed]">
+        <div className="relative min-h-screen overflow-hidden bg-[#fdf9ed] dark:bg-black">
             <div className="relative z-10 mx-auto h-screen max-w-7xl py-16">
                 <motion.div
                     className="grid grid-cols-12"
@@ -26,11 +26,11 @@ export default function Component() {
                         >
                             <Badge
                                 variant="secondary"
-                                className="bg-white px-2 py-2 text-xs font-medium text-black"
+                                className="bg-white dark:bg-black px-2 py-2 text-xs font-medium text-black dark:text-white"
                             >
-                                <RiFlashlightFill className="mr-2 h-4 w-4 rounded-full bg-purple-50 p-0.5 text-purple-600 shadow" />
+                                <RiFlashlightFill className="mr-2 h-4 w-4 rounded-full bg-purple-50 dark:bg-purple-900/20 p-0.5 text-purple-600 dark:text-purple-400 shadow" />
                                 New features are now available{" "}
-                                <span className="text-purple-500">(Beta)</span>
+                                <span className="text-purple-500 dark:text-purple-400">(Beta)</span>
                             </Badge>
                         </motion.div>
 
@@ -39,10 +39,10 @@ export default function Component() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4, duration: 0.8 }}
                         >
-                            <h1 className="font-funn text-5xl font-medium text-gray-900 lg:text-6xl">
+                            <h1 className="font-funn text-5xl font-medium text-gray-900 dark:text-gray-100 lg:text-6xl">
                                 Collecting customer <br />
                                 feedback,{" "}
-                                <span className="text-orange-500">
+                                <span className="text-orange-500 dark:text-orange-400">
                                     back-to-back.
                                 </span>
                             </h1>
@@ -51,7 +51,7 @@ export default function Component() {
 
                     <div className="col-span-5 flex flex-col items-start justify-end space-y-6">
                         <motion.p
-                            className="max-w-full text-lg leading-relaxed text-gray-700"
+                            className="max-w-full text-lg leading-relaxed text-gray-700 dark:text-gray-400"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.6, duration: 0.6 }}
@@ -68,13 +68,13 @@ export default function Component() {
                         >
                             <Button
                                 size="lg"
-                                className="group rounded-full bg-gray-900 px-4 py-4 text-base font-medium text-white hover:bg-gray-800"
+                                className="group rounded-full bg-gray-900 dark:bg-white px-4 py-4 text-base font-medium text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-100"
                             >
                                 See it in action
                                 <RiArrowRightLine className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </Button>
 
-                            <p className="text-sm font-medium text-gray-700">
+                            <p className="text-sm font-medium text-gray-700 dark:text-gray-400">
                                 50+ people use Jambo today.
                             </p>
                         </motion.div>
@@ -97,7 +97,7 @@ export default function Component() {
                         }}
                         className="absolute bottom-0 -z-20 h-full w-full border-0"
                     >
-                        <div className="pointer-events-none mx-auto h-[35rem] max-w-6xl rounded-t-full bg-yellow-200"></div>
+                        <div className="pointer-events-none mx-auto h-[35rem] max-w-6xl rounded-t-full bg-yellow-200 dark:bg-yellow-900/20"></div>
                     </motion.div>
                     <motion.div
                         className="absolute right-1/2 bottom-0 mx-auto w-full max-w-4xl translate-x-1/2"

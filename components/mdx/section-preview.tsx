@@ -201,7 +201,7 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
                             </div>
                         }
                     >
-                        <div className="overflow- col-span-2 row-start-2 mx-auto mt-8 min-w-0 border border-r-0 border-l-0">
+                        <div className="overflow- col-span-2 row-start-2 mx-auto mt-8 min-w-0 border border-r-0 border-l-0 border-dashed dark:border-neutral-700">
                             {renderContent()}
                         </div>
                     </React.Suspense>

@@ -16,14 +16,14 @@ import DotsPattern from "@/components/motion/dots-pattern";
 
 export default function Component() {
     return (
-        <div className="relative min-h-screen overflow-hidden bg-[#fdf9ed]">
+        <div className="relative min-h-screen overflow-hidden bg-[#fdf9ed] dark:bg-black">
             <DotsPattern
                 backgroundColor="#F8F5EC"
                 dotColor="#4A5568"
                 gridSpacing={30}
             />
 
-            <div className="relative z-10 mx-auto h-screen max-w-7xl border-l border-neutral-400 py-16 pl-16">
+            <div className="relative z-10 mx-auto h-screen max-w-7xl border-l border-neutral-400 dark:border-neutral-700 py-16 pl-16">
                 <div className="grid h-full items-center gap-12 lg:grid-cols-12">
                     <div className="col-span-10 flex h-full flex-col justify-between">
                         <motion.div
@@ -39,11 +39,11 @@ export default function Component() {
                             >
                                 <Badge
                                     variant="secondary"
-                                    className="bg-white px-2 py-2 text-xs font-medium text-black"
+                                    className="bg-white dark:bg-black px-2 py-2 text-xs font-medium text-black dark:text-white"
                                 >
-                                    <RiFlashlightFill className="mr-2 h-4 w-4 rounded-full bg-purple-50 p-0.5 text-purple-600 shadow" />
+                                    <RiFlashlightFill className="mr-2 h-4 w-4 rounded-full bg-purple-50 dark:bg-purple-900/20 p-0.5 text-purple-600 dark:text-purple-400 shadow" />
                                     New features are now available{" "}
-                                    <span className="text-purple-500">
+                                    <span className="text-purple-500 dark:text-purple-400">
                                         (Beta)
                                     </span>
                                 </Badge>
@@ -54,17 +54,17 @@ export default function Component() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4, duration: 0.8 }}
                             >
-                                <h1 className="font-funn text-5xl font-medium text-gray-900 lg:text-7xl">
+                                <h1 className="font-funn text-5xl font-medium text-gray-900 dark:text-gray-100 lg:text-7xl">
                                     Collecting customer <br />
                                     feedback,{" "}
-                                    <span className="text-orange-500">
+                                    <span className="text-orange-500 dark:text-orange-400">
                                         back-to-back.
                                     </span>
                                 </h1>
                             </motion.div>
 
                             <motion.p
-                                className="max-w-lg text-lg leading-relaxed text-gray-700"
+                                className="max-w-lg text-lg leading-relaxed text-gray-700 dark:text-gray-400"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.6, duration: 0.6 }}
@@ -82,13 +82,13 @@ export default function Component() {
                             >
                                 <Button
                                     size="lg"
-                                    className="group rounded-full bg-gray-900 px-4 py-4 text-base font-medium text-white hover:bg-gray-800"
+                                    className="group rounded-full bg-gray-900 dark:bg-white px-4 py-4 text-base font-medium text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-100"
                                 >
                                     See it in action
                                     <RiArrowRightLine className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                                 </Button>
 
-                                <p className="text-sm font-medium text-gray-700">
+                                <p className="text-sm font-medium text-gray-700 dark:text-gray-400">
                                     50+ people use Jambo today.
                                 </p>
                             </motion.div>
@@ -104,7 +104,7 @@ export default function Component() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.6, duration: 0.6 }}
-                                className="text-sm"
+                                className="text-sm text-gray-700 dark:text-gray-400"
                             >
                                 Used by top-tech companies
                             </motion.p>
@@ -112,7 +112,7 @@ export default function Component() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.6, duration: 0.6 }}
-                                className="mt-auto flex gap-8 [&_svg]:size-10"
+                                className="mt-auto flex gap-8 [&_svg]:size-10 text-gray-700 dark:text-gray-400"
                             >
                                 <RiNotionFill />
                                 <RiSlackFill />
@@ -150,7 +150,7 @@ export default function Component() {
                                 ease: "easeOut",
                             }}
                         >
-                            <div className="overflow-hidden rounded-t-2xl bg-white p-1 shadow-2xl">
+                            <div className="overflow-hidden rounded-t-2xl bg-white dark:bg-black p-1 shadow-2xl">
                                 <Image
                                     src="https://res.cloudinary.com/dcxm3ccir/image/upload/v1741613286/h10.jpg"
                                     alt="Jambo Dashboard Interface"
