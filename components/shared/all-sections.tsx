@@ -4,6 +4,8 @@ import Image from "next/image";
 import { motion } from "motion/react";
 
 import { Index } from "@/__registry__";
+import CldImageComponent from "../ui/cld-image";
+import { fadeUp } from "@/lib/motion";
 
 interface Section {
     name: string;
@@ -89,12 +91,14 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                     <div className="mx-auto max-w-7xl">
                         <div className="mt-32 max-w-7xl px-10">
                             <div className="mb-16 space-y-4">
-                                <motion.h1 className="text-4xl font-semibold tracking-tight text-black md:text-4xl dark:text-white">
+                                <motion.h1 
+                                {...fadeUp({ delay: 0.4, duration: 0.8 })}
+                                className="text-4xl font-medium tracking-tight text-black md:text-4xl dark:text-white">
                                     Explore wide range of Sections
                                 </motion.h1>
 
                                 <motion.p
-                                    className="max-w-md text-gray-600 dark:text-gray-400"
+                                    className="max-w-xl text-gray-600 dark:text-gray-400"
                                     transition={{ delay: 0.2 }}
                                 >
                                     A library of 500+ professionally designed,
@@ -151,9 +155,9 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                                                         )}
 
                                                     <div className="flex-1">
-                                                        <Image
-                                                            width="960"
-                                                            height="600"
+                                                        <CldImageComponent
+                                                            width={960}
+                                                            height={600}
                                                             src={
                                                                 section.thumbnail
                                                             }
