@@ -166,7 +166,7 @@ export default function Component() {
                                         </h3>
                                         <div className="hover flex flex-col space-y-3 [&_a]:text-sm [&_a]:text-gray-600 [&_a]:transition-colors [&_a]:hover:text-gray-900 [&_a]:dark:text-gray-400 [&_a]:dark:hover:text-white">
                                             <Link href="#">Pricing</Link>
-                                            <Link href="#">Contact Us</Link>
+                                            <Link href="/contact_us">Contact Us</Link>
                                             <Link
                                                 href="#"
                                                 className="flex items-center"
