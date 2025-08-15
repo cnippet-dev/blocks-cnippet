@@ -12,6 +12,7 @@ import {
     RiUserSettingsFill,
 } from "@remixicon/react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
 import {
     DropdownMenu,
@@ -25,7 +26,10 @@ import {
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog-cn";
 import { Button } from "@/components/ui/button";
-import AuthDialog from "../auth/dialog";
+// Dynamically import AuthDialog. It will be in a separate JS chunk.
+const AuthDialog = dynamic(() => import("../auth/dialog"), {
+    loading: () => <div className="size-9 rounded-full bg-gray-200" />, // Optional: a simple loader
+});
 
 const NavUser = () => {
     const { status, data: session } = useSession();
@@ -154,7 +158,7 @@ const NavUser = () => {
                             <DialogTrigger asChild>
                                 <Button
                                     size="lg"
-                                    className="[&amp;_svg]:size-4.5 group cursor-pointer rounded-full bg-white hover:bg-gray-100 dark:bg-gray-50 px-3 shadow-none"
+                                    className="[&amp;_svg]:size-4.5 group cursor-pointer rounded-full bg-white px-2 shadow-none hover:bg-gray-100 dark:bg-gray-50"
                                 >
                                     <RiUserFill className="text-black group-hover:text-black/90" />
                                 </Button>

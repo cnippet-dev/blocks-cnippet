@@ -1,8 +1,19 @@
 import React from "react";
 import { Index } from "@/__registry__";
-import { ScreenShift } from "../_components/screen-shift";
+import dynamic from "next/dynamic";
 
 // type Params = Promise<{ slug: string }>;
+
+const ScreenShift = dynamic(
+    () =>
+        import("../_components/screen-shift").then((mod) => ({
+            default: mod.ScreenShift,
+        })),
+    {
+        ssr: true,
+        loading: () => <div className="h-20 bg-white dark:bg-black" />,
+    },
+);
 
 const PreviewPage = async ({
     params,

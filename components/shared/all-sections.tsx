@@ -1,9 +1,10 @@
 "use client";
 import React, { forwardRef } from "react";
-import Image from "next/image";
 import { motion } from "motion/react";
 
 import { Index } from "@/__registry__";
+import CldImageComponent from "../ui/cld-image";
+import { fadeInBlur, fadeUp } from "@/lib/motion";
 
 interface Section {
     name: string;
@@ -11,25 +12,6 @@ interface Section {
     thumbnail: string;
     number: string;
 }
-
-const itemVariants = {
-    hidden: {
-        opacity: 0,
-        y: 30,
-        scale: 0.95,
-    },
-    visible: {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        transition: {
-            type: "spring" as const,
-            stiffness: 100,
-            damping: 15,
-            duration: 0.6,
-        },
-    },
-};
 
 interface SectionsProps extends React.HTMLAttributes<HTMLDivElement> {
     count?: number;
@@ -89,13 +71,25 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                     <div className="mx-auto max-w-7xl">
                         <div className="mt-32 max-w-7xl px-10">
                             <div className="mb-16 space-y-4">
-                                <motion.h1 className="text-4xl font-semibold tracking-tight text-black md:text-4xl dark:text-white">
+                                <motion.h1
+                                    {...fadeUp({
+                                        delay: 0.4,
+                                        duration: 0.6,
+                                        scroll: true,
+                                    })}
+                                    className="text-4xl font-medium tracking-tight text-black md:text-4xl dark:text-white"
+                                >
                                     Explore wide range of Sections
                                 </motion.h1>
 
                                 <motion.p
-                                    className="max-w-md text-gray-600 dark:text-gray-400"
-                                    transition={{ delay: 0.2 }}
+                                    className="max-w-xl text-gray-600 dark:text-gray-400"
+                                    {...fadeUp({
+                                        delay: 0.6,
+                                        duration: 0.6,
+                                        y: 20,
+                                        scroll: true,
+                                    })}
                                 >
                                     A library of 500+ professionally designed,
                                     expertly crafted component examples you can
@@ -121,14 +115,21 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                                             <motion.div
                                                 key={index}
                                                 className={`dark:bg-background relative overflow-visible border-dashed border-gray-400/50 bg-white p-4 transition-shadow duration-300 ${index !== 3 && index !== 7 && index !== 11 ? "border-r" : ""} ${index <= 11 ? "border-b" : ""}`}
-                                                variants={itemVariants}
-                                                whileHover={{
-                                                    transition: {
-                                                        type: "spring",
-                                                        stiffness: 300,
-                                                        damping: 20,
-                                                    },
-                                                }}
+                                                // variants={itemVariants}
+                                                // whileHover={{
+                                                //     transition: {
+                                                //         type: "spring",
+                                                //         stiffness: 300,
+                                                //         damping: 20,
+                                                //     },
+                                                // }}
+
+                                                {...fadeUp({
+                                                    delay: 0.5 + index * 0.1,
+                                                    y: 20,
+                                                    duration: 0.6,
+                                                    scroll: true,
+                                                })}
                                                 whileTap={{ scale: 0.98 }}
                                             >
                                                 <motion.div
@@ -151,15 +152,15 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                                                         )}
 
                                                     <div className="flex-1">
-                                                        <Image
-                                                            width="960"
-                                                            height="600"
+                                                        <CldImageComponent
+                                                            width={960}
+                                                            height={600}
                                                             src={
                                                                 section.thumbnail
                                                             }
                                                             sizes="100vw"
                                                             alt="Description of my image"
-                                                            className="w-full rounded-2xl bg-white dark:bg-neutral-800 bg-gradient-to-t from-background "
+                                                            className="from-background w-full rounded-2xl bg-white bg-gradient-to-t dark:bg-neutral-800"
                                                         />
 
                                                         <div className="flex flex-col items-start p-4">

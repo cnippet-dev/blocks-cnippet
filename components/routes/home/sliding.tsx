@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import Image from "next/image";
 import { useScroll, useTransform, motion } from "motion/react";
 import { RiBardFill } from "@remixicon/react";
+import CldImageComponent from "@/components/ui/cld-image";
 
 type SliderItem = {
     color: string;
@@ -138,7 +138,7 @@ export default function SlidingImages() {
                                 className="flex h-[16vw] w-[50%] items-center justify-center rounded-2xl bg-gray-50 dark:bg-neutral-800"
                             >
                                 <div className="relative h-[90%] w-[90%]">
-                                    <Image
+                                    <CldImageComponent
                                         fill
                                         alt="slider image"
                                         src={`${project.src}`}
@@ -159,7 +159,7 @@ export default function SlidingImages() {
                                 className="flex h-[16vw] w-[50%] items-center justify-center rounded-2xl bg-gray-50 dark:bg-neutral-800"
                             >
                                 <div className="relative h-[90%] w-[90%]">
-                                    <Image
+                                    <CldImageComponent
                                         fill
                                         alt="slider image"
                                         src={`${project.src}`}

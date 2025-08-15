@@ -1,21 +1,22 @@
 "use client";
 
 import { Suspense } from "react";
-import SectionsPage from "./_components/categories";
-import Navbar from "@/components/shared/navbar";
-import Footer from "@/components/shared/footer";
 
 import ReactLenis from "lenis/react";
+import dynamic from "next/dynamic";
+
+const SectionsPage = dynamic(() => import("./_components/categories"), {
+    ssr: true,
+    loading: () => <div className="h-20 bg-white dark:bg-black" />,
+});
 
 const page = () => {
     return (
         <>
             <ReactLenis root>
-                <Navbar />
                 <Suspense>
                     <SectionsPage />
                 </Suspense>
-                <Footer />
             </ReactLenis>
         </>
     );

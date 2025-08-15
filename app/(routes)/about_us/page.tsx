@@ -5,8 +5,6 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { RiArrowRightLine } from "@remixicon/react";
 
-const Navbar = dynamic(() => import("@/components/shared/navbar"));
-const Footer = dynamic(() => import("@/components/shared/footer"));
 const Cta = dynamic(() => import("@/components/routes/home/cta"));
 
 const metrics = [
@@ -45,7 +43,6 @@ const AboutPage = () => {
 
     return (
         <>
-            <Navbar />
             <section className="mx-auto w-full max-w-full border-t-0 border-b px-4 md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-800 dark:bg-black">
                 <div className="border border-t-0 border-b-0 dark:border-neutral-800">
                     <div className="grid grid-cols-6 divide-x dark:divide-neutral-800">
@@ -187,7 +184,6 @@ const AboutPage = () => {
                 </div>
             </section>
             <Cta />
-            <Footer />
         </>
     );
 };

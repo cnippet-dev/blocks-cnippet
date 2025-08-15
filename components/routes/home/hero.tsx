@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { fadeIn, fadeUp, fadeUpBlur, zoomIn } from "@/lib/motion";
 
 const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
     (props, ref) => {
@@ -30,13 +31,16 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                 <div className="relative z-10 pt-4">
                     <div className="mx-auto flex max-w-4xl flex-col items-center justify-center px-6 py-20 text-center">
                         <motion.div
-                            initial={{ scale: 0, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
+                            {...zoomIn({
+                                delay: 0.2,
+                                duration: 0.5,
+                                type: "spring",
+                                stiffness: 100,
+                            })}
                         >
                             <Badge
                                 variant="secondary"
-                                className="mb-8 border border-gray-200 bg-gray-100 py-0.5 pr-4 pl-0.5 text-xs text-black transition-colors dark:border-neutral-800 hover:bg-gray-200 dark:bg-neutral-950 dark:text-white"
+                                className="mb-8 border border-gray-200 bg-gray-100 py-0.5 pr-4 pl-0.5 text-xs text-black transition-colors hover:bg-gray-200 dark:border-neutral-800 dark:bg-neutral-950 dark:text-white"
                             >
                                 <span className="mr-1 rounded-full border bg-white px-4 py-1 text-xs dark:border-neutral-800 dark:bg-black">
                                     New
@@ -46,16 +50,12 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                         </motion.div>
 
                         <motion.h1
-                            initial={{ y: 30, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.8, delay: 0.4 }}
-                            className="mb-6 max-w-3xl text-4xl leading-tight font-semibold tracking-tight text-gray-900 dark:text-gray-100 md:text-6xl lg:text-5xl"
+                            {...fadeUpBlur({ delay: 0.4, duration: 0.8 })}
+                            className="mb-6 max-w-3xl text-4xl leading-tight font-semibold tracking-tight text-gray-900 md:text-6xl lg:text-5xl dark:text-gray-100"
                         >
                             Deliver Quality Websites and Web Apps With{" "}
                             <motion.span
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                transition={{ duration: 0.5, delay: 0.4 }}
+                                {...zoomIn({ delay: 0.4, duration: 0.5 })}
                                 className="-pt-5 inline-flex rotate-[22.5deg] items-center rounded-xl bg-blue-100 p-1.5"
                             >
                                 <RiFlashlightFill className="size-7 text-blue-600" />
@@ -64,9 +64,12 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                         </motion.h1>
 
                         <motion.p
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.6, delay: 0.8 }}
+                          {...fadeUp({ 
+                            delay: 0.8, 
+                            duration: 0.6,
+                            y: 20,
+                            scroll: true  // Enable scroll-based animation
+                          })}
                             className="mb-8 max-w-2xl text-lg leading-relaxed tracking-tight text-gray-700 dark:text-gray-400"
                         >
                             Ship consistent high-quality ui 10x faster with the
@@ -80,9 +83,13 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
 
                         <motion.div
                             ref={ref}
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.6, delay: 1.0 }}
+                            {...zoomIn({ 
+                                delay: 0.4, 
+                                duration: 0.5,
+                                scroll: true,
+                                once: true,   // Only animate once
+                                amount: 0.5   // Trigger when 50% in view
+                              })}
                             className="mb-4 flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4"
                         >
                             <Button
@@ -103,17 +110,21 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                         </motion.div>
 
                         <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.4, delay: 1.4 }}
+                            {...fadeUp({ delay: 1.4, duration: 0.4 })}
                             className="text-xs text-gray-700"
                         >
                             Pay once, Use forever
                         </motion.p>
                     </div>
 
-                    <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-dashed border-t border-b border-dashed md:grid-cols-6 dark:divide-neutral-800 dark:border-neutral-800">
-                        <div className="group col-span-2 flex items-start justify-start gap-2 px-4 py-10">
+                    <motion.div
+                        {...fadeIn({ delay: 1.4, duration: 0.6 })}
+                        className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-dashed border-t border-b border-dashed md:grid-cols-6 dark:divide-neutral-800 dark:border-neutral-800"
+                    >
+                        <motion.div
+                            {...fadeUp({ delay: 1.6, duration: 0.4 })}
+                            className="group col-span-2 flex items-start justify-start gap-2 px-4 py-10"
+                        >
                             <svg
                                 className="w-20 shrink-0 text-black *:data-lift:transition-transform *:data-lift:duration-300 group-hover:*:data-lift:-translate-y-0.5 group-data-selected:*:data-lift:translate-y-0 sm:w-30"
                                 aria-hidden="true"
@@ -220,11 +231,14 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                                 </h3>
                                 <p className="text-sm text-gray-500">
                                     Over 500+ professionally designed, fully
-                                    responsive, expertly crafted components.
+                                    responsive, expertly craftechod components.
                                 </p>
                             </div>
-                        </div>
-                        <div className="group dark:bg-background col-span-2 flex items-start justify-start gap-2 bg-indigo-50/80 px-4 py-10">
+                        </motion.div>
+                        <motion.div
+                            {...fadeUp({ delay: 1.8, duration: 0.4 })}
+                            className="group dark:bg-background col-span-2 flex items-start justify-start gap-2 bg-indigo-50/80 px-4 py-10"
+                        >
                             <svg
                                 className="w-20 shrink-0 text-indigo-700 *:data-lift:transition-transform *:data-lift:duration-300 group-hover:*:data-lift:-translate-y-0.5 group-data-selected:*:data-lift:translate-y-0 sm:w-30"
                                 aria-hidden="true"
@@ -308,8 +322,11 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                                     responsive, expertly crafted components.
                                 </p>
                             </div>
-                        </div>
-                        <div className="group col-span-2 flex items-start justify-start gap-2 px-4 py-10">
+                        </motion.div>
+                        <motion.div
+                            {...fadeUp({ delay: 2.0, duration: 0.4 })}
+                            className="group col-span-2 flex items-start justify-start gap-2 px-4 py-10"
+                        >
                             <svg
                                 className="w-20 shrink-0 text-black *:data-lift:transition-transform *:data-lift:duration-300 group-hover:*:data-lift:-translate-y-0.5 group-data-selected:*:data-lift:translate-y-0 sm:w-30"
                                 aria-hidden="true"
@@ -411,10 +428,13 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                                     responsive, expertly crafted components.
                                 </p>
                             </div>
-                        </div>
-                    </div>
+                        </motion.div>
+                    </motion.div>
 
-                    <div className="mx-auto max-w-7xl p-10">
+                    <motion.div
+                        {...fadeIn({ delay: 2.2, duration: 0.6 })}
+                        className="mx-auto max-w-7xl p-10"
+                    >
                         <video
                             src="https://res.cloudinary.com/dcxm3ccir/video/upload/v1754817735/vid-dUjweer.mp4"
                             muted
@@ -422,7 +442,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                             autoPlay
                             className="h-full w-full rounded-3xl"
                         />
-                    </div>
+                    </motion.div>
                 </div>
             </section>
         );
