@@ -1,16 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
 
-const Navbar = dynamic(() => import("@/components/shared/navbar"), {
-    loading: () => <div className="h-20 bg-white dark:bg-black" />,
-    ssr: true,
-});
-
-const Footer = dynamic(() => import("@/components/shared/footer"), {
-    loading: () => <div className="h-32 bg-gray-50 dark:bg-black" />,
-    ssr: true,
-});
-
 const ContactForm = dynamic(() => import("@/components/shared/form/contact"), {
     loading: () => (
         <div className="col-span-3 animate-pulse">
@@ -23,7 +13,6 @@ const ContactForm = dynamic(() => import("@/components/shared/form/contact"), {
 const ContactPage = () => {
     return (
         <>
-            <Navbar />
             <main className="relative">
                 <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-0 flex w-full overflow-visible">
                     <div className="absolute top-0 left-1/2 z-0 h-full w-full max-w-7xl flex-auto -translate-x-1/2 overflow-visible">
@@ -51,7 +40,6 @@ const ContactPage = () => {
                     </div>
                 </section>
             </main>
-            <Footer />
         </>
     );
 };

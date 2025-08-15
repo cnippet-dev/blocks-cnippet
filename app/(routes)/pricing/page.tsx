@@ -23,8 +23,6 @@ import {
 
 import { createPayment } from "@/lib/actions/payment.actions";
 
-const Navbar = dynamic(() => import("@/components/shared/navbar"));
-const Footer = dynamic(() => import("@/components/shared/footer"));
 const Faq = dynamic(() => import("@/components/routes/home/faq"));
 
 export default function PricingPage() {
@@ -207,7 +205,6 @@ export default function PricingPage() {
                 strategy="lazyOnload"
             />
 
-            <Navbar />
             <TooltipProvider>
                 <div className="dark:bg-background mx-auto w-full max-w-full border-t-0 border-b px-4 md:px-10 xl:px-20 2xl:px-30 dark:border-neutral-800">
                     <div className="border border-t-0 border-b-0 dark:border-neutral-800">
@@ -454,7 +451,6 @@ export default function PricingPage() {
                 </div>
             </TooltipProvider>
             <Faq />
-            <Footer />
         </>
     );
 }
