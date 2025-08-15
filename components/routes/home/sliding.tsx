@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import Image from "next/image";
 import { useScroll, useTransform, motion } from "motion/react";
 import { RiBardFill } from "@remixicon/react";
 import CldImageComponent from "@/components/ui/cld-image";

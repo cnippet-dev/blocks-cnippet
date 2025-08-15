@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { fadeIn, fadeUp, zoomIn } from "@/lib/motion";
+import { fadeIn, fadeUp, fadeUpBlur, zoomIn } from "@/lib/motion";
 
 const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
     (props, ref) => {
@@ -50,7 +50,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                         </motion.div>
 
                         <motion.h1
-                            {...fadeUp({ delay: 0.4, duration: 0.8 })}
+                            {...fadeUpBlur({ delay: 0.4, duration: 0.8 })}
                             className="mb-6 max-w-3xl text-4xl leading-tight font-semibold tracking-tight text-gray-900 md:text-6xl lg:text-5xl dark:text-gray-100"
                         >
                             Deliver Quality Websites and Web Apps With{" "}
@@ -64,7 +64,12 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                         </motion.h1>
 
                         <motion.p
-                            {...fadeUp({ delay: 0.8, duration: 0.6 }, 20)}
+                          {...fadeUp({ 
+                            delay: 0.8, 
+                            duration: 0.6,
+                            y: 20,
+                            scroll: true  // Enable scroll-based animation
+                          })}
                             className="mb-8 max-w-2xl text-lg leading-relaxed tracking-tight text-gray-700 dark:text-gray-400"
                         >
                             Ship consistent high-quality ui 10x faster with the
@@ -78,7 +83,13 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
 
                         <motion.div
                             ref={ref}
-                            {...fadeUp({ delay: 1.0, duration: 0.6 }, 20)}
+                            {...zoomIn({ 
+                                delay: 0.4, 
+                                duration: 0.5,
+                                scroll: true,
+                                once: true,   // Only animate once
+                                amount: 0.5   // Trigger when 50% in view
+                              })}
                             className="mb-4 flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4"
                         >
                             <Button

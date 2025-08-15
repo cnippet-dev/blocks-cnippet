@@ -1,5 +1,6 @@
-import { Variants, Transition } from "motion/react";
+import { Transition } from "motion/react";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type AnimationOptions = {
     delay?: number;
     duration?: number;
@@ -13,6 +14,13 @@ export type AnimationOptions = {
     bounce?: number;
     repeat?: number;
     repeatType?: "loop" | "reverse" | "mirror";
+    scroll?: boolean;
+    y?: number;
+    x?: number;
+    scale?: number;
+    rotate?: number;
+    filter?: string;
+    [key: string]: any;
 };
 
 const baseTransition = (options?: AnimationOptions): Transition => ({
@@ -28,109 +36,209 @@ const baseTransition = (options?: AnimationOptions): Transition => ({
     repeatType: options?.repeatType || "loop",
 });
 
-// Fade animations
-export const fadeIn = (options?: AnimationOptions): Variants => ({
-    initial: { opacity: 0 },
-    animate: {
-        opacity: 1,
-        transition: baseTransition(options)
+const createMotionProps = (
+    baseInitial: any,
+    baseAnimate: any,
+    options?: AnimationOptions
+) => {
+    const initial = {
+        ...baseInitial,
+        ...(options?.customInitial || {}),
+        filter: options?.filter ? `blur(${options.filter}px)` : baseInitial.filter
+    };
+
+    const animate = {
+        ...baseAnimate,
+        ...(options?.customAnimate || {}),
+        filter: options?.filter ? "blur(0px)" : baseAnimate.filter
+    };
+
+    const transition = baseTransition(options);
+
+    if (options?.scroll) {
+        return {
+            initial: "hidden",
+            whileInView: "visible",
+            viewport: {
+                once: options?.once ?? true,
+                amount: options?.amount ?? 0.25
+            },
+            variants: {
+                hidden: initial,
+                visible: {
+                    ...animate,
+                    transition
+                }
+            }
+        };
     }
-});
 
-export const fadeUp = (options?: AnimationOptions, y?: number, scroll?: boolean): Variants => ({
-    initial: { opacity: 0, y: y ?? 30 },
-    whileInView: {
-        opacity: 1,
-        y: 0,
-        transition: baseTransition(options)
-    },
-    // animate: {
-    //     opacity: 1,
-    //     y: 0,
-    //     transition: baseTransition(options)
-    // }
-});
-
-export const fadeDown = (options?: AnimationOptions, y?: number): Variants => ({
-    initial: { opacity: 0, y: y ?? -30 },
-    animate: {
-        opacity: 1,
-        y: 0,
-        transition: baseTransition(options)
-    }
-});
-
-export const fadeLeft = (options?: AnimationOptions, x?: number): Variants => ({
-    initial: { opacity: 0, x: x ?? 30 },
-    animate: {
-        opacity: 1,
-        x: 0,
-        transition: baseTransition(options)
-    }
-});
-
-export const fadeRight = (options?: AnimationOptions, x?: number): Variants => ({
-    initial: { opacity: 0, x: x ?? -30 },
-    animate: {
-        opacity: 1,
-        x: 0,
-        transition: baseTransition(options)
-    }
-});
-
-// Zoom animations
-export const zoomIn = (options?: AnimationOptions): Variants => ({
-    initial: { scale: 0, opacity: 0 },
-    animate: {
-        scale: 1,
-        opacity: 1,
-        transition: {
-            ...baseTransition(options),
-            // type: "spring",
-            // stiffness: 100
+    return {
+        initial: "hidden",
+        animate: "visible",
+        variants: {
+            hidden: initial,
+            visible: {
+                ...animate,
+                transition
+            }
         }
-    }
-});
+    };
+};
 
-export const zoomOut = (options?: AnimationOptions): Variants => ({
-    initial: { scale: 1.2, opacity: 0 },
-    animate: {
-        scale: 1,
-        opacity: 1,
-        transition: baseTransition(options)
-    }
-});
+// ============================================================================
+// FADE ANIMATION
+// ============================================================================
 
-// Specialized animations
-export const scaleIn = (options?: AnimationOptions, scale?: number): Variants => ({
-    initial: { scale: scale ?? 0 },
-    animate: {
-        scale: 1,
-        transition: {
-            ...baseTransition(options),
+export const fadeIn = (options?: AnimationOptions) =>
+    createMotionProps({ opacity: 0 }, { opacity: 1 }, options);
+
+export const fadeUp = (options?: AnimationOptions) =>
+    createMotionProps(
+        { opacity: 0, y: options?.y ?? 30 },
+        { opacity: 1, y: 0 },
+        options
+    );
+
+export const fadeDown = (options?: AnimationOptions) =>
+    createMotionProps(
+        { opacity: 0, y: options?.y ?? -30 },
+        { opacity: 1, y: 0 },
+        options
+    );
+
+export const fadeLeft = (options?: AnimationOptions) =>
+    createMotionProps(
+        { opacity: 0, x: options?.x ?? 30 },
+        { opacity: 1, x: 0 },
+        options
+    );
+
+export const fadeRight = (options?: AnimationOptions) =>
+    createMotionProps(
+        { opacity: 0, x: options?.x ?? -30 },
+        { opacity: 1, x: 0 },
+        options
+    );
+
+// ============================================================================
+// SLIDE ANIMATION
+// ============================================================================
+
+// ADD SLIDE UP|DOWN|LEFT|RIGHT
+
+// ============================================================================
+// ZOOM ANIMATION
+// ============================================================================
+
+export const zoomIn = (options?: AnimationOptions) =>
+    createMotionProps(
+        { scale: options?.scale ?? 0, opacity: 0 },
+        { scale: 1, opacity: 1 },
+        options
+    );
+
+export const zoomOut = (options?: AnimationOptions) =>
+    createMotionProps(
+        { scale: options?.scale ?? 1.2, opacity: 0 },
+        { scale: 1, opacity: 1 },
+        options
+    );
+
+// ADD ZOOM UP|DOWN|LEFT|RIGHT
+
+
+// ============================================================================
+// SCALE ANIMATION
+// ============================================================================
+
+export const scaleIn = (options?: AnimationOptions) =>
+    createMotionProps(
+        { scale: options?.scale ?? 0 },
+        { scale: 1 },
+        {
+            ...options,
             type: "spring",
             bounce: 0.4
         }
-    }
-});
+    );
 
-export const rotateIn = (options?: AnimationOptions, rotate?: number): Variants => ({
-    initial: { rotate: rotate ?? -45, opacity: 0 },
-    animate: {
-        rotate: 0,
-        opacity: 1,
-        transition: baseTransition(options)
-    }
-});
+// ADD SCALE OUT|BOUNCE|ELASTIC
 
-// Stagger animations for children
+
+// ============================================================================
+// ROTATE ANIMATION
+// ============================================================================
+
+export const rotateIn = (options?: AnimationOptions) =>
+    createMotionProps(
+        { rotate: options?.rotate ?? -45, opacity: 0 },
+        { rotate: 0, opacity: 1 },
+        options
+    );
+
+// ADD ROTATE OUT|SPIN|FLIP
+
+// ============================================================================
+// FADE W/ BLUR ANIMATION
+// ============================================================================
+
+
+export const fadeInBlur = (options?: AnimationOptions) =>
+    createMotionProps(
+        { opacity: 0, filter: "blur(10px)" },
+        { opacity: 1, filter: "blur(0px)" },
+        options
+    );
+
+export const fadeUpBlur = (options?: AnimationOptions) =>
+    createMotionProps(
+        { opacity: 0, y: options?.y ?? 30, filter: "blur(10px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)" },
+        options
+    );
+
+export const fadeDownBlur = (options?: AnimationOptions) =>
+    createMotionProps(
+        { opacity: 0, y: options?.y ?? -30, filter: "blur(10px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)" },
+        options
+    );
+
+
+export const fadeleftBlur = (options?: AnimationOptions) =>
+    createMotionProps(
+        { opacity: 0, x: options?.x ?? 30, filter: "blur(10px)" },
+        { opacity: 1, x: 0, filter: "blur(0px)" },
+        options
+    );
+
+export const fadeRightBlur = (options?: AnimationOptions) =>
+    createMotionProps(
+        { opacity: 0, x: options?.x ?? 30, filter: "blur(10px)" },
+        { opacity: 1, x: 0, filter: "blur(0px)" },
+        options
+    );
+
+
+
+
+
+
+
+
+
+
 export const staggerContainer = (
     options?: AnimationOptions & { staggerChildren?: number }
-): Variants => ({
-    animate: {
-        transition: {
-            staggerChildren: options?.staggerChildren || 0.1,
-            ...baseTransition(options)
+) => ({
+    variants: {
+        visible: {
+            transition: {
+                staggerChildren: options?.staggerChildren || 0.1,
+                ...baseTransition(options)
+            }
         }
     }
 });
+/* eslint-enable @typescript-eslint/no-explicit-any */

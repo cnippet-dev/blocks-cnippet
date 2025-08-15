@@ -186,7 +186,7 @@ export default function Component() {
                                                     <Button
                                                         size="sm"
                                                         variant="outline"
-                                                        className="items-start justify-start border-none bg-gray-50 px-0 py-0 text-left text-sm font-normal text-gray-600 shadow-none hover:bg-gray-50 dark:text-gray-400 dark:bg-black dark:hover:bg-black"
+                                                        className="items-start cursor-pointer justify-start border-none bg-gray-50 px-0 py-0 text-left text-sm font-normal text-gray-600 shadow-none hover:bg-gray-50 dark:text-gray-400 dark:bg-black dark:hover:bg-black"
                                                     >
                                                         Legal
                                                     </Button>

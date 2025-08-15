@@ -1,13 +1,26 @@
 import { useMDXComponent } from "@content-collections/mdx/react";
 import { HTMLAttributes } from "react";
+import dynamic from "next/dynamic";
 
 import { cn } from "@/lib/utils";
-import { CopyButton } from "@/components/mdx/copy-button";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CodeBlockCommand } from "./components/mdx/code-block-command";
-import { Button } from "@/components/ui/button";
-import { SectionPreview } from "./components/mdx/section-preview";
+// Lazy load heavy components with loading states
+const CopyButton = dynamic(() => import("@/components/mdx/copy-button").then(mod => ({ default: mod.CopyButton })), {
+    loading: () => <div className="w-8 h-8 bg-gray-200 dark:bg-gray-800 animate-pulse rounded" />
+});
+const Tabs = dynamic(() => import("@/components/ui/tabs").then(mod => ({ default: mod.Tabs })), {
+    loading: () => <div className="h-10 bg-gray-200 dark:bg-gray-800 animate-pulse rounded" />
+});
+const TabsContent = dynamic(() => import("@/components/ui/tabs").then(mod => ({ default: mod.TabsContent })));
+const TabsList = dynamic(() => import("@/components/ui/tabs").then(mod => ({ default: mod.TabsList })));
+const TabsTrigger = dynamic(() => import("@/components/ui/tabs").then(mod => ({ default: mod.TabsTrigger })));
+const CodeBlockCommand = dynamic(() => import("./components/mdx/code-block-command").then(mod => ({ default: mod.CodeBlockCommand })), {
+    loading: () => <div className="h-12 bg-gray-200 dark:bg-gray-800 animate-pulse rounded" />
+});
+const Button = dynamic(() => import("@/components/ui/button").then(mod => ({ default: mod.Button })));
+const SectionPreview = dynamic(() => import("./components/mdx/section-preview").then(mod => ({ default: mod.SectionPreview })), {
+    loading: () => <div className="h-64 bg-gray-200 dark:bg-gray-800 animate-pulse rounded-lg" />
+});
 
 interface MDXProps {
     code: string;
