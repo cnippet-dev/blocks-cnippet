@@ -1,10 +1,9 @@
-import { Registry } from "@/registry/schema";
 
 const BASE_PATH = "registry/default";
 
 const generateSections = (
     sectionsConfig: { name: string; no?: string }[],
-): Registry => {
+) => {
     return sectionsConfig.map((section, index) => ({
         name: section.name,
         slug: `/sections/${section.name}`,
@@ -16,7 +15,7 @@ const generateSections = (
     }));
 };
 
-export const section: Registry = generateSections([
+export const section = generateSections([
     {
         name: "banner",
         no: "1",

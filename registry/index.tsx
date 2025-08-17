@@ -1,5 +1,6 @@
 import { Registry } from "./schema";
 import { section } from "./registry-section";
 import { sections } from "./registry-sections";
+import { blocks } from "@/registry/registry-blocks";
 
-export const registry = [...section, ...sections];
+export const registry = [...blocks];
