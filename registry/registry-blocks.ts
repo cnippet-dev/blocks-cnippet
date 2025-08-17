@@ -1,5 +1,4 @@
 import { type Registry } from "@/registry/schema"
-const BASE_PATH = "registry/default/";
 
 export const blocks: Registry["items"] = [
   {

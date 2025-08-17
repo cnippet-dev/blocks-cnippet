@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import {
     RiBankCardFill,
     RiHeart2Fill,
@@ -14,6 +14,7 @@ import {
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
+import { useSessionCache } from "@/hooks/use-session-cache";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -32,25 +33,25 @@ const AuthDialog = dynamic(() => import("../auth/dialog"), {
 });
 
 const NavUser = () => {
-    const { status, data: session } = useSession();
+    const { status, data: session, isAuthenticated, isLoading } = useSessionCache();
 
     return (
         <>
-            {status === "loading" ? (
+            {isLoading ? (
                 <div className="-mt-[22px] mr-3 ml-2 w-fit">
                     <div className="loader"></div>
                 </div>
             ) : (
                 <>
-                    {status === "authenticated" ? (
+                    {isAuthenticated ? (
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <div className="">
                                     <div className="mt-0 flex w-full cursor-pointer items-center justify-center gap-2">
-                                        {session.user?.image ? (
+                                        {session?.user?.image ? (
                                             <Avatar className="size-9 rounded-full">
                                                 <AvatarImage
-                                                    src={session.user?.image}
+                                                    src={session.user.image}
                                                     alt="user profile"
                                                     width={1080}
                                                     height={680}
@@ -73,94 +74,69 @@ const NavUser = () => {
                                     </div>
                                 </div>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent
-                                className="w-52 rounded-xl dark:border-neutral-700"
-                                side="bottom"
-                                align="end"
-                                sideOffset={10}
-                            >
-                                <DropdownMenuLabel className="p-0 font-normal">
-                                    <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                                        <div className="grid flex-1 text-left text-sm leading-tight">
-                                            <span className="truncate font-medium text-black dark:text-white">
-                                                {" "}
-                                                {session.user?.name}
-                                            </span>
-                                            <span className="truncate text-xs">
-                                                {session.user?.email}
-                                            </span>
-                                        </div>
+                            <DropdownMenuContent className="w-56" align="end" forceMount>
+                                <DropdownMenuLabel className="font-normal">
+                                    <div className="flex flex-col space-y-1">
+                                        <p className="text-sm font-medium leading-none">
+                                            {session?.user?.name}
+                                        </p>
+                                        <p className="text-xs leading-none text-muted-foreground">
+                                            {session?.user?.email}
+                                        </p>
                                     </div>
                                 </DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuGroup>
-                                    <DropdownMenuItem>
-                                        <Link
-                                            href="/pricing"
-                                            className="flex w-full items-center gap-2"
-                                        >
-                                            <RiSparkling2Fill className="size-4" />
-                                            Upgrade to Pro
+                                    <DropdownMenuItem asChild>
+                                        <Link href="/profile">
+                                            <RiUserFill className="mr-2 h-4 w-4" />
+                                            <span>Profile</span>
+                                        </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem asChild>
+                                        <Link href="/profile/billing">
+                                            <RiBankCardFill className="mr-2 h-4 w-4" />
+                                            <span>Billing</span>
+                                        </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem asChild>
+                                        <Link href="/profile/settings">
+                                            <RiSettings2Fill className="mr-2 h-4 w-4" />
+                                            <span>Settings</span>
+                                        </Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem asChild>
+                                        <Link href="/profile/favourites">
+                                            <RiHeart2Fill className="mr-2 h-4 w-4" />
+                                            <span>Favourites</span>
                                         </Link>
                                     </DropdownMenuItem>
                                 </DropdownMenuGroup>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuGroup>
-                                    <DropdownMenuItem>
-                                        <Link
-                                            href="/profile"
-                                            className="flex w-full items-center gap-2"
-                                        >
-                                            <RiUserSettingsFill className="size-4" />
-                                            Profile
-                                        </Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem>
-                                        <Link
-                                            href="/profile/favourites"
-                                            className="flex w-full items-center gap-2"
-                                        >
-                                            <RiHeart2Fill className="size-4" />
-                                            Favourites
-                                        </Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem>
-                                        <Link
-                                            href="/profile/billing"
-                                            className="flex w-full items-center gap-2"
-                                        >
-                                            <RiBankCardFill className="size-4" />
-                                            Billing
-                                        </Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem>
-                                        <Link
-                                            href="/profile/settings"
-                                            className="flex w-full items-center gap-2"
-                                        >
-                                            <RiSettings2Fill className="size-4" />
-                                            Settings
+                                    <DropdownMenuItem asChild>
+                                        <Link href="/profile/subscriptions">
+                                            <RiSparkling2Fill className="mr-2 h-4 w-4" />
+                                            <span>Pro Subscription</span>
                                         </Link>
                                     </DropdownMenuItem>
                                 </DropdownMenuGroup>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem
+                                    className="text-red-600 focus:text-red-600 dark:text-red-400 dark:focus:text-red-400"
                                     onClick={() => signOut()}
-                                    className="cursor-pointer"
                                 >
-                                    <RiLogoutBoxRFill className="size-4" />
-                                    Log out
+                                    <RiLogoutBoxRFill className="mr-2 h-4 w-4" />
+                                    <span>Log out</span>
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     ) : (
                         <Dialog>
                             <DialogTrigger asChild>
-                                <Button
-                                    size="lg"
-                                    className="[&amp;_svg]:size-4.5 group cursor-pointer rounded-full bg-white px-2 shadow-none hover:bg-gray-100 dark:bg-gray-50"
-                                >
-                                    <RiUserFill className="text-black group-hover:text-black/90" />
+                                <Button variant="ghost" size="sm">
+                                    <RiUserFill className="mr-2 h-4 w-4" />
+                                    Sign In
                                 </Button>
                             </DialogTrigger>
                             <AuthDialog />

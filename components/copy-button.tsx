@@ -12,7 +12,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 
-export function copyToClipboardWithMeta(value: string, event?: Event) {
+export function copyToClipboardWithMeta(value: string) {
   navigator.clipboard.writeText(value)
   // if (event) {
   //   trackEvent(event)

@@ -1,7 +1,8 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
+
+import { useSessionCache } from "@/hooks/use-session-cache";
 
 interface ProStatusContextType {
     isPro: boolean;
@@ -17,11 +18,23 @@ export const ProStatusProvider = ({
 }: {
     children: React.ReactNode;
 }) => {
-    const { status: sessionStatus } = useSession();
+    const { status: sessionStatus, data: session } = useSessionCache();
     const [proStatus, setProStatus] = useState<ProStatusContextType>({
         isPro: false,
         isLoading: true,
     });
+
+    // Memoize the fetch function to prevent unnecessary re-creations
+    const fetchStatus = useCallback(async () => {
+        try {
+            const response = await fetch("/api/pro");
+            const data = await response.json();
+            setProStatus({ isPro: data.isPro, isLoading: false });
+        } catch (error) {
+            console.error("Failed to fetch pro status", error);
+            setProStatus({ isPro: false, isLoading: false });
+        }
+    }, []);
 
     useEffect(() => {
         if (sessionStatus === "loading") {
@@ -33,19 +46,11 @@ export const ProStatusProvider = ({
             return;
         }
 
-        const fetchStatus = async () => {
-            try {
-                const response = await fetch("/api/pro");
-                const data = await response.json();
-                setProStatus({ isPro: data.isPro, isLoading: false });
-            } catch (error) {
-                console.error("Failed to fetch pro status", error);
-                setProStatus({ isPro: false, isLoading: false });
-            }
-        };
-
-        fetchStatus();
-    }, [sessionStatus]);
+        // Only fetch if we have a session and haven't fetched yet
+        if (sessionStatus === "authenticated" && session?.user?.email) {
+            fetchStatus();
+        }
+    }, [sessionStatus, session?.user?.email, fetchStatus]);
 
     return (
         <ProStatusContext.Provider value={proStatus}>

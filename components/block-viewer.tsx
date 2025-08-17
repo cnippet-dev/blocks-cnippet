@@ -2,14 +2,12 @@
 
 import * as React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import {
     Check,
     ChevronRight,
     Clipboard,
     File,
     Folder,
-    Fullscreen,
     Monitor,
     RotateCw,
     Smartphone,

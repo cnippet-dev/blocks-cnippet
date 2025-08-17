@@ -14,6 +14,7 @@ export const registryItemTypeSchema = z.enum([
     "registry:theme",
     "registry:style",
     "registry:item",
+    "registry:section",
 
     // Internal use only
     "registry:example",
@@ -72,6 +73,9 @@ export const registryItemSchema = z.object({
     extends: z.string().optional(),
     name: z.string(),
     type: registryItemTypeSchema,
+    slug: z.string().optional(),
+    thumbnail: z.string().optional(),
+    number: z.string().optional(),
     title: z.string().optional(),
     author: z.string().min(2).optional(),
     description: z.string().optional(),

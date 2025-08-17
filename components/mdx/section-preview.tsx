@@ -6,8 +6,8 @@ import * as React from "react";
 import { Index } from "@/__registry__";
 import Link from "next/link";
 import { Fullscreen } from "lucide-react";
-import { useSession } from "next-auth/react";
 
+import { useSessionCache } from "@/hooks/use-session-cache";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
@@ -32,11 +32,14 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
     const Codes = React.Children.toArray(children) as React.ReactElement[];
     const Src = Codes[0];
 
-    const { status } = useSession();
+    const { isAuthenticated } = useSessionCache();
     const { isPro, isLoading: isProLoading } = useProStatus();
 
-    //eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const componentConfig = (Index[config.style] as any)[name];
+    // Memoize expensive computations
+    const componentConfig = React.useMemo(() => {
+        //eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return (Index[config.style] as any)[name];
+    }, [config.style, name]);
 
     const Preview = React.useMemo(() => {
         if (!componentConfig) {
@@ -58,9 +61,12 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
     }, [componentConfig, name]);
 
     const { auth: requiresAuth, pro: requiresPro } = componentConfig || {};
-    const isLoggedIn = status === "authenticated";
-    const canViewCode =
-        !requiresAuth || (isLoggedIn && (!requiresPro || isPro));
+
+    // Memoize authentication checks
+    const canViewCode = React.useMemo(
+        () => !requiresAuth || (isAuthenticated && (!requiresPro || isPro)),
+        [requiresAuth, requiresPro, isAuthenticated, isPro],
+    );
 
     const renderTabs = () => {
         if (canViewCode) {
@@ -110,7 +116,7 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
                 </div>
             );
         }
-        if (activeTab === "login" || (requiresAuth && !isLoggedIn)) {
+        if (activeTab === "login" || (requiresAuth && !isAuthenticated)) {
             return (
                 <div className="flex min-h-[200px] flex-col items-center justify-center gap-4">
                     <p className="text-muted-foreground text-center text-base">
