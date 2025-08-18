@@ -1,7 +1,7 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import NavClientContent from "./nav-client-content";
+import CldImageComponent from "@/components/ui/cld-image";
 
 const Navbar = () => {
     return (
@@ -46,7 +46,7 @@ const Navbar = () => {
                 <div className="sticky top-4 z-50 pt-3 pb-6">
                     <nav className="mx-auto flex max-w-4xl items-center justify-between rounded-full bg-gray-200/60 px-2 py-2 backdrop-blur-md dark:bg-neutral-800/50">
                         <Link href="/" className="flex items-center">
-                            <Image
+                            <CldImageComponent
                                 src="https:res.cloudinary.com/dcxm3ccir/image/upload/v1753948226/logo-light.png"
                                 alt=""
                                 className="size-10"

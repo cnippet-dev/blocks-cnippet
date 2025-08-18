@@ -38,9 +38,9 @@ import {
 const getCategories = () => {
     return Array.from(
         new Set(
-            Object.values(Index["default"])
+            Object.values(Index)
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                .filter((item: any) => item.type === "registry:sections")
+                .filter((item: any) => item.type === "registry:block")
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 .map((item: any) => {
                     const match = item.name.match(/^(.*?)-/);
@@ -72,10 +72,10 @@ export default function SectionsPage() {
         setFailedImages((prev) => new Set(prev).add(sectionName));
     };
 
-    const filteredSections = Object.values(Index["default"]).filter(
+    const filteredSections = Object.values(Index).filter(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (item: any) => {
-            if (item.type !== "registry:sections") return false;
+            if (item.type !== "registry:block") return false;
 
             // Search filter
             if (

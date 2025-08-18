@@ -1,11 +1,15 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+import { useSessionCache } from "@/hooks/use-session-cache";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
     Form,
     FormControl,
@@ -14,12 +18,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Loader2, Eye, EyeOff } from "lucide-react";
-import Link from "next/link";
 import { toast } from "sonner";
-import { signIn, useSession } from "next-auth/react";
-import { RiGithubFill, RiGoogleFill } from "@remixicon/react";
 
 const formSchema = z.object({
     email: z.string().email({
@@ -41,7 +40,7 @@ export default function SignInForm() {
     const [error, setError] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState(false);
 
-    const { data: session, status } = useSession();
+    const { data: session, status, isAuthenticated } = useSessionCache();
 
     const form = useForm<FormData>({
         resolver: zodResolver(formSchema),
@@ -52,14 +51,14 @@ export default function SignInForm() {
     });
 
     useEffect(() => {
-        if (status === "authenticated") {
+        if (isAuthenticated) {
             if (session?.needsCompletion) {
                 router.push("/about_you");
             } else {
                 router.push("/");
             }
         }
-    }, [status, session, router]);
+    }, [isAuthenticated, session, router]);
 
     async function onSubmit(values: FormData) {
         setIsLoading("signin");
@@ -101,185 +100,96 @@ export default function SignInForm() {
     };
 
     return (
-        <section className="relative h-screen w-full overflow-hidden dark:bg-black">
-            <div className="mx-auto w-full max-w-6xl px-4 pt-16 md:px-8">
-                <div className="relative w-full">
-                    <div className="col-span-10 flex w-full flex-col items-center justify-center bg-white p-8 text-center md:p-16 dark:bg-black">
-                        <div className="w-full max-w-md">
-                            <div className="mb-12 text-center">
-                                <h1 className="mb-4 text-3xl font-semibold md:text-4xl">
-                                    Welcome back
-                                </h1>
-                                <p className="text-gray-500">
-                                    Sign in to your account
-                                </p>
-                            </div>
-
-                            <Form {...form}>
-                                <form
-                                    onSubmit={form.handleSubmit(onSubmit)}
-                                    className="space-y-4 text-left"
-                                >
-                                    <FormField
-                                        control={form.control}
-                                        name="email"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel className="font-medium text-black dark:text-white">
-                                                    Email
-                                                </FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        placeholder="Enter your email"
-                                                        className="mt-1 w-full rounded-none border-t-0 border-r-0 border-b border-l-0 border-neutral-300 bg-transparent px-0 py-2 font-light shadow-none placeholder:text-base placeholder:text-neutral-500 focus:border-purple-500 focus:outline-none focus-visible:ring-0 dark:border-neutral-700"
-                                                        {...field}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
+        <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+            <div className="flex flex-col space-y-2 text-center">
+                <h1 className="text-2xl font-semibold tracking-tight">
+                    Welcome back
+                </h1>
+                <p className="text-sm text-muted-foreground">
+                    Enter your email below to create your account
+                </p>
+            </div>
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Email</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="m@example.com"
+                                        {...field}
+                                        type="email"
+                                        autoComplete="email"
                                     />
-
-                                    <FormField
-                                        control={form.control}
-                                        name="password"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel className="font-medium text-black dark:text-white">
-                                                    Password
-                                                </FormLabel>
-                                                <div className="relative">
-                                                    <FormControl>
-                                                        <Input
-                                                            type={
-                                                                showPassword
-                                                                    ? "text"
-                                                                    : "password"
-                                                            }
-                                                            placeholder="Enter your password"
-                                                            className="mt-1 w-full rounded-none border-t-0 border-r-0 border-b border-l-0 border-neutral-300 bg-transparent px-0 py-2 font-light shadow-none placeholder:text-base placeholder:text-neutral-500 focus:border-purple-500 focus:outline-none focus-visible:ring-0 dark:border-neutral-700"
-                                                            {...field}
-                                                        />
-                                                    </FormControl>
-                                                    <button
-                                                        type="button"
-                                                        className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 transition-colors hover:text-gray-700"
-                                                        onClick={() =>
-                                                            setShowPassword(
-                                                                !showPassword,
-                                                            )
-                                                        }
-                                                    >
-                                                        {showPassword ? (
-                                                            <EyeOff size={18} />
-                                                        ) : (
-                                                            <Eye size={18} />
-                                                        )}
-                                                    </button>
-                                                </div>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Password</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="Enter your password"
+                                        {...field}
+                                        type={showPassword ? "text" : "password"}
+                                        autoComplete="current-password"
                                     />
-
-                                    <div className="text-right">
-                                        <Link
-                                            href="/forgot_password"
-                                            className="text-sm text-purple-600 hover:underline"
-                                        >
-                                            Forgot your password?
-                                        </Link>
-                                    </div>
-
-                                    <Button
-                                        type="submit"
-                                        className="group relative flex h-12 w-full items-center justify-center overflow-hidden rounded-none bg-blue-700 text-white shadow-none hover:bg-blue-800"
-                                        disabled={isLoading === "signin"}
-                                    >
-                                        {isLoading === "signin" ? (
-                                            <>
-                                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                                Signing in...
-                                            </>
-                                        ) : (
-                                            "Sign in"
-                                        )}
-                                    </Button>
-
-                                    {error && (
-                                        <div className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-500">
-                                            <div className="flex">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    className="mr-2 h-5 w-5 text-red-400"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fillRule="evenodd"
-                                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
-                                                {error}
-                                            </div>
-                                        </div>
-                                    )}
-                                </form>
-                            </Form>
-
-                            <div className="my-8 flex items-center">
-                                <div className="h-px flex-1 bg-neutral-300 dark:bg-neutral-700" />
-                                <span className="px-4 text-sm text-gray-500">
-                                    OR CONTINUE WITH
-                                </span>
-                                <div className="h-px flex-1 bg-neutral-300 dark:bg-neutral-700" />
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-4">
-                                <Button
-                                    onClick={loginWithGit}
-                                    className="group relative flex h-12 items-center justify-center gap-2 overflow-hidden rounded-none border border-neutral-900 bg-white shadow-none dark:bg-black"
-                                >
-                                    <div className="absolute inset-0 w-full -translate-x-[100%] bg-black transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
-                                    {isLoading === "github" ? (
-                                        <Loader2 className="relative z-10 size-6 animate-spin text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
-                                    ) : (
-                                        <RiGithubFill className="relative z-10 size-6 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
-                                    )}
-                                    <span className="relative z-10 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black">
-                                        GitHub
-                                    </span>
-                                </Button>
-                                <Button
-                                    onClick={loginWithGoogle}
-                                    className="group relative flex h-12 items-center justify-center gap-2 overflow-hidden rounded-none border border-neutral-900 bg-white shadow-none dark:bg-black"
-                                >
-                                    <div className="absolute inset-0 w-full -translate-x-[100%] bg-black transition-transform duration-300 group-hover:translate-x-[0%] dark:bg-white" />
-                                    {isLoading === "google" ? (
-                                        <Loader2 className="relative z-10 size-6 animate-spin text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
-                                    ) : (
-                                        <RiGoogleFill className="relative z-10 size-5 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black" />
-                                    )}
-                                    <span className="relative z-10 text-slate-950 duration-300 group-hover:text-white dark:text-white dark:group-hover:text-black">
-                                        Google
-                                    </span>
-                                </Button>
-                            </div>
-
-                            <p className="mt-12 text-gray-500">
-                                Don&apos;t have an account?{" "}
-                                <Link
-                                    href="/sign_up"
-                                    className="underline hover:text-purple-500"
-                                >
-                                    Sign up
-                                </Link>
-                            </p>
-                        </div>
-                    </div>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <Button
+                        type="submit"
+                        className="w-full"
+                        disabled={isLoading === "signin"}
+                    >
+                        {isLoading === "signin" ? "Signing in..." : "Sign in"}
+                    </Button>
+                </form>
+            </Form>
+            <div className="px-8 text-center text-sm">
+                <a
+                    href="#"
+                    className="underline underline-offset-4 hover:text-primary"
+                >
+                    Forgot your password?
+                </a>
+            </div>
+            <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">
+                        Or continue with
+                    </span>
                 </div>
             </div>
-        </section>
+            <div className="flex flex-col gap-2">
+                <Button
+                    variant="outline"
+                    onClick={loginWithGoogle}
+                    disabled={isLoading === "google"}
+                >
+                    {isLoading === "google" ? "Loading..." : "Google"}
+                </Button>
+                <Button
+                    variant="outline"
+                    onClick={loginWithGit}
+                    disabled={isLoading === "github"}
+                >
+                    {isLoading === "github" ? "Loading..." : "GitHub"}
+                </Button>
+            </div>
+        </div>
     );
 }

@@ -1,22 +1,27 @@
-import { Registry } from "@/registry/schema";
 
 const BASE_PATH = "registry/default";
 
 const generateSections = (
     sectionsConfig: { name: string; no?: string }[],
-): Registry => {
+) => {
     return sectionsConfig.map((section, index) => ({
         name: section.name,
-        slug: `/sections/${section.name}`,
+        slug: `/blocks/${section.name}`,
         type: "registry:section",
         // files: [`${BASE_PATH}/sections/${section.name}/${section.name}-1.tsx`],
-        files: [`${BASE_PATH}/sections/hero/hero1.tsx`],
+        files: [
+            {
+                path: "registry/default/sections/hero/hero1.tsx",
+                type: "",
+                target: ""
+            }
+        ],
         number: section.no,
         thumbnail: `https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/${section.name}.png`,
     }));
 };
 
-export const section: Registry = generateSections([
+export const section = generateSections([
     {
         name: "banner",
         no: "1",

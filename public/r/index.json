@@ -1,12 +1,13 @@
 [
   {
     "name": "banner",
-    "slug": "/sections/banner",
+    "slug": "/blocks/banner",
     "type": "registry:section",
     "files": [
       {
         "path": "registry/default/sections/hero/hero1.tsx",
-        "type": "registry:section"
+        "type": "",
+        "target": ""
       }
     ],
     "number": "1",
@@ -14,12 +15,13 @@
   },
   {
     "name": "blog",
-    "slug": "/sections/blog",
+    "slug": "/blocks/blog",
     "type": "registry:section",
     "files": [
       {
         "path": "registry/default/sections/hero/hero1.tsx",
-        "type": "registry:section"
+        "type": "",
+        "target": ""
       }
     ],
     "number": "6",
@@ -27,12 +29,13 @@
   },
   {
     "name": "career",
-    "slug": "/sections/career",
+    "slug": "/blocks/career",
     "type": "registry:section",
     "files": [
       {
         "path": "registry/default/sections/hero/hero1.tsx",
-        "type": "registry:section"
+        "type": "",
+        "target": ""
       }
     ],
     "number": "1",
@@ -40,12 +43,13 @@
   },
   {
     "name": "contact",
-    "slug": "/sections/contact",
+    "slug": "/blocks/contact",
     "type": "registry:section",
     "files": [
       {
         "path": "registry/default/sections/hero/hero1.tsx",
-        "type": "registry:section"
+        "type": "",
+        "target": ""
       }
     ],
     "number": "2",
@@ -53,12 +57,13 @@
   },
   {
     "name": "cta",
-    "slug": "/sections/cta",
+    "slug": "/blocks/cta",
     "type": "registry:section",
     "files": [
       {
         "path": "registry/default/sections/hero/hero1.tsx",
-        "type": "registry:section"
+        "type": "",
+        "target": ""
       }
     ],
     "number": "1",
@@ -66,12 +71,13 @@
   },
   {
     "name": "faq",
-    "slug": "/sections/faq",
+    "slug": "/blocks/faq",
     "type": "registry:section",
     "files": [
       {
         "path": "registry/default/sections/hero/hero1.tsx",
-        "type": "registry:section"
+        "type": "",
+        "target": ""
       }
     ],
     "number": "1",
@@ -79,12 +85,13 @@
   },
   {
     "name": "feature",
-    "slug": "/sections/feature",
+    "slug": "/blocks/feature",
     "type": "registry:section",
     "files": [
       {
         "path": "registry/default/sections/hero/hero1.tsx",
-        "type": "registry:section"
+        "type": "",
+        "target": ""
       }
     ],
     "number": "1",
@@ -92,12 +99,13 @@
   },
   {
     "name": "footer",
-    "slug": "/sections/footer",
+    "slug": "/blocks/footer",
     "type": "registry:section",
     "files": [
       {
         "path": "registry/default/sections/hero/hero1.tsx",
-        "type": "registry:section"
+        "type": "",
+        "target": ""
       }
     ],
     "number": "3",
@@ -105,12 +113,13 @@
   },
   {
     "name": "hero",
-    "slug": "/sections/hero",
+    "slug": "/blocks/hero",
     "type": "registry:section",
     "files": [
       {
         "path": "registry/default/sections/hero/hero1.tsx",
-        "type": "registry:section"
+        "type": "",
+        "target": ""
       }
     ],
     "number": "5",
@@ -118,12 +127,13 @@
   },
   {
     "name": "login",
-    "slug": "/sections/login",
+    "slug": "/blocks/login",
     "type": "registry:section",
     "files": [
       {
         "path": "registry/default/sections/hero/hero1.tsx",
-        "type": "registry:section"
+        "type": "",
+        "target": ""
       }
     ],
     "number": "4",
@@ -131,12 +141,13 @@
   },
   {
     "name": "metrics",
-    "slug": "/sections/metrics",
+    "slug": "/blocks/metrics",
     "type": "registry:section",
     "files": [
       {
         "path": "registry/default/sections/hero/hero1.tsx",
-        "type": "registry:section"
+        "type": "",
+        "target": ""
       }
     ],
     "number": "1",
@@ -144,12 +155,13 @@
   },
   {
     "name": "navbar",
-    "slug": "/sections/navbar",
+    "slug": "/blocks/navbar",
     "type": "registry:section",
     "files": [
       {
         "path": "registry/default/sections/hero/hero1.tsx",
-        "type": "registry:section"
+        "type": "",
+        "target": ""
       }
     ],
     "number": "1",
@@ -157,12 +169,13 @@
   },
   {
     "name": "newsletter",
-    "slug": "/sections/newsletter",
+    "slug": "/blocks/newsletter",
     "type": "registry:section",
     "files": [
       {
         "path": "registry/default/sections/hero/hero1.tsx",
-        "type": "registry:section"
+        "type": "",
+        "target": ""
       }
     ],
     "number": "1",
@@ -170,12 +183,13 @@
   },
   {
     "name": "pricing",
-    "slug": "/sections/pricing",
+    "slug": "/blocks/pricing",
     "type": "registry:section",
     "files": [
       {
         "path": "registry/default/sections/hero/hero1.tsx",
-        "type": "registry:section"
+        "type": "",
+        "target": ""
       }
     ],
     "number": "7",
@@ -183,12 +197,13 @@
   },
   {
     "name": "team",
-    "slug": "/sections/team",
+    "slug": "/blocks/team",
     "type": "registry:section",
     "files": [
       {
         "path": "registry/default/sections/hero/hero1.tsx",
-        "type": "registry:section"
+        "type": "",
+        "target": ""
       }
     ],
     "number": "1",
@@ -196,12 +211,13 @@
   },
   {
     "name": "testimonial",
-    "slug": "/sections/testimonial",
+    "slug": "/blocks/testimonial",
     "type": "registry:section",
     "files": [
       {
         "path": "registry/default/sections/hero/hero1.tsx",
-        "type": "registry:section"
+        "type": "",
+        "target": ""
       }
     ],
     "number": "1",
