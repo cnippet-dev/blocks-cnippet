@@ -1,13 +1,15 @@
 import React from "react";
-import { Index } from "@/__registry__";
 import dynamic from "next/dynamic";
+import { getRegistryComponent, getRegistryItem } from "@/lib/registry";
 
-// type Params = Promise<{ slug: string }>;
+const getCachedRegistryItem = React.cache(async (name: string) => {
+    return await getRegistryItem(name);
+});
 
 const ScreenShift = dynamic(
     () =>
         import("../_components/screen-shift").then((mod) => ({
-            default: mod.ScreenShift,
+            default: mod.default,
         })),
     {
         ssr: true,
@@ -15,30 +17,36 @@ const ScreenShift = dynamic(
     },
 );
 
-const PreviewPage = async ({
-    params,
-}: {
-    params: Promise<{ slug: string }>;
-}) => {
-    const slug = await params;
+const PreviewPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+    const { slug } = await params;
 
-    const Preview =
-        Index[slug.slug as keyof (typeof Index)]
-            ?.component;
+    try {
+        const [item, Component] = await Promise.all([
+            getCachedRegistryItem(slug),
+            getRegistryComponent(slug),
+        ]);
 
-    if (!Preview) {
+        if (!item || !Component) {
+            return (
+                <div className="p-8 text-center">
+                    Component not found: {slug}
+                </div>
+            );
+        }
+
         return (
             <>
-                <div>DDDD</div>
+                <ScreenShift name={slug} />
             </>
         );
+    } catch (error) {
+        console.error("Preview loading failed:", error);
+        return (
+            <div className="p-8 text-center text-red-500">
+                Failed to load component preview
+            </div>
+        );
     }
-
-    return (
-        <>
-            <ScreenShift name={slug.slug} />
-        </>
-    );
 };
 
 export default PreviewPage;

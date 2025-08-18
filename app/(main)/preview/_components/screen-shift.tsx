@@ -19,7 +19,7 @@ interface SectionPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
     name: string;
 }
 
-export function ScreenShift({ name }: SectionPreviewProps) {
+export default function ScreenShift({ name }: SectionPreviewProps) {
     const resizablePanelRef = React.useRef<ImperativePanelHandle>(null);
     const [iframeKey, setIframeKey] = React.useState(0);
 
