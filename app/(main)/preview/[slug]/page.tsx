@@ -23,7 +23,7 @@ const PreviewPage = async ({
     const slug = await params;
 
     const Preview =
-        Index["default"][slug.slug as keyof (typeof Index)["default"]]
+        Index[slug.slug as keyof (typeof Index)]
             ?.component;
 
     if (!Preview) {

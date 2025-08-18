@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 
 import { Index } from "@/__registry__";
 import CldImageComponent from "../ui/cld-image";
-import { fadeInBlur, fadeUp } from "@/lib/motion";
+import { fadeUp } from "@/lib/motion";
 
 interface Section {
     name: string;
@@ -26,7 +26,7 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
             Object.values(Index).filter(
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 (item: any): item is Section =>
-                    item.type === "registry:section" && "thumbnail" in item,
+                    item.type === "registry:section",
             );
 
         return (
@@ -73,7 +73,7 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                             <div className="mb-16 space-y-4">
                                 <motion.h1
                                     {...fadeUp({
-                                        delay: 0.4,
+                                        delay: 0.2,
                                         duration: 0.6,
                                         scroll: true,
                                     })}
@@ -125,7 +125,7 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                                                 // }}
 
                                                 {...fadeUp({
-                                                    delay: 0.5 + index * 0.1,
+                                                    delay: 0.3 + index * 0.1,
                                                     y: 20,
                                                     duration: 0.6,
                                                     scroll: true,
@@ -155,9 +155,7 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
                                                         <CldImageComponent
                                                             width={960}
                                                             height={600}
-                                                            src={
-                                                                section.thumbnail
-                                                            }
+                                                            src={`https://res.cloudinary.com/dcxm3ccir/image/upload/v1753941711/${section.name}.png`}
                                                             sizes="100vw"
                                                             alt="Description of my image"
                                                             className="from-background w-full rounded-2xl bg-white bg-gradient-to-t dark:bg-neutral-800"
@@ -165,9 +163,7 @@ const Sections = forwardRef<HTMLDivElement, SectionsProps>(
 
                                                         <div className="flex flex-col items-start p-4">
                                                             <motion.a
-                                                                href={
-                                                                    section.slug
-                                                                }
+                                                                href={`/sections/${section.name}`}
                                                                 className="font-medium text-black/80 capitalize dark:text-white"
                                                                 initial={{
                                                                     opacity: 0,

@@ -11,7 +11,6 @@ import { useSessionCache } from "@/hooks/use-session-cache";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
-import { useConfig } from "@/lib/use-config";
 import { useProStatus } from "@/lib/get-pro";
 import {
     Tooltip,
@@ -24,13 +23,15 @@ interface SectionPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
     name: string;
 }
 
-export function SectionPreview({ name, children }: SectionPreviewProps) {
+export function SectionPreview({ name }: SectionPreviewProps) {
     const [activeTab, setActiveTab] = React.useState<
         "preview" | "code" | "login" | "pro"
     >("preview");
     const Files = Index[name].files ?? [];
     const [fileIndex, setFileIndex] = React.useState<number>(0);
-    const [sourceHtmlMap, setSourceHtmlMap] = React.useState<Record<number, string>>({});
+    const [sourceHtmlMap, setSourceHtmlMap] = React.useState<
+        Record<number, string>
+    >({});
     const [isLoadingCode, setIsLoadingCode] = React.useState<boolean>(false);
     const SrcPath = Files[fileIndex]?.path;
 
@@ -40,7 +41,7 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
     // Memoize expensive computations
     const componentConfig = React.useMemo(() => {
         //eslint-disable-next-line @typescript-eslint/no-explicit-any
-        return (Index[name] as any);
+        return Index[name] as any;
     }, [name]);
 
     const Preview = React.useMemo(() => {
@@ -110,8 +111,8 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
                 const html = data?.highlightedCode
                     ? data.highlightedCode
                     : data?.code
-                        ? `<pre><code>${data.code}</code></pre>`
-                        : "";
+                      ? `<pre><code>${data.code}</code></pre>`
+                      : "";
                 setSourceHtmlMap((prev) => ({ ...prev, [fileIndex]: html }));
             })
             .finally(() => isMounted && setIsLoadingCode(false));
@@ -130,7 +131,9 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
                     {Files.length > 1 && (
                         <div className="flex items-center gap-2 border-b px-2 py-1">
                             {Files.map((f: { path: string }, idx: number) => {
-                                const label = f?.path?.split("/").pop() ?? `file-${idx+1}`;
+                                const label =
+                                    f?.path?.split("/").pop() ??
+                                    `file-${idx + 1}`;
                                 const isActive = idx === fileIndex;
                                 return (
                                     <button
@@ -144,11 +147,17 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
                             })}
                         </div>
                     )}
-                    <div className="w-full rounded-md [&_pre]:my-0 [&_pre]:max-h-[600px] [&_pre]:overflow-auto">
+                    <div className="w-full rounded-md bg-[#17191e] px-4 [&_pre]:my-0 [&_pre]:max-h-[600px] [&_pre]:overflow-auto">
                         {isLoadingCode && !sourceHtmlMap[fileIndex] ? (
-                            <div className="py-6 text-center text-muted-foreground">Loading code…</div>
+                            <div className="text-muted-foreground py-6 text-center">
+                                Loading code…
+                            </div>
                         ) : (
-                            <div dangerouslySetInnerHTML={{ __html: sourceHtmlMap[fileIndex] || "" }} />
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: sourceHtmlMap[fileIndex] || "",
+                                }}
+                            />
                         )}
                     </div>
                 </div>

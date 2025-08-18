@@ -66,6 +66,10 @@ export const blocks = [
         ]
     ),
     ...generateSections("login", 4, ["F", "F", "F", "F"], ["F", "F", "F", "F"], []),
+    ...generateSections("metrics", 1, ["T"], ["T"], []),
+    ...generateSections("navbar", 1, ["T"], ["T"], []),
+    ...generateSections("newsletter", 1, ["T"], ["T"], []),
+
     ...generateSections(
         "pricing",
         7,
@@ -73,84 +77,6 @@ export const blocks = [
         ["F", "F", "T", "F", "F", "F", "F"]
         , []
     ),
-    ...generateSections("team", 1, ["F"], ["F"],[]),
-    ...generateSections("testimonial", 1, ["F"], ["F"],[]),
+    ...generateSections("team", 1, ["F"], ["F"], []),
+    ...generateSections("testimonial", 1, ["F"], ["F"], []),
 ]
-
-// export const blocks: Registry["items"] = [
-//     {
-//         name: "hero-1",
-//         type: "registry:block",
-//         description: "Hero section with modern design",
-//         registryDependencies: [],
-//         files: [
-//             {
-//                 path: "registry/default/sections/hero/hero1.tsx",
-//                 type: "registry:page",
-//                 target: "/sections/hero",
-//             },
-//             {
-//                 path: "registry/default/sections/footer/footer1.tsx",
-//                 type: "registry:page",
-//                 target: "/sections/footer",
-//             },
-//         ],
-//         categories: ["hero", "sections"],
-//     },
-//     {
-//         name: "hero-2",
-//         type: "registry:block",
-//         description: "Alternative hero section design",
-//         registryDependencies: [],
-//         files: [
-//             {
-//                 path: "registry/default/sections/hero/hero2.tsx",
-//                 type: "registry:page",
-//                 target: "/sections/hero",
-//             },
-//         ],
-//         categories: ["hero", "sections"],
-//     },
-//     {
-//         name: "hero-3",
-//         type: "registry:block",
-//         description: "Modern hero section with gradient",
-//         registryDependencies: [],
-//         files: [
-//             {
-//                 path: "registry/default/sections/hero/hero3.tsx",
-//                 type: "registry:page",
-//                 target: "/sections/hero",
-//             },
-//         ],
-//         categories: ["hero", "sections"],
-//     },
-//     {
-//         name: "hero-4",
-//         type: "registry:block",
-//         description: "Hero section with animated elements",
-//         registryDependencies: [],
-//         files: [
-//             {
-//                 path: "registry/default/sections/hero/hero4.tsx",
-//                 type: "registry:page",
-//                 target: "/sections/hero",
-//             },
-//         ],
-//         categories: ["hero", "sections"],
-//     },
-//     {
-//         name: "hero-5",
-//         type: "registry:block",
-//         description: "Minimalist hero section",
-//         registryDependencies: [],
-//         files: [
-//             {
-//                 path: "registry/default/sections/hero/hero5.tsx",
-//                 type: "registry:page",
-//                 target: "/sections/hero",
-//             },
-//         ],
-//         categories: ["hero", "sections"],
-//     },
-// ]

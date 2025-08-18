@@ -65,7 +65,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
 
                         <motion.p
                           {...fadeUp({ 
-                            delay: 0.8, 
+                            delay: 0.6, 
                             duration: 0.6,
                             y: 20,
                             scroll: true  // Enable scroll-based animation
@@ -84,7 +84,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                         <motion.div
                             ref={ref}
                             {...zoomIn({ 
-                                delay: 0.4, 
+                                delay: 0.6, 
                                 duration: 0.5,
                                 scroll: true,
                                 once: true,   // Only animate once
@@ -110,7 +110,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                         </motion.div>
 
                         <motion.p
-                            {...fadeUp({ delay: 1.4, duration: 0.4 })}
+                            {...fadeUp({ delay: 0.8, duration: 0.4 })}
                             className="text-xs text-gray-700"
                         >
                             Pay once, Use forever
@@ -118,11 +118,11 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                     </div>
 
                     <motion.div
-                        {...fadeIn({ delay: 1.4, duration: 0.6 })}
+                        {...fadeIn({ delay: 0.8, duration: 0.6 })}
                         className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-dashed border-t border-b border-dashed md:grid-cols-6 dark:divide-neutral-800 dark:border-neutral-800"
                     >
                         <motion.div
-                            {...fadeUp({ delay: 1.6, duration: 0.4 })}
+                            {...fadeUp({ delay: 0.9, duration: 0.4 })}
                             className="group col-span-2 flex items-start justify-start gap-2 px-4 py-10"
                         >
                             <svg
@@ -236,7 +236,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                             </div>
                         </motion.div>
                         <motion.div
-                            {...fadeUp({ delay: 1.8, duration: 0.4 })}
+                            {...fadeUp({ delay: 1.1, duration: 0.4 })}
                             className="group dark:bg-background col-span-2 flex items-start justify-start gap-2 bg-indigo-50/80 px-4 py-10"
                         >
                             <svg
@@ -324,7 +324,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                             </div>
                         </motion.div>
                         <motion.div
-                            {...fadeUp({ delay: 2.0, duration: 0.4 })}
+                            {...fadeUp({ delay: 1.3, duration: 0.4 })}
                             className="group col-span-2 flex items-start justify-start gap-2 px-4 py-10"
                         >
                             <svg
@@ -432,7 +432,7 @@ const Hero = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
                     </motion.div>
 
                     <motion.div
-                        {...fadeIn({ delay: 2.2, duration: 0.6 })}
+                        {...fadeIn({ delay: 1.5, duration: 0.6 })}
                         className="mx-auto max-w-7xl p-10"
                     >
                         <video

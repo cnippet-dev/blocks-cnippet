@@ -308,6 +308,42 @@ export const Index: Record<string, any> = {
     }],
     component: React.lazy(() => import("@/registry/default/sections/login/login4.tsx")),
   },
+  "metrics-1": {
+    name: "metrics-1",
+    type: "registry:block",
+    auth: true,
+    pro: true,
+    files: [{ 
+      path: "registry/default/sections/metrics/metrics1.tsx",
+      type: "registry:page",
+      target: "/sections/metrics"
+    }],
+    component: React.lazy(() => import("@/registry/default/sections/metrics/metrics1.tsx")),
+  },
+  "navbar-1": {
+    name: "navbar-1",
+    type: "registry:block",
+    auth: true,
+    pro: true,
+    files: [{ 
+      path: "registry/default/sections/navbar/navbar1.tsx",
+      type: "registry:page",
+      target: "/sections/navbar"
+    }],
+    component: React.lazy(() => import("@/registry/default/sections/navbar/navbar1.tsx")),
+  },
+  "newsletter-1": {
+    name: "newsletter-1",
+    type: "registry:block",
+    auth: true,
+    pro: true,
+    files: [{ 
+      path: "registry/default/sections/newsletter/newsletter1.tsx",
+      type: "registry:page",
+      target: "/sections/newsletter"
+    }],
+    component: React.lazy(() => import("@/registry/default/sections/newsletter/newsletter1.tsx")),
+  },
   "pricing-1": {
     name: "pricing-1",
     type: "registry:block",

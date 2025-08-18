@@ -23,6 +23,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { OrbitingCircles } from "../motion/orbiting-circles";
+import CldImageComponent from "../ui/cld-image";
 
 export default function Component() {
     const { theme, setTheme } = useTheme();
@@ -139,7 +140,7 @@ export default function Component() {
                             <div className="grid gap-20 md:grid-cols-2 lg:grid-cols-6">
                                 <div className="col-span-2 space-y-2">
                                     <div className="flex items-center">
-                                        <Image
+                                        <CldImageComponent
                                             src="https:res.cloudinary.com/dcxm3ccir/image/upload/v1753948226/logo-light.png"
                                             alt=""
                                             className="size-10"
