@@ -3,4 +3,4 @@ import { section } from "./registry-section";
 import { sections } from "./registry-sections";
 import { blocks } from "@/registry/registry-blocks";
 
-export const registry = [...blocks];
+export const registry = [...blocks, ...section];

@@ -14,23 +14,24 @@ const getCachedRegistryItem = React.cache(async (name: string) => {
     return await getRegistryItem(name);
 });
 
-export async function generateStaticParams() {
-    const { Index } = await import("@/__registry__/index");
-    const index = z.record(z.string(), registryItemSchema).parse(Index);
+// export async function generateStaticParams() {
+//     const { Index } = await import("@/__registry__/index");
+//     const index = z.record(z.string(), registryItemSchema).parse(Index);
 
-    return Object.values(index)
-        .filter((block) =>
-            [
-                "registry:block",
-                "registry:component",
-                "registry:example",
-                "registry:internal",
-            ].includes(block.type),
-        )
-        .map((block) => ({
-            name: block.name,
-        }));
-}
+//     return Object.values(index)
+//         .filter((block) =>
+//             [
+//                 "registry:block",
+//                 "registry:component",
+//                 "registry:example",
+//                 "registry:internal",
+//                 "registry:section"
+//             ].includes(block.type),
+//         )
+//         .map((block) => ({
+//             name: block.name,
+//         }));
+// }
 
 export default async function BlockPage({
     params,

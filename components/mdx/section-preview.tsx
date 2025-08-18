@@ -28,9 +28,11 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
     const [activeTab, setActiveTab] = React.useState<
         "preview" | "code" | "login" | "pro"
     >("preview");
-    const [config] = useConfig();
-    const Codes = React.Children.toArray(children) as React.ReactElement[];
-    const Src = Codes[0];
+    const Files = Index[name].files ?? [];
+    const [fileIndex, setFileIndex] = React.useState<number>(0);
+    const [sourceHtmlMap, setSourceHtmlMap] = React.useState<Record<number, string>>({});
+    const [isLoadingCode, setIsLoadingCode] = React.useState<boolean>(false);
+    const SrcPath = Files[fileIndex]?.path;
 
     const { isAuthenticated } = useSessionCache();
     const { isPro, isLoading: isProLoading } = useProStatus();
@@ -38,8 +40,8 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
     // Memoize expensive computations
     const componentConfig = React.useMemo(() => {
         //eslint-disable-next-line @typescript-eslint/no-explicit-any
-        return (Index[config.style] as any)[name];
-    }, [config.style, name]);
+        return (Index[name] as any);
+    }, [name]);
 
     const Preview = React.useMemo(() => {
         if (!componentConfig) {
@@ -91,6 +93,33 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
         );
     };
 
+    React.useEffect(() => {
+        if (activeTab !== "code" || !canViewCode) return;
+        if ((!name && !SrcPath) || fileIndex == null) return;
+        if (sourceHtmlMap[fileIndex]) return;
+        let isMounted = true;
+        setIsLoadingCode(true);
+        const params = new URLSearchParams();
+        if (name) params.set("name", name);
+        if (SrcPath) params.set("src", SrcPath);
+        params.set("index", String(fileIndex));
+        fetch(`/api/registry/source?${params.toString()}`)
+            .then((r) => r.json())
+            .then((data) => {
+                if (!isMounted) return;
+                const html = data?.highlightedCode
+                    ? data.highlightedCode
+                    : data?.code
+                        ? `<pre><code>${data.code}</code></pre>`
+                        : "";
+                setSourceHtmlMap((prev) => ({ ...prev, [fileIndex]: html }));
+            })
+            .finally(() => isMounted && setIsLoadingCode(false));
+        return () => {
+            isMounted = false;
+        };
+    }, [activeTab, canViewCode, name, SrcPath, fileIndex, sourceHtmlMap]);
+
     const renderContent = () => {
         if (activeTab === "preview") {
             return Preview;
@@ -98,8 +127,29 @@ export function SectionPreview({ name, children }: SectionPreviewProps) {
         if (activeTab === "code" && canViewCode) {
             return (
                 <div className="overflow-y-auto rounded-xl text-sm break-words">
+                    {Files.length > 1 && (
+                        <div className="flex items-center gap-2 border-b px-2 py-1">
+                            {Files.map((f: { path: string }, idx: number) => {
+                                const label = f?.path?.split("/").pop() ?? `file-${idx+1}`;
+                                const isActive = idx === fileIndex;
+                                return (
+                                    <button
+                                        key={idx}
+                                        onClick={() => setFileIndex(idx)}
+                                        className={`rounded px-2 py-1 text-xs ${isActive ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                                    >
+                                        {label}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    )}
                     <div className="w-full rounded-md [&_pre]:my-0 [&_pre]:max-h-[600px] [&_pre]:overflow-auto">
-                        {Src}
+                        {isLoadingCode && !sourceHtmlMap[fileIndex] ? (
+                            <div className="py-6 text-center text-muted-foreground">Loading code…</div>
+                        ) : (
+                            <div dangerouslySetInnerHTML={{ __html: sourceHtmlMap[fileIndex] || "" }} />
+                        )}
                     </div>
                 </div>
             );

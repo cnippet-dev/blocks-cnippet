@@ -2,7 +2,7 @@
 import React, { forwardRef } from "react";
 import { motion } from "motion/react";
 
-import { Index } from "@/config/blocks";
+import { Index } from "@/__registry__";
 import CldImageComponent from "../ui/cld-image";
 import { fadeInBlur, fadeUp } from "@/lib/motion";
 
@@ -18,8 +18,6 @@ interface SectionsProps extends React.HTMLAttributes<HTMLDivElement> {
     //eslint-disable-next-line @typescript-eslint/no-explicit-any
     sections?: any[];
 }
-
-
 
 const Sections = forwardRef<HTMLDivElement, SectionsProps>(
     ({ count, sections }, ref) => {
