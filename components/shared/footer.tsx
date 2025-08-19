@@ -140,8 +140,12 @@ export default function Component() {
                             <div className="grid gap-20 md:grid-cols-2 lg:grid-cols-6">
                                 <div className="col-span-2 space-y-2">
                                     <div className="flex items-center">
-                                        <CldImageComponent
-                                            src="https:res.cloudinary.com/dcxm3ccir/image/upload/v1753948226/logo-light.png"
+                                        <Image
+                                            src={
+                                                theme === "dark"
+                                                    ? "/logo-light.png"
+                                                    : "/logo-dark.png"
+                                            }
                                             alt=""
                                             className="size-10"
                                             width={1080}
@@ -167,7 +171,9 @@ export default function Component() {
                                         </h3>
                                         <div className="hover flex flex-col space-y-3 [&_a]:text-sm [&_a]:text-gray-600 [&_a]:transition-colors [&_a]:hover:text-gray-900 [&_a]:dark:text-gray-400 [&_a]:dark:hover:text-white">
                                             <Link href="#">Pricing</Link>
-                                            <Link href="/contact_us">Contact Us</Link>
+                                            <Link href="/contact_us">
+                                                Contact Us
+                                            </Link>
                                             <Link
                                                 href="#"
                                                 className="flex items-center"
@@ -187,7 +193,7 @@ export default function Component() {
                                                     <Button
                                                         size="sm"
                                                         variant="outline"
-                                                        className="items-start cursor-pointer justify-start border-none bg-gray-50 px-0 py-0 text-left text-sm font-normal text-gray-600 shadow-none hover:bg-gray-50 dark:text-gray-400 dark:bg-black dark:hover:bg-black"
+                                                        className="cursor-pointer items-start justify-start border-none bg-gray-50 px-0 py-0 text-left text-sm font-normal text-gray-600 shadow-none hover:bg-gray-50 dark:bg-black dark:text-gray-400 dark:hover:bg-black"
                                                     >
                                                         Legal
                                                     </Button>
